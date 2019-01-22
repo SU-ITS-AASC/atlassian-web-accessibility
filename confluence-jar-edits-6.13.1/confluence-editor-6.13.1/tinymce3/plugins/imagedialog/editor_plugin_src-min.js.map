@@ -1,0 +1,8 @@
+{
+"version":3,
+"file":"/dummy-file-path",
+"lineCount":2,
+"mappings":"AAGAA,MAAA,oGAGG,QAAA,CACCC,CADD,CAECC,CAFD,cAOYC,QAAAA,CAASC,CAATD,EACHC,CAAAC,OAAAC,IAAA,CAAc,QAAA,GACVF,CAAAG,WAAA,gBAA8BL,CAAAM,OAAAC,yBAA9B,CADU,CAAd,CADGN,CAPZ,SAaeO,QAAAA,6GAKQT,CAAAU,aALRD,KAKqCT,CAAAW,aALrCF,EAbf,EAHH,CA8BAG;OAAA,8BAAAC,YAAA,oEACyF,QAAA,CAASC,CAAT,MACzEd,EAAUY,OAAA,WAEdZ,EAAAe,OAAA,yCAAwDD,CAAxD,CAGAd,EAAAgB,cAAAX,IAAA,yBAAmDL,CAAAiB,QAAAC,sBAAnD,CAN6E,CADzF;",
+"sources":["input.js"],
+"names":["define","tinymce","Confluence","init","ed","onInit","add","addCommand","Editor","defaultInsertImageDialog","getInfo","majorVersion","minorVersion","require","safeRequire","ConfluenceImageDialogPlugin","create","PluginManager","plugins","ConfluenceImageDialog"]
+}

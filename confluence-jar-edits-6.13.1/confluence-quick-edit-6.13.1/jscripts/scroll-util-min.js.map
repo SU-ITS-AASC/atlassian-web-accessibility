@@ -1,0 +1,8 @@
+{
+"version":3,
+"file":"/dummy-file-path",
+"lineCount":2,
+"mappings":"AAGAA,MAAA,oEAIG,QAAA,CACCC,CADD,CAECC,CAFD,CAGCC,CAHD,yBAQsBC,QAAAA,GACTC,0BAAA,EADSD,EAGTE,qCAAA,EAHSF,aARtB,uBAsB4BC,QAAAA,GAEnBE,QAASA,EAATA,wBACyBN,EADzBM,CAEeN,CAAAO,YAFfD,CAKeL,CAAAO,gBAAAC,UALfH,CAFmBF,IAWfM,EAAUJ,CAAA,EAXKF,CAafO,CAbeP,qBAcRJ,EAAAY,WAdQR,CAefO,CAfeP,CAeAJ,CAAAa,YAfAT,SAgBRH,CAAAO,gBAhBQJ,EAgBoBH,CAAAO,gBAAAM,YAhBpBV,CAkBfO,CAlBeP,CAkBAH,CAAAO,gBAAAO,aAlBAX,YAqBf,QAAAY,eAAA,IArBeZ;OAyBfa,EAA0BC,WAAA,EAAAC,IAzBXf,CA0BfgB,EAAgBC,WAAA,EA1BDjB,OA8Bda,EA9Bcb,CA8BYgB,CA9BZhB,IA8BqCM,CA9BrCN,CA8B+CO,CA9B/CP,EA+Bf,OAAAY,eAAA,IA/BeZ,CAgCfJ,CAAAsB,SAAA,MAhCelB,CAiCRM,CAjCQN,EAiCGE,CAAA,EAjCHF,KAtB5B,kCAoEuCC,QAAAA,OAE1BkB,MAEJC,aAAA,EAAAC,KAAA,CAAwB,QAAA,OAChBC,EAAWxB,CAAA,MAAAyB,IAAA,YADK,YAEhBD,CAFgB,YAEMA,CAFN,OAGhBH,EAHgB,CAGNrB,CAAA,MAHM,IAAxB,CAJ8BG,KAYzBkB,CAZyBlB,cAgB1BgB,EAASE,CAAAF,OAAA,EAhBiBhB,CAmB1BY,EAA0BC,WAAA,EAAAC,IAnBAd,CAoB1Be,EAAgBC,WAAA,EApBUhB,CAqB1BuB,EAAeP,CAAfO,EAAyBX,CAAzBW,CAAmDR,CAAnDQ,IArB0BvB,GAuB1BuB,CAvB0BvB,GAwB1BkB,CAAA,GAAAd,UAxB0BJ,EAwBoBuB,CAxBpBvB,WApEvC,EAJH,CAwGAwB,QAAA,8BAAAC,YAAA,qCAAuF,QAAA,CAASC,CAAT,EAC3EF,OAAA3B,UAER8B,GAAAC,OAAA,CAAYF,CAAZ,CAHmF,CAAvF;",
+"sources":["input.js"],
+"names":["define","window","document","$","scrollToElement","scrollWindowToElement","scrollOverflowContainerToElement","getScrollY","pageYOffset","documentElement","scrollTop","scrollY","windowHeight","innerWidth","innerHeight","clientWidth","clientHeight","scrollIntoView","elementVerticalPosition","offset","top","elementHeight","height","scrollBy","$parent","parents","each","overflow","css","differential","require","safeRequire","ScrollUtil","fn","extend"]
+}

@@ -1,0 +1,78 @@
+{namespace Confluence.Templates.Editor.Components.ColorPicker}
+
+/**
+ * Color picker for editor (same color palette as tinymce color picker)
+ */
+{template .display}
+    {let $colors: [
+			[ 'hex' : '000000', 'name' : getText('tinymce.colorpicker.black') ],
+			[ 'hex' : '993300', 'name' : getText('tinymce.colorpicker.burntOrange') ],
+			[ 'hex' : '333300', 'name' : getText('tinymce.colorpicker.darkOlive') ],
+			[ 'hex' : '003300', 'name' : getText('tinymce.colorpicker.darkGreen') ],
+			[ 'hex' : '003366', 'name' : getText('tinymce.colorpicker.darkAzure') ],
+			[ 'hex' : '000080', 'name' : getText('tinymce.colorpicker.navyBlue') ],
+			[ 'hex' : '333399', 'name' : getText('tinymce.colorpicker.indigo') ],
+			[ 'hex' : '333333', 'name' : getText('tinymce.colorpicker.veryDarkGray') ],
+			[ 'hex' : '800000', 'name' : getText('tinymce.colorpicker.maroon') ],
+
+			[ 'hex' : 'FF6600', 'name' : getText('tinymce.colorpicker.orange') ],
+			[ 'hex' : '808000', 'name' : getText('tinymce.colorpicker.olive') ],
+			[ 'hex' : '008000', 'name' : getText('tinymce.colorpicker.green') ],
+			[ 'hex' : '008080', 'name' : getText('tinymce.colorpicker.teal') ],
+			[ 'hex' : '0000FF', 'name' : getText('tinymce.colorpicker.blue') ],
+			[ 'hex' : '666699', 'name' : getText('tinymce.colorpicker.grayishBlue') ],
+			[ 'hex' : '7A869A', 'name' : getText('tinymce.colorpicker.gray') ],
+			
+			[ 'hex' : 'FF0000', 'name' : getText('tinymce.colorpicker.red') ],
+			[ 'hex' : 'FF9900', 'name' : getText('tinymce.colorpicker.amber') ],
+			[ 'hex' : '99CC00', 'name' : getText('tinymce.colorpicker.yellowGreen') ],
+			[ 'hex' : '339966', 'name' : getText('tinymce.colorpicker.seaGreen') ],
+			[ 'hex' : '33CCCC', 'name' : getText('tinymce.colorpicker.turquoise') ],
+			[ 'hex' : '3366FF', 'name' : getText('tinymce.colorpicker.royalBlue') ],
+			[ 'hex' : '800080', 'name' : getText('tinymce.colorpicker.purple') ],
+			[ 'hex' : 'A5ADBA', 'name' : getText('tinymce.colorpicker.mediumGray') ],
+			
+			[ 'hex' : 'FF00FF', 'name' : getText('tinymce.colorpicker.magenta') ],
+			[ 'hex' : 'FFCC00', 'name' : getText('tinymce.colorpicker.gold') ],
+			[ 'hex' : 'FFFF00', 'name' : getText('tinymce.colorpicker.yellow') ],
+			[ 'hex' : '00FF00', 'name' : getText('tinymce.colorpicker.lime') ],
+			[ 'hex' : '00FFFF', 'name' : getText('tinymce.colorpicker.aqua') ],
+			[ 'hex' : '00CCFF', 'name' : getText('tinymce.colorpicker.skyBlue') ],
+			[ 'hex' : '993366', 'name' : getText('tinymce.colorpicker.redViolet') ],
+			[ 'hex' : 'C1C7D0', 'name' : getText('tinymce.colorpicker.lightGray') ],
+			
+			[ 'hex' : 'FF99CC', 'name' : getText('tinymce.colorpicker.pink') ],
+			[ 'hex' : 'FFCC99', 'name' : getText('tinymce.colorpicker.peach') ],
+			[ 'hex' : 'FFFF99', 'name' : getText('tinymce.colorpicker.lightYellow') ],
+			[ 'hex' : 'CCFFCC', 'name' : getText('tinymce.colorpicker.paleGreen') ],
+			[ 'hex' : 'CCFFFF', 'name' : getText('tinymce.colorpicker.paleCyan') ],
+			[ 'hex' : '99CCFF', 'name' : getText('tinymce.colorpicker.lightSkyBlue') ],
+			[ 'hex' : 'CC99FF', 'name' : getText('tinymce.colorpicker.plum') ],
+			[ 'hex' : 'FFFFFF', 'name' : getText('tinymce.colorpicker.white') ]
+	] /}
+
+    <a class="toolbar-trigger aui-button" href="#" id="rte-button-color" data-color="003366" data-tooltip="{getText('tinymce.colorpicker.color')}">
+        {call Confluence.Templates.Icons.iconSpan}
+            {param type: 'editor-color' /}
+            {param text: getText('tinymce.colorpicker.picker_title') /}
+        {/call}
+        <span class="selected-color"></span>
+    </a>
+    <div class="aui-dd-parent">
+        <a class="toolbar-trigger aui-dd-trigger aui-button" href="#" id="rte-button-color-selector" data-control-id="colorSelector" data-tooltip="{getText('tinymce.colorpicker.more_colors')}">
+            {call Confluence.Templates.Icons.iconSpan}
+                {param type: 'dropdown' /}
+                {param text: getText('tinymce.colorpicker.more_colors') /}
+            {/call}
+        </a>
+        <div class="color-picker-container">
+            <div class="color-picker aui-dropdown hidden">
+                <ul>
+                    {foreach $color in $colors}
+                        <li><a href="#" aria-label="{$color.name}" data-tooltip="{$color.name}" style="background-color: #{$color.hex}" data-color="{$color.hex}">&nbsp;</a></li>
+                    {/foreach}
+                </ul>
+            </div>
+        </div>
+    </div>
+{/template}

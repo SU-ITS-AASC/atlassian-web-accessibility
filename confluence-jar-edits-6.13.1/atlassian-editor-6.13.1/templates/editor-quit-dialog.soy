@@ -1,0 +1,53 @@
+{namespace Confluence.Templates.Editor.Sections.QuitDialog}
+
+/**
+   Quit dialog template
+ * @param isLimitedMode if collaborative editing is in limited mode
+ * @param pageId if pageId==0, it is a new page
+ * @param newPage
+ * @param contentType
+*/
+{template .render}
+    <section role="dialog" id="quit-editor-dialog" class="aui-layer aui-dialog2 aui-dialog2-medium" aria-hidden="true">
+        <header class="aui-dialog2-header">
+        </header>
+        <div class="aui-dialog2-content">
+        </div>
+        <footer class="aui-dialog2-footer">
+            <div class="aui-dialog2-footer-actions">
+                {if $pageId == 0}
+                    <button id="qed-publish-button" class="aui-button aui-button-primary publish">{getText('publish.name')}</button>
+                {else}
+                    <button id="qed-publish-button" class="aui-button aui-button-primary update">{getText('update.word')}</button>
+                {/if}
+
+                <button id="qed-discard-button"
+                {if $isLimitedMode}
+                title="{getText('editor.quit-dialog.button.discard.limited.tooltip')}"
+                {else}
+                    {if not $newPage}
+                        title="{getText('editor.quit-dialog.button.discard.collaborative.tooltip')}"
+                    {/if}
+                {/if}
+                class="aui-button toolbar-item exit">
+                {if $newPage}
+                    {if $contentType == 'blogpost'}
+                        {getText('editor.quit-dialog.button.delete.blog.exit')}
+                    {else}
+                        {getText('editor.quit-dialog.button.delete.page.exit')}
+                    {/if}
+                {else}
+                    {if $contentType == 'blogpost'}
+                        {getText('editor.quit-dialog.button.revert.blog.exit')}
+                    {else}
+                        {getText('editor.quit-dialog.button.revert.page.exit')}
+                    {/if}
+                {/if}
+                </button>
+
+                <button id="qed-save-exit-button" class="aui-button aui-button-primary exit">{getText('editor.quit-dialog.button.save.exit')}</button>
+                <button id="qed-close-button" class="aui-button toolbar-item">{getText('close.name')}</button>
+            </div>
+        </footer>
+    </section>
+{/template}

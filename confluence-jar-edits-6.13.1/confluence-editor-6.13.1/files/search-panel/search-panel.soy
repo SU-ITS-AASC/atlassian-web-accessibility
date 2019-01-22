@@ -1,0 +1,30 @@
+{namespace Confluence.Templates.File}
+
+/**
+ * The search panel for the image dialog
+ * @param spaceKey the current space key
+ * @param spaceName the current space name
+ */
+{template .searchPanel}
+    <div class="search-panel-wrapper">
+        <div id="search-image">
+            <form class="aui search-form" id="search-image-form" action="#">
+                <fieldset class="inline">
+                    <div class="search-input">
+                        <label for="search-image" class="assistive">{getText('search.name')}</label>
+                        <input autofocus type="text" class="text search-image-text" size="50" autocomplete="off">
+                    </div>
+                    <select class="search-space select" id="search-image-space-select">
+                        <option value="">{getText('spaces.all')}</option>
+                        <option value="{$spaceKey}">{$spaceName}</option>
+                    </select>
+                    <button type="submit" class="aui-button search-button">{getText('search.name')}</button>
+                </fieldset>
+            </form>
+        </div>
+        <div id="searched-images" class="scroll-wrapper">
+            <div class="loading-message hidden">{getText('search.searching')}</div>
+            <ul class="file-list"></ul>
+        </div>
+    </div>
+{/template}

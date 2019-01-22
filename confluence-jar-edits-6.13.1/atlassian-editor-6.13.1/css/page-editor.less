@@ -1,0 +1,1346 @@
+@N0: #FFFFFF;
+@N40: #DFE1E5;
+@N500: #42526E;
+@N600: #344563;
+
+.comment-thread .quick-comment-container {
+    min-height: 268px;
+}
+
+body.contenteditor {
+    // Have to stop dialog2 from clobbering the overflow on the body element. https://ecosystem.atlassian.net/browse/AUI-4087
+    overflow: hidden !important;
+    overflow-y: auto !important;
+}
+
+/*
+ * CONFDEV-26898 - ensure that any fullscreen iframes added by plugins (e.g. when editing
+ * a Balsamiq mockup) appear above positioned elements of the editor such as the page title,
+ * breadcrumbs, and error messages.
+ *
+ * Any iframes that have an explicit z-index should be able to easily override this value
+ * with a more specific selector.
+ */
+body.contenteditor ~ iframe {
+    z-index: 4;
+}
+
+.contenteditor #full-height-container,
+.contenteditor #main .edit form {
+    display: table;
+}
+
+.contenteditor #full-height-container > div,
+.contenteditor #editpagetemplate > div,
+.contenteditor #createpagetemplate > div,
+.contenteditor #editpageform > div,
+.contenteditor #createpageform > div {
+    display: table-row;
+    padding: 0;
+}
+
+.contenteditor #full-height-container.active-preview #main-header,
+.contenteditor #full-height-container #content > .aui-message {
+    display: none;
+}
+
+.contenteditor #full-height-container > div,
+.contenteditor #main .edit form {
+    width: 100%;
+}
+
+.contenteditor #main,
+#content.edit,
+.contenteditor #main .edit form,
+#wysiwyg,
+#preview,
+#previewArea {
+    height: 100%;
+}
+
+/*CONF-41035*/
+#content.edit {
+    display: table-cell;
+}
+
+/* Needed to ensure that elements will appear below it when scrolling */
+.contenteditor #header-precursor,
+.contenteditor #header-precursor .cell {
+    z-index: 3;
+    position: relative;
+    background: #ffffff;
+}
+
+#main.active-preview .edit + br.clear {
+    display: none;
+}
+
+.contenteditor #header .cell,
+.contenteditor #header-precursor .cell {
+    box-sizing: border-box;
+    padding:  0 0.75em;
+}
+
+.contenteditor #main {
+    border: 0 !important;
+}
+
+#wysiwyg iframe,
+#preview iframe {
+    height: 100%;
+    width: 100%;
+    border: 0;
+    padding: 0;
+    margin: 0;
+}
+
+.grouped ul,
+.grouped ol {
+    margin: 0;
+    padding-left: 0;
+}
+
+.aui-toolbar .grouped .grouped-dropdown-item {
+    background: transparent;
+    border-top: 1px solid #ddd;
+    margin-top: 3px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    height: auto;
+    clear: both;
+}
+
+.aui-toolbar .aui-dropdown.grouped .grouped-dropdown-item:hover,
+.aui-toolbar .aui-dropdown.grouped .grouped-dropdown-item.active,
+.aui-toolbar .aui-dropdown.grouped .grouped-dropdown-item.active a {
+    background: transparent;
+}
+
+.aui-toolbar .grouped .grouped-dropdown-item:first-child {
+    border-top: 0;
+    padding-top: 0;
+}
+
+.grouped span {
+    display: inline-block;
+    padding: 0 0.5em;
+    margin-top: 4px;
+}
+
+/* avoid inappropriate hover effect */
+.grouped .grouped-dropdown-item:hover,
+.grouped .grouped-dropdown-item.active {
+    background: transparent;
+}
+
+/* END exploratory pattern for grouped dropdowns */
+
+
+/* CSS from here on is implementation-specific */
+#rte-savebar .loading {
+    background: transparent url(../../../images/icons/wait.gif) 50% 50% no-repeat;
+    text-indent: -9999px;
+    overflow: hidden;
+    width: 25px;
+    height: 25px;
+    visibility: hidden; /* hidden, but affecting layout by default. js handles further show/hide */
+}
+
+/* Editor toolbar and icons */
+/* TODOXHTML look at this stuff again  */
+#previewArea iframe {
+    border: none;
+    margin: 0;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+.comment #previewArea {
+    padding: 1px;
+}
+
+.comment #previewArea iframe {
+    overflow: hidden;
+}
+
+#rte-toolbar {
+    font-size: 0;
+    width: 100%;
+    line-height: 1;
+    border-bottom: 1px solid @N40;
+    margin: 0;
+    padding: 0;
+    padding-top: 7px;
+    background-color: @N0;
+}
+
+#rte-toolbar .aui-buttons {
+    border-left: 1px solid @N40;
+    padding-left: 3px;
+}
+
+.contenteditor #rte-toolbar {
+    z-index: 2;
+    position: relative;
+    padding-right: 75px;
+}
+
+#rte-toolbar .aui-toolbar2-primary {
+	margin: 0 114px 0 10px;
+}
+
+.contenteditor #rte-toolbar .aui-toolbar2-primary {
+    margin-right: 16px;
+}
+
+#toolbar #rte-toolbar .aui-buttons {
+    margin-bottom: 7px;
+    margin-right: 3px;
+}
+
+#toolbar .aui-buttons + .aui-buttons {
+    margin-left: 0;
+}
+
+#toolbar #rte-toolbar .aui-toolbar2-primary .aui-buttons.no-separator {
+    margin-right: 2px;
+    margin-left: -2px;
+}
+
+#toolbar #rte-toolbar .aui-button.aui-button-subtle[disabled], .aui-button.aui-button-subtle[aria-disabled="true"] {
+    border: 1px solid transparent;
+}
+
+#rte-toolbar .aui-toolbar2-secondary .aui-buttons,
+#rte-toolbar .aui-buttons.no-separator,
+#rte-toolbar .aui-buttons:first-child,
+#rte-toolbar .aui-buttons.close {
+    border-left: none;
+    padding-left: 0;
+}
+
+#rte-toolbar .disabled,
+#rte-toolbar .toolbar-contextual.disabled,
+#rte-toolbar .toolbar-item.disabled,
+#rte-toolbar-row-default .aui-button[disabled] .icon {
+    color: #707070;
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+#rte-toolbar .disabled a,
+#rte-toolbar .disabled span,
+#rte-toolbar .disabled button,
+#rte-toolbar .disabled div,
+#rte-toolbar .disabled li {
+    cursor: not-allowed !important;
+}
+
+/* When toolbar is disabled jquery.fadeTo(0.5) is executed. This ensures the [disabled]
+   icons don't compound the opacity changes */
+#rte-toolbar-row-default.disabled .aui-button[disabled] .icon {
+    opacity: 1;
+}
+
+.ic-sidebar #rte-savebar .aui-buttons.toolbar-group-preview.toolbar-group-preview-page.toolbar-group-preview-shared-draft ~ .aui-buttons.cancel-button-container-shared-draft,
+.ic-sidebar #rte-savebar .aui-buttons.toolbar-group-preview.toolbar-group-preview-blogpost.toolbar-group-preview-shared-draft ~ .aui-buttons.cancel-button-container-shared-draft,
+.ic-sidebar #rte-savebar .aui-buttons.toolbar-group-preview.toolbar-group-preview-page.toolbar-group-preview-non-shared-draft ~ .aui-buttons.cancel-button-container-shared-draft.cancel-button-container-quick-edit,
+.ic-sidebar #rte-savebar .aui-buttons.toolbar-group-preview.toolbar-group-preview-blogpost.toolbar-group-preview-non-shared-draft ~ .aui-buttons.cancel-button-container-shared-draft.cancel-button-container-quick-edit{
+    margin-right: 0px;
+}
+
+#rte-savebar {
+    display: block;
+    margin: 0;
+    border-top: 1px solid @N40;
+    padding: 5px 10px 0px 0;
+    box-shadow: none;
+
+    #rte-spinner  {
+        width: 16px;
+        height: 18px;
+        line-height: 20px;
+        padding: 0;
+        margin-top: 4px;
+    }
+
+    #rte-button-cancel, #rte-button-revert {
+        border: 0;
+        padding: 1px;
+        padding-right: 0;
+        min-width: 60px;
+    }
+
+    .toolbar-split-row {
+        font-size: 11px;
+        color: #666;
+        margin: 0;
+    }
+
+    label {
+        font-size: 14px;
+        margin-right: 5px;
+        line-height: 30px;
+    }
+
+    .aui-buttons {
+        margin-right: 10px;
+        margin-left: 0;
+
+        &.toolbar-group-preview.toolbar-group-ellipsis {
+            margin-left: 20px;
+            margin-right: -10px;
+            #rte-button-ellipsis {
+                width: 32px;
+            }
+        }
+
+        &.toolbar-group-preview.toolbar-group-preview-page.toolbar-group-preview-non-shared-draft ~ .aui-buttons.cancel-button-container-shared-draft,
+        &.toolbar-group-preview.toolbar-group-preview-page.toolbar-group-preview-shared-draft.assistive ~  .aui-buttons.cancel-button-container-shared-draft,
+        &.toolbar-group-preview.toolbar-group-preview-blogpost.toolbar-group-preview-shared-draft.assistive ~  .aui-buttons.cancel-button-container-shared-draft,
+        &.toolbar-group-preview.toolbar-group-preview-blogpost.toolbar-group-preview-non-shared-draft ~ .aui-buttons.cancel-button-container-shared-draft {
+
+            margin-right: 0px;
+        }
+
+        &.cancel-button-container-shared-draft,
+        &.toolbar-group-preview.toolbar-group-preview-page.toolbar-group-preview-non-shared-draft ~ .aui-buttons.cancel-button-container-shared-draft.cancel-button-container-quick-edit,
+        &.toolbar-group-preview.toolbar-group-preview-page.toolbar-group-preview-shared-draft.assistive ~ .aui-buttons.cancel-button-container-shared-draft.cancel-button-container-quick-edit,
+        &.toolbar-group-preview.toolbar-group-preview-page.toolbar-group-preview-shared-draft ~ .aui-buttons.cancel-button-container-shared-draft,
+        &.toolbar-group-preview.toolbar-group-preview-blogpost.toolbar-group-preview-non-shared-draft ~ .aui-buttons.cancel-button-container-shared-draft.cancel-button-container-quick-edit,
+        &.toolbar-group-preview.toolbar-group-preview-blogpost.toolbar-group-preview-shared-draft.assistive ~ .aui-buttons.cancel-button-container-shared-draft.cancel-button-container-quick-edit,
+        &.toolbar-group-preview.toolbar-group-preview-blogpost.toolbar-group-preview-shared-draft ~ .aui-buttons.cancel-button-container-shared-draft,
+        &.toolbar-group-preview.toolbar-group-preview-comment.toolbar-group-preview-non-shared-draft ~ .aui-buttons.cancel-button-container-shared-draft,
+        &.toolbar-group-preview.toolbar-group-preview-template.toolbar-group-preview-non-shared-draft ~ .aui-buttons.cancel-button-container-shared-draft {
+            margin-right: -10px;
+        }
+    }
+
+
+    .save-button-container {
+        float: left;
+        white-space: nowrap;
+        padding-left: 0;
+        margin-right: 10px;
+    }
+
+    .aui-icon-wait { /* text wrapper for spinner */
+        background-repeat: no-repeat;
+        background-position: 0 3px;
+        display: block;
+    }
+
+    .toolbar-split {
+        line-height: 1;
+    }
+
+    .hints {
+        margin-bottom: 0;
+    }
+
+    .minor-edit,
+    .rte-toolbar-comment {
+        padding: 0;
+    }
+
+    .minor-edit {
+        margin-top: 1px;
+    }
+}
+
+#rte-savebar-tinymce-plugin-point {
+    font-size:14px;
+    float:left;
+}
+
+#rte-savebar-tinymce-plugin-point .toolbar-item {
+    float:none;
+    margin-left:10px;
+}
+
+#rte-savebar .minor-edit input,
+#versionComment {
+    position: relative;
+}
+
+#rte-toolbar .toolbar-contextual {
+    display: block;
+}
+
+#toolbar #rte-toolbar .toolbar-contextual .aui-buttons.close {
+    margin: 0px 14px 0 0;
+    position: absolute;
+    right: 0;
+}
+
+#rte-toolbar .toolbar-contextual .aui-buttons.close .aui-button {
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+    padding: 0;
+}
+
+#rte-toolbar .aui-toolbar2-secondary ul.aui-buttons:last-child {
+	margin-right: 0;
+}
+
+#rte-button-insert-table:focus {
+    outline: none;
+}
+
+#rte-button-insert-table,
+#rte-button-insert,
+#rte-button-insert-template {
+    padding: 0 10px;
+}
+
+#toolbar-group-watch-page-after-comment {
+    margin: 0; /* Remove the margin here so we can use line height to position it. */
+}
+
+#rte-button-preview,
+#rte-button-publish,
+#rte-button-cancel,
+#rte-button-edit {
+	line-height: 20px;
+}
+
+#rte-button-preview {
+    min-width: 72px;
+}
+
+#rte-toolbar-row-searchreplace {
+    padding: 3px 0 0 10px;
+    margin-left: 0;
+    display: block;
+}
+
+#toolbar #rte-toolbar-row-searchreplace.toolbar-contextual .aui-buttons {
+    margin-left: 0;
+    margin-right: 3px;
+}
+
+#toolbar #rte-toolbar-row-searchreplace.toolbar-contextual .aui-buttons.no-separator {
+    margin-left: 10px;
+}
+
+#rte-toolbar-row-searchreplace .toolbar-group label {
+    margin-right: 4px;
+    margin-left: 10px;
+    font-size: 14px;
+}
+
+#rte-toolbar-row-searchreplace .aui-buttons .toolbar-item > label {
+    line-height: 20px;
+    font-size: 14px;
+    margin-left: 20px;
+    margin-right: 10px;
+}
+
+#rte-toolbar-row-searchreplace .aui-buttons .toolbar-item:first-child > label {
+    margin-left: 0;
+}
+
+#rte-toolbar-row-searchreplace .aui-buttons .toolbar-item > input {
+    width: auto;
+}
+
+#search-toolbar-replace-text {
+    margin-right: 10px;
+}
+
+#rte-toolbar .toolbar-splitbutton .aui-dd-parent .aui-dd-trigger {
+    padding: 0 2px;
+}
+
+#rte-toolbar .toolbar-splitbutton .aui-dd-parent .aui-dd-trigger {
+    padding: 0 2px;
+}
+
+/* partition off a tiny space in the top right of the toolbar to place the help button group */
+/* This overrides the toolbar split style in AUI 3.2.1 */
+#rte-toolbar .toolbar-split-right {
+    float: none;
+    position: absolute;
+    right: 0;
+    top: 10px;
+    max-width: 80px;
+}
+
+#rte-toolbar .toolbar-split-left {
+    margin-right: 80px;
+}
+
+#savebar-container ul li.toolbar-item {
+    text-align: center; /* Required for button alignment in IE */
+}
+
+/* Full screen editor styles */
+.editor-fullheight {
+    height: 100%; /* CONF-28415 */
+}
+
+#wysiwyg .mceIframeContainer,
+#wysiwyg table.mceLayout {
+    border: 0;
+}
+
+/* Set dropdown links to block to make them full width */
+#toolbar .aui-dropdown a {
+ display: block;
+}
+
+
+
+/* TODOXHTML: change vms so this stuff simply isn't rendered on edit screen. */
+body.contenteditor {
+    #footer, #sidebar-container {
+        display: none;
+    }
+}
+
+#draft-status {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: #707070;
+    font-size: 12px;
+    line-height: 12px;
+    padding: 8px 0 0 10px;
+    max-width: 240px;
+
+    a:hover, a:active, a:visited, a:link {
+        color: #707070;
+    }
+}
+
+/* RTE hints and hint buttons */
+.hints a:hover,
+.hints a:active,
+.hints a:visited,
+.hints a:link {
+    text-decoration: none;
+    outline: none;
+}
+
+.hints {
+    margin: 0 0 10px 0;
+}
+
+/* Confluence RTE Toolbar Icons */
+#rte-button-color {
+    border-right: 0;
+    margin-right: 0;
+    -moz-border-radius: 3px 0 0 3px;
+    -webkit-border-radius: 3px 0 0 3px;
+    border-radius: 3px 0 0 3px;
+
+    .selected-color {
+        border-radius: 2px;
+        width: 16px;
+        height: 2px;
+        margin: 18px 0 0 0;
+        display: block;
+
+        span {
+            width: 14px;
+            height: 2px;
+            margin: 0;
+            padding: 0;
+        }
+    }
+
+    .icon-textcolor {
+        margin-top: 2px;
+    }
+}
+
+/* adjust padding to let the dropdown menus breathe */
+#format-dropdown {
+    #format-dropdown-display {
+        padding: 0 10px 0 10px;
+        line-height: 24px;
+
+        span.dropdown-text {
+            min-width: 70px; /* covers maximum expected i18n text width to avoid drop down flickering */
+        }
+    }
+
+    .aui-dropdown {
+        li {
+            height: auto;
+            padding: 0;
+        }
+
+        a {
+            padding: 6px 50px 6px 10px;
+        }
+
+        .mce_h1, .mce_h2, .mce_h3, .mce_h4 {
+            a {
+                padding: 0.4em 50px 0.5em 10px;
+            }
+        }
+    }
+}
+
+#insert-menu .aui-dropdown .icon {
+    background: transparent 0 0 no-repeat;
+    display: inline-block;
+    height: 16px;
+    padding: 0;
+    margin: 1px 10px 0 0;
+    text-indent: -9999em;
+    width: 16px;
+    color: @N500
+}
+
+#pagelayout-menu .aui-dropdown a,
+#more-menu .aui-dropdown a,
+#insert-menu .aui-dropdown a,
+#template-menu .aui-dropdown a {
+    line-height: 19px;
+}
+#more-menu .aui-dropdown a {
+    padding: 4px 50px 4px 25px;
+}
+
+#template-menu .aui-dropdown a {
+    padding: 6px 50px 6px 10px;
+}
+
+#insert-menu .aui-dropdown a {
+    padding: 4px 50px 4px 8px;
+    margin: 0;
+}
+
+#more-menu .no-icon .icon {
+    margin: 0;
+}
+
+#pagelayout-menu {
+    .aui-dropdown {
+        min-width: 0;
+
+        a {
+            min-width: 0;
+            padding: 2px 10px 2px 25px;
+        }
+
+        li {
+            &:first-child {
+                padding-top: 5px;
+            }
+
+            &:last-child {
+                padding-bottom: 5px;
+            }
+        }
+
+        .icon { // pagelayout specific styles
+            padding-left: 0;
+        }
+
+        .icon-layout {
+            float: none;
+            display: block;
+        }
+    }
+}
+
+/* icon-only buttons */
+.aui-toolbar .icon {
+    text-indent: -9999em;
+    width: 16px;
+    float: left;
+    height: 100%;
+    display: inline-block;
+    background: transparent 0 0 no-repeat;
+}
+
+#rte-savebar .aui-button-primary {
+    padding: 4px 10px;
+}
+
+#rte-toolbar .aui-button .dropdown-text {
+    float: left;
+}
+
+/* genuine AUI override */
+.aui-toolbar .aui-dd-parent .aui-dropdown li {
+    padding: 0;
+}
+
+/* overriding an AUI override until we can remove the override. no, really. */
+body .aui-toolbar .aui-dd-parent .aui-dropdown li a {
+    color: #333;
+    padding: 4px 10px;
+}
+
+/* TODOXHTML should probably get better consideration */
+.aui-toolbar .aui-dd-parent .aui-dropdown li a:link {
+    color: #333;
+}
+
+/* end override */
+
+form.aui.editor {
+    margin-top: 0px;
+}
+
+/* TODOXHTML: remove the original competing style */
+#format-dropdown li.mce_formatPreview.mce_blockquote a {
+    border-left: 0;
+}
+
+/* Title styles */
+#editor-precursor {
+    background-color: #f5f5f5;
+}
+
+#editor-precursor .cell {
+    display: block;
+    padding-bottom: 10px;
+    width: 100%;
+    position: relative;
+}
+
+.active-preview #editor-precursor .cell {
+    border-bottom: 1px dashed transparent;
+}
+
+#editor-precursor #breadcrumbs {
+    padding-left: 10px;
+    display: inline-block;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+#editor-precursor #draft-status-lozenge {
+    text-decoration: none;
+    margin-left: 10px;
+}
+
+#editor-precursor #editor-messages {
+    margin: 0 10px;
+}
+
+/* CONF-32021 Remove aui style causing editor messages to appear too close to the page title input field */
+#editor-precursor .aui-message:first-child {
+    margin-top: 10px;
+}
+
+#content-title {
+    max-width: 100%;
+    margin: 0;
+    min-height: 32px;
+    padding: 0;
+    outline: none;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    background: none;
+    border: none;
+    box-shadow: none;
+    display: inline-block;
+    font-size: 28px;
+    height: 40px;
+    width: 100%;
+}
+/* placeholder styles, don't group them */
+#content-title::-webkit-input-placeholder {
+    color: #999999;
+}
+#content-title:-moz-placeholder {
+    color: #999999;
+}
+#content-title::-moz-placeholder {
+    color: #999999;
+}
+#content-title:-ms-input-placeholder {
+    color: #999999;
+}
+
+#content-title-div {
+    padding: 0px 30px 0 10px;
+    font-size: 24px;
+    line-height: normal;
+    font-weight: bold;
+    margin-top: 0px;
+}
+
+#content-title-div .field-group {
+	padding: 0;
+}
+
+#content-title-div .error { /* We need to sytle it as it's not in an AUI form */
+    font-weight: bold;
+    color: #cc0000;
+    background-color: #fff;
+    padding-top: 5px;
+}
+
+.editor.aui #all-messages {
+    padding:0 10px 0 10px;
+}
+
+.contenteditor #main-header,
+#comments-section #editor-precursor,
+#comments-section #editor-notifications-container,
+#main.active-preview.active-preview #editor-notifications-container,
+#main.active-preview #editor-messages,
+#main.active-preview #toolbar,
+#main.active-preview #content-title-div {
+    display: none;
+}
+
+.contenteditor .active-preview #main-header {
+    display: block;
+}
+
+.quick-comment-container #editor-messages .aui-message.error {
+    margin: 0 0 10px 0;
+}
+
+#editor-notification-container {
+    display: table-row;
+    position: absolute;
+    bottom: 100px;
+    right: 25px;
+    width: 300px;
+    z-index: 5;
+}
+
+.contenteditor #editor-notifications-container {
+    left: 0;
+    margin: 0 auto;
+    max-width: 880px;
+    position: absolute;
+    right: 0;
+    top: 10px;
+    width: 100%;
+    z-index: 2;
+}
+
+.contenteditor #full-height-container.active-preview .aui-message {
+    margin: 20px 20px 0 20px;
+}
+
+.contenteditor #editor-notifications-container #all-messages,
+.contenteditor #editor-notifications-container #heartbeat-div,
+.contenteditor #editor-notifications-container #editor-messages {
+    width: 100%;
+    padding: 0;
+}
+
+.contenteditor #editor-notifications-container #all-messages .aui-message,
+.contenteditor #editor-notifications-container #heartbeat-div .aui-message,
+.contenteditor #editor-notifications-container #editor-messages .aui-message {
+    margin: 10px 0px;
+    -webkit-box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.2);
+}
+
+.contenteditor #editor-precursor {
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    background: none;
+    padding: 0px;
+}
+
+#toolbar #more-menu .dd-allocated,
+#toolbar #more-menu .dd-allocated .aui-button {
+    margin-left: 0;
+}
+
+.aui-toolbar .toolbar-split-captcha .toolbar-group {
+    float: right;
+}
+
+.aui-toolbar .captcha {
+    padding: 0;
+    width: auto;
+    text-align: right;
+}
+
+.aui-toolbar .captcha .aui-message-warning,
+.aui-toolbar #captcha-response {
+    clear: both;
+}
+
+.aui-toolbar .captcha-image {
+    margin: 7px 3px;
+}
+
+.aui-toolbar .captcha-image,
+.aui-toolbar #captcha-response {
+    float: right;
+}
+
+/* CONFDEV-4468 - Copied from tiny_mce/themes/advanced/skins/default/ui.css */
+#wysiwyg .defaultSkin .mceBlocker {
+    position:absolute;
+    left:0;
+    top:0;
+    z-index:1000;
+    opacity:0.5;
+    -ms-filter:'alpha(opacity=50)';
+    filter:alpha(opacity=50); background:#FFF
+}
+
+#wysiwyg .defaultSkin .mceProgress {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1001;
+    background: url(data:image/gif;base64,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) top left no-repeat;
+    width: 32px;
+    height: 32px;
+    margin: -16px 0 0 -16px
+}
+
+/* Table Picker */
+#table-picker-container .table-picker-box {
+    overflow: hidden;
+    border:  1px solid @N40;
+    padding: 6px;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+#table-picker-container .table-picker-background {
+    position: relative;
+}
+
+#table-picker-container .picker {
+    overflow: hidden;
+    background-repeat: repeat;
+    position: absolute;
+}
+
+#table-picker-container .picker.heading {
+    height: 18px;
+}
+
+#table-picker-container .table-picker-box .desc {
+    overflow: hidden;
+    font-family: helvetica;
+    font-size: 12px;
+    display: block;
+    text-align: center;
+    font-weight: bold;
+    width: 100%;
+    margin: 0;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 20px;
+}
+
+#table-picker-container {
+    position: absolute;
+    z-index: 10001;
+}
+
+#table-picker-backdrop {
+    background-color: transparent;
+    position: fixed;
+    padding: 0;
+    margin: 0;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 10000;
+}
+
+#conflict-diffs{
+    display: table-cell;
+    border-top: 1px solid @N40;
+    border-bottom:  1px solid @N40;
+}
+
+#conflict-wrapper {
+    max-height: 300px;
+    overflow: auto;
+}
+
+#conflict-wrapper > .aui-message {
+    margin: 10px;
+}
+
+#page-diffs {
+    margin: 0 10px;
+    padding: 10px 0;
+}
+
+#confluence-editor-discard-confirm-dialog .confluence-editor-discard-message span {
+    background-image: url(../../../images/icons/emoticons/warning.gif);
+    background-position: .5em 50%;
+    background-repeat: no-repeat;
+    margin: 0px;
+    padding-left: 28px;
+    padding-top: 0px;
+}
+
+/* from master.css */
+.hidden,
+li.hidden {
+    display: none !important;
+    visibility: hidden;
+}
+#page {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+/* End from master.css */
+
+
+/* from default-theme.css */
+html, body {
+    height: 100%;
+}
+
+#full-height-container {
+    height: 100%;
+    width: 100%;
+    position: relative;
+    background-color: #f5f5f5;
+}
+
+#full-height-container.active-preview {
+    background-color: #ffffff;
+}
+/* End from default-theme.css */
+
+/* custom overrides for PDL */
+#toolbar .aui-toolbar2-secondary {
+    margin-right: -6px;
+}
+
+#toolbar .aui-toolbar2-secondary .aui-button {
+    padding: 0 6px;
+}
+
+.aui-toolbar2 {
+	box-sizing: border-box;
+}
+
+.aui-toolbar2 .aui-toolbar2-primary {
+    float: left;
+}
+.aui-toolbar2 .aui-toolbar2-secondary {
+    position: absolute;
+    top: 7px;
+    right: 10px;
+}
+
+.aui-toolbar2 .toolbar-dropdown .icon-dropdown {
+	height: 100%;
+}
+
+.aui-toolbar2 .aui-dd-parent,
+.aui-toolbar2 .toolbar-dropdown {
+
+    &:hover a.aui-button {
+        background: rgba(9, 30, 66, 0.08);
+    }
+
+    &.active {
+        a.aui-button {
+            background-color: @N600;
+            color: @N0;
+
+            .aui-icon {
+                color: inherit;
+            }
+        }
+    }
+
+    a.aui-button {
+        background-color: transparent;
+        position: relative;
+        height: 26px;
+        border-radius: 3px;
+        line-height: 24px;
+    }
+}
+
+/* dropdown arrow */
+/* There are atleast two different implementations */
+.aui-toolbar2 .dd-allocated,
+.aui-toolbar2 .aui-dd-parent {
+
+    a.aui-dd-trigger:after {
+        -moz-osx-font-smoothing: grayscale;
+        -webkit-font-smoothing: antialiased;
+        -webkit-text-stroke-width: 0;
+        font-family: "Adgs Icons";
+        font-weight: normal;
+        font-style: normal;
+        speak: none;
+        content: "\f15b";
+        font-size: 16px;
+        height: 16px;
+        line-height: 1;
+        margin-top: -8px;
+        position: absolute;
+        right: 4px;
+        top: 50%;
+        text-indent: 0;
+        width: 16px;
+    }
+}
+
+/* Following rules target Insert table and Insert More styles */
+#toolbar .aui-toolbar2 .aui-buttons.no-separator .aui-dd-parent > a.aui-dd-trigger {
+    padding-right: 5px;
+}
+#toolbar .aui-toolbar2 .aui-buttons.no-separator .aui-dd-parent > a.aui-dd-trigger:after {
+    margin-left: -15px;
+}
+
+.aui-toolbar2 .aui-dd-parent > a.aui-dd-trigger:hover:after {
+	opacity: 1;
+}
+
+/*
+   Ideally can remove these overrides when this issue is resolved
+   https://ecosystem.atlassian.net/browse/AUI-949
+*/
+.aui-toolbar2 .aui-dropdown,
+body.edit .aui-dialog .aui-dropdown,
+body.create .aui-dialog .aui-dropdown {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+.aui-toolbar2 .aui-dropdown a.item-link,
+.aui-toolbar2 .aui-dropdown a.item-link:focus
+.aui-toolbar2 .aui-dropdown a.item-link:hover
+.aui-toolbar2 .aui-dropdown a.item-link:active {
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.aui-buttons li.toolbar-dropdown:first-child {
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    border-left-width: 1px;
+    border-left-color: #CCC;
+}
+
+#rte-toolbar .toolbar-item {
+    &, & > a.toolbar-trigger {
+        height: 26px;
+        &:link, &:visited, &:hover, &:focus, &:active {
+            text-decoration:none;
+            color:#333;
+        }
+    }
+}
+
+.aui-toolbar2 li.aui-button {
+	display: inline-block;
+	padding: 0 10px;
+	float: none;
+	line-height: 30px;
+}
+
+.aui-toolbar2 li.aui-button a.toolbar-trigger {
+	padding: 0;
+	margin: 0;
+}
+
+#format-dropdown-display-menu li > a {
+	margin-left: 2px;
+}
+
+#more-menu {
+	float: none;
+    margin-left: -12px;
+    margin-right: -6px;
+}
+
+#table-more-settings h2 {
+    padding-bottom: 10px;
+}
+
+#rte-savebar .aui-button-link:hover {
+	text-decoration:none;
+}
+
+#rte-savebar .aui-button span.icon ~ span.trigger-text,
+#rte-toolbar .aui-button span.icon ~ span.trigger-text,
+#rte-toolbar .aui-button span.icon ~ span.dropdown-text,
+#property-panel .aui-button span.icon ~ span.panel-button-text {
+    padding-left: 3px;
+}
+
+#rte-toolbar .aui-button,
+#rte-savebar .aui-button {
+	margin-top: 0;
+}
+
+#rte-savebar.aui-toolbar2 .aui-button {
+	margin-top: 0px;
+}
+
+#editor-precursor .aui-toolbar2 .aui-button {
+    padding: 0 6px;
+}
+
+#editor-precursor .aui-toolbar2 {
+    padding-left: 10px;
+}
+
+.aui-page-panel.active-preview #editor-precursor .aui-toolbar2 {
+    /* Here we hide the breadcrumb buttons when in the editor preview mode. */
+    display: none;
+}
+
+.aui-message .aui-icon {
+	background-position: center;
+}
+
+#rte-toolbar input,
+#rte-savebar input,
+#update-page-restrictions-dialog input {
+	font-size: 14px;
+}
+
+#rte-toolbar-row-searchreplace .aui-buttons {
+	margin-top: 0;
+}
+
+#rte-toolbar .aui-dropdown {
+    z-index: 4001; /* Higher than property panels */
+}
+
+/* End custom overrides for PDL */
+
+/* These containers need to be positioned above the page title and breadcrumbs in the editor,
+   so that they don't re-appear above the global header as the editor content is scrolled */
+#editpageform > #anonymous-warning {
+    display: none;
+}
+#comments-section #anonymous-warning {
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.contenteditor {
+    #pas-announcement {
+        display: block;
+        position: relative;
+        opacity: 1;
+    }
+
+    #header {
+        z-index: 3;
+        position: relative;
+    }
+
+    #conflict-diffs {
+        z-index: 2;
+        position: relative;
+        background: #ffffff;
+    }
+}
+
+#rte-toolbar {
+    /*Relative resize table*/
+    ul.table-mode-list {
+        list-style: none;
+        margin: 0;
+        padding: 5px 0;
+
+        .item-link {
+            padding-right: 20px;
+        }
+
+        .dropdown-item {
+            line-height: 18px;
+        }
+    }
+}
+
+.quit-editor-dialog {
+    .tipsy-inner {
+        text-align: left;
+        max-width: 220px;
+    }
+}
+
+#quit-editor-dialog  {
+
+    button {
+        &.disabled {
+            text-decoration: none;
+            outline: none;
+        }
+    }
+
+    .legend {
+        margin-bottom: 15px;
+        .legend-title {
+            font-weight: bold;
+            padding-left: 0;
+        }
+        span {
+            padding: 5px;
+        }
+    }
+
+    .diff-context-placeholder {
+        background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAQCAYAAAAiYZ4HAAAABGdBTUEAALGPC/xhBQAAARBJREFUKBV9kbuuRUAUhteISyVRaBQUKu//KhoitBKFEBTitv3rnCWzx8mZZFxmvv8y0PXHOI7jKsvyGobhtWuRMc7zpKqqaJomquuaxnH8Ir4EAs/zTEopuu1fokegw47jUJqmFATBS6RQ0oSTJCHXdblK27Z0n4UTYaL6vr+6riPUgLMOS3ldZDdNw+smbFk/bZEeRREzSLJ936d1XSmO46cGYNu2Gdr3nXSRWpblkmjcBS6KgpezLCMR8T4+Hya//DoDRiomnpEmFS18a0zdGaDneTxNkdq27akkzoBRBcNcewTmhn5ofU/lec4JUgPOAnPEfcGhRWQB/A+GCAYwQlV1/0VOCMPw5SwJckfSB4/U/WAIKs/PAAAAAElFTkSuQmCC') repeat-x;
+        background-size: 6px;
+        height: 10px;
+    }
+
+    .aui-button {
+        display: none;
+    }
+
+    .contributor-list {
+        list-style: none;
+        padding-left: 0px;
+        margin-top: 13px;
+        max-height: 160px;
+        overflow-y: auto;
+        li {
+            float: left;
+            width: 50%;
+        }
+    }
+    .contributor-avatar {
+        display: table-cell;
+        vertical-align: middle;
+        padding: 4px 0;
+    }
+    .contributor-name {
+        padding: 0 10px;
+        font-weight: bold;
+        display: table-cell;
+        vertical-align: middle;
+    }
+}
+
+.editor-block::after {
+    background: #000;
+    opacity: 0.5;
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 2;
+}

@@ -1,0 +1,183 @@
+{namespace Confluence.Templates.Editor.Components.Precursor}
+
+/**
+ * Renders the section that precedes the editor, which includes the title input field
+ * and any notifications.
+ * @param loginParams params for Confluence.Templates.Notifications.notLoggedIn
+ * @param notificationParams params for Confluence.Templates.Editor.Components.Precursor.notifications
+ * @param actionErrors list of action errors to display
+ * @param titleParams params for Confluence.Templates.Editor.Components.Precursor.title
+ * @param metadataParams params for Confluence.Templates.Editor.Components.Precursor.metadata
+ */
+{template .render}
+    <div id="editor-notifications-container">
+        <div id="editor-messages">
+            {call Confluence.Templates.Notifications.notLoggedIn data="$loginParams" /}
+            {call Confluence.Templates.Editor.Components.Precursor.notifications data="$notificationParams" /}
+        </div>
+        <div id="all-messages">
+            {call Confluence.Templates.Notifications.actionErrors}
+                {param actionErrors: $actionErrors /}
+                {param closeable: true /}
+            {/call}
+        </div>
+    </div>
+    <div id="editor-precursor">
+        <div class="cell">
+            {call Confluence.Templates.Editor.Components.Precursor.metadata data="$metadataParams" /}
+            {call Confluence.Templates.Editor.Components.Precursor.title data="$titleParams" /}
+        </div>
+    </div>
+{/template}
+
+/**
+ * Renders the section that precedes the editor, which includes the title input field
+ * @param loginParams params for Confluence.Templates.Notifications.notLoggedIn
+ * @param notificationParams params for Confluence.Templates.Editor.Components.Precursor.notifications
+ * @param actionErrors list of action errors to display
+ * @param titleParams params for Confluence.Templates.Editor.Components.Precursor.title
+ * @param metadataParams params for Confluence.Templates.Editor.Components.Precursor.metadata
+ */
+{template .renderTitle}
+    <div id="editor-notifications-container">
+        {if not $loginParams.isUserAuthenticated}
+                <div id="editor-messages">
+                    {call Confluence.Templates.Notifications.notLoggedIn data="$loginParams" /}
+                    {call Confluence.Templates.Editor.Components.Precursor.notifications data="$notificationParams" /}
+                </div>
+        {/if}
+        <div id="all-messages">
+                {call Confluence.Templates.Notifications.actionErrors}
+                    {param actionErrors: $actionErrors /}
+                    {param closeable: true /}
+                {/call}
+        </div>
+    </div>
+    <div id="editor-precursor">
+        <div class="cell">
+            {call Confluence.Templates.Editor.Components.Precursor.metadata data="$metadataParams" /}
+            {call Confluence.Templates.Editor.Components.Precursor.title data="$titleParams" /}
+        </div>
+    </div>
+{/template}
+
+/**
+ * Notifications
+ * @param showDraftMessage
+ * @param existingDraft (map - isNewPage, title, lastModificationDate)
+ * @param mergeRequired
+ * @param conflictFound
+ * @param pageId
+ * @param spaceKey
+ */
+{template .notifications}
+    {if $showDraftMessage}
+        //We don't like display:none either
+        <div id="draft-messages" style="display:none" class="aui-message info closeable">
+            <span class="aui-icon icon-hint"></span>
+            {if $existingDraft.isNewPage}
+                {if $existingDraft.title}
+                    {let $escapedTitle}{$existingDraft.title|escapeHtml}{/let}
+                    {getText('draft.warning.create.page', formatDateTime($existingDraft.lastModificationDate), $escapedTitle)|noAutoescape}
+                {else}
+                    {getText('draft.warning.create.page.without.title', formatDateTime($existingDraft.lastModificationDate))|noAutoescape}
+                {/if}
+
+                {sp}{getText('draft.warning.resume.or.discard.new', '<a href="#" class="use-draft"> ', '</a>', '<a href="#" class="discard-draft"> ', '</a>')|noAutoescape}
+            {else}
+                {getText('draft.warning.edit.page', formatDateTime($existingDraft.lastModificationDate))}
+                {if $mergeRequired}
+                    {sp}{getText('draft.warning.merge.required')}
+                {/if}
+                {if $conflictFound}
+                    {sp}{getText('draft.warning.conflict.found', '<a href="?pageId=' + $pageId + '&viewConflict=true&spaceKey=' + $spaceKey + '" >', '</a>',
+                        '<a href="#" class="discard-draft">', '</a>', '<a href="' + contextPath() + '/users/viewmydrafts.action">', '</a>')|noAutoescape}
+                {else}
+                    {if $mergeRequired}
+                        {sp}{getText('draft.warning.merge.or.discard',  '<a id="view-diff-link-notification" href="#" class="view-diff-link">', '</a>',
+                            '<a href="#" class="use-draft"> ', '</a>', '<a href="#" class="discard-draft">', '</a>')|noAutoescape}
+                    {else}
+                        {sp}{getText('draft.warning.resume.or.discard',  '<a id="view-diff-link-notification" href="#" class="view-diff-link">', '</a>',
+                            '<a href="#" class="use-draft"> ', '</a>', '<a href="#" class="discard-draft">', '</a>')|noAutoescape}
+                    {/if}
+                {/if}
+            {/if}
+        </div>
+    {/if}
+
+    <div id='heartbeat-div' class="hidden">
+        <div class="aui-message info closeable">
+                <span class="aui-icon icon-info"></span>
+            {getText('heartbeat.page.edited.info', '<span id="other-users-span"></span>')|noAutoescape}
+        </div>
+    </div>
+{/template}
+
+/**
+ * Title field
+ * @param? title
+ * @param? placeholder
+ * @param? disabled
+ * @param? readonly
+ * @param? collaborative
+ */
+{template .title}
+    <div id="content-title-div" class="{if $collaborative}collaborative{/if}">
+        <input type="text" name="title" id="content-title" tabindex="1" class="text pagetitle" autocomplete="off"
+            {if $title}value="{$title}"{/if} {if $placeholder}placeholder="{$placeholder}"{/if}
+            {if $disabled}disabled="disabled"{/if} {if $readonly}readonly="readonly"{/if}>
+    </div>
+{/template}
+
+/**
+ * @param contentId
+ * @param contextMap
+ */
+{template .metadata private="true"}
+    <div class="aui-buttons aui-toolbar2">
+        {call .metadataButtons data="all" /}
+        {call .metadataLinks data="all" /}
+    </div>
+{/template}
+
+/**
+ * Fetch web-items which should be rendered as buttons next to the breadcrumbs
+ * @param contentId
+ * @param contextMap
+ */
+{template .metadataButtons private="true"}
+    {let $items: itemsForSection($contentId, 'system.editor.precursor.buttons', $contextMap) /}
+    {foreach $item in $items}
+        {let $buttonId: $item.id ? $item.id : '' /}
+        {let $buttonLabel: $item.label ? $item.label : '' /}
+        {let $buttonTooltip: $item.tooltip ? $item.tooltip : '' /}
+        {let $iconClass: $item.params['iconClass'] ? $item.params['iconClass'] : '' /}
+        {let $explicitRestrictions: $item.params['explicitRestrictions'] ? $item.params['explicitRestrictions'] : '' /}
+        {let $inheritedRestrictions: $item.params['inheritedRestrictions'] ? $item.params['inheritedRestrictions'] : '' /}
+        <button class="aui-button aui-button-subtle {$buttonId}" type="button" data-tooltip="{$buttonLabel}" id="{$buttonId}"
+                data-explicit-restrictions="{$explicitRestrictions}" data-inherited-restrictions="{$inheritedRestrictions}">
+            <span class="icon{if $iconClass} aui-icon aui-icon-small {$iconClass}{/if}"></span>
+        </button>
+    {/foreach}
+{/template}
+
+/**
+ * Fetch web-items which should be rendered as links next to the breadcrumbs
+ * @param contentId
+ * @param contextMap
+ */
+{template .metadataLinks private="true"}
+    {let $items: itemsForSection($contentId, 'system.editor.precursor.links', $contextMap) /}
+    {foreach $item in $items}
+        {let $linkId: $item.id ? $item.id : '' /}
+        {let $linkLabel: $item.label ? $item.label : '' /}
+        {let $linkTooltip: $item.tooltip ? $item.tooltip : '' /}
+        {let $styleClass: $item.styleClass ? $item.styleClass : '' /}
+        {let $includeHref: $item.params['includeHref'] ? $item.params['includeHref'] == 'true' : false /}
+        <a title="{$linkTooltip}" id="{$linkId}"
+           {if $includeHref}href="{$item.url}" {/if}
+           {if $styleClass}class="{$styleClass}"{/if}>
+            <span>{$linkLabel}</span>
+        </a>
+    {/foreach}
+{/template}

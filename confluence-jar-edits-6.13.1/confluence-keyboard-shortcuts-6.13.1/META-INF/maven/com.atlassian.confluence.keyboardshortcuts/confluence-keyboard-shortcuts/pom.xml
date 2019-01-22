@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>confluence-misc-plugins</artifactId>
+        <groupId>com.atlassian.confluence</groupId>
+        <version>6.13.1</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.atlassian.confluence.keyboardshortcuts</groupId>
+    <artifactId>confluence-keyboard-shortcuts</artifactId>
+
+    <name>Confluence Keyboard Shortcuts Plugin</name>
+    <description>Confluence Keyboard Shortcuts Plugin</description>
+    <url />
+
+    <dependencies>
+        <dependency>
+            <groupId>com.atlassian.confluence.rest</groupId>
+            <artifactId>confluence-rest-plugin</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.atlassian.plugins</groupId>
+            <artifactId>atlassian-plugins-webresource</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.atlassian.plugins.shortcuts</groupId>
+            <artifactId>atlassian-shortcuts-plugin</artifactId>
+            <version>${atlassian.keyboard.shortcuts.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.atlassian.confluence</groupId>
+            <artifactId>confluence</artifactId>
+            <version>${project.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.atlassian.plugins.rest</groupId>
+            <artifactId>atlassian-rest-common</artifactId>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jul-to-slf4j</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
+
+    <properties>
+        <atlassian.plugin.key>com.atlassian.confluence.keyboardshortcuts</atlassian.plugin.key>
+        <confluence.version>${project.version}</confluence.version>
+        <atlassian.product.version>${project.version}</atlassian.product.version>
+    </properties>
+
+    <build>
+        <resources>
+            <!-- This filtering strategy is intentionally weird to trick the IDEA plugin into including the directory in the classpath -->
+            <resource>
+                <directory>src/main/resources</directory>
+                <excludes>
+                    <exclude>atlassian-plugin.xml</exclude>
+                </excludes>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+                <includes>
+                    <include>atlassian-plugin.xml</include>
+                </includes>
+            </resource>
+        </resources>
+        <plugins>
+            <plugin>
+                <groupId>org.twdata.maven</groupId>
+                <artifactId>maven-cli-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>com.samaxes.maven</groupId>
+                <artifactId>minify-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+</project>

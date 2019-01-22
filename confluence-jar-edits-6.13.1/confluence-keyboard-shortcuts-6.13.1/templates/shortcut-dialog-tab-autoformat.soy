@@ -1,0 +1,204 @@
+{namespace Confluence.Templates.KeyboardShortcutsDialog.Autoformat}
+
+/**
+ * A template for a autocomplete settings link
+ * @param href key of the settings page
+ */
+{template .configureAutocomplete}
+    <div id="keyboard-shortcut-autocomplete-message">
+        {getText('keyboard.shortcuts.autoformat.config.autocomplete')} <a target="_blank" href={$href}>{getText('keyboard.shortcuts.autoformat.config.autocomplete.link.description')}</a>
+    </div>
+{/template}
+
+/**
+ * A template for a single item in the wiki markup help dilaog
+ * @param output what the editor will output
+ * @param type what you type into the editor
+ * @param actionClass a class to apply to the action column
+ */
+{template .helpItem autoescape="false"}
+   <li class="item-details">
+       <span class="item-description wiki-content">{$output}</span>
+       <span class="{$actionClass} item-action">{$type}</span>
+   </li>
+{/template}
+
+/**
+* A template for simple help items with <code> tags for the text
+* @param output what the editor will output
+* @param type what you type into the editor
+*/
+{template .simpleHelpItem autoescape="false"}
+    {call Confluence.Templates.KeyboardShortcutsDialog.Autoformat.helpItem}
+        {param output: $output/}
+        {param type}
+            <code>{$type}</code>
+        {/param}
+        {param actionClass: ''/}
+    {/call}
+{/template}
+
+/**
+* A template for autoformat table help items
+* @param output what the editor will output
+* @param type what you type into the editor
+*/
+{template .tableHelpItem autoescape="false"}
+    {call Confluence.Templates.KeyboardShortcutsDialog.Autoformat.helpItem}
+        {param output: $output/}
+        {param type}
+            <code>{$type}</code>
+        {/param}
+        {param actionClass: 'table-action'/}
+    {/call}
+{/template}
+
+/**
+* A template for autoformat heading help items
+* @param output what the editor will output
+* @param type what you type into the editor
+*/
+{template .styleHelpItem autoescape="false"}
+    {call Confluence.Templates.KeyboardShortcutsDialog.Autoformat.helpItem}
+        {param output: $output/}
+        {param type}
+            <code>{$type}</code>
+        {/param}
+        {param actionClass: 'style-action'/}
+    {/call}
+{/template}
+
+/**
+* A template for a keyboard shortcut item
+* @param output the keyboard shortcut
+* @param type a description of what the shortcut does
+*/
+{template .keyboardShortcutItem}
+    {call Confluence.Templates.KeyboardShortcutsDialog.Autoformat.helpItem}
+        {param output}
+            {$output}
+        {/param}
+        {param type}
+            <kbd class="regular-key">{$type}</kbd>
+        {/param}
+        {param actionClass: ''/}
+    {/call}
+{/template}
+
+/**
+ * A template to render the markup help for an emoticon
+ * @param src the url of the emoticon
+ * @param type what you type into the editor
+ */
+{template .emoticonHelpItem}
+    {call Confluence.Templates.KeyboardShortcutsDialog.Autoformat.simpleHelpItem}
+        {param output}
+            <img src={$src}></img>
+        {/param}
+        {param type: $type /}
+    {/call}
+{/template}
+
+/**
+* The output of using the bold autoformatting
+*/
+{template .boldDescription}
+    <b>{getText('keyboard.shortcuts.autoformat.bold.desc')}</b> {getText('keyboard.shortcuts.autoformat.text')}
+{/template}
+
+/**
+* The output of using the underline autoformatting
+*/
+{template .underlineDescription}
+    <span style="text-decoration: underline;">{getText('keyboard.shortcuts.autoformat.underline.desc')}</span> {getText('keyboard.shortcuts.autoformat.text')}
+{/template}
+
+/**
+* The output of using the italic autoformatting
+*/
+{template .italicDescription}
+    <em>{getText('keyboard.shortcuts.autoformat.italic.desc')}</em> {getText('keyboard.shortcuts.autoformat.text')}
+{/template}
+
+/**
+* The output of using the monospace autoformatting
+*/
+{template .monospaceDescription}
+    <code>{getText('keyboard.shortcuts.autoformat.monospace.desc')}</code> {getText('keyboard.shortcuts.autoformat.text')}
+{/template}
+
+/**
+* The output of using the table autoformatting
+*/
+{template .tableDescription}
+    <table class="confluenceTable">
+        <tbody>
+            <tr>
+                <td class="confluenceTd">{getText('editor.autoformat.sampletext.firstcell')}</td>
+                <td class="confluenceTd">&nbsp;</td>
+                <td class="confluenceTd">&nbsp;</td>
+                <td class="confluenceTd">&nbsp;</td>
+            </tr>
+        </tbody>
+    </table>
+{/template}
+
+/**
+* The output of using the table autoformatting with headings
+*/
+{template .tableWithHeadingsDiscriptions}
+    <table class="confluenceTable">
+        <tbody>
+            <tr>
+                <th class="confluenceTh">{getText('editor.autoformat.sampletext.heading')}</th>
+                <th class="confluenceTh">{getText('editor.autoformat.sampletext.heading')}</th>
+            </tr>
+            <tr>
+                <td class="confluenceTd">&#8203;</td>
+                <td class="confluenceTd">&#8203;</td>
+            </tr>
+        </tbody>
+    </table>
+{/template}
+
+/**
+* The output of using the h1 autoformatting
+*/
+{template .h1Description}
+    <h1>{getText('keyboard.shortcuts.autoformat.heading')}</h1>
+{/template}
+
+/**
+* The output of using the h3 autoformatting
+*/
+{template .h3Description}
+    <h3>{getText('keyboard.shortcuts.autoformat.heading')}</h3>
+{/template}
+
+/**
+* The output of using the bq autoformatting
+*/
+{template .bqDescription}
+    <blockquote>{getText('keyboard.shortcuts.autoformat.quote')}</blockquote>
+{/template}
+
+/**
+* The output of using the numbered list autoformatting
+*/
+{template .numberedListDescription}
+    <ol><li>{getText('keyboard.shortcuts.autoformat.list.desc')}</li></ol>
+{/template}
+
+/**
+* The output of using the bulleted list autoformatting
+*/
+{template .bulletedListDescription}
+    <ul><li>{getText('keyboard.shortcuts.autoformat.bults.desc')}</li></ul>
+{/template}
+
+/**
+* The output of using the inline task list autoformatting
+*/
+{template .inlineTaskListDescription}
+    <ul class="inline-task-list"><li>task</li></ul>
+{/template}

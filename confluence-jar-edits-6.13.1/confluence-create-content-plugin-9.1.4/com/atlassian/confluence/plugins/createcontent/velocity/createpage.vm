@@ -1,0 +1,4 @@
+#* @vtlvariable name="action" type="com.atlassian.confluence.plugins.createcontent.actions.AbstractCreateBlueprintPageAction" *#
+$action.storeBlueprintPageIndicatorInEditorContext()
+$action.storeBlueprintKeyInEditorContext()
+#parse("/pages/createpage.vm")

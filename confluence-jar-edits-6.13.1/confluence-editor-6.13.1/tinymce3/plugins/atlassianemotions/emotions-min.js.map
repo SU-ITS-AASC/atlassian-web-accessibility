@@ -1,0 +1,8 @@
+{
+"version":3,
+"file":"/dummy-file-path",
+"lineCount":2,
+"mappings":"AAGAA,MAAA,4FAGG,QAAA,CACCC,CADD,CAECC,CAFD,EAMCD,CAAAE,gBAAA,EAND,aASYC,QAAAA,GACHH,CAAAI,kBAAA,EADGD,KAGCE,MACJJ,EAAA,mBAAAK,GAAA,eAAwC,QAAA,CAAUC,CAAV,EACpCA,CAAAC,eAAA,EACIC,EAFgC,CAErBF,CAAAG,OACfL,EAAAM,OAAA,CAAYF,CAAAG,QAAAC,KAAZ,iBAAqDJ,CAAAK,GAArD,CAAkEL,CAAAM,IAAlE,CAHoC,CAAxC,CAJGZ,CATZ,QAsBcQ,QAAAA,CAASF,CAATE,CAAmBK,CAAnBL,CAA0BM,CAA1BN,MACDO,EAAKlB,CAAAmB,OADJR,CAEDS,EAAMF,CAAAE,IAKVpB,EAAAqB,iBAAA,EACArB,EAAAsB,MAAA,EACAJ,EAAAK,YAAA,uBAA0CH,CAAAI,WAAA,YAChCP,CADgC,KAEhCC,CAAAO,QAAA,CAAWT,CAAX,CAFgC,OAG9BE,CAAAO,QAAA,CAAWT,CAAX,CAH8B;AAKtC,OALsC,sBAKLP,CALK,CAMtC,oBANsC,CAMfA,CANe,EAA1C,CATKE,CAtBd,EAHH,CAiDAe,QAAA,8BAAAC,YAAA,iEAAmH,QAAA,CAASC,CAAT,EAC/GF,OAAA,iBAAAG,OAAAC,IAAA,CAAoCF,CAAAzB,KAApC,CAAyDyB,CAAzD,CAD+G,CAAnH;",
+"sources":["input.js"],
+"names":["define","tinyMCEPopup","$","requireLangPack","init","resizeToInnerSize","self","on","e","preventDefault","emoticon","target","insert","dataset","type","id","src","title","emoticonUrl","ed","editor","dom","restoreSelection","close","execCommand","createHTML","getLang","require","safeRequire","EmotionsDialog","onInit","add"]
+}

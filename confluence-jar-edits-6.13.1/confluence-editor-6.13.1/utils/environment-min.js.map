@@ -1,0 +1,8 @@
+{
+"version":3,
+"file":"/dummy-file-path",
+"lineCount":1,
+"mappings":"AAGAA,MAAA,+CAGA,QAAA,CACIC,CADJ,kBAMgBC,SAAAC,SAAAC,QAAA,OANhB,+BAQuCC,QAAAA,CAAUC,CAAVD,MACvBE,EAAON,CAAAO,KAAAC,QAAA,0BADgBJ,OAIpBK,WAJoBL,CAIPC,CAAAK,QAAA,CAAiBC,MAAA,CAAOL,CAAP,KAAjB,UAJOF,CAIoCC,CAJpCD,CARvC,EAHA;",
+"sources":["input.js"],
+"names":["define","AJS","navigator","platform","indexOf","transformCmdKeyTextBasingOnOS","text","ctrl","I18n","getText","isMac","replace","RegExp"]
+}

@@ -1,0 +1,44 @@
+// Styles for list-plugin-templates.vm
+
+#content-blueprint-templates, #space-blueprints-admin, #system-templates {
+    table
+    {
+        > tbody > tr > td.template-operations {
+            width: 1%;
+            white-space: nowrap;
+            text-align: right;
+        }
+        > thead > tr > th.web-item-operations {
+            white-space: nowrap;
+        }
+    }
+
+    .web-item-operations {
+        font-weight: normal;
+    }
+
+    .web-item-module.disabled {
+        td, th, .promoted-state-toggle-trigger {
+            color: #999;
+        }
+
+        .web-item-operations-divider {
+          color: #3b73af;
+        }
+    }
+
+    // "What are Blueprints?", "Find more Blueprints", etc
+    .additional-blueprints-links {
+        margin-top: 10px;
+    }
+
+    // Each section should be separated from the one before, natch.
+    &.templates-section {
+        margin: 20px 0px;
+    }
+}
+
+table.aui > tbody > tr > td {
+    // overrides listpagetemplates.css
+    vertical-align: middle;
+}

@@ -1,0 +1,37 @@
+Manifest-Version: 1.0
+Archiver-Version: Plexus Archiver
+Created-By: Apache Maven Bundle Plugin
+Built-By: bamboo-agent
+Build-Jdk: 1.8.0_144
+Atlassian-Build-Date: 2019-01-17T03:03:51+0000
+Bnd-LastModified: 1547694231452
+Bundle-Description: Atlassian Confluence plugin providing quick commen
+ ting functionality
+Bundle-DocURL: https://www.atlassian.com/
+Bundle-License: https://www.atlassian.com/legal/customer-agreement
+Bundle-ManifestVersion: 2
+Bundle-Name: Quick Comment Plugin
+Bundle-SymbolicName: com.atlassian.confluence.plugins.confluence-quick
+ -edit
+Bundle-Vendor: Atlassian
+Bundle-Version: 6.13.1
+Export-Package: .compile-less.less-compilation-marker;resolution:=opti
+ onal;version="6.13.1",atlassian-plugin.xml;resolution:=optional;versi
+ on="6.13.1",com.atlassian.confluence.plugins.quickcomment;resolution:
+ =optional;version="6.13.1",css;resolution:=optional;version="6.13.1",
+ jscripts;resolution:=optional;version="6.13.1",jscripts.handlers;reso
+ lution:=optional;version="6.13.1",jscripts.handlers.comment;resolutio
+ n:=optional;version="6.13.1",jscripts.view-content;resolution:=option
+ al;version="6.13.1",soy;resolution:=optional;version="6.13.1",templat
+ es;resolution:=optional;version="6.13.1",velocity_implicit.vm;resolut
+ ion:=optional;version="6.13.1"
+Import-Package: css;version="0.0.0",jscripts;version="0.0.0",soy;versi
+ on="0.0.0",templates;version="0.0.0",com.atlassian.renderer;version="
+ 6.2.7",javax.ws.rs;version="1.1.1",com.atlassian.user;version="3.0",o
+ rg.slf4j;version="1.6.4",com.atlassian.plugins.rest.common.security;v
+ ersion="2.6.2.1",javax.xml.stream;version="0.0.0",net.jcip.annotation
+ s;version="1.0",javax.xml.bind.annotation;version="2.1",javax.servlet
+ .http;version="3.0",javax.ws.rs.core;version="1.1.1"
+Originally-Created-By: Apache Maven Bundle Plugin
+Tool: Bnd-2.4.1.201501161923
+

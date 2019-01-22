@@ -1,0 +1,8 @@
+{
+"version":3,
+"file":"/dummy-file-path",
+"lineCount":2,
+"mappings":"AAQAA,MAAA,2GAIG,QAAA,CACCC,CADD,CAECC,CAFD,CAGCC,CAHD,cAQYC,QAAAA,CAASC,CAATD,EACHF,CAAAI,OAAAC,cAAAC,SADGJ,GAGHC,EAAAI,aAAAC,IAAA,CAAoB,QAAA,GAChBP,CAAAQ,MAAA,kDAGAN,EAAAO,WAAAC,SAAA,CAAuBX,CAAAI,OAAAC,cAAAO,QAAAC,gBAAvB,CACAZ,EAAAa,QAAA,6BALgB,CAApB,CASAX,EAAAY,OAAAP,IAAA,CAAcR,CAAAI,OAAAC,cAAAO,QAAAI,SAAd,CACAb,EAAAc,OAAAT,IAAA,CAAcR,CAAAI,OAAAC,cAAAO,QAAAI,SAAd,CAbGd,CARZ,SAwBegB,QAAAA;gEAKQnB,CAAAoB,aALRD,KAKqCnB,CAAAqB,aALrCF,EAxBf,EAJH,CAuCAG,QAAA,8BAAAC,YAAA,qEAAuH,QAAA,CAASC,CAAT,MAC/GxB,EAAUsB,OAAA,WACdtB,EAAAyB,OAAA,gCAA+CD,CAA/C,CACAxB,EAAA0B,cAAAjB,IAAA,gBAA0CT,CAAA2B,QAAAC,aAA1C,CAHmH,CAAvH;",
+"sources":["input.js"],
+"names":["define","tinymce","Confluence","AJS","init","ed","Editor","Autocompleter","Settings","onPostRender","add","debug","onKeyPress","addToTop","Manager","triggerListener","trigger","onUndo","reattach","onRedo","getInfo","majorVersion","minorVersion","require","safeRequire","AutoCompletePlugin","create","PluginManager","plugins","AutoComplete"]
+}

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceDoc><classDocs><classDoc><className>com.atlassian.confluence.plugins.createcontent.experimental.ExperimentalContentBlueprintResource</className><commentText><![CDATA[This resource will be merged into Confluence.core after development is finished.
+ It will replace ContentBlueprintResource]]></commentText><methodDocs><methodDoc><methodName>createInstance</methodName><commentText><![CDATA[This method is put here temporally, will be moved to confluence core ContentBlueprintResource when done.
+ this method implements option A, B in the spec, Option C is already implemented in confluence core.
+ ContentBlueprintResource]]></commentText><responseDoc/></methodDoc></methodDocs></classDoc></classDocs></resourceDoc>

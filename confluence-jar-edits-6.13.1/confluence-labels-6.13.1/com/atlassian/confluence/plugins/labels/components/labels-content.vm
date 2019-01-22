@@ -1,0 +1,5 @@
+<div class="labels-section-content content-column"#if($labelable) entityid="${labelable.id}" entitytype="${labelable.type}"#end>
+	<div class="labels-content">
+		#parse("/com/atlassian/confluence/plugins/labels/components/labels-list.vm")
+    </div>
+</div>

@@ -1,0 +1,240 @@
+{namespace Confluence.Templates.Editor.Sections.Savebar}
+
+/**
+ * @param contentId
+ * @param useDatePicker
+ * @param postingDate
+ * @param usePluggableStatus
+ * @param versionMismatch
+ * @param metadataContext
+ * @param webPanelContext
+ * @param sharedDraftsEnabled
+ * @param contentType
+ * @param newPage - Indicates that this is a draft that has never been published
+ */
+{template .render}
+    <div id="savebar-container">
+        <div id="rte-savebar" class="aui-toolbar aui-toolbar2">
+            {call Confluence.Templates.Editor.Sections.Savebar.pluggablePanels}
+                {param contentId: $contentId /}
+                {param contextMap: $webPanelContext /}
+            {/call}
+            <div class="toolbar-split toolbar-split-row">
+                <div class="toolbar-split toolbar-split-left">
+                    {call Confluence.Templates.Editor.Sections.Savebar.metadata}
+                        {param contentId: $contentId /}
+                        {param useDatePicker: $useDatePicker /}
+                        {param postingDate: $postingDate /}
+                        {param contextMap: $metadataContext /}
+                    {/call}
+                </div>
+                <div class="toolbar-split toolbar-split-right">
+                    {call Confluence.Templates.Editor.Sections.Savebar.actions}
+                        {param contentId: $contentId /}
+                        {param usePluggableStatus: $usePluggableStatus /}
+                        {param versionMismatch: $versionMismatch /}
+                        {param sharedDraftsEnabled: $sharedDraftsEnabled /}
+                        {param contentType: $contentType /}
+                        {param newPage: $newPage /}
+                    {/call}
+                </div>
+            </div>
+        </div>
+    </div>
+{/template}
+
+/**
+ * @param contentId
+ * @param contextMap
+ */
+{template .pluggablePanels private="true"}
+    {let $panels: panelsForLocation($contentId, 'atl.editor.savebar', $contextMap) /}
+    {foreach $panel in $panels}
+        {$panel.html|noAutoescape}
+    {/foreach}
+{/template}
+
+/**
+ * @param contentId
+ * @param useDatePicker
+ * @param postingDate
+ * @param contextMap
+ */
+{template .metadata private="true"}
+    <div class="aui-buttons">
+        {let $items: itemsForSection($contentId, 'system.editor.savebar.buttons.secondary', $contextMap) /}
+        {foreach $item in $items}
+            {let $buttonId: $item.id ? $item.id : '' /}
+            {let $buttonLabel: $item.label ? $item.label : '' /}
+            {let $buttonTooltip: $item.tooltip ? $item.tooltip : '' /}
+            {let $iconClass: $item.params['iconClass'] ? $item.params['iconClass'] : '' /}
+            {let $explicitRestrictions: $item.params['explicitRestrictions'] ? $item.params['explicitRestrictions'] : '' /}
+            {let $inheritedRestrictions: $item.params['inheritedRestrictions'] ? $item.params['inheritedRestrictions'] : '' /}
+            <button class="aui-button toolbar-button" type="button" data-tooltip="{$buttonTooltip}" id="{$buttonId}"
+                    data-explicit-restrictions="{$explicitRestrictions}" data-inherited-restrictions="{$inheritedRestrictions}">
+                {if $iconClass}<span class="icon{$iconClass}"></span>{/if}
+                <span class="trigger-text">{$buttonLabel}</span>
+            </button>
+        {/foreach}
+    </div>
+
+    {if $useDatePicker}
+        <div class="aui-buttons" id="toolbar-group-blog-date">
+            <span class="rte-toolbar-comment toolbar-item">
+                <label for="PostingDate"><span>{getText('posting.day')}:</span></label>
+            </span>
+            <input id="PostingDate" name="PostingDate" value="{$postingDate}" type="text" size="10" class="text medium-field">
+        </div>
+    {/if}
+{/template}
+
+/**
+ * @param contentId
+ * @param usePluggableStatus
+ * @param versionMismatch
+ * @param sharedDraftsEnabled
+ * @param contentType
+ * @param newPage
+ */
+{template .actions}
+    {if $usePluggableStatus}
+        <div id="pluggable-status-container" class="toolbar-item rte-toolbar-pluggable-status">
+            <div id="pluggable-status"></div>
+        </div>
+    {/if}
+    <div class="aui-buttons" id="rte-savebar-tinymce-plugin-point"></div>
+    <div class="aui-buttons">
+        <span id="rte-spinner" class="toolbar-item {if $sharedDraftsEnabled}shared-drafts{/if}">&nbsp;</span>
+    </div>
+
+    {call Confluence.Templates.Editor.Sections.Savebar.editAndPreviewButtons}
+        {param sharedDraftsEnabled: $sharedDraftsEnabled /}
+        {param contentType: $contentType /}
+    {/call}
+
+    {call Confluence.Templates.Editor.Sections.Savebar.saveButton}
+        {param contentId: $contentId /}
+        {param versionMismatch: $versionMismatch /}
+    {/call}
+
+    {call Confluence.Templates.Editor.Sections.Savebar.cancelButton}
+        {param contentType: $contentType /}
+    {/call}
+
+    {if $sharedDraftsEnabled}
+        {call Confluence.Templates.Editor.Sections.Savebar.ellipsisMenu}
+             {param sharedDraftsEnabled: $sharedDraftsEnabled /}
+             {param contentType: $contentType /}
+             {param newPage: $newPage /}
+        {/call}
+    {/if}
+{/template}
+
+/**
+ * Renders the edit button and preview button
+ * @param sharedDraftsEnabled
+ * @param contentType
+*/
+{template .editAndPreviewButtons}
+     /* The edit button to return from preview */
+    <div class="aui-buttons toolbar-group-edit assistive">
+        <button id="rte-button-edit" class="aui-button" title="{getText('editor.return.to.edit')}" type="button">
+            <span class="trigger-text">{getText('show.wysiwyg')}</span>
+        </button>
+    </div>
+
+    <div class="aui-buttons toolbar-group-preview toolbar-group-preview-{$contentType}
+    {if $sharedDraftsEnabled} toolbar-group-preview-shared-draft{else} toolbar-group-preview-non-shared-draft{/if}">
+        {if not $sharedDraftsEnabled or $contentType == 'comment'}
+            <button class="aui-button toolbar-item" id="rte-button-preview" title="{getText('tinymce.confluence.preview')}" type="button">
+                <span class="trigger-text">{getText('show.preview')}</span>
+            </button>
+         {/if}
+    </div>
+{/template}
+
+/**
+ *  Renders the edit button, and the ellipsis menu.
+ * @param sharedDraftsEnabled
+ * @param contentType
+ * @param newPage
+*/
+{template .ellipsisMenu}
+    {if $sharedDraftsEnabled and ($contentType == 'page' or $contentType == 'blogpost')}
+        <div class="aui-buttons toolbar-group-preview toolbar-group-ellipsis">
+            <button class="aui-button toolbar-item aui-dropdown2-trigger aui-dropdown2-trigger-arrowless"
+                aria-owns="rte-ellipsis-menu" aria-haspopup="true" id="rte-button-ellipsis" type="button">
+                <span class="aui-icon aui-icon-small aui-iconfont-more"></span>
+            </button>
+        </div>
+        // Dropdown options
+        <div id="rte-ellipsis-menu" data-aui-alignment="top auto" class="aui-style-default aui-dropdown2">
+            <div class="aui-dropdown2-section">
+                <ul class="aui-list-truncate">
+                    <li><a href="#" id="rte-button-preview">{getText('editor.ellipsis.preview')}</a></li>
+                    {if not $newPage}
+                        <li><a href="#" id="rte-show-changes">{getText('editor.ellipsis.view-changes')}</a></li>
+                    {/if}
+                </ul>
+            </div>
+            <div class="aui-dropdown2-section">
+                <ul class="aui-list-truncate">
+                    {if $newPage}
+                        {if $contentType == 'blogpost'}
+                            <li><a href="#" id="rte-show-revert">{getText('editor.ellipsis.blog.delete')}</a></li>
+                        {else}
+                            <li><a href="#" id="rte-show-revert">{getText('editor.ellipsis.page.delete')}</a></li>
+                        {/if}
+                    {else}
+                        <li><a href="#" id="rte-show-revert">{getText('editor.ellipsis.remove')}</a></li>
+                    {/if}
+                </ul>
+            </div>
+        </div>
+    {/if}
+{/template}
+
+/**
+ * @param contentId
+ * @param versionMismatch
+ */
+{template .saveButton}
+    /* Submit buttons */
+    <div class="save-button-container">
+        {if $versionMismatch}
+            <button class="aui-button aui-button-primary" type="submit" id="rte-button-overwrite" value="{getText('overwrite.name')}" name="overwrite">
+                <span class="trigger-text">{getText('overwrite.name')}</span>
+            </button>
+        {else}
+            {let $items: itemsForSection($contentId, 'system.editor.savebar.buttons.primary')/}
+            {foreach $item in $items}
+                {let $tabIndex: $item.params.tabindex ? $item.params.tabindex : ''/}
+                {let $buttonName: $item.params['button-name'] ? $item.params['button-name'] : '' /}
+                {let $buttonValue: $item.params['button-value'] ? $item.params['button-value'] : '' /}
+                {let $buttonId: $item.id ? $item.id : '' /}
+                {let $buttonLabel: $item.label ? $item.label : '' /}
+                {let $buttonTooltip: $item.tooltip ? $item.tooltip : '' /}
+                <button class="aui-button aui-button-primary" type="submit" id="{$buttonId}" name="{$buttonName}" value="{$buttonValue}" title="{$buttonTooltip}">
+                    <span class="trigger-text">{$buttonLabel}</span>
+                </button>
+            {/foreach}
+        {/if}
+    </div>
+{/template}
+
+/**
+ * A cancel button appropriate to the content type being edited.
+ * @param contentType
+ */
+{template .cancelButton}
+    /* Cancel link */
+    <div class="aui-buttons cancel-button-container-shared-draft">
+        <button class="aui-button" type="submit" id="rte-button-cancel" name="cancel" value="cancel">
+            {if $contentType == 'page' or $contentType == 'blogpost'}
+                {getText('close.name')}
+            {else}
+                {getText('cancel.name')}
+            {/if}
+        </button>
+    </div>
+{/template}

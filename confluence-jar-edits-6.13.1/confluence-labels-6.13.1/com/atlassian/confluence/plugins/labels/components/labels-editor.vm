@@ -1,0 +1,12 @@
+#requireResource("com.atlassian.confluence.plugins.confluence-labels:labels-editor")
+#requireResource("confluence.web.resources:aui-forms")
+
+#set( $labels = $webInterfaceContext.getParameter('labels'))
+
+#if(!$alignLabelsRight)
+    #set($alignLabelsRight = true)
+#end
+
+<div id="labels-section" class="pageSection group">
+    #parse("/com/atlassian/confluence/plugins/labels/components/labels-content.vm")
+</div>

@@ -1,0 +1,15 @@
+{namespace Confluence.Templates.Shared}
+
+/**
+* A generic template for rendering macros
+*
+* @param macroName the name of the macro to be rendered
+* @param parameters a map of parameter names to values
+*/
+{template .macroXhtml}
+    <ac:macro ac:name="{$macroName}">
+        {foreach $paramName in keys($parameters)}
+            <ac:parameter ac:name="{$paramName}">{$parameters[$paramName]}</ac:parameter>
+        {/foreach}
+    </ac:macro>
+{/template}

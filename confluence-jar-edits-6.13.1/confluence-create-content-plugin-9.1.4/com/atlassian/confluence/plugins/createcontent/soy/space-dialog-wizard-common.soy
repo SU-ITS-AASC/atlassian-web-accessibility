@@ -1,0 +1,146 @@
+{namespace Confluence.Templates.Blueprints.CreateSpace}
+
+/**
+ * Form for the common Space details in the Create Space dialog.
+ *
+ * @param atlToken the XSRF token to send with the form
+ * @param showSpacePermission initial space permission (defaults to edit)
+ * @param? fieldErrors the map of errors to display keyed by field name
+ * @param? name initial value for the name field
+ * @param? spaceKey initial value for the spaceKey field
+ * @param? spacePermission initial space permission (defaults to edit)
+ */
+{template .createSpaceForm}
+    <form method="post" class="aui common-space-form">
+        {call .createSpaceFormFields}
+            {param showSpacePermission: $showSpacePermission /}
+            {param fieldErrors: $fieldErrors /}
+            {param name: $name /}
+            {param spaceKey: $spaceKey /}
+            {param spacePermission: $spacePermission /}
+            {param disableRequiredIcon: true /}
+        {/call}
+        <input type="hidden" name="atl_token" value="{$atlToken}" />
+    </form>
+{/template}
+
+/**
+ * Form fields for the common Space details in the Create Space dialog.
+ *
+ * @param showSpacePermission initial space permission (defaults to edit)
+ * @param? fieldErrors the map of errors to display keyed by field name
+ * @param? name initial value for the name field
+ * @param? spaceKey initial value for the spaceKey field
+ * @param? spacePermission initial space permission (defaults to edit)
+ * @param? disableRequiredIcon display the required icon next to the fields (defaults to false)
+ */
+{template .createSpaceFormFields}
+        <fieldset>
+            <div class="field-group">
+                <label for="name">{getText('create.content.plugin.space.create.form.name.label')}
+                    {if not $disableRequiredIcon}
+                        <span class="aui-icon icon-required"/>
+                    {/if}
+                </label>
+                <input class="text long-field" name="name" autocomplete="off" {if $name}value="{$name}"{/if}/>
+                {if $fieldErrors and $fieldErrors['name']}
+                    {foreach $error in $fieldErrors['name']}
+                        <div class="error">{$error}</div>
+                    {/foreach}
+                {else}
+                    <div class="error hidden"></div>
+                {/if}
+            </div>
+            <div class="field-group">
+                <label for="spaceKey">{getText('create.content.plugin.space.create.form.key.label')}
+                    {if not $disableRequiredIcon}
+                        <span class="aui-icon icon-required"/>
+                    {/if}
+                </label>
+                <input class="text long-field" name="spaceKey" {if $spaceKey}value="{$spaceKey}"{/if}/>
+                <span class="aui-icon aui-icon-small aui-iconfont-help" data-unicode="UTF+E003"
+                    data-tooltip="{getText('create.content.plugin.space.create.form.key.tooltip')}" original-title=""/>
+                {if $fieldErrors and $fieldErrors['spaceKey']}
+                    {foreach $error in $fieldErrors['spaceKey']}
+                        <div class="error">{$error}</div>
+                    {/foreach}
+                {else}
+                    <div class="error hidden"></div>
+                {/if}
+            </div>
+        </fieldset>
+        {if $showSpacePermission}
+            {call .spaceFormPermissions}
+                {param spacePermission: $spacePermission /}
+            {/call}
+        {/if}
+{/template}
+
+/**
+ * Dialog form for the Add Personal Space link.
+ */
+{template .createPersonalSpaceForm}
+    <form method="post" class="aui common-space-form how-to-use-blueprint-page">
+        <h2>{getText('create.content.plugin.create.personal.space.wizard.heading')}</h2>
+        <ol class="howto-steps horizontal">
+            <li class="howto-step">
+                <h3>{getText('create.content.plugin.create.personal.space.wizard.subheading1')}</h3>
+                <p>{getText('create.content.plugin.create.personal.space.wizard.description1')}</p>
+            </li>
+            <li class="howto-step">
+                <h3>{getText('create.content.plugin.create.personal.space.wizard.subheading2')}</h3>
+                <p>{getText('create.content.plugin.create.personal.space.wizard.description2')}</p>
+            </li>
+            <li class="howto-step">
+                <h3>{getText('create.content.plugin.create.personal.space.wizard.subheading3')}</h3>
+                <p>{getText('create.content.plugin.create.personal.space.wizard.description3')}</p>
+            </li>
+        </ol>
+    </form>
+{/template}
+
+/**
+ * Common space permission options to show when creating a space.
+ * @param spacePermission '' or 'private'.
+ */
+{template .spaceFormPermissions private="true"}
+    <fieldset class="group" >
+        <span class="aui-icon aui-icon-small {if $spacePermission == 'private'}aui-iconfont-locked{else}aui-iconfont-unlocked{/if}" id="permissions-group"></span>
+        <div class="checkbox">
+            <input class="checkbox" type="checkbox" id="permission-private" name="spacePermission" value="private"{if $spacePermission == 'private'} checked="checked"{/if} />
+            <label for="permission-private">{getText('create.content.plugin.space.create.form.private.label')}</label>
+        </div>
+    </fieldset>
+{/template}
+
+/**
+ * Welcome to space dialog
+ */
+{template .welcome}
+    <ul class="space-types">
+        <li>
+            <p>{getText('create.content.plugin.space.welcome-dialog.label.team')}</p>
+        </li>
+        <li>
+            <p>{getText('create.content.plugin.space.welcome-dialog.label.project')}</p>
+        </li>
+        <li>
+            <p>{getText('create.content.plugin.space.welcome-dialog.label.company')}</p>
+        </li>
+    </ul>
+
+    <div class="space-description">
+        <h1>{getText('create.content.plugin.space.welcome-dialog.description.header')}</h1>
+        <ul>
+            <li>
+                {getText('create.content.plugin.space.welcome-dialog.description.content.part1')}</p>
+            </li>
+            <li>
+                {getText('create.content.plugin.space.welcome-dialog.description.content.part2')}</p>
+            </li>
+            <li>
+                {getText('create.content.plugin.space.welcome-dialog.description.content.part3')}</p>
+            </li>
+        </ul>
+    </div>
+{/template}

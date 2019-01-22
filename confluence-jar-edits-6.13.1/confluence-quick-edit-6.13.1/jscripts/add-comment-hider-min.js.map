@@ -1,0 +1,8 @@
+{
+"version":3,
+"file":"/dummy-file-path",
+"lineCount":1,
+"mappings":"AAGAA,MAAA,8CACG,QAAA,SAGQ,SAAA,CAAUC,CAAV,EACHA,CAAA,qBAAAC,KAAA,EADG,CAHR,CADH,CASAC,QAAA,8BAAAC,YAAA,2CAA6F,QAAA,CAASC,CAAT,EACzFF,OAAA,OAAAG,OAAA,CAAsBD,CAAtB,CADyF,CAA7F;",
+"sources":["input.js"],
+"names":["define","$","hide","require","safeRequire","AddCommentHider","toInit"]
+}

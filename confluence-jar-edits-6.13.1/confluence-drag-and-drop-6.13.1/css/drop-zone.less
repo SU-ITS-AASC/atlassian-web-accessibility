@@ -1,0 +1,55 @@
+@import "common.less";
+@arrowImageUrl: '../../resources/com.atlassian.confluence.plugins.drag-and-drop/images/arrow.gif';
+
+.border (@radius:10px, @color ) {
+    border-radius: @radius;
+    -moz-border-radius: @radius;
+    -webkit-border-radius: @radius;
+    border: 3px dashed @color;
+}
+
+.attachments-drop-zone {
+    .border(10px, @adgMediumLightGrey);
+    color: @adgMediumGrey;
+    font-size: 18px;
+    height: 124px;
+    padding: 25px;
+    text-align: center;
+    width: 420px;
+    .drop-zone-image {
+        background-image: url(@arrowImageUrl);
+        width: 55px;
+        height: 55px;
+        margin: 10px auto;
+    }
+    .drop-zone-text {
+        margin: 0 auto;
+        padding-top: 6px;
+        width: 240px;
+    }
+}
+
+.drop-zone-on-hover {
+    background-color: @adgLightGrey;
+}
+
+#attached-images .attached-image {
+    .drop-zone-on-hover {
+        background-color: @adgLightGrey;
+    }
+    .image-dialog-drop-zone-container {
+        .border(10px, @adgMediumLightGrey);
+        line-height: 1em;
+        .drop-zone-image {
+            background-image: url(@arrowImageUrl);
+            width: 55px;
+            height: 55px;
+            margin: 13px auto 0;
+        }
+        .drop-zone-text {
+            font-weight: bold;
+            color: #bbb;
+            margin-top: 5px;
+        }
+    }
+}

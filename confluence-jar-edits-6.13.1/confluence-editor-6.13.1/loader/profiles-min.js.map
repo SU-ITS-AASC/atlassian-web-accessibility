@@ -1,0 +1,8 @@
+{
+"version":3,
+"file":"/dummy-file-path",
+"lineCount":2,
+"mappings":"AAGAA,MAAA,+CAGG,QAAA,CACCC,CADD,CAECC,CAFD,uCAMCC,QAAAA,kBAEkBC,gIAAAA,MAAAA,KAFlBD,EAND,4BAuBCE,QAAAA,CAAoCC,CAApCD,MACQD,EAAU,uHAAA,MAAA,KAWVF,EAAAK,KAAAC,WAAA,iBAZRH,EAYgDH,CAAAO,aAAAC,UAAA,+BAZhDL;AAaQD,CAAAO,KAAA,sBAGAL,EAhBRD,EAgBmBC,CAAAM,eAhBnBP,EAiBQD,CAAAO,KAAA,4BAGAL,EApBRD,EAoBmBC,CAAAO,eApBnBR,EAqBQD,CAAAO,KAAA,4BArBRN,gBAyBiBD,CAzBjBC,EAvBD,gCAoDCS,QAAAA,kBACkBV,8IAAAA,MAAAA,KADlBU,EApDD,EAHH,CAgGAC,QAAA,8BAAAC,qBAAA;",
+"sources":["input.js"],
+"names":["define","$","AJS","createProfileForCommentEditor","plugins","createProfileForPageEditor","options","Meta","getBoolean","DarkFeatures","isEnabled","push","versionComment","notifyWatchers","createProfileForTemplateEditor","require","exportModuleAsGlobal"]
+}

@@ -1,0 +1,8 @@
+{
+"version":3,
+"file":"/dummy-file-path",
+"lineCount":2,
+"mappings":"AAAAA,MAAA,wGAKG,QAAA,CAAUC,CAAV,CACUC,CADV,CAEUC,CAFV,CAGUC,CAHV,EAeCC,QAASA,EAATA,CAAyCC,CAAzCD,MACQE,EAAUD,CAAVC,IADRF,CAGQG,EAAKD,CAAAC,GAALA,EAAmBJ,CAAAK,aAAA,EAH3BJ,CAIQK,EAAcH,CAAAI,KAAdD,EAA8BP,CAAAS,IAAA,gBAJtCP,CAKQQ,EAAWN,CAAAM,SAAXA,EAA+BV,CAAAS,IAAA,aALvCP,yBAQ4BQ,CAR5BR,YAUiCK,CAVjCL,eAU2DK,CAV3DL,GAOuBG,CAPvBH,QAO6BG,CAP7BH,CAfD,IAQKS,CARL,CASKC,EAA6Bd,CAAAe,SAAA,EATlC,uBA4BCC,QAAAA,CAAwBC,CAAxBD,EACIH,CADJG,CAC0BC,CACtBH,EAAAI,QAAA,EAFJF,CA5BD,iCAgDsCZ,CAhDtC,kBAiCCe,QAAAA,SAEWL,EAAAM,KAAA,CAAgC,QAAA,SAC/BhB,EAAA,EAD+B,WAvBhCF,CAAAS,IAAA,+BAuBgC;AAExBE,CAAAQ,6BAAA,EAFwB,UAKlBpB,CAAAqB,IAAAC,UAAA,EAAAC,WAAA,EALkB,EAAhC,CAFXL,CAjCD,EALH;",
+"sources":["input.js"],
+"names":["define","$","AJS","Meta","Confluence","isCollaborativeEditingAvailable","_content","content","id","getContentId","contentType","type","get","editMode","collaborativePlugin","collaborativePluginPromise","Deferred","registerPlugin","_collaborativePlugin","resolve","getEditorContent","pipe","getSynchronisedEditorContent","Rte","getEditor","getContent"]
+}

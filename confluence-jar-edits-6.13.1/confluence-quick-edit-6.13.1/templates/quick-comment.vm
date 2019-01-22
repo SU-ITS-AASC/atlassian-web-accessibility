@@ -1,0 +1,28 @@
+#* @vtlvariable name="webResourceManager" type="com.atlassian.confluence.plugin.webresource.DefaultConfluenceWebResourceManager" *#
+## The traditional 'add comment' button should always be hidden.
+#requireResourcesForContext("plugin.quick.comment.hider")
+
+##Need to check that there's a comment to edit when in edit mode
+## The Quick Comment section should only be presented if we aren't already doing a 'traditional' comment operation
+##Will remove when completely remove slow comment
+#set ($validCommentEdit = $action.editComment && $action.comment)
+
+#if (!$action.isPrintableVersion() && $permissionHelper.canComment($action.authenticatedUser, $action.page) && ($darkFeatures.isFeatureEnabled('editor.slow.comment.disable')) || (!$action.showCommentArea && !($validCommentEdit) && $action.replyToComment == 0))
+    #if ($action.authenticatedUser)
+        #set ($fullName = $action.authenticatedUser.fullName)
+        #set ($userName = $action.authenticatedUser.name)
+        #set ($userProfilePicture = $userAccessor.getUserProfilePicture($action.authenticatedUser))
+        #set ($userProfilePicturePathHtml = $userProfilePicture.getUriReference())
+        #set ($isDefaultProfilePicture = $userProfilePicture.isDefault())
+    #else
+        #set ($fullName = $action.getText('anonymous.name'))
+        #set ($isDefaultProfilePicture = false)
+    #end
+
+    #putMetadata("user-display-name", $fullName)
+
+    #set ($contextParameters = { "contextPath": $req.contextPath, "staticResourceUrlPrefix": $staticResourceUrlPrefix })
+    #set ($templateParameters = { "contentId": $action.page.id, "commenter": { "userName": $userName, "displayName": $fullName, "profilePicture": { "isDefault": $isDefaultProfilePicture, "path": "$userProfilePicturePathHtml" } }, "context": $contextParameters })
+
+    $soyTemplateRendererHelper.getRenderedTemplateHtml("com.atlassian.confluence.plugins.quickedit:quick-comment-initial", "Confluence.Templates.Comments.displayTopLevelCommentEditorPlaceholder.soy", $templateParameters)
+#end

@@ -1,0 +1,295 @@
+{namespace Confluence.Templates.Comments}
+
+/**
+ * Display the container which the comment editor for a reply will be loaded into.
+ *
+ * @param contentId the id of the content being commented on.
+ * @param parentCommentId the id of the comment being replied to
+ * @param commenter the person making the comment. See usages for the structure of this object.
+ */
+{template .displayReplyEditorLoadingContainer}
+// Note - the 'display time' equivalent of this structure is represented in the .commentThread template
+<ol class="comment-threads">
+    <li class="comment-thread">
+        {call Confluence.Templates.Comments.displayCommentEditorCommon}
+            {param comment: [ 'ownerId': $contentId, 'parentId': $parentCommentId ] /}
+            {param commenter: $commenter /}
+            {param state: 'loading' /}
+            {param mode: 'reply' /}
+        {/call}
+    </li>
+</ol>
+{/template}
+
+/**
+ * Display the placeholder for a top level comment to be made.
+ *
+ * @param contentId the id of the content being commented on.
+ * @param commenter an object representing the person commenting. See usages for the structure.
+ */
+{template .displayTopLevelCommentEditorPlaceholder}
+    {call Confluence.Templates.Comments.displayCommentEditorCommon}
+        {param comment: [ 'ownerId': $contentId ] /}
+        {param commenter: $commenter /}
+        {param state: 'placeholder' /}
+        {param mode: 'add' /}
+    {/call}
+{/template}
+
+/**
+ * Display the editor container for editing an existing comment
+ *
+ * @param contentId the id of the content being commented on.
+ * @param commentId the id of the comment to be edited.
+ * @param commenter an object representing the person commenting. See usages for the structure.
+ */
+{template .displayEditEditorContainer}
+    {call Confluence.Templates.Comments.displayCommentEditorCommon}
+        {param comment: [ 'ownerId': $contentId, 'id': $commentId ] /}
+        {param commenter: $commenter /}
+        {param state: 'placeholder' /}
+        {param mode: 'edit' /}
+    {/call}
+{/template}
+
+/**
+ * Create the HTML error message for display if there is a problem loading the editor.
+ *
+ * @param message the returned message
+ * @param fallbackUrl the URL for the link to be presented as the fallback.
+ */
+{template .editorLoadErrorMessage}
+<p>{$message}</p>
+<p><a href="{$fallbackUrl}">{getText('quick.comment.loading.error.retry')}</a></p>
+{/template}
+
+/**
+ * A template representing the commonality between the displayCommentEditorLoadingContainer template
+ * and the displayCommentEditorPlaceholder template.
+ *
+ * @param comment the comment. This will be a partially populated comment object since the comment hasn't been complete yet.
+ * @param commenter the person making the comment. See usages for the structure of this object.
+ * @param state one of 'placeholder' indicating the comment placeholder should be displayed, or 'loading' indicating that the editor loading container should be displayed.
+ * @param mode one of 'add', 'edit' or 'reply'. 
+ */
+{template .displayCommentEditorCommon private="true"}
+<div class="quick-comment-container comment {$mode}">
+{call Confluence.Templates.Comments.userLogo}
+    {param userInfo: $commenter /}
+{/call}
+    // used to stop the scroll bar and viewport jumping about as we remove the loading container and replace with the dynamically loaded editor
+    <div class="quick-comment-body">
+        <div class="quick-comment-loading-container" style="display:{if $state == 'loading'}block{else}none{/if};">
+        </div>
+
+        <div id="editor-messages">
+        </div>
+        <div id="all-messages">
+        </div>
+        <form style="display:{if $state == 'loading'}none{else}block{/if};" class="quick-comment-form aui"
+              method="post"{sp}
+              {switch $mode}
+                {case 'add'}
+                    name="inlinecommentform"{sp}action="{contextPath()}/pages/doaddcomment.action?pageId={$comment.ownerId}"
+                {case 'edit'}
+                    name="editcommentform"{sp}action="{contextPath()}/pages/doeditcomment.action?pageId={$comment.ownerId}&commentId={$comment.id}"
+                {case 'reply'}
+                    name="threadedcommentform"{sp} action="{contextPath()}/pages/doaddcomment.action?pageId={$comment.ownerId}&parentId={$comment.parentId}"
+              {/switch}
+         {sp}>
+         {if $mode == 'add'}
+            <div title="{getText('comment.name.tooltip')}" class="quick-comment-prompt"><span>{getText('quick.comment.placeholder.message')}</span></div>
+         {/if}
+        </form>
+    </div>
+</div>
+{/template}
+
+/**
+ * Display the logo for the user with an optional link to set a profile picture if the user
+ * has not set one.
+ *
+ * @param userInfo an object representing a user. See usages for structure.
+ */
+{template .userLogo private="true"}
+// NOTE: This currently duplicates the userLogo macro from macros.vm. If you change one you will probably need to change the other.
+<p class="comment-user-logo">
+{if $userInfo.userName == null}
+    <img class="userLogo logo anonymous" src="{staticResourceUrlPrefix()}/images/icons/profilepics/anonymous.svg"
+    alt="{getText('accessibility.user.icon')}: {getText('user.icon.anonymous.title')}" title="{getText('user.icon.anonymous.title')}">
+{elseif $userInfo.profilePicture.isDefault}
+    <a class="userLogoLink" data-username="{$userInfo.userName}" href="{contextPath()}/users/profile/editmyprofilepicture.action" title="{getText('add.a.profile.picture')}">
+        <img class="userLogo logo defaultLogo" src="{staticResourceUrlPrefix()}/images/icons/profilepics/add_profile_pic.svg" alt="{getText('accessibility.user.icon')}: {getText('add.a.profile.picture')}">
+    </a>
+{else}
+    <a class="userLogoLink" data-username="{$userInfo.userName}" href="
+        {call Confluence.Templates.User.userLinkUrl}
+            {param username: $userInfo.userName /}
+        {/call}
+    ">
+        <img class="userLogo logo" src="{$userInfo.profilePicture.path}" alt="{getText('accessibility.user.icon')}: {$userInfo.userName}" title="{$userInfo.userName}">
+    </a>
+{/if}
+</p>
+{/template}
+
+// ----------------------------------------------------------------------------
+// NOTE: Dynamic posting of comments has been disabled due to problems in
+// reusing the editor. Therefore none of the templates below are actually
+// in use.
+
+/**
+ * Display a rendered comment.
+ *
+ * The comment parameter has the following structure:
+ * {
+ *     id:               (number)
+ *     html:             (string)
+ *     ownerId:          (number)
+ *     parentId:         (number) 0 indicates a top level comment
+ *     primaryActions:    (array of actions) may be empty
+ *     secondaryActions: (array of actions) may be empty
+ * }
+ *
+ * The commenter parameter has the following structure:
+ * {
+ *     userName:       (string)
+ *     displayName:    (string)
+ *     profilePicture: {
+ *         isDefault: (boolean)
+ *         path:      (string)
+ *     }
+ * }
+ *
+ * @param comment an object representing a comment and including actions on the comment.
+ * @param commenter an object representing the person commenting.
+ * @param firstReply if true then this comment is the first reply to another one or to the content (check comment.parentId). Otherwise there are existing replies.
+ * @param highlight if true then highlight this comment
+ */
+{template .displayComment}
+{if $comment.parentId == 0 and $firstReply}
+    // NOTE: While we still have both statically and dynamically rendered comments in Confluence these templates duplicate comments.vmd.
+    //       If you are changing one you will probably also want to change the other.
+    <div id="comments-section" class="pageSection group">
+        <div class="section-header">
+            <h2 id="comments-section-title" class="section-title">{getText('comment.singular')}</h2>
+            {call Confluence.Templates.Comments.commentThread}
+                {param comment: $comment /}
+                {param commenter: $commenter /}
+                {param highlight: $highlight /}
+                {param topLevel: true /}
+            {/call}
+        </div>    
+    </div>
+{elseif $firstReply}
+    // a new comment thread is required
+    {call Confluence.Templates.Comments.commentThread}
+        {param comment: $comment /}
+        {param commenter: $commenter /}
+        {param highlight: $highlight /}
+        {param topLevel: false /}
+    {/call}
+{else}
+    {call Confluence.Templates.Comments.commentThreadItem}
+        {param comment: $comment /}
+        {param commenter: $commenter /}
+        {param highlight: true /}
+    {/call}
+{/if}
+{/template}
+
+/**
+ * Template for displaying a comment on a page wrapped in the appropriate
+ * thread structure.
+ *
+ * @param comment the comment being displayed
+ * @param commenter the creator of the comment being displayed. 
+ * @param topLevel if this is a top level thread then set true
+ * @param highlight if true then highlight this comment.
+ */
+{template .commentThread private="true"}
+<ol class="comment-threads{if $topLevel}{sp}top-level" id="page-comments{/if}">
+    {call Confluence.Templates.Comments.commentThreadItem}
+        {param comment: $comment /}
+        {param commenter: $commenter /}
+        {param highlight: $highlight /}
+    {/call}
+</ol>
+{/template}
+
+/**
+ * Template for displaying a comment on a page wrapped in the appropriate
+ * list item structure.
+ *
+ * @param comment the comment being displayed
+ * @param commenter the creator of the comment being displayed. 
+ * @param highlight if true then highlight this comment.
+ */
+{template .commentThreadItem private="true"}
+<li id="comment-thread-{$comment.id}" class="comment-thread">
+    {call Confluence.Templates.Comments.commentView}
+        {param comment: $comment /}
+        {param commenter: $commenter /}
+        {param highlight: $highlight /}
+    {/call}
+</li>
+{/template}
+
+/**
+ * The view of a rendered comment. This needs to be placed into context hence the reason it is
+ * private.
+ *
+ * @param comment an object representing a comment and including actions on the comment. See usages for the structure of this object.
+ * @param commenter an object representing the person commenting. See usages for the structure of this object.
+ * @param highlight if true then the comment should be highlighted.
+ */
+{template .commentView private="true"}
+<div class="comment{if $highlight == true}{sp}focused{/if}" id="comment-{$comment.id}">
+    {call Confluence.Templates.Comments.userLogo}
+        {param userInfo: $commenter /}
+    {/call}
+    <div class="comment-header">
+    <h4 class="author">
+    {if $commenter.userName == null}
+        {getText('anonymous.name')}
+    {else}
+        <a href="{contextPath()}/display/~{$commenter.userName|escapeUri}" class="url fn confluence-userlink" data-username="{$commenter.userName}">{$commenter.displayName}</a>
+    {/if}
+    </h4>
+    </div>
+    <div class="comment-body">
+        <div class="comment-content wiki-content">{$comment.html|noAutoescape}</div>
+        <div class="comment-actions">
+            {call Confluence.Templates.Comments.displayCommentActions}
+                {param section: 'secondary' /}
+                {param actions: $comment.secondaryActions /}
+                {param commentId: $comment.id /}
+            {/call}
+            {call Confluence.Templates.Comments.displayCommentActions}
+                {param section: 'primary' /}
+                {param actions: $comment.primaryActions /}
+                {param commentId: $comment.id /}
+            {/call}
+        </div>
+    </div>
+</div>
+{/template}
+
+/**
+ * Displays the actions for a comment.
+ *
+ * @param section the section these actions are for.
+ * @param actions the user actions for this section
+ * @param commentId the id of the comment these actions apply to
+ */
+{template .displayCommentActions private="true"}
+<ul class="comment-actions-{$section}">
+{if $actions != null}    
+    {foreach $item in $actions}
+    <li {if $item.style != null}{sp}class="{$item.style}"{/if}>
+    <a {if $item.tooltip != null}{sp}title="{$item.tooltip}"{/if} href="{$item.url}" {if $item.id}{sp}id="{$item.id}-{$commentId}"{/if}><span>{$item.label}</span></a>
+    </li>{\n}
+    {/foreach}
+{/if}
+</ul>
+{/template}

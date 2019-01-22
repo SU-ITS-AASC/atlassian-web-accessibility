@@ -1,0 +1,27 @@
+[lang|=en],body{font-family:Arial,sans-serif}
+body{color:#333;font-size:14px;line-height:1.42857142857143}
+[lang|=ja]{font-family:"Hiragino Kaku Gothic Pro","ヒラギノ角ゴ Pro W3","メイリオ",Meiryo,"ＭＳ Ｐゴシック",Verdana,Arial,sans-serif}
+.aui-group,.aui-panel,.aui-tabs,blockquote,dl,form.aui,h1,h2,h3,h4,h5,h6,ol,p,pre,table.aui,ul{margin:10px 0 0}
+.aui-group:first-child,.aui-panel:first-child,.aui-tabs:first-child,blockquote:first-child,dl:first-child,form.aui:first-child,h1:first-child,h2:first-child,h3:first-child,h4:first-child,h5:first-child,h6:first-child,ol:first-child,p:first-child,pre:first-child,table.aui:first-child,ul:first-child{margin-top:0}
+.aui-page-header-hero .aui-page-header-main h1,.aui-page-header-hero .aui-page-header-main h2,.aui-page-header-marketing .aui-page-header-main h1,.aui-page-header-marketing .aui-page-header-main h2,h1{color:#333;font-size:32px;font-weight:400;line-height:1.25;text-transform:none;margin:30px 0 0}
+h2{color:#333;font-size:24px;font-weight:400;line-height:1.25;text-transform:none;margin:30px 0 0}
+.aui-page-header-hero .aui-page-header-main p,.aui-page-header-marketing .aui-page-header-main p,h3{color:#333;font-size:20px;font-weight:400;line-height:1.5;text-transform:none;margin:30px 0 0}
+h4,h5,h6{font-weight:700;margin:20px 0 0}
+h4{color:#333;font-size:16px;line-height:1.25;text-transform:none}
+h5{color:#333;font-size:14px;line-height:1.42857143;text-transform:none}
+h6,small{font-size:12px;color:#707070}
+h6{line-height:1.66666667;text-transform:uppercase}
+h1:first-child,h2:first-child,h3:first-child,h4:first-child,h5:first-child,h6:first-child{margin-top:0}
+h1+h2,h2+h3,h3+h4,h4+h5,h5+h6{margin-top:10px}
+.aui-group>.aui-item>h1:first-child,.aui-group>.aui-item>h2:first-child,.aui-group>.aui-item>h3:first-child,.aui-group>.aui-item>h4:first-child,.aui-group>.aui-item>h5:first-child,.aui-group>.aui-item>h6:first-child{margin-top:20px}
+.aui-group:first-child>.aui-item>h1:first-child,.aui-group:first-child>.aui-item>h2:first-child,.aui-group:first-child>.aui-item>h3:first-child,.aui-group:first-child>.aui-item>h4:first-child,.aui-group:first-child>.aui-item>h5:first-child,.aui-group:first-child>.aui-item>h6:first-child{margin-top:0}
+small{line-height:1.33333333333333}
+code,kbd{font-family:monospace}
+address,cite,dfn,var{font-style:italic}
+cite:before{content:"\2014 \2009"}
+blockquote{border-left:1px solid #ccc;color:#707070;margin-left:19px;padding:10px 20px}
+blockquote>cite{display:block;margin-top:10px}
+q{color:#707070}
+q:before{content:open-quote}
+q:after{content:close-quote}
+abbr{border-bottom:1px #707070 dotted;cursor:help}

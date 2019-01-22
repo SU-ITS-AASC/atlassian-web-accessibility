@@ -1,0 +1,33 @@
+.confluenceTable {
+  &.fixed-table {
+    table-layout: fixed;
+    /*
+    this CSS fixes 2 issues:
+    - switching from fixed to auto doesn't shrink table to original size
+    - can't stretch table bigger than page size
+    */
+    width: 0px;
+    .confluenceTh, .confluenceTd {
+      word-wrap: break-word;
+      overflow: auto;
+      img.confluence-embedded-image:not([width]):not([height]) {
+        max-width: ~'calc(100% - 4px)';
+      }
+      .content-wrapper {
+        overflow-x: auto;
+      }
+    }
+    &.tablesorter > thead > tr > th.confluenceTh {
+      padding-right: 10px; // Avoid text in title drop to new line
+    }
+  }
+  .confluenceTh, .confluenceTd {
+    min-width: 8px;
+    p + .content-wrapper {
+      margin-top: 10px;
+    }
+  }
+  .content-wrapper + .content-wrapper {
+    margin-top: 10px;
+  }
+}

@@ -1,0 +1,8 @@
+{
+"version":3,
+"file":"/dummy-file-path",
+"lineCount":2,
+"mappings":"AAMAA,MAAA,8HAMG,QAAA,CACCC,CADD,CAECC,CAFD,CAGCC,CAHD,CAICC,CAJD,CAKCC,CALD,cAWYC,QAAAA,CAASC,CAATD,EAEHE,QAASA,EAATA,MAUQL,CAAAM,OAAAC,GAAAC,cAAA,EAVRH,EAUgDD,CAAAK,QAAA,EAVhDJ,GAUiEL,CAAAM,OAAAI,QAAA,EAVjEL,OAWeN,EAAAY,KAAAC,QAAA,yBAXfP,CAeAD,CAAAS,OAAAC,IAAA,CAAc,QAAA,GACVhB,CAAA,CAAEG,CAAF,CAAAc,KAAA,gBAA+BV,CAA/B,CADU,CAAd,CAIAD,EAAAY,SAAAF,IAAA,CAAgB,QAAA,GACZhB,CAAA,CAAEG,CAAF,CAAAgB,OAAA,gBAAiCZ,CAAjC,CADY,CAAhB,CArBGF,CAXZ,SAqCee,QAAAA;QAKQhB,CAAAiB,aALRD,KAKqChB,CAAAkB,aALrCF,EArCf,EANH,CAsDAG,QAAA,8BAAAC,YAAA,sEAC2F,QAAA,CAASC,CAAT,MAC3ErB,EAAUmB,OAAA,WAEdnB,EAAAsB,OAAA,2CAA0DD,CAA1D,CAEArB,EAAAuB,cAAAX,IAAA,2BAAqDZ,CAAAwB,QAAAC,wBAArD,CAL+E,CAD3F;",
+"sources":["input.js"],
+"names":["define","$","AJS","Confluence","window","tinymce","init","ed","onLeavePage","Editor","UI","isFormEnabled","isDirty","isEmpty","I18n","getText","onInit","add","bind","onRemove","unbind","getInfo","majorVersion","minorVersion","require","safeRequire","ConfluenceLeaveTemplatePlugin","create","PluginManager","plugins","ConfluenceLeaveTemplate"]
+}

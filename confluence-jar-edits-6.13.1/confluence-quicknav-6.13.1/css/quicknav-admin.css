@@ -1,0 +1,23 @@
+#quick-search a.admin-item span:before {
+    font-family: "Atlassian Icons";
+    font-weight: normal;
+    -webkit-font-smoothing: antialiased;
+    font-style: normal;
+    font-size: 16px;
+    color: #707070;
+    border: none;
+    line-height: 1;
+    /* This icon font glyph value may change between AUI versions. Check when performing AUI upgrade */
+    content: "\f11e"; /* aui-icon aui-icon-small aui-iconfont-configure */
+    margin: 0 8px;
+}
+
+#quick-search .aui-dropdown .admin-item span{
+    padding-left: 0;
+}
+
+/* Override styles on quick search placeholder text so that the text is visible */
+#quick-search-query::placeholder {
+    color: #DEEBFF;
+    opacity: 0.8;
+}

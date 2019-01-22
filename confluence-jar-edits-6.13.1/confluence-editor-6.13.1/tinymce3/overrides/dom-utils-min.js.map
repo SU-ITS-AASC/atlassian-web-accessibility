@@ -1,0 +1,8 @@
+{
+"version":3,
+"file":"/dummy-file-path",
+"lineCount":2,
+"mappings":"AAMAA,MAAA,mEAGG,QAAA,CAAUC,CAAV,CACUC,CADV,iBAMoBC,QAAAA,OACXC,EAAKH,CAAAI,IAAAC,UAAA,EADMH,CAGXI,EAAMH,CAAAG,IAHKJ,CAIXK,EAAWD,CAAAC,SAJAL,MAcP,CAdOA,CAcP,CAdOA,EAcP,CAAA,IAAA,CAAA,CAAA,aAAA,CAdOA,EAOPM,CAPON,CAOUD,CAAA,CAAEE,CAAAM,UAAAC,QAAA,EAAF,CAAAC,QAAA,iBAPVT,CASP,CATOA,GAQPM,CAAAI,OAROV,CASAM,CAAA,GATAN,CAcwCI,CAH5CO,IAAAC,KAXIZ,OAcP,EAdOA,CANpB,SAuBoBa,QAAAA,CAAUC,CAAVD,EACNf,CAAAI,IAAAC,UAAAF,EACTG,IAAAC,SAAAU,aAFeF,CAEgBC,CAFhBD,CAvBpB,EAHH,CAmCAG;OAAA,8BAAAC,YAAA,kDAAoG,QAAA,CAAUC,CAAV,MAC5FC,EAAUH,OAAA,WAEdG,EAAAf,IAAAc,SAAAE,UAAAC,QAHgG,CAGvDH,CAAAG,QACzCF,EAAAf,IAAAc,SAAAE,UAAAE,QAJgG,CAIvDJ,CAAAI,QAJuD,CAApG;",
+"sources":["input.js"],
+"names":["define","AJS","$","DOMUtils.getRoot","ed","Rte","getEditor","dom","settings","$pageLayoutDiv","selection","getNode","closest","length","doc","body","DOMUtils.setRoot","element","root_element","require","safeRequire","DOMUtils","tinymce","prototype","getRoot","setRoot"]
+}

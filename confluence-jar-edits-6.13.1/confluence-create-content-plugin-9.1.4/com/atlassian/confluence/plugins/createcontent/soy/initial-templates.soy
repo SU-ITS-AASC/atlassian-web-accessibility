@@ -1,0 +1,48 @@
+{namespace Confluence.Templates.Blueprints}
+
+/**
+ * create page dialog body
+ */
+{template .createDialogBody}
+    {call .waitContainer/}
+    <div class="create-dialog-body loadable">
+        <div class="template-select-container">
+            {call .waitContainer/}
+            <div class="template-select-container-body loadable"></div>
+        </div>
+    </div>
+{/template}
+
+/**
+ * Wait spinner block element with text.
+ */
+{template .waitContainer private="true"}
+    <div class="wait-container">
+        {call .waitIcon/}
+    </div>
+{/template}
+
+/**
+ * Wait spinner icon.
+ */
+{template .waitIcon}
+    <div class="wait-icon"></div>
+{/template}
+
+/**
+* The help link for the create dialog
+*/
+{template .helpLink}
+    {call Confluence.Templates.Dialog.helpLink}
+        {param href: helpUrl('help.creating.content') /}
+    {/call}
+{/template}
+
+/**
+* The help link for the create space dialog
+*/
+{template .spaceHelpLink}
+    {call Confluence.Templates.Dialog.helpLink}
+        {param href: helpUrl('help.add.space') /}
+    {/call}
+{/template}

@@ -1,0 +1,7 @@
+#foreach ($key in $action.alphaSupport.keys)
+    <h3 class="labels-alphabetical-subset-heading">$key</h3>
+    <div class="labels-alphabetical-subset">
+        #set($labels = $action.alphaSupport.getContents($key))
+        #parse("/com/atlassian/confluence/plugins/labels/components/labels-list.vm")
+    </div>
+#end

@@ -1,0 +1,91 @@
+<html>
+<head>
+    <title>$i18n.getText("space.directory")</title>
+
+</head>
+<body>
+    <div class="pagecontent">
+        <content tag="bodyClass">spaces</content>
+        #applyDecorator("root")
+        #decoratorParam("context" "global")
+        #decoratorParam("mode"  "spacedir")
+        #decoratorParam("helper" $action.helper)
+
+        #requireResource("com.atlassian.confluence.plugins.confluence-space-directory:space-directory")
+        #putMetadata('page-size', $action.pageSize)
+
+        <div id="space-directory-wrapper">
+            <nav class="aui-navgroup aui-navgroup-vertical" id="space-directory"  #if($selectedSpaceCategory)data-selected-tab="$htmlUtil.htmlEncode($selectedSpaceCategory)"#end>
+                <div class="aui-navgroup-inner">
+                    <ul id="space-system-list" class="aui-nav">
+                        <li>
+                            <a data-tab-name="all" class="all-spaces" href="#space-search-result">$i18n.getText("spaces.all")</a>
+                        </li>
+                        <li class="space-type">
+                            <a data-tab-name="site" data-status-name="current" data-type-name="global" class="global-spaces" href="#space-search-result">$i18n.getText("global.spaces")</a>
+                        </li>
+                        <li class="space-type">
+                            <a data-tab-name="personal" data-status-name="current" data-type-name="personal" class="personal-spaces" href="#space-search-result">$i18n.getText("personal.spaces")</a>
+                        </li>
+                        #if($remoteUser)
+                            <li id="favourites-toggle">
+                                <a data-tab-name="favourite" href="#space-search-result">$i18n.getText("favourite.spaces")</a>
+                            </li>
+                        #end
+                        <li class="space-type">
+                            <a data-tab-name="archived" data-status-name="archived" data-type-name="archived" class="archived-spaces" href="#space-search-result">$i18n.getText("archived.spaces")</a>
+                        </li>
+                    </ul>
+                    #if($teamLabels && !$teamLabels.isEmpty())
+                        <div class="aui-nav-heading"><strong>$i18n.getText("addlabels.teamlabels")</strong></div>
+                        <ul id="space-labels-list" class="aui-nav">
+                            #foreach ($teamLabel in $teamLabels)
+                                <li class="team-label">
+                                    <a data-tab-name="$teamLabel.getName()" href="#space-search-result">$action.convertToNiceTeamLabel($teamLabel.getName())</a>
+                                </li>
+                            #end
+                        </ul>
+                    #end
+                </div>
+            </nav>
+
+            <div id="space-search-result" class="tabs-pane active-pane">
+                <div id="space-search-title-bar">
+                    <h2 class="space-search-title"></h2>
+                    <div id="space-search">
+                        <div class="loading-throbber"></div>
+                        <form id="space-search-form" action="$req.contextPath/dosearchsite.action" class="aui">
+                            #assistiveLabel("queryString" "$i18n.getText('search.filter.label')")
+                            <input id="space-search-query" name="queryString" type="text" placeholder="$i18n.getText("filter.name")" autocomplete="off" class="text">
+                            <input name="type" type="hidden" value="spacedesc">
+                        </form>
+                    </div>
+                </div>
+                <div id="aui-message-bar"></div>
+                <div class="space-list-section entity-list-section">
+                    <table id="space-list" class="aui list-container hidden">
+                        <thead class="list-header">
+                        <tr>
+                            <td class="column-heading name-heading" colspan="2">$i18n.getText("space.name")</td>
+                            <td class="column-heading desc-heading">$i18n.getText("description.name")</td>
+                            <td class="column-heading labels-heading">$i18n.getText("categories.name")</td>
+                            <td class="column-heading icon-column-heading"></td>
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
+                #pagination ($paginationSupport "$req.contextPath/spacedirectory/view.action?")
+                <div class="no-results hidden">
+                    $soyTemplateRendererHelper.getRenderedTemplateHtml("com.atlassian.auiplugin:aui-experimental-soy-templates", "aui.message.info.soy", {"content" : $i18n.getText("no.spaces.found").toString()})
+                </div>
+                <div id="space-directory-help" class="hidden">$i18n.getText("hint.space.categories", $docBean.getLink("help.add.space.categories"))</div>
+
+                #if ($showBlankExperience)
+                    #set ($docLink = $docBean.getLink("help.add.space"))
+                    #blankExperience("space", $hasCreatePermission, "blank.experience.spaces", "blank.experience.spaces.no.create.permission", "space.create", "/spaces/createspace-start.action", $docLink, "$req.contextPath/contactadministrators.action")
+                #end
+            </div>
+        </div>
+    #end
+    </div>
+</body>

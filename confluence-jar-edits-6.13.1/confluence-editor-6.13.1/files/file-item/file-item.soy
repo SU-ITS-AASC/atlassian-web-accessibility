@@ -1,0 +1,64 @@
+{namespace Confluence.Templates.File}
+
+/**
+ * Image list item for the image dialog.
+ *
+ * @param file the image/file object to render
+ * @param highlightedImageNameContent html with the image name in highlight form
+ * @param highlightedParentTitleContent html with the parent title in highlight form
+ * @param tooltip tooltip of the file
+ */
+{template .fileDialogListItem}
+    <li class="attached-file loading" data-attachment-id="{$file.id}" data-owner-id="{$file.ownerId}" data-file-name="{$file.fileName}">
+        <div class="file-container" title="{$tooltip}">
+            {if $file.isImage}
+                <img class="thumbnail hidden" src="{$file.nonceUrl}" >
+                <a href="{$file.downloadUrl}" class="abs-icon zoom">Zoom</a>
+                <p class="hidden image-preview-throbber">&nbsp;</p>
+            {else}
+                {if $file.isPreviewable}
+                    <span class="thumbnail {$file.iconClass}" >
+                       <i class="aui-icon size-48 svg-icon {$file.iconAUIClass}">File</i>
+                    </span>
+                    <a href="{$file.downloadUrl}" class="abs-icon zoom">Zoom</a>
+                    <p class="hidden image-preview-throbber">&nbsp;</p>
+                {else}
+                    <span class="thumbnail {$file.iconClass}" >
+                        <i class="aui-icon size-48 svg-icon {$file.iconAUIClass}">File</i>
+                    </span>
+                {/if}
+            {/if}
+            <i class="abs-icon select">Select</i>
+        </div>
+        <span class="caption filename" title="{$file.fileName}">{$highlightedImageNameContent|noAutoescape}</span>
+        {if $highlightedParentTitleContent}
+            <span class="caption owner-title" title="{$file.parentTitle}">{$highlightedParentTitleContent|noAutoescape}</span>
+        {/if}
+    </li>
+{/template}
+
+
+/**
+ * Image list item place holder
+ *
+ * @param file */
+{template .fileDialogListItemPlaceHolder}
+    <li class="attached-file loading" data-attachment-id="{$file.id}" data-file-name="{$file.fileName}">
+        <div class="file-container" title="{$file.fileName}">
+            {if $file.isImage and $file.url}
+                <img class="thumbnail" src="{$file.url}">
+            {else}
+                <span class="thumbnail">
+                    <i class="aui-icon size-48 svg-icon {$file.iconAUIClass}">File</i>
+                </span>
+            {/if}
+            <div id="docs-progress-bar-{$file.fileId}" class="aui-progress-indicator">
+                <span class="aui-progress-indicator-value"></span>
+            </div>
+            <div class="overlay"></div>
+            <i class="aui-icon aui-icon-small aui-iconfont-close-dialog abs-icon cancel">Cancel</i>
+        </div>
+        <span class="caption filename" title="{$file.fileName}">{$file.fileName}</span>
+        <span class="caption owner-title hidden" title=""></span>
+    </li>
+{/template}

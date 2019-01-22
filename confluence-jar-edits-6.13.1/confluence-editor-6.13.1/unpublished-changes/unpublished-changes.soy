@@ -1,0 +1,13 @@
+{namespace Confluence.Templates.UnpublishedChanges}
+
+/**
+ * This represents the unpublished changes lozenge that will appear in the editor.
+ *
+ * @param tooltip settings for lozenge
+ * @param label settings for lozenge
+ */
+{template .lozenge}
+    <a id="unpublished-changes-lozenge" href="#" class="view-diff-link" title="{$tooltip}">
+        <span class="aui-lozenge aui-lozenge-complete aui-lozenge-subtle unpublished-changes-lozenge">{$label}</span>
+    </a>
+{/template}

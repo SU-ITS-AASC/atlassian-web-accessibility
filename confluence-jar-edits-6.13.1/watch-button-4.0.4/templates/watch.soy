@@ -1,0 +1,52 @@
+{namespace Confluence.Watch.Templates autoescape="contextual"}
+
+
+/**
+* Body main template.
+* @param watchingPage
+* @param watchingSpace
+* @param watchingBlogs
+* @param isAdmin
+* @param isBlogPost
+*/
+{template .dialogBody}
+    <div class="cw-status">
+        <h2 class="cw-title"></h2>
+        <p class="cw-title-description"></p>
+    </div>
+
+    <form class="aui cw-dialog">
+        <div class="cw-tooltip cw-tooltip-watch-page">
+            <div class="checkbox">
+                <input class="checkbox" type="checkbox" id="cw-watch-page" {if $watchingPage}checked{/if}>
+
+                <label for="cw-watch-page">
+                {if $isBlogPost}
+                    {getText('confluence.watch.blog')}
+                {else}
+                    {getText('confluence.watch.page')}
+                {/if}
+                </label>
+            </div>
+        </div>
+
+        {if $isBlogPost}
+        <div class="cw-tooltip cw-tooltip-watch-blogs">
+            <div class="checkbox">
+                <input class="checkbox" type="checkbox" id="cw-watch-blogs" {if $watchingBlogs}checked{/if}>
+                <label for="cw-watch-blogs">{getText('confluence.watch.blogs')}</label>
+            </div>
+        </div>
+        {/if}
+
+        <div class="checkbox">
+            <input class="checkbox" type="checkbox" id="cw-watch-space" {if $watchingSpace}checked{/if}>
+            <label for="cw-watch-space">{getText('confluence.watch.space')}</label>
+        </div>
+    </form>
+    {if $isAdmin}
+    <div class="cw-manage-watchers-wrapper">
+        <button class="aui-button aui-button-link cw-manage-watchers">{getText('confluence.watch.manage')}</button>
+    </div>
+    {/if}
+{/template}

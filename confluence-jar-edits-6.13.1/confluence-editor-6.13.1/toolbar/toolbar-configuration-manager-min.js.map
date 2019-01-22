@@ -1,0 +1,8 @@
+{
+"version":3,
+"file":"/dummy-file-path",
+"lineCount":2,
+"mappings":"AAGAA,MAAA,sEAEG,QAAA,CACCC,CADD,QAYQ,SAAA,CAAUC,CAAV,MAECC;gFAFD,yBA8CHC,QAAAA,CAA2BC,CAA3BD,UACQC,CADRD,CAEQF,CAAAI,KAAA,EAFRF,UAMIC,EAAiBA,CAAjBA,IANJD,CAQaG,CARbH,KAQaG,CARbH,GAQoBC,EARpBD,CASYC,CAAAG,eAAA,CAA8BD,CAA9B,CATZH,EAUgBD,CAAA,CAA2BI,CAA3B,CAVhBH,OAWsCC,CAAAI,CAAeF,CAAfE,CAXtCL,EAtBIH,CAAA,CAiCuDE,CAAAO,CAA2BH,CAA3BG,CAjCvD,CAAiBR,CAAjB,CAAAI,KAAA,EAsBJF,EA9CG,EAZR,CAFH,CAuGAO,QAAA,8BAAAC,qBAAA;",
+"sources":["input.js"],
+"names":["define","$","$toolbar","TOOLBAR_GROUP_SELECTOR_MAP","configureToolbar","toolbarOptions","hide","key","hasOwnProperty","groupOptions","groupSelector","require","exportModuleAsGlobal"]
+}

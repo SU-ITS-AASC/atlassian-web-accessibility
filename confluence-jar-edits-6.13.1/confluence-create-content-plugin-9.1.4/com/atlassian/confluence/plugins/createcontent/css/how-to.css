@@ -1,0 +1,27 @@
+ol.howto-steps {
+    counter-reset: item;
+    list-style-type: none;
+    margin: 30px 0px 0px 40px;
+}
+
+li.howto-step {
+    display: block;
+}
+
+li.howto-step:before {
+    content: counter(item) "  ";
+    counter-increment: item;
+    color: #707070;
+    font-size: 24px;
+    margin: 0px 30px 20px 0px;
+    float: left;
+}
+
+.howto-step {
+    margin: 0px 0px 20px 0px;
+}
+
+.howto-step p {
+    margin: 0px 0px 0px 0px;
+    width: 450px;
+}

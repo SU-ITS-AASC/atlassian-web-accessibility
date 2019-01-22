@@ -1,0 +1,23 @@
+{namespace Confluence.Templates.Blueprints.CreateFromTemplate}
+
+/**
+ * Macro template
+ * @param spaceKey
+ * @param buttonLabel
+ * @param createContentUrl
+ * @param hasCreatePermission
+ * @param? title
+ * @param? templateId
+ * @param? contentBlueprintId
+  */
+{template .macroTemplate}
+    <a class='aui-button create-from-template-button'
+        {if not $hasCreatePermission}aria-disabled='true' data-tooltip="{getText('create.from.template.button.disabled.tooltip')}"{/if}
+        data-space-key='{$spaceKey}'
+        href='{$createContentUrl}'
+        {if $title}data-title='{$title}'{/if}
+        {if $templateId}data-template-id='{$templateId}'{/if}
+        {if $contentBlueprintId}data-content-blueprint-id='{$contentBlueprintId}'{/if}
+        >{$buttonLabel}
+    </a>
+{/template}

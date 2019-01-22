@@ -1,0 +1,116 @@
+body.spaces #main {
+    padding: 0;
+    border-bottom: 1px solid #ccc;
+}
+
+body.spaces #main-header {
+    padding: 20px;
+    margin: 0;
+    border-bottom: 1px solid #ccc;
+    background-color: #f5f5f5;
+
+}
+
+body.spaces .dashboard {
+    margin-top: 0;
+}
+
+/* Needed so content fills 100% when no spaces found */
+.dashboard-group.spacedir {
+    display: block;
+    width: auto;
+    margin-bottom: 0px;
+}
+
+body.spaces .dashboard-group > div {
+    margin-top: 0;
+}
+
+#space-directory-wrapper {
+    display: table;
+    min-width: 100%;
+    height: 523px;
+}
+
+#space-directory {
+    display:table-cell;
+    min-width: 200px;
+    padding: 0 10px 0 10px;
+    width: 200px;
+}
+
+#space-search-result {
+    display:table-cell;
+    min-width: 100%;
+    border-left: 1px solid #ccc;
+    padding: 20px;
+}
+
+#space-search-result .no-results {
+    margin-top: 20px;
+}
+
+#space-search-title-bar {
+    position:relative;
+    margin-top: 0;
+}
+
+#space-directory-help {
+    padding-top: 10px;
+}
+
+body.spaces #space-search {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+#space-search-form {
+    margin-top: 0;
+}
+
+#space-list .space-name {
+    vertical-align: top;
+    min-width: 250px;
+    padding-left: 0;
+}
+
+#space-list .entity-logo, .entity-logo img {
+    width: 32px;
+    height: 32px;
+}
+
+#space-search .loading-throbber {
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    left: -34px;
+    top: 4px;
+}
+
+#space-list .entity-icon a {
+    color: #42526e;
+}
+
+#space-list .entity-icon.disabled a  {
+    color: #a5adba;
+    pointer-events: none;
+    cursor: default;
+}
+
+#space-list .entity-attribute {
+    padding: 10px;
+}
+
+#space-list .entity-attribute.entity-logo {
+    padding: 5px 10px;
+}
+
+.space-list-section.entity-list-section {
+    margin-top: 10px;
+}
+
+.blank-experience-space {
+    min-height: 100px;
+    background: url('img/space-empty-placeholder.png') no-repeat right bottom;
+}

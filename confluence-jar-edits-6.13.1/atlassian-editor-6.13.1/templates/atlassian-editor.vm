@@ -1,0 +1,522 @@
+#*
+This is a template for the RTE editor.
+
+Required Context Parameters:
+* id - unique id of the editor
+* webResourceManager - instance of a WebResourceManager
+* webInterfaceManager - instance of a WebInterfaceManager
+* webInterfaceContext - a map/context to be used when calling the WebInterfaceManager
+* i18n - a bean that has a getText method for i18n
+* locale - the current user's locale as a string
+* req - the request object
+* textareaName - name of the texarea
+
+Optional Context Parameters:
+* fullscreen - whether the editor is supposed to be styled as a fullscreen editor
+* minEditorHeight - the minimum height of the editor when loaded
+* content - initial content to be displayed in the editor (html as a string)
+* hideSaveBar - true to hide bottom save bar (you then have the option to provide your own save / submit buttons)
+* showDraftStatus - false to hide the draft status line if your editor doesn't save drafts
+* showPrecursor - true to show the editor breadcrumbs, title input and messages space
+*
+* ****************************
+*    PLEASE READ IF YOU ARE MODIFYING THIS FILE:
+* ****************************
+*
+* - While we may need to support this in the short and medium term for backwards compatibility,
+* we are moving away from having a velocity template to render the editor toolbar for many reasons
+* (high coupling, difficult to extend, difficult to make it work with a custom initialised quick editor, etc)
+*
+* - Ideally, new buttons should be added by plugins using tinymce plugin system.
+*
+* - In a first step towards a custom toolbar, we are providing an API to hide/show buttons in editors
+* created using the quick edit API.
+*
+*#
+
+#htmlSafe() ## we want anti-xss protection regardless of admin setting (see CONF-20239)
+
+#macro (toolbarIconButton $control $title $tooltip $iconfont)
+<li class="toolbar-item aui-button aui-button-subtle" id="rte-button-${control}" #if($tooltip) data-tooltip="$!tooltip"#end>
+    <a class="toolbar-trigger" href="#" data-control-id="$control">
+        #iconSpan($iconfont, $title, "")
+    </a>
+</li>
+#end
+
+#macro (advancedToolbarIconButton $i18n $control $shortcut $iconfont)
+    #set($title = $i18n.getText("tinymce.advanced.${control}_desc"))
+
+    #if($shortcut)
+        #set($shortcut = $i18n.getText("tinymce.advanced.${control}_shortcut"))
+        #set($tooltip = $title + " (" + $shortcut + ")")
+    #else
+        #set($tooltip = $title)
+    #end
+    #toolbarIconButton($control, $title, $tooltip, $iconfont)
+#end
+
+#macro (formatMenuDropDownItem $i18n $format $key)
+    #set($text = $i18n.getText("tinymce.advanced.${key}"))
+    #set($shortcut = $i18n.getText("tinymce.advanced.${key}_shortcut"))
+    #set($tooltip = $text + " (" + $shortcut + ")")
+<li class="dropdown-item format-${format}" data-format="${format}" data-tooltip="$tooltip">
+    <a class="item-link" href="#">$text</a>
+</li>
+#end
+
+#macro (moreMenuDropDownItem $i18n $control $title $shortcut $tooltip)
+    #set($title = $i18n.getText("${title}"))
+    #if (!$tooltip)
+        #set($tooltip = $title)
+    #end
+    #if ($shortcut)
+        #set($shortcut = $i18n.getText("${shortcut}"))
+        #set($tooltip = $tooltip + " (" + $shortcut + ")")
+    #end
+    #if ($tooltip == $title)
+        #set($tooltip = "") ## Don't have a tooltip exactly the same as the text
+    #end
+<li class="dropdown-item more-menu-trigger" data-control-id="$control" data-tooltip="$!tooltip">
+    <a id="rte-$control" class="item-link" href="#">
+        #iconSpan("check", "", "hidden")$title
+    </a>
+</li>
+#end
+
+#macro (pagelayoutMenuDropDownItem $layoutName $title $dataCols $dataHeader $dataFooter)
+<li class="dropdown-item" data-tooltip="$title">
+    <a href="#" class="item-link" data-atlassian-layout='{"name": "$layoutName", "columns": $dataCols #if($dataHeader), "header": true #end #if($dataFooter), "footer":true #end }' >
+        #iconSpan("check", "", "hidden")
+        #iconSpan("layout", $title, $layoutName)
+    </a>
+</li>
+#end
+
+#macro (dropdownItemWithIcon $id $displayText $className $dataAttr $dataValue $tooltip $type $additionalClasses)
+<li class="dropdown-item $!className" $dataAttr="$dataValue" #if($tooltip) data-tooltip="$!tooltip"#end >
+<a #if($id) id="$id"#end class="item-link" href="#">
+    #iconSpan($type, "", $additionalClasses) $displayText
+</a>
+</li>
+#end
+
+#macro (dropdownItemWithoutIcon $id $displayText $className $dataAttr $dataValue $tooltip )
+<li class="dropdown-item $!className" $dataAttr="$dataValue" #if($tooltip) data-tooltip="$!tooltip"#end >
+<a #if($id) id="$id"#end class="item-link" href="#">
+    $displayText
+</a>
+</li>
+#end
+
+#macro (insertContentDropdownItem $i18n $id $dataAttr $dataValue $displayText $tooltip $shortcut, $showIcon, $type)
+    #set($className = "content-${id}")
+    #set($id = "rte-insert-${id}")
+    #set($displayText = $i18n.getText("${displayText}"))
+    #set($tooltip = $i18n.getText("${tooltip}"))
+
+    #if($shortcut)
+        #set($shortcut = $i18n.getText("${shortcut}"))
+        #set($tooltip = $tooltip + " (" + $shortcut + ")")
+    #end
+
+    #if ($showIcon == true)
+    ## If showIcon is true or undefined (null or empty) - i.e. default to true
+        #dropdownItemWithIcon($id, $displayText, $className, $dataAttr $dataValue, $tooltip, $type, "")
+    #else
+    ## If showIcon has explicitly been set to false
+        #dropdownItemWithoutIcon($id, $displayText, $className, $dataAttr $dataValue, $tooltip)
+    #end
+#end
+
+#if ($fullscreen == true)
+    #set ($editorClass = "editor-fullheight")
+#else
+    #set ($editorClass = "editor-default")
+#end
+
+#if ($action.isCollaborativeContent() == true)
+    #set ($collaborativeClass = "collaborative")
+#else
+    #set ($collaborativeClass = "")
+#end
+
+## Top editor toolbar
+<div id="toolbar">
+    <div id="rte-toolbar" class="aui-toolbar aui-toolbar2">
+
+        <div class="aui-toolbar2-primary toolbar-primary">
+            <ul class="aui-buttons rte-toolbar-group-formatting">
+            ## format drop down menu
+                <li id="format-dropdown" class="toolbar-item toolbar-dropdown">
+                    <div class="aui-dd-parent">
+                        <a id="format-dropdown-display" href="#" class="toolbar-trigger aui-dd-trigger aui-button" data-control-id="formatselect">
+                            <span class="dropdown-text">$i18n.getText("tinymce.advanced.paragraph")</span>
+                            #iconSpan("dropdown", "", "", "icon-dropdown")
+                        </a>
+                        <ul id="format-dropdown-display-menu" class="aui-dropdown hidden">
+                            #formatMenuDropDownItem($i18n, "p", "paragraph")
+                                #formatMenuDropDownItem($i18n, "h1", "h1")
+                                #formatMenuDropDownItem($i18n, "h2", "h2")
+                                #formatMenuDropDownItem($i18n, "h3", "h3")
+                                #formatMenuDropDownItem($i18n, "h4", "h4")
+                                #formatMenuDropDownItem($i18n, "h5", "h5")
+                                #formatMenuDropDownItem($i18n, "h6", "h6")
+                                #formatMenuDropDownItem($i18n, "pre", "pre")
+                                #formatMenuDropDownItem($i18n, "blockquote", "blockquote")
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+
+            <ul class="aui-buttons rte-toolbar-group-style">
+                #advancedToolbarIconButton($i18n, "bold", true, "editor-bold")
+                #advancedToolbarIconButton($i18n, "italic", true, "editor-italic")
+                #advancedToolbarIconButton($i18n, "underline", true, "editor-underline")
+            ## waiting for AUI split-button to get released b947e7e3b8a0f14345e072a79739f618050db801
+                <li id="color-picker-control" class="toolbar-item toolbar-splitbutton">
+                    $soyTemplateRendererHelper.getRenderedTemplateHtml("com.atlassian.plugins.editor:components", "Confluence.Templates.Editor.Components.ColorPicker.display.soy", {})
+                </li>
+                <li id="more-menu" class="toolbar-item toolbar-dropdown">
+                    <div class="aui-dd-parent">
+                        <a id="rte-button-more" href="#" class="toolbar-trigger aui-dd-trigger aui-button"  data-tooltip='$i18n.getText("tinymce.atlassian.more_menu")'>
+                            #iconSpan("editor-styles", $i18n.getText("tinymce.advanced.formatting_desc"), "")
+                                #iconSpan("dropdown", "", "", "icon-dropdown")
+                        </a>
+                        <div id="rte-button-more-menu" class="aui-dropdown grouped hidden">
+                            <div class="grouped-dropdown-item">
+                                <ul>
+                                    #moreMenuDropDownItem($i18n, "strikethrough", "tinymce.advanced.striketrough_desc", "tinymce.advanced.striketrough_shortcut", false)
+                                        #moreMenuDropDownItem($i18n, "sub" "tinymce.advanced.sub_desc", false, false)
+                                        #moreMenuDropDownItem($i18n, "sup", "tinymce.advanced.sup_desc", false, false)
+                                        #moreMenuDropDownItem($i18n, "monospace", "tinymce.atlassian.monospace", false, $i18n.getText("tinymce.atlassian.monospace_desc"))
+
+                                        ## More menu plugin point
+                                        #set ($moreFeatures = $webInterfaceManager.getDisplayableItems("system.editor.more.formats", $webInterfaceContext))
+                                        #foreach ($item in $moreFeatures)
+                                    #set($label = $item.label.getDisplayableLabel($req, $webInterfaceContext))
+                                    #set($tooltip = $item.tooltip.getDisplayableLabel($req, $webInterfaceContext))
+                                    #set($dataControl = "")
+                                    #if($item.webParams)
+                                        #set($dataControl = $item.webParams.get("data-control-id"))
+                                    #end
+                                    #dropdownItemWithIcon("${item.link.id}", $label, "more-menu-trigger no-icon", "data-control-id", $dataControl, $tooltip)
+                                #end
+                                </ul>
+                            </div>
+                            <div class="grouped-dropdown-item">
+                                <ul>
+                                    #dropdownItemWithoutIcon("rte-removeformat", $i18n.getText("tinymce.atlassian.remove_formatting"), "more-menu-trigger no-icon", "data-format", "removeformat", $i18n.getText("tinymce.atlassian.remove_formatting_desc"))
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                </li>
+            </ul>
+
+            <ul class="aui-buttons rte-toolbar-group-lists">
+                #advancedToolbarIconButton($i18n, "bullist", true, "editor-list-bullet")
+                    #advancedToolbarIconButton($i18n, "numlist", true, "editor-list-number")
+            </ul>
+            #if ($useInlineTasks)
+                <ul class="aui-buttons rte-toolbar-group-task-lists">
+                    #advancedToolbarIconButton($i18n, "tasklist", true, "editor-task")
+                </ul>
+            #end
+
+            <ul class="aui-buttons rte-toolbar-group-indentation">
+                #advancedToolbarIconButton($i18n, "outdent", false, "indent-left")
+                    #advancedToolbarIconButton($i18n, "indent", false, "indent-right")
+            </ul>
+
+            <ul class="aui-buttons rte-toolbar-group-justification">
+                #advancedToolbarIconButton($i18n, "justifyleft", false, "editor-align-left")
+                    #advancedToolbarIconButton($i18n, "justifycenter", false, "editor-align-center")
+                    #advancedToolbarIconButton($i18n, "justifyright", false, "editor-align-right")
+            </ul>
+
+            #if ($usePageLayouts)
+                <ul class="aui-buttons hidden" id="page-layout-2-group">
+                    <li id="page-layout-2" class="toolbar-item" data-tooltip='$i18n.getText("tinymce.confluence.layout.menu")'>
+                        <a href="#" class="aui-button aui-button-subtle toolbar-trigger" id="rte-button-pagelayout-2">
+                            #iconSpan("editor-layout", $i18n.getText("tinymce.confluence.layout.menu"))
+                        </a>
+                    </li>
+                </ul>
+            #end
+
+
+            <ul class="aui-buttons rte-toolbar-group-files hidden"></ul>
+
+            <ul class="aui-buttons rte-toolbar-group-link no-separator">
+                <li class="toolbar-item" data-tooltip='$i18n.getText("tinymce.confluence.conf_link_desc") ($i18n.getText("tinymce.confluence.conf_link_shortcut"))'>
+                    <a id="rte-button-link" class="toolbar-trigger aui-button aui-button-subtle" href="#" data-control-id="linkbrowserButton">
+                        #iconSpan("link", "", "")
+                        <span class="trigger-text">$i18n.getText("tinymce.confluence.conf_link")</span>
+                    </a>
+                </li>
+            </ul>
+
+            <ul class="aui-buttons rte-toolbar-group-table no-separator">
+                <li class="toolbar-item toolbar-dropdown" id="insert-table-dropdown">
+                    <div class="aui-dd-parent">
+                        <a href="#" class="toolbar-trigger aui-dd-trigger aui-button aui-button-subtle" id="rte-button-insert-table" data-tooltip='$i18n.getText("tinymce.tablepicker.insert_table_title")'>
+                            #iconSpan("editor-table", "", "")
+                            <span class="dropdown-text">$i18n.getText("tinymce.tablepicker.insert_table")</span>
+                            #iconSpan("dropdown", "", "", "icon-dropdown")
+                        </a>
+
+                        <div id="table-picker-container" class="hidden aui-box-shadow">
+                            <div class="table-picker-box" data-tooltip='$i18n.getText("tinymce.tablepicker.pickerbox.tooltip")'>
+                                <div class="table-picker-background">
+                                    <div class="picker picker-cell"></div>
+                                    <div class="picker picker-heading heading"></div>
+                                    <div class="picker picker-selected-cell"></div>
+                                    <div class="picker picker-selected-heading heading"></div>
+                                </div>
+                                <p class="desc"></p>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+
+        ## TOOLBAR PLUGIN POINT
+        ## Please be aweare that this will be deprecated soon.
+        ## We plan to provide an API so buttons can be added by using tinymce's like pluggable API
+            #foreach ($webPanel in $webInterfaceManager.getDisplayableWebPanels("atl.editor.toolbar.primary", $webInterfaceContext))
+                $!webPanel.getHtml($webInterfaceContext)
+            #end
+
+            #if ($useTemplates)
+                <ul class="aui-buttons rte-toolbar-group-templates no-separator">
+                    <li class="toolbar-item toolbar-dropdown" id="template-menu">
+                        <div class="aui-dd-parent">
+                            <a href="#" class="toolbar-trigger aui-dd-trigger aui-button aui-button-subtle" id="rte-button-insert-template" data-tooltip='$i18n.getText("tinymce.templates.insert-template.tooltip")'>
+                                #iconSpan("page-template", "", "")
+                                <span class="dropdown-text">$i18n.getText("tinymce.templates.insert-template")</span>
+                                #iconSpan("dropdown", "", "", "icon-dropdown")
+                            </a>
+
+                            <div class="aui-dropdown grouped hidden">
+                                <div class="grouped-dropdown-item">
+                                    <span class="assistive">$i18n.getText("tinymce.templates.actions.defined")</span>
+                                    <ul>
+                                        #dropdownItemWithoutIcon("rte-button-insert-placeholder", $i18n.getText("tinymce.templates.placeholder"), "instructional-text" "data-instructional-text-action" "add" $i18n.getText("tinymce.templates.placeholder.tooltip") )
+                                    </ul>
+                                </div>
+                                <div class="grouped-dropdown-item variables-actions">
+                                    <span class="assistive">$i18n.getText("tinymce.templates.variables.manage")</span>
+                                    <ul id="template-manage-list">
+                                        #dropdownItemWithoutIcon("", $i18n.getText("tinymce.templates.variables.add"), "variables-add" "data-variables-action" "add" $i18n.getText("tinymce.templates.variables.add.tooltip") )
+                                    </ul>
+                                    <ul class="variables-list">
+                                        <!-- variables are added here dyanmically -->
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            #end
+
+            <ul class="aui-buttons rte-toolbar-group-insert no-separator">
+                <li class="toolbar-item toolbar-dropdown" id="insert-menu">
+                    <div class="aui-dd-parent">
+                        <a href="#" class="toolbar-trigger aui-dd-trigger aui-button aui-button-subtle" id="rte-button-insert" data-tooltip='$i18n.getText("tinymce.atlassian.insert_menu.tooltip")'>
+                            #iconSpan("add", "", "")
+                            <span class="dropdown-text">$i18n.getText("tinymce.atlassian.insert_menu")</span>
+                            #iconSpan("dropdown", "", "", "icon-dropdown")
+                        </a>
+
+                        <div id="insert-menu-options" class="aui-dropdown grouped hidden">
+                            <div class="grouped-dropdown-item">
+                                <span class="assistive">$i18n.getText("tinymce.atlassian.insert_menu.content_desc")</span>
+                                <ul id="content-insert-list">
+                                    #insertContentDropdownItem($i18n, "image", "data-command", "mceConfimage", "tinymce.confluence.conf_file", "tinymce.confluence.conf_file_desc", "tinymce.confluence.conf_file_shortcut", true, "image")
+                                        #insertContentDropdownItem($i18n, "link", "data-control-id", "linkbrowserButton", "tinymce.confluence.conf_link", "tinymce.confluence.conf_link_desc", "tinymce.confluence.conf_link_shortcut", true, "link")
+                                        #insertContentDropdownItem($i18n, "wikimarkup", "data-command", "InsertWikiMarkup", "tinymce.confluence.conf_wikimarkup", "tinymce.confluence.conf_wikimarkup_desc", "tinymce.confluence.conf_wikimarkup_shortcut", true, "code")
+                                        #insertContentDropdownItem($i18n, "hr", "data-command", "InsertHorizontalRule", "tinymce.advanced.hr_desc", "tinymce.atlassian.insert_menu.hr_desc", false, true, "horizontal-rule")
+                                        #if ($useInlineTasks)
+                                    #insertContentDropdownItem($i18n, "tasklist", "data-command", "InsertInlineTaskListNoToggle", "tinymce.confluence.conf_tasklist", "tinymce.confluence.conf_tasklist_desc", "tinymce.confluence.conf_tasklist_shortcut", true, "task")
+                                #end
+                                        #insertContentDropdownItem($i18n, "date", "data-command", "confMenuInsertDate", "tinymce.confluence.conf_date", "tinymce.confluence.conf_date_desc", "tinymce.confluence.conf_date_shortcut", true, "calendar")
+                                        #insertContentDropdownItem($i18n, "emoticon", "data-command", "mceEmotion", "tinymce.confluence.conf_emoticon", "tinymce.confluence.conf_emoticon_desc", false, true, "emoji")
+                                        #insertContentDropdownItem($i18n, "symbol", "data-command", "confCharmap", "tinymce.advanced.charmap_desc", "tinymce.atlassian.insert_menu.charmap_desc", false, true, "symbol")
+                                </ul>
+                                <span class="assistive">$i18n.getText("tinymce.atlassian.insert_menu.macro_desc")</span>
+                                <ul id="macro-insert-list">
+                                    #set ($defaultFeatures = $webInterfaceManager.getDisplayableItems("system.editor.featured.macros.default", $webInterfaceContext))
+                                    #foreach ($item in $defaultFeatures)
+                                        #set($label = $item.label.getDisplayableLabel($req, $webInterfaceContext))
+                                        #set($tooltip = $i18n.getText("tinymce.confluence.macro_insert", $label))
+                                        #set($type = "")
+                                        #set($additionalClasses = "")
+                                        #if($item.webParams)
+                                            #set($type = $item.webParams.get("icon-type"))
+                                            #set($additionalClasses = $item.webParams.get("icon-classes"))
+                                        #end
+                                        #dropdownItemWithIcon("${item.link.id}", $label, "macro-${item.link.id}", "data-macro-name", "$item.link.id", $tooltip, $!type, $!additionalClasses)
+                                    #end
+                                </ul>
+                            </div>
+                            <div class="grouped-dropdown-item">
+                                <ul id="more-macros-list">
+                                    #insertContentDropdownItem($i18n, "macro", "data-command", "mceConfMacroBrowser", "tinymce.confluence.macro_other", "tinymce.confluence.macro_other_desc",  "tinymce.confluence.conf_macro_browser_shortcut", false, "")
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+
+            #if ($usePageLayouts)
+                <ul class="aui-buttons rte-toolbar-group-page-layouts-section-types">
+                    <li id="pagelayout-menu" class="toolbar-item toolbar-dropdown">
+                        <div class="aui-dd-parent">
+                            <a href="#" class="toolbar-trigger aui-dd-trigger aui-button aui-button-subtle" id="rte-button-pagelayout" data-tooltip='$i18n.getText("tinymce.confluence.layout.menu")'>
+                                #iconSpan("layout", $i18n.getText("tinymce.confluence.layout.menu"), "pagelayout-default")
+                                #iconSpan("dropdown", "", "", "icon-dropdown")
+                            </a>
+
+                            <ul id="pagelayout-menu-options" class="aui-dropdown hidden">
+                                #pagelayoutMenuDropDownItem("pagelayout-none", $i18n.getText("tinymce.confluence.layout.none"), "0", false, false)
+                                #pagelayoutMenuDropDownItem("pagelayout-two-simple", $i18n.getText("tinymce.confluence.layout.two_col_simple"), '["", ""]', false, false)
+                                #pagelayoutMenuDropDownItem("pagelayout-two-simple-left", $i18n.getText("tinymce.confluence.layout.two_col_simple_left"), '["aside", "large"]', false, false)
+                                #pagelayoutMenuDropDownItem("pagelayout-two-simple-right", $i18n.getText("tinymce.confluence.layout.two_col_simple_right"), '["large", "aside"]', false, false)
+                                #pagelayoutMenuDropDownItem("pagelayout-three-simple", $i18n.getText("tinymce.confluence.layout.three_col_simple"), '["", "", ""]', false, false)
+                                #pagelayoutMenuDropDownItem("pagelayout-two", $i18n.getText("tinymce.confluence.layout.two_col"), '["", ""]', true, true)
+                                #pagelayoutMenuDropDownItem("pagelayout-two-left", $i18n.getText("tinymce.confluence.layout.two_col_left"), '["aside", "large"]', true, true)
+                                #pagelayoutMenuDropDownItem("pagelayout-two-right", $i18n.getText("tinymce.confluence.layout.two_col_right"), '["large", "aside"]', true, true)
+                                #pagelayoutMenuDropDownItem("pagelayout-three", $i18n.getText("tinymce.confluence.layout.three_col"), '["", "", ""]', true, true)
+                                #pagelayoutMenuDropDownItem("pagelayout-three-sidebars", $i18n.getText("tinymce.confluence.layout.three_col_sidebars"), '["sidebars", "large", "sidebars"]', true, true)
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            #end
+
+        ## Please don't include any more buttons using the velocity template
+        ## Please do that in your tinymce plugin instead
+        ## https://pug.jira-dev.com/wiki/display/EDITOR/Improving+the+editor+toolbar
+
+            <ul class="aui-buttons aui-button-subtle rte-toolbar-group-undo">
+                #advancedToolbarIconButton($i18n, "undo", true, "undo")
+                    #advancedToolbarIconButton($i18n, "redo", true, "redo")
+            </ul>
+        </div>## toolbar-split-left
+        #if ($showDraftStatus != "false")
+        ## We don't like display:none either
+        ## We should eventually remove this from the velocity template.
+        ## Rendering draft related markup should be the responsability of the tinymce pluging confluence-drafts
+        ## so this will probably become a soy template in the future.
+            <div id="draft-status" style="display:none"></div>
+        #end
+        <div class="aui-toolbar2-secondary">
+            <ul class="aui-buttons aui-button-subtle rte-toolbar-group-searchreplace">
+                #toolbarIconButton("searchreplace", $i18n.getText("tinymce.searchreplace.replace_desc"), $i18n.getText("tinymce.searchreplace.replace_desc"), "search")
+            </ul>
+            <ul class="aui-buttons aui-button-subtle rte-toolbar-group-help">
+                #toolbarIconButton("help", $i18n.getText("tinymce.confluence.conf_shortcuts_help"), $i18n.getText("tinymce.atlassian.help"), "editor-help")
+            </ul>
+        </div>## toolbar-split-right
+    </div>## rte-toolbar
+</div>##toolbar
+
+#if ($webInterfaceContext.parentPage.id)
+    #set($parentPageId = $webInterfaceContext.parentPage.id)
+#else
+    #set($parentPageId = 0)
+#end
+
+#if ($action.restricted)
+    #set($editPageRestricted = $action.restricted)
+#else
+    #set($editPageRestricted = false)
+#end
+
+#if ($showPrecursor)
+    #set ($isUserAuthenticated = true)
+    #if (!$action.authenticatedUser)
+        #set ($isUserAuthenticated = false)
+    #end
+    #set ($loginParams = {
+        "isUserAuthenticated": $isUserAuthenticated,
+        "isExternalUserManagementEnabled": $action.isExternalUserManagementEnabled(),
+        "loginURL": $seraph.getLinkLoginURL($req)
+    })
+    #set ($titleParams = {
+        "title": ${action.title},
+        "placeholder": $!titlePlaceholder,
+        "disabled": $!isLinkCreation,
+        "readonly": $!isTitleReadOnly,
+        "collaborative": $action.isCollaborativeContent()
+    })
+    #set ($notificationParams = {
+        "showDraftMessage": $showDraftMessage,
+        "existingDraft": {
+        "isNewPage": $existingDraft.newPage,
+        "title": $existingDraft.title,
+        "lastModificationDate": $existingDraft.lastModificationDate
+    },
+        "mergeRequired": $mergeRequired,
+        "conflictFound": $conflictFound,
+        "pageId": $pageId,
+        "spaceKey": ${action.spaceKey}
+    })
+    #set ($metadataParams = {
+        'contentId': "$contentId",
+        'contextMap': {'numLabelsString': $webInterfaceContext.getParameter('numLabelsString'),
+        'editPageRestricted': $editPageRestricted, 'editMode': true, 'parentPageId': "$parentPageId"}
+    })
+    #if($darkFeatures.isDarkFeatureEnabled('editor.ajax.save') && !$darkFeatures.isDarkFeatureEnabled('editor.ajax.save.disable'))
+        $soyTemplateRendererHelper.getRenderedTemplateHtml("com.atlassian.plugins.editor:components",
+            "Confluence.Templates.Editor.Components.Precursor.renderTitle.soy",
+        {'loginParams': $loginParams, 'notificationParams': $notificationParams, 'actionErrors': $actionErrors,
+            'titleParams': $titleParams, 'metadataParams': $metadataParams})
+    #else
+        $soyTemplateRendererHelper.getRenderedTemplateHtml("com.atlassian.plugins.editor:components",
+            "Confluence.Templates.Editor.Components.Precursor.render.soy",
+        {'loginParams': $loginParams, 'notificationParams': $notificationParams, 'actionErrors': $actionErrors,
+            'titleParams': $titleParams, 'metadataParams': $metadataParams})
+    #end
+#end
+
+<div id="wysiwyg">
+    <div id="rte" class="cell $editorClass $collaborativeClass">
+        <textarea id="wysiwygTextarea" name="$textareaName" class="hidden tinymce-editor">$!content</textarea>
+    </div>
+</div>
+<div id="editor-html-source-container" class="hidden">
+    <textarea id="editor-html-source" class="monospaceInput"></textarea>
+</div>
+
+<div id="preview">
+## We don't add the preview content here because we will never start in preview mode and it will always be refreshed when switching tabs
+## It was also causing problems with the inclusion of a macro in the page source (CONF-4533)
+    <div id="previewArea" class="cell">
+    </div>
+</div>
+
+#if (!$hideSaveBar)
+    #set($savebarContext = {
+        'contentId': "$contentId",
+        'contentType': "$contentType",
+        'useDatePicker': $useDatePicker,
+        'postingDate': $postingDate,
+        'usePluggableStatus': $usePluggableStatus,
+        'versionMismatch': $versionMismatch,
+        'metadataContext': {'numLabelsString': $webInterfaceContext.getParameter('numLabelsString'),
+        'editPageRestricted': $editPageRestricted, 'editMode': true, 'parentPageId': "$parentPageId"},
+        'webPanelContext': {'fieldErrors': $action.fieldErrors},
+        'sharedDraftsEnabled': $action.collaborativeEditingHelper.isSharedDraftsFeatureEnabled($action.spaceKey),
+        'newPage': $newPage
+    })
+    $soyTemplateRendererHelper.getRenderedTemplateHtml("com.atlassian.plugins.editor:sections", "Confluence.Templates.Editor.Sections.Savebar.render.soy", $savebarContext)
+#end
+
+#if ($action.collaborativeEditingHelper.isSharedDraftsFeatureEnabled($action.spaceKey))
+##this dialog is only necessary when we have Collab Editing
+    $soyTemplateRendererHelper.getRenderedTemplateHtml("com.atlassian.plugins.editor:components", "Confluence.Templates.Editor.Sections.QuitDialog.render.soy", {'isLimitedMode': $action.collaborativeEditingHelper.isLimitedModeEnabled($action.spaceKey), 'pageId': $pageId, 'newPage': $newPage, 'contentType': $contentType})
+#end

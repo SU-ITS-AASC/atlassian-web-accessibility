@@ -1,0 +1,18 @@
+{namespace Confluence.Templates.Editor.SaveBar.NotifyWatchers}
+
+/**
+ * Renders the notify watchers UI
+ *
+ * [data-persist] will only work if you add persistable.js. It will persist your choice on localstorage;
+ * See more at /confluence-plugins/confluence-bundled-plugins/confluence-aui-staging/src/main/resources/js/persistable.js
+ *
+ * @param contentId
+ */
+{template .render}
+<span class="minor-edit toolbar-item">
+    <input id="notifyWatchers" name="notifyWatchers" value="true" type="checkbox" data-persist="checked" data-persist-scope="{$contentId}" data-default-value="true" checked>
+    <label for="notifyWatchers">
+      <span>{getText('editor.minor.edit')}</span>
+    </label>
+</span>
+{/template}

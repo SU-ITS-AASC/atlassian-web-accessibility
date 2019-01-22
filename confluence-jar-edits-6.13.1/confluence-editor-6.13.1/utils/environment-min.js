@@ -1,0 +1,1 @@
+define("confluence-editor/utils/environment",["ajs"],function(b){return{isMac:0<=navigator.platform.indexOf("Mac"),transformCmdKeyTextBasingOnOS:function(a){var c=b.I18n.getText("keyboard.shortcut.ctrl");return this.isMac?a.replace(RegExp(c,"g"),"\u2318"):a}}});

@@ -1,0 +1,44 @@
+#* @vtlvariable name="systemTemplates" type="java.util.List<com.atlassian.confluence.pages.templates.PageTemplate>" *#
+
+#requireResource("com.atlassian.confluence.plugins.confluence-create-content-plugin:list-templates-resources")
+
+#macro (addSystemTemplateRow $template)
+<tr data-template-module-complete-key="$template.moduleCompleteKey">
+    #set ($templateEdited = $template.id != 0)
+    <td>$i18nResolver.getText($template.i18nNameKey)
+        #if ($templateEdited)
+            <span class="smalltext">$i18nResolver.getText('create.content.plugin.list.templates.edited')</span>
+        #end
+    </td>
+    <td class="template-operations">
+        #if ($templateEdited)
+        ## Template has been edited before
+        ## Assumes we're using templates2 - see common-listpagetemplates.vm in Confluence core.
+            <a class="operation-edit" href="$contextPath/pages/templates2/editpagetemplate.action?entityId=$template.id">$i18nResolver.getText("edit.name")</a> &middot;
+            <a class="operation-revert" href="$contextPath/plugins/createcontent/revert-template.action?entityId=$template.id">$i18nResolver.getText("create.content.plugin.plugin.list.templates.reset-to-default")</a>
+        #else
+        ## Template has never been edited before
+            <a class="operation-edit" href="$contextPath/plugins/createcontent/edit-template.action?pluginKey=$template.pluginKey&moduleKey=$template.moduleKey">$i18nResolver.getText("edit.name")</a>
+        #end
+    </td>
+</tr>
+#end
+
+#macro (addSystemTemplateRows $templateRefs)
+    #foreach ($templateRef in $templateRefs)
+        #addSystemTemplateRow($templateRef)
+    #end
+#end
+
+#if (!$space)
+    <div id="system-templates" class="templates-section">
+        <h2>$i18nResolver.getText("create.content.plugin.plugin.system-templates")</h2>
+        <table class="aui web-item-module" id="system-pagetemplates-table">
+            <tbody>
+                #addSystemTemplateRows($systemTemplates)
+            </tbody>
+        </table>
+    </div>
+#end
+
+

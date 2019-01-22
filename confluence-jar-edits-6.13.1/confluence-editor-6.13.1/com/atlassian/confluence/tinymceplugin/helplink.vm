@@ -1,0 +1,3 @@
+#if ($action.isHelpAvailable())
+    #doc("$action.getLinkUrlKey()" "$action.getLinkName()")
+#end

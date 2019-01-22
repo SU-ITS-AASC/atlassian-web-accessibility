@@ -1,0 +1,1 @@
+ol.howto-steps{counter-reset:item;list-style-type:none;margin:30px 0 0 40px}li.howto-step{display:block}li.howto-step:before{content:counter(item) "  ";counter-increment:item;color:#707070;font-size:24px;margin:0 30px 20px 0;float:left}.howto-step{margin:0 0 20px 0}.howto-step p{margin:0;width:450px}

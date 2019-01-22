@@ -1,0 +1,8 @@
+{
+"version":3,
+"file":"/dummy-file-path",
+"lineCount":2,
+"mappings":"AAGAA,MAAA,8FAIG,QAAA,CACCC,CADD,CAECC,CAFD,CAGCC,CAHD,cAWYC,QAAAA,GACCD,CAAAE,UADDD,EAECE,UAAA,CAAW,QAAA,GACKL,CAAAM,CAAEL,CAAAM,IAAAC,UAAA,EAAAC,QAAA,EAAFH,CACZI,SAAA,OAFO,CAAX,GAFDP,CAXZ,SAmBeQ,QAAAA,yGAKQT,CAAAU,aALRD,KAKqCT,CAAAW,aALrCF,EAnBf,EAJH,CAkCAG;OAAA,8BAAAC,YAAA,mEACwF,QAAA,CAASC,CAAT,MACxEd,EAAUY,OAAA,WAEdZ,EAAAe,OAAA,8BAA6CD,CAA7C,CAEAd,EAAAgB,cAAAC,IAAA,cAAwCjB,CAAAkB,QAAAC,WAAxC,CAL4E,CADxF;",
+"sources":["input.js"],
+"names":["define","$","AJS","tinymce","init","isIDevice","setTimeout","$body","Rte","getEditor","getBody","addClass","getInfo","majorVersion","minorVersion","require","safeRequire","iOSEditingPlugin","create","PluginManager","add","plugins","iOSEditing"]
+}

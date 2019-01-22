@@ -1,0 +1,6 @@
+<p>
+    $action.getText('label.help.label.usage')
+</p>
+<p>
+    $action.getText('label.help.labels.beginning.with.my')
+</p>

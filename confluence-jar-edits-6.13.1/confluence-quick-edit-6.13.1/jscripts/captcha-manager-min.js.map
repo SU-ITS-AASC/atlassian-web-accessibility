@@ -1,0 +1,8 @@
+{
+"version":3,
+"file":"/dummy-file-path",
+"lineCount":2,
+"mappings":"AAGAA,MAAA,0DAGG,QAAA,CACCC,CADD,CAECC,CAFD,QAUQ,SAAA,CAAUC,CAAV,EAMHC,QAASA,EAATA,CAAyBC,CAAzBD,QACWH,EAAA,CAAEE,CAAF,SAAAG,KAAA,CAA4BD,CAA5B,CADXD,CANG,sBA2BiBG,QAAAA,OACRC,EAAOJ,CAAA,qBADCG,MAERC,CAAAC,OAFQF,MAGJG,EAAeC,IAAAC,OAAA,EACLJ,EAhBtBK,KAAA,OAAiBX,CAAAY,YAAA,EAAjB,iBAgB4BJ,CAhB5B,CAJAN,EAAA,2BAAAW,IAAA,CAqBqBL,CArBrB,CAQAN,EAAA,iCAAAW,IAAA,IAQgBR,EA3BjB,gBA2CiBS,QAAAA,aAEJZ,CAAA,2BAAAW,IAAA,EAFIC,UAGEZ,CAAA,iCAAAW,IAAA,EAHFC,EA3CjB,EAVR,CAHH,CAkEAC;OAAA,8BAAAC,qBAAA;",
+"sources":["input.js"],
+"names":["define","$","AJS","container","findInContainer","selector","find","refreshCaptcha","$img","length","newCaptchaId","Math","random","attr","contextPath","val","getCaptchaData","require","exportModuleAsGlobal"]
+}

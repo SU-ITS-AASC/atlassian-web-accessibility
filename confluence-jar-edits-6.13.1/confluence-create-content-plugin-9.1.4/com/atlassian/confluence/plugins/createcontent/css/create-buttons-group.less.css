@@ -1,0 +1,31 @@
+#create-page-button.clc-create-dialog-btn {
+  margin-left: 1px;
+  margin-right: 5px;
+}
+#create-page-button.clc-create-dialog-btn .aui-icon {
+  margin-top: 3px;
+}
+/*CONFDEV-38608*/
+#quick-create-page-button {
+  margin-right: 0px;
+}
+/* style for discovery tooltip*/
+#inline-dialog-discoveryTooltip .title {
+  font-weight: bold;
+  color: #707070;
+  font-size: 12px;
+  margin-bottom: 15px;
+}
+#inline-dialog-discoveryTooltip .contents {
+  border: 2px solid #f79232;
+  border-radius: 2px;
+}
+#inline-dialog-discoveryTooltip #closeDisDialog {
+  margin-top: 10px;
+}
+#arrow-discoveryTooltip:before {
+  border-color: #f79232 rgba(0, 0, 0, 0);
+}
+#arrow-discoveryTooltip:after {
+  top: 4px;
+}

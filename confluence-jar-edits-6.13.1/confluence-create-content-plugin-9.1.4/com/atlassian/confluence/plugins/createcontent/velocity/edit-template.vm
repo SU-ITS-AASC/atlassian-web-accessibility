@@ -1,0 +1,51 @@
+<html>
+<head>
+    <title>Edit Template</title>
+</head>
+
+    #set ($decorator = $req.getParameter("inline"))
+    #set ($contentType = "template")
+
+    #applyDecorator("root")
+        #decoratorParam("helper" $action.helper)
+        #decoratorParam("context" "page")
+        #decoratorParam("mode" "edit")
+        <body>
+            #set ($formName = "editpagetemplate")
+            #set ($formAction = "do-edit-template.action")
+            #set ($editMode = "create")
+
+            #bodytag ("Component" "template='content-editor.vm'" "theme='custom'")
+                #param ("formName" "$formName")
+                #param ("formAction" "$formAction")
+                #param ("contentType" "template")
+                #param ("useContentPermissions" false)
+                #param ("useDatePicker" false)
+                #param ("mode" $editMode)
+                #param ("labelsString" $action.getLabelsString())
+                #param ("saveDrafts" "false")
+                #param ("shouldResize" "true")
+                #param ("fullscreen" "false")
+                #param ("autoStart" "true")
+                #param ("pageId" $action.entityId)
+                #param ("isTitleReadOnly", "true")
+            #end
+        </body>
+    #end
+
+    <fieldset class="create-content-template-fields" style="display: none">
+        ## System templates
+        <input type="hidden" name="pluginKey" value="$!pluginKey">
+        <input type="hidden" name="moduleKey" value="$!moduleKey">
+        <input type="hidden" name="referencingPluginKey" value="$!referencingPluginKey">
+        <input type="hidden" name="referencingModuleKey" value="$!referencingModuleKey">
+        ## Blueprints
+        <input type="hidden" name="contentTemplateRefId" value="$!contentTemplateRefId"> ## null if system templates
+        ## Both
+        <input type="hidden" name="pageTemplateVersion" value="$!pageTemplateVersion">
+    </fieldset>
+
+    ## needs to be outside of the applyDecorator macro so that this tag bubbles up to main.vmd
+    <content tag="bodyClass">contenteditor edit</content>
+
+</html>

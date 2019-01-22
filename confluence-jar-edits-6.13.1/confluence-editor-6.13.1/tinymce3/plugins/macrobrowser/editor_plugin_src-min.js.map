@@ -1,0 +1,8 @@
+{
+"version":3,
+"file":"/dummy-file-path",
+"lineCount":2,
+"mappings":"AAGAA,MAAA,iFAEG,QAAA,CACCC,CADD,cAOYC,QAAAA,CAASC,CAATD,EAEHC,CAAAC,OAAAC,IAAA,CAAc,QAAA,GACVF,CAAAG,WAAA,uBAAqCL,CAAAM,WAAAC,aAAAC,iCAArC,CADU,CAAd,CAFGP,CAPZ,SAeeQ,QAAAA,8GAKQT,CAAAU,aALRD,KAKqCT,CAAAW,aALrCF,EAff,EAFH,CA4BAG;OAAA,8BAAAC,YAAA,qEAC0F,QAAA,CAASC,CAAT,MAC1Ed,EAAUY,OAAA,WAEdZ,EAAAe,OAAA,0CAAyDD,CAAzD,CAGAd,EAAAgB,cAAAZ,IAAA,0BAAoDJ,CAAAiB,QAAAC,uBAApD,CAN8E,CAD1F;",
+"sources":["input.js"],
+"names":["define","tinymce","init","ed","onInit","add","addCommand","confluence","macrobrowser","macroBrowserToolbarButtonClicked","getInfo","majorVersion","minorVersion","require","safeRequire","ConfluenceMacroBrowserPlugin","create","PluginManager","plugins","ConfluenceMacroBrowser"]
+}

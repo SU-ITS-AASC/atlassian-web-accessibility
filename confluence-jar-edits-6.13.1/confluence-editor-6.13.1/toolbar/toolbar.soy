@@ -1,0 +1,15 @@
+{namespace Confluence.Templates.Editor.Toolbar}
+
+/**
+ * A template for a button in editor toolbar
+ * This button will be inserted inside a button group.
+ * @param button settings of button
+ */
+{template .toolbarButton}
+    <li id="{$button.id}" class="toolbar-item {$button.className}" data-tooltip="{$button.tooltip}" data-weight="{$button.weight}">
+        <a class="toolbar-trigger aui-button aui-button-subtle" href="#" data-control-id="{$button.id}">
+            <span class="icon {$button.icon}"></span>
+            <span class="trigger-text">{$button.title}</span>
+        </a>
+    </li>
+{/template}

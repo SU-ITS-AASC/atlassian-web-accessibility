@@ -1,0 +1,28 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>$action.getText("tinymce.charmap_dlg.title")</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    $webResourceHelper.getResourceTags("com.atlassian.confluence.editor:charmap-resources")
+	<base target="_self" />
+</head>
+<body id="charmap" class="popup-window">
+    <table id="charmap-picker">
+        <tr>
+            <td id="charmap-view">
+                <!-- Chars will be rendered here -->
+            </td>
+            <td id="charmap-info">
+                <table>
+                    <tr>
+                        <td id="code-value">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td id="code-name">&nbsp;</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

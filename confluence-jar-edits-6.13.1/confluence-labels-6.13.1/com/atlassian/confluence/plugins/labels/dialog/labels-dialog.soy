@@ -1,0 +1,75 @@
+{namespace Confluence.Templates.Labels}
+
+/**
+ * A template for a dialog help link
+ */
+{template .helpLink}
+    {call Confluence.Templates.Dialog.helpLink}
+        {param href: docLink('help.edit.labels') /}
+    {/call}
+{/template}
+
+/**
+ * Template for Labels dialog
+ */
+{template .dialog}
+    <div id="labels-dialog">
+        <form id="add-labels-form" method="GET" action="" class="aui">
+            <div id="label-operation-error-container">
+                <div id="label-operation-error-message" class="error-message" ></div>
+            </div>
+
+            <div id="label-input-fields">
+                <input id="labels-string" autocomplete="off" name="labels-string" value="labels-string" class="text">
+                <input id="add-labels-editor-button" type="submit" class="add-labels aui-button" value="{getText('add.word')}">
+            </div>
+            <div id="labels-autocomplete-list" class="aui-dd-parent resize-to-input"></div>
+            <div id="dialog-label-list" class="labels-section-content">
+            <!-- DIV placeholder for labels list, is copied into in labels-dialog.js -->
+            </div>
+            <div class="labels-tip"></div>
+        </form>
+    </div>
+{/template}
+
+/**
+* Template for the 'No Labels' scenario
+*/
+{template .nolabels}
+<li class="no-labels-message">
+    {getText('labels.none')}
+</li>
+{/template}
+
+/**
+* List of labels specially for the labels dialog.
+*
+* This is being migrated from labels-list.vm.  Changes to this should be replicated in labels-list.vm for now.
+*
+* @param labels Collection of labels.
+*/
+{template .dialogLabelList}
+    <ul class="label-list editable">
+        {call .dialogLabels data="all"/}
+    </ul>
+{/template}
+
+/**
+ * Just the list of labels. Basically a duplicate of Confluence.Templates.Labels.labels from labels-server.soy.
+ *
+ * @param labels
+ * @param? editable
+ */
+{template .dialogLabels}
+    {foreach $label in $labels}
+        <li class="aui-label {if $editable}aui-label-closeable aui-label-split{/if}" data-label-id="{$label.id}">
+            <a class="aui-label-split-main" href="{contextPath()}{$label.link}" rel="tag">{if (not $label.prefix) or $label.prefix == 'global' or $label.prefix == 'team'}{$label.name}{else}{$label.prefix}:{$label.name}{/if}</a>
+            {if $editable}
+            <span class="aui-label-split-close">
+                <span tabindex="0" class="aui-icon aui-icon-close"  title="{getText('remove.label')}" original-title="{getText('remove.label')}">{getText('remove.label')}
+                </span>
+            </span>
+            {/if}
+        </li>
+    {/foreach}
+{/template}

@@ -1,0 +1,3 @@
+#* @implicitly included *#
+#* @vtlmacrolibrary path="../../../../../../confluence-core/confluence-webapp/src/main/webapp/template/includes/macros.vm" *#
+#* @velocityproperties path="../../../../../../confluence-core/confluence-webapp/src/main/resources/velocity.properties" *#

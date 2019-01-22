@@ -1,0 +1,227 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.atlassian.confluence.plugins</groupId>
+        <artifactId>confluence-editor-plugins</artifactId>
+        <version>6.13.1</version>
+    </parent>
+
+    <groupId>com.atlassian.confluence.plugins</groupId>
+    <artifactId>confluence-editor</artifactId>
+    <packaging>atlassian-plugin</packaging>
+
+    <name>TinyMCE Editor Plugin  </name>
+    <description>TinyMCE Editor Plugin for Confluence</description>
+    <url>http://confluence.atlassian.com/display/CONFEXT/TinyMCE+Plugin</url>
+
+    <dependencies>
+	    <dependency>
+            <groupId>com.atlassian.confluence</groupId>
+            <artifactId>confluence</artifactId>
+            <scope>provided</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>asm</groupId>
+                    <artifactId>asm</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.atlassian.plugins.rest</groupId>
+            <artifactId>atlassian-rest-common</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.atlassian.image</groupId>
+            <artifactId>atlassian-image-consumer</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.atlassian.plugins.rest</groupId>
+            <artifactId>com.atlassian.jersey-library</artifactId>
+            <type>pom</type>
+            <scope>provided</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>asm</groupId>
+                    <artifactId>asm</artifactId>
+                </exclusion>
+            </exclusions>
+
+        </dependency>
+        <!-- End of REST dependencies -->
+
+        <dependency>
+            <groupId>com.atlassian.sal</groupId>
+            <artifactId>sal-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.atlassian.confluence.plugins</groupId>
+            <artifactId>confluence-api</artifactId>
+            <version>${project.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Needed for markdown parsing. -->
+        <dependency>
+            <groupId>com.sangupta</groupId>
+            <artifactId>nutz</artifactId>
+            <version>0.6.1-atlassian</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <!-- End markdown parsing. -->
+
+        <!-- Needed for cleaning up the html text -->
+        <dependency>
+            <groupId>org.jsoup</groupId>
+            <artifactId>jsoup</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Needed for Qualifier annotations -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-beans</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.atlassian.analytics</groupId>
+            <artifactId>analytics-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <properties>
+        <atlassian.plugin.key>com.atlassian.confluence.editor</atlassian.plugin.key>
+        <confluence.version>${project.version}</confluence.version>
+        <atlassian.product.version>${project.version}</atlassian.product.version>
+    </properties>
+
+    <build>
+        <resources>
+            <!-- This filtering strategy is intentionally weird to trick the IDEA plugin into including the directory in the classpath -->
+            <resource>
+                <directory>src/main/resources</directory>
+                <excludes>
+                    <exclude>atlassian-plugin.xml</exclude>
+                </excludes>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+                <includes>
+                    <include>atlassian-plugin.xml</include>
+                </includes>
+            </resource>
+        </resources>
+        <plugins>
+            <plugin>
+                <groupId>com.atlassian.maven.plugins</groupId>
+                <artifactId>maven-confluence-plugin</artifactId>
+                <version>${amps.plugin.version}</version>
+                <configuration>
+                    <skipAllPrompts>true</skipAllPrompts>
+                    <extractDependencies>false</extractDependencies>
+                    <productVersion>${project.version}</productVersion>
+                    <productDataVersion>3.1</productDataVersion>
+                    <instructions>
+                        <!--
+                        Version of velocity here should be strictly bound to exactly correspond
+                        to be exactly same version as provided by confluence.
+                        Done so to avoid LinkageError.
+                        -->
+                        <Import-Package>
+                            org.apache.velocity.context;version="[${velocity.osgi.bound.version},${velocity.osgi.bound.version}]",
+                            *;resolution:=optional
+                        </Import-Package>
+                        <Private-Package />
+                        <Export-Package>
+                            com.atlassian.confluence.tinymceplugin.rest.entities.*,
+                            com.atlassian.confluence.tinymceplugin.service,
+                            com.atlassian.confluence.tinymceplugin.conditions
+                        </Export-Package>
+                    </instructions>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>process-resources</id>
+                        <goals>
+                            <goal>generate-manifest</goal>
+                            <goal>copy-bundled-dependencies</goal>
+                        </goals>
+                        <phase>process-classes</phase>
+                    </execution>
+                    <execution>
+                        <id>prepare-package</id>
+                        <goals>
+                            <goal>validate-manifest</goal>
+                        </goals>
+                        <phase>prepare-package</phase>
+                    </execution>
+                    <execution>
+                        <id>package</id>
+                        <goals>
+                            <goal>generate-obr-artifact</goal>
+                            <goal>jar</goal>
+                        </goals>
+                        <phase>package</phase>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.twdata.maven</groupId>
+                <artifactId>maven-cli-plugin</artifactId>
+                <configuration>
+                    <commands>
+                        <pi>clean resources compile jar com.atlassian.maven.plugins:atlassian-pdk:install</pi>
+                        <pu>com.atlassian.maven.plugins:atlassian-pdk:uninstall</pu>
+                    </commands>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <excludes>
+                        <exclude>it/**</exclude>
+                        <exclude>**/*$*</exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>com.atlassian.lesscss</groupId>
+                <artifactId>lesscss-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+</project>

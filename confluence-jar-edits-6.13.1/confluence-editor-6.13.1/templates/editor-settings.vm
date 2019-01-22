@@ -1,0 +1,10 @@
+##editor-settings.vm variables from EditorSettingsContextProvider.java
+#if ($dynamicLoading == "true")
+	#foreach ($setting in $settings)
+	    #renderMetadatum($setting.key, "$setting.value")
+	#end
+#else
+	#foreach ($setting in $settings)
+	    #putMetadata($setting.key, $setting.value)
+	#end
+#end

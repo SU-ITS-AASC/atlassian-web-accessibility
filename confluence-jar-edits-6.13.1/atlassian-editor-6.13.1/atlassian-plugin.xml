@@ -1,0 +1,89 @@
+<atlassian-plugin key="com.atlassian.plugins.editor" name="Atlassian Editor Plugin" plugins-version="2">
+    <plugin-info>
+        <param name="atlassian-data-center-compatible">true</param>
+        <description>Atlassian Editor Plugin</description>
+        <version>6.13.1</version>
+        <vendor name="Atlassian" url="http://confluence.atlassian.com/display/CONFEXT/TinyMCE+Plugin"/>
+    </plugin-info>
+
+    <resource name="i18n" type="i18n" location="com/atlassian/plugins/editor/i18n"/>
+    <!-- Renders an editor -->
+    <web-panel key="editor-panel" location="atl.editor">
+        <resource name="view" type="confluence-velocity" location="templates/atlassian-editor.vm"/>
+    </web-panel>
+
+    <web-resource key="sections" name="Editor Sections">
+        <resource name="editor-savebar-soy.js" type="download" location="templates/editor-savebar.soy"/>
+        <dependency>com.atlassian.soy.soy-template-plugin:soy-deps</dependency>
+    </web-resource>
+
+    <web-resource key="components" name="Editor Components">
+        <resource name="color-picker.js" type="download" location="templates/color-picker.soy"/>
+        <resource name="editor-precursor-soy.js" type="download" location="templates/editor-precursor.soy"/>
+        <resource name="editor-quit-dialog.soy" type="download" location="templates/editor-quit-dialog.soy"/>
+        <dependency>confluence.web.resources:shared-templates</dependency>
+        <dependency>com.atlassian.soy.soy-template-plugin:soy-deps</dependency>
+    </web-resource>
+
+    <web-resource key="atlassian-rte-javascript" name="Atlassian Editor Javascript Resources">
+        <dependency>com.atlassian.plugins.tinymce:atlassian-rte-javascript-tinymce-core</dependency>
+        <dependency>com.atlassian.plugins.tinymce:atlassian-rte-javascript-tinymce-extensions</dependency>
+    </web-resource>
+
+    <web-resource key="atlassian-rte-css" name="Atlassian Editor CSS Resources">
+        <transformation extension="less">
+            <transformer key="less-transformer"/>
+        </transformation>
+        <resource name="tinyMce-plugins-table.css" type="download" location="css/table-dialog.css"/>
+        <resource name="editor.css" type="download" location="css/page-editor.less"/>
+        <resource name="editor-toolbar.css" type="download" location="css/editor-toolbar.less"/>
+        <resource name="editor-toolbar-split-buttons.css" type="download"
+                  location="css/editor-toolbar-split-buttons.less"/>
+        <resource name="editor-ie.css" type="download" location="css/page-editor-ie.css">
+            <param name="conditionalComment" value="lt IE 9"/>
+        </resource>
+        <resource name="tinymce-editor.css" type="download" location="css/tinymce-editor.css"/>
+        <resource name="insert-wiki-markup.css" type="download" location="css/insert-wiki-markup.css"/>
+        <resource name="page-editor-icons.css" type="download" location="css/page-editor-icons.css"/>
+        <resource name="toolbar-icons.css" type="download" location="css/toolbar-icons.css"/>
+        <dependency>com.atlassian.soy.soy-template-plugin:soy-deps</dependency>
+        <context>editor-v4</context>
+    </web-resource>
+
+    <web-resource key="atlassian-rte-resources" name="Atlassian Editor Resources">
+        <dependency>com.atlassian.plugins.editor:atlassian-rte-javascript</dependency>
+        <dependency>com.atlassian.plugins.editor:atlassian-rte-css</dependency>
+        <dependency>com.atlassian.auiplugin:ajs</dependency>
+        <dependency>com.atlassian.auiplugin:aui-flag</dependency>
+        <dependency>confluence.web.resources:meta</dependency>
+        <dependency>confluence.aui.staging:dark-features</dependency>
+        <dependency>confluence.aui.staging:storage-manager</dependency>
+        <dependency>confluence.aui.staging:persistable</dependency>
+        <dependency>com.atlassian.auiplugin:aui-experimental-soy-templates</dependency>
+        <dependency>com.atlassian.auiplugin:aui-inline-dialog2</dependency>
+
+        <!-- Ideally we can remove this dependency altogether -->
+        <dependency>confluence.web.resources:ajs</dependency>
+        <dependency>confluence.web.resources:aui-experimental</dependency>
+        <dependency>confluence.web.resources:date-picker</dependency>
+        <context>editor-v3</context>
+    </web-resource>
+
+    <xwork name="Atlassian Editor Actions" key="editoractions">
+        <description>Xwork actions for TinyMCE link and image editing.</description>
+
+        <package name="editor" extends="default" namespace="/plugins/editor/tinymce">
+            <default-interceptor-ref name="validatingStack"/>
+
+            <action name="emotions" class="com.atlassian.plugins.editor.actions.TinyMceEmotionsAction">
+                <result name="success" type="velocity">/templates/emotions.vm</result>
+            </action>
+
+            <action name="charmap" class="com.atlassian.confluence.core.ConfluenceActionSupport">
+                <result name="success" type="velocity">/templates/charmap.vm</result>
+            </action>
+
+        </package>
+    </xwork>
+
+</atlassian-plugin>

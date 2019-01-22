@@ -1,0 +1,39 @@
+{namespace Confluence.Templates.KeyboardShortcutsDialog}
+
+/**
+ * Template for a single dialog module
+ * @param title the title of the dialog module
+ */
+{template .keyboardShortcutModule}
+    <div class="module">
+        <div class="mod-header">
+            <h3>{$title}</h3>
+        </div>
+        <div class="mod-content">
+            <ul class="mod-item">
+            </ul>
+        </div>
+    </div>
+{/template}
+
+/**
+ * Template for the checkbox to enabled and disable keyboard shortcuts
+ */
+{template .keyboardShortcutEnabledCheckbox}
+    <form name="shortcut-settings" id="shortcut-settings-form">
+        <input type="checkbox" name="enabled" id="keyboard-shortcut-enabled-checkbox">
+        <label for="keyboard-shortcut-enabled-checkbox">{getText('keyboard.shortcuts.dialog.enable.shortcuts.label')}</label>
+    </form>
+{/template}
+
+/**
+ * Template for a panel on the keyboard shortcuts dialog
+ * @param panelId the panel's id
+ */
+{template .keyboardShortcutPanel}
+    <div id={$panelId}>
+        <div class="keyboard-shortcut-dialog-panel-header"></div>
+        <div class="shortcutsmenu"></div>
+        <div class="keyboard-shortcut-dialog-panel-footer"></div>
+    </div>
+{/template}

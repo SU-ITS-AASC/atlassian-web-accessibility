@@ -1,0 +1,53 @@
+{namespace Confluence.Templates.File}
+
+/**
+ * Attach file form
+ * @param isNonSupportDragDrop
+ * @param atlToken the XSRF token to send with the form
+ * @param hasAttachPermission
+ */
+{template .uploadFileForm}
+    {if $hasAttachPermission}
+        <div id="upload-attachment">
+            {if $isNonSupportDragDrop}
+                <form action="{contextPath()}/pages/attachfile.action" method="post" enctype="multipart/form-data">
+            {else}
+                <form>
+            {/if}
+
+            <label id="upload-files-button" class="aui-button upload-files">
+                <span class="file-upload-icon">
+                {getText('attach.files.upload.files')}
+                </span>&nbsp;&nbsp;{getText('attach.files.upload.files')}
+                {if $isNonSupportDragDrop}<input name="file_0" type="file" class="upfile invisible">{/if}
+            </label>
+
+            {if $isNonSupportDragDrop}
+                <input type="hidden" name="minorEdit_0" value="true" />
+                <input type="hidden" name="atl_token" value="{$atlToken}" />
+            {/if}
+            </form>
+
+            {if $isNonSupportDragDrop}
+                <div class="upload-in-progress hidden">{getText('image.browser.upload.image.uploading')}</div>
+            {/if}
+        </div>
+    {/if}
+
+    {if $hasAttachPermission}<div class="divider"></div>{/if}
+{/template}
+
+/**
+ * The attached images panel for the image dialog.
+ */
+{template .attachedFilesPanel}
+    <div id="attached-files" class="scroll-wrapper">
+        {call aui.message.warning}
+            {param title: '' /}
+            {param closeable: 'true' /}
+            {param content}{/param}
+        {/call}
+        <div class="loading-message hidden">{getText('image.browser.loading')}</div>
+        <ul class="file-list"></ul>
+    </div>
+{/template}

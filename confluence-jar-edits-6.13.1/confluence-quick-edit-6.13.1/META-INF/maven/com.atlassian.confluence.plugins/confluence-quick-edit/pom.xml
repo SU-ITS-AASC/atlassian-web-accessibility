@@ -1,0 +1,137 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.atlassian.confluence.plugins</groupId>
+        <artifactId>confluence-editor-plugins</artifactId>
+        <version>6.13.1</version>
+    </parent>
+
+    <artifactId>confluence-quick-edit</artifactId>
+    <name>Quick Comment Plugin</name>
+    <description>Atlassian Confluence plugin providing quick commenting functionality</description>
+    <packaging>atlassian-plugin</packaging>
+
+    <properties>
+        <atlassian.plugin.key>com.atlassian.plugins.editor</atlassian.plugin.key>
+        <confluence.version>${project.version}</confluence.version>
+        <atlassian.product.version>${project.version}</atlassian.product.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.atlassian.confluence</groupId>
+            <artifactId>confluence</artifactId>
+        </dependency>
+        <!-- REST dependencies -->
+        <dependency>
+            <groupId>javax.ws.rs</groupId>
+            <artifactId>jsr311-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.atlassian.plugins.rest</groupId>
+            <artifactId>atlassian-rest-common</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.atlassian.plugins.rest</groupId>
+            <artifactId>com.atlassian.jersey-library</artifactId>
+            <type>pom</type>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <resources>
+            <!-- This filtering strategy is intentionally weird to trick the IDEA plugin into including the directory in the classpath -->
+            <resource>
+                <directory>src/main/resources</directory>
+                <excludes>
+                    <exclude>atlassian-plugin.xml</exclude>
+                    <exclude>**/*.gif</exclude>
+                    <exclude>**/*.png</exclude>
+                </excludes>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+                <includes>
+                    <include>atlassian-plugin.xml</include>
+                    <include>**/*.gif</include>
+                    <include>**/*.png</include>
+                </includes>
+            </resource>
+        </resources>
+        <plugins>
+            <plugin>
+                <groupId>com.atlassian.lesscss</groupId>
+                <artifactId>lesscss-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.twdata.maven</groupId>
+                <artifactId>maven-cli-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <!-- bundle dependencies in plugin JAR -->
+                <groupId>com.atlassian.maven.plugins</groupId>
+                <artifactId>maven-confluence-plugin</artifactId>
+                <version>${amps.plugin.version}</version>
+                <configuration>
+                    <skipAllPrompts>true</skipAllPrompts>
+                    <extractDependencies>false</extractDependencies>
+                    <productVersion>${confluence.version}</productVersion>
+                    <productDataVersion>${confluence.data.version}</productDataVersion>
+                    <!-- Don't worry about this stuff. With the packaging type of jar it will do nothing, except stop
+                         this plugin from moaning during the build. -->
+                    <instructions>
+                        <Export-Package>
+                            *;resolution:=optional
+                        </Export-Package>
+                        <Private-Package />
+                        <Import-Package>
+                            com.atlassian.confluence.plugins.quickcomment*;version="0.0.0",
+                            css;version="0.0.0",
+                            jscripts;version="0.0.0",
+                            soy;version="0.0.0",
+                            templates;version="0.0.0",
+                            com.atlassian.confluence.*;version="4.3",
+                            com.atlassian.renderer;version="6.2.7",
+                            javax.ws.rs;version="${jax-rs.atlassian-rest.osgi.version}",
+                            com.atlassian.user;version="3.0",
+                            org.slf4j;version="1.6.4",
+                            com.atlassian.plugins.rest.common.security;version="2.6.2.1",
+                            javax.xml.stream;version="0.0.0",
+                            net.jcip.annotations;version="1.0",
+                            javax.xml.bind.annotation;version="2.1",
+                            com.atlassian.plugin.web*;version="2.13.0-m2",
+                            javax.servlet.http;version="3.0",
+                            javax.ws.rs.core;version="${jax-rs.atlassian-rest.osgi.version}"
+                        </Import-Package>
+                    </instructions>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <excludes>
+                        <exclude>it/**</exclude>
+                        <exclude>**/*$*</exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+    <profiles>
+         <profile>
+            <id>default</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <maven.yuicompressor.skip>true</maven.yuicompressor.skip>
+            </properties>
+        </profile>
+    </profiles>
+</project>

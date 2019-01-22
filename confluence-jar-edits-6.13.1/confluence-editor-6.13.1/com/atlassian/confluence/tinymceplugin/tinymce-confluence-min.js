@@ -1,0 +1,1 @@
+tinymce.confluence=tinymce.confluence||{};

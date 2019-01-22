@@ -1,0 +1,46 @@
+#content-blueprint-templates table > tbody > tr > td.template-operations,
+#space-blueprints-admin table > tbody > tr > td.template-operations,
+#system-templates table > tbody > tr > td.template-operations {
+  width: 1%;
+  white-space: nowrap;
+  text-align: right;
+}
+#content-blueprint-templates table > thead > tr > th.web-item-operations,
+#space-blueprints-admin table > thead > tr > th.web-item-operations,
+#system-templates table > thead > tr > th.web-item-operations {
+  white-space: nowrap;
+}
+#content-blueprint-templates .web-item-operations,
+#space-blueprints-admin .web-item-operations,
+#system-templates .web-item-operations {
+  font-weight: normal;
+}
+#content-blueprint-templates .web-item-module.disabled td,
+#space-blueprints-admin .web-item-module.disabled td,
+#system-templates .web-item-module.disabled td,
+#content-blueprint-templates .web-item-module.disabled th,
+#space-blueprints-admin .web-item-module.disabled th,
+#system-templates .web-item-module.disabled th,
+#content-blueprint-templates .web-item-module.disabled .promoted-state-toggle-trigger,
+#space-blueprints-admin .web-item-module.disabled .promoted-state-toggle-trigger,
+#system-templates .web-item-module.disabled .promoted-state-toggle-trigger {
+  color: #999;
+}
+#content-blueprint-templates .web-item-module.disabled .web-item-operations-divider,
+#space-blueprints-admin .web-item-module.disabled .web-item-operations-divider,
+#system-templates .web-item-module.disabled .web-item-operations-divider {
+  color: #3b73af;
+}
+#content-blueprint-templates .additional-blueprints-links,
+#space-blueprints-admin .additional-blueprints-links,
+#system-templates .additional-blueprints-links {
+  margin-top: 10px;
+}
+#content-blueprint-templates.templates-section,
+#space-blueprints-admin.templates-section,
+#system-templates.templates-section {
+  margin: 20px 0px;
+}
+table.aui > tbody > tr > td {
+  vertical-align: middle;
+}

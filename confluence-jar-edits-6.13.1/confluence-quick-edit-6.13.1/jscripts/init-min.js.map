@@ -1,0 +1,8 @@
+{
+"version":3,
+"file":"/dummy-file-path",
+"lineCount":2,
+"mappings":"AAGAA,MAAA,wDAIG,QAAA,CACCC,CADD,CAECC,CAFD,CAGCC,CAHD,QAUYC,SAAAA,GAEuBF,CAAA,QAAAG,SAAAC,eAFvBF,CAkBHH,CAAAM,MAAA,4CAlBGH,CAYHF,CAAA,CAAEC,CAAF,CAAAK,KAAA,CAAe,QAAA,GACXP,CAAAM,MAAA,sEACAN,EAAAQ,WAAAC,aAAAF,KAAA,EAFW,CAAf,CASJP,EAAAQ,WAAAE,UAAAC,eAAA,EACAX,EAAAY,QAAA,kCAtBOT,CAVZ,CAJH,CA0CAU;OAAA,8BAAAC,YAAA,8BAAgF,QAAA,CAASC,CAAT,MACxEf,EAAMa,OAAA,OAGNb,EAAAgB,aAAAC,UAAA,sBAJwE,CAKxEjB,CAAAkB,IAAA,qFALwE,CAQxElB,CAAAmB,OAAA,CAAWJ,CAAX,CARwE,CAAhF;",
+"sources":["input.js"],
+"names":["define","AJS","$","window","init","hasClass","preloadEditorResources","debug","load","Confluence","EditorLoader","QuickEdit","enableHandlers","trigger","require","safeRequire","Init","DarkFeatures","isEnabled","log","toInit"]
+}

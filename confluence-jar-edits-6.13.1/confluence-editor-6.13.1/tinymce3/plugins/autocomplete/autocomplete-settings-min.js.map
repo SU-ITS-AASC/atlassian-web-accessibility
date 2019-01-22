@@ -1,0 +1,8 @@
+{
+"version":3,
+"file":"/dummy-file-path",
+"lineCount":1,
+"mappings":"AAGAA,MAAA,iFAEG,QAAA,CACCC,CADD,yBAiBWC,QAAAA,CAAUC,CAAVD,QACK,SAAA,CAAUE,CAAV,CAAkBC,CAAlB,CAAwBC,CAAxB,MAECC,QAAYD,CAAZC,mBAAkCD,EAEtCL,EAAAO,MAAA,CAAUL,CAAV,OAA0BC,CAA1B,QAA4CC,CAA5C,eADaC,CACb,CAD4BC,CAC5B,OADgDD,CAChD,UACAA,EALG,GAKKC,CALL,EAKiBN,CAAAO,MAAA,CAAUF,CAAV,CALjB,CADLJ,CAjBX,EAFH,CA+BAO,QAAA,8BAAAC,qBAAA;",
+"sources":["input.js"],
+"names":["define","AJS","log","owner","caller","desc","obj","objIsStr","debug","require","exportModuleAsGlobal"]
+}

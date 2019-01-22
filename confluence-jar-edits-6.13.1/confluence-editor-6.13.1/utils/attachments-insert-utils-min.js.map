@@ -1,0 +1,8 @@
+{
+"version":3,
+"file":"/dummy-file-path",
+"lineCount":2,
+"mappings":"AAGAA,MAAA,8FAKA,QAAA,CACIC,CADJ,CAEIC,CAFJ,CAGIC,CAHJ,+BAQ+BC,QAAAA,CAAUC,CAAVD,CAAkBE,CAAlBF,CAAgCG,CAAhCH,MACfI,EAAUC,OAAA,WAKdJ,EAAAK,OANmBN,aAMFF,CAAAS,IAAA,gBANEP,YASfC,EAAAO,QATeR,EASGC,CAAAO,QATHR,GASsBF,CAAAS,IAAA,cATtBP,UAURC,CAAAQ,KAVQT,QAWRC,CAAAS,MAXQV,QAYRC,CAAAU,KAZQX,CAenBC,EAfmBD,CAeVH,CAAAe,KAAA,CAAOf,CAAAgB,KAAA,CAAOZ,CAAP,uCAAP,CAAkE,QAAA,CAAUa,CAAV,SAC/DA,CAD+D,CAAlE,CAILC,EAnBef,YAoBJF,CAAAS,IAAA,cApBIP,qCAuBHC,CAvBGD,EA2BLI,EAAAY,WAAAC,WAAAC,YAAAC,CAA0CJ,CAA1CI;AAAiDjB,CAAjDiB,CACdC,KAAA,CAAa,QAAA,CAAUC,CAAV,EACLlB,CADK,EAELJ,CAAA,CAAEsB,CAAF,CAAAC,MAAA,EAFK,CAAb,CA5BmBtB,CAR/B,EALA,CAkDAK,QAAA,8BAAAkB,YAAA;",
+"sources":["input.js"],
+"names":["define","_","Meta","$","insertFilePlaceholder","params","replacedNode","showPropertiesPanelAfterInsert","tinymce","require","height","get","ownerId","page","space","date","omit","pick","value","macro","confluence","MacroUtils","insertMacro","promise","done","macroNode","click","safeRequire"]
+}

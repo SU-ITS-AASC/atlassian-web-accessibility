@@ -1,0 +1,31 @@
+#create-dialog .wait-container {
+  display: none;
+}
+#create-dialog .loading .wait-container {
+  text-align: center;
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  display: block;
+}
+#create-dialog .loadable {
+  display: block;
+}
+#create-dialog .loading > .loadable {
+  display: none;
+}
+#create-dialog h2.dialog-title {
+  line-height: 25px;
+}
+#create-dialog h2.dialog-title .dialog-help-link {
+  margin-top: 2px;
+}
+#create-dialog .dom-filter-field-form {
+  margin-right: 10px;
+}
+#create-dialog .aui-button {
+  margin-right: 10px;
+}
+#create-dialog .aui-button.aui-button-primary {
+  margin-left: 0;
+}

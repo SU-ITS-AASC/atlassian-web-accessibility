@@ -1,0 +1,8 @@
+{
+"version":3,
+"file":"/dummy-file-path",
+"lineCount":2,
+"mappings":"AAKAA,MAAA,4KAGG,QAAA,CACCC,CADD,CAECC,CAFD,cAOYC,QAAAA,GACHD,CAAA,EADGC,CAPZ,SAWeC,QAAAA,yGAKQH,CAAAI,aALRD,KAKqCH,CAAAK,aALrCF,EAXf,EAHH,CAyBAG;OAAA,8BAAAC,YAAA,2EAA6H,QAAA,CAASC,CAAT,MACrHR,EAAUM,OAAA,WACdN,EAAAS,OAAA,qCAAoDD,CAApD,CACAR,EAAAU,cAAAC,IAAA,qBAA+CX,CAAAY,QAAAX,kBAA/C,CAHyH,CAA7H;",
+"sources":["input.js"],
+"names":["define","tinymce","AutoCompleteMacro","init","getInfo","majorVersion","minorVersion","require","safeRequire","AutoCompleteMacroPlugin","create","PluginManager","add","plugins"]
+}

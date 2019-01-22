@@ -1,0 +1,42 @@
+<html>
+<head>
+    <title>$htmlUtil.htmlEncode($pageTitle)</title>
+</head>
+
+#applyDecorator("root")
+    #decoratorParam("context" "profile")
+    #decoratorParam("mode"  "my-labels")
+    #decoratorParam("helper" $action.helper)
+    #decoratorParam("help-path" "/com/atlassian/confluence/plugins/labels/components/my-labels-help.vm")
+    #decoratorParam("infopanel-width" "200px")
+
+   <body>
+   <div style="float: right; margin-top: 12px; margin-right: 12px;">
+       <a href="$req.contextPath/spaces/createrssfeed.action?types=page&amp;types=blogpost&amp;types=mail&amp;types=comment&amp;types=attachment&amp;sort=modified&amp;spaces=&amp;labelString=favourite+favorite&amp;rssType=rss2&amp;maxResults=10&amp;timeSpan=5&amp;publicFeed=false&amp;title=Personal+Labels+RSS+Feed" title="Personal Labels RSS Feed"><img src="$staticResourceUrlPrefix/images/icons/rss20.gif" height="15" width="80"></a>
+   </div>
+
+    <p>$action.getText("user.profile.mylabels.blurb")</p>
+
+    <div class="view-my-labels">
+
+        <div class="your-labels">
+            <h2 class="tabletitle">$action.getText('your.labels')</h2>
+            <ul>
+                #foreach ($label in $myLabels)
+                    <li><a href="${req.contextPath}/users/viewmylabels.action?labelId=$label.id">$label.name</a> <span class="smalltext">$action.getContentCount($label)</span></li>
+                #end
+            </ul>
+        </div>
+
+        <div class="all-labelled-content">
+            #bodytag ("Component" "template='general-pagelist.vm'")
+                #param ("mytitle" "#if($currentLabel)$action.getText('labbelled.content.with') &quot;$!currentLabel.name&quot; #else $action.getText('all.labelled.content')#end")
+                #param ("pages" "paginationSupport.page")
+            #end
+            #pagination($action.paginationSupport "${req.contextPath}/users/viewmylabels.action?labelId=$currentLabel.id&")
+        </div>
+
+    </div>
+</body>
+#end
+</html>
