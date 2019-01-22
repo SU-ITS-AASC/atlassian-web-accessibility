@@ -123,7 +123,8 @@
  */
 {template .title}
     <div id="content-title-div" class="{if $collaborative}collaborative{/if}">
-        <input type="text" name="title" id="content-title" tabindex="1" class="text pagetitle" autocomplete="off"
+        <label for="content-title" class="assistive">Content title</label>
+        <input type="text" name="title" id="content-title" title="Content title" tabindex="1" class="text pagetitle" autocomplete="off"
             {if $title}value="{$title}"{/if} {if $placeholder}placeholder="{$placeholder}"{/if}
             {if $disabled}disabled="disabled"{/if} {if $readonly}readonly="readonly"{/if}>
     </div>
@@ -154,7 +155,7 @@
         {let $iconClass: $item.params['iconClass'] ? $item.params['iconClass'] : '' /}
         {let $explicitRestrictions: $item.params['explicitRestrictions'] ? $item.params['explicitRestrictions'] : '' /}
         {let $inheritedRestrictions: $item.params['inheritedRestrictions'] ? $item.params['inheritedRestrictions'] : '' /}
-        <button class="aui-button aui-button-subtle {$buttonId}" type="button" data-tooltip="{$buttonLabel}" id="{$buttonId}"
+        <button class="aui-button aui-button-subtle {$buttonId}" type="button" aria-label="{$buttonLabel}" data-tooltip="{$buttonLabel}" id="{$buttonId}"
                 data-explicit-restrictions="{$explicitRestrictions}" data-inherited-restrictions="{$inheritedRestrictions}">
             <span class="icon{if $iconClass} aui-icon aui-icon-small {$iconClass}{/if}"></span>
         </button>

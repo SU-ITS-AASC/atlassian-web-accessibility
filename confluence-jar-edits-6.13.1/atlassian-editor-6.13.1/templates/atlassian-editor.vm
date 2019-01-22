@@ -38,7 +38,7 @@ Optional Context Parameters:
 
 #macro (toolbarIconButton $control $title $tooltip $iconfont)
 <li class="toolbar-item aui-button aui-button-subtle" id="rte-button-${control}" #if($tooltip) data-tooltip="$!tooltip"#end>
-    <a class="toolbar-trigger" href="#" data-control-id="$control">
+    <a class="toolbar-trigger" href="#" data-control-id="$control" aria-label="${control}">
         #iconSpan($iconfont, $title, "")
     </a>
 </li>
@@ -485,10 +485,12 @@ Optional Context Parameters:
 
 <div id="wysiwyg">
     <div id="rte" class="cell $editorClass $collaborativeClass">
-        <textarea id="wysiwygTextarea" name="$textareaName" class="hidden tinymce-editor">$!content</textarea>
+        <label for="wysiwygTextarea" class="assistive">WYSIWYG Text Editor</label>
+        <textarea id="wysiwygTextarea" name="$textareaName" title="WYSIWYG Text Editor" class="hidden tinymce-editor">$!content</textarea>
     </div>
 </div>
 <div id="editor-html-source-container" class="hidden">
+    <label for="editor-html-source" class="assistive">HTML Source Editor</textarea>
     <textarea id="editor-html-source" class="monospaceInput"></textarea>
 </div>
 

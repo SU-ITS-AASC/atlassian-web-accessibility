@@ -1,6 +1,0 @@
-#atlassian-editor_container,#content,body,form,html,iframe{height:100%;min-height:100%;width:100%}
-*{box-sizing:border-box}
-body,html{padding:0;margin:0;background:#fff}
-#content{padding:50px 15vw 20px}
-form{margin:0!important}
-.aui-toolbar2{z-index:1000;position:absolute;width:540px;top:0;left:0;right:0;margin-left:auto;margin-right:auto}
