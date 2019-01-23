@@ -1,0 +1,10 @@
+com.atlassian.confluence.extra.office.canary.aspose.words.WordImportCanaryExecutor
+com.benryan.components.ConverterSemaphore
+com.benryan.components.DefaultContentResolver#contentResolver
+com.benryan.components.DefaultHtmlCacheManager#htmlCacheManager
+com.benryan.components.DefaultOcSettingsManager#ocSettingsManager
+com.benryan.components.DefaultSlideCacheManager#slideCacheManager
+com.benryan.components.DefaultTemporaryAuthTokenManager#temporaryAuthTokenManager
+com.benryan.components.ImporterSemaphore
+com.benryan.quartz.CacheCleanup#cacheCleanupJob
+com.benryan.servlet.webdav.EditInWordResourceFactory#resourceBackend

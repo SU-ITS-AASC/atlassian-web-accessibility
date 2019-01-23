@@ -1,0 +1,350 @@
+<atlassian-plugin key="com.atlassian.confluence.keyboardshortcuts" name="Confluence Keyboard Shortcuts Plugin" plugins-version="2">
+    <plugin-info>
+        <param name="atlassian-data-center-compatible">true</param>
+        <description>Confluence Keyboard Shortcuts Plugin</description>
+        <version>6.14.0</version>
+        <vendor name="Atlassian"/>
+        <application-version min="3.4"/>
+    </plugin-info>
+
+    <resource type="i18n" name="i18n" location="com/atlassian/confluence/plugins/keyboardshortcuts/KeyboardShortcutsI18n" />
+    <resource name="images/" type="download" location="images/" />
+
+    <web-panel key="keyboardshortcut-flag" location="atl.header">
+        <resource name="view" type="static">
+            <![CDATA[<meta name="ajs-use-keyboard-shortcuts" content="true">]]>
+        </resource>
+        <condition class="com.atlassian.confluence.plugins.keyboardshortcuts.conditions.UseKeyboardShortcutsCondition" />
+    </web-panel>
+
+    <web-resource key="confluence-keyboard-shortcuts" name="Confluence Keyboard Shortcuts" i18n-name-key="confluence.keyboard.shortcuts.name">
+        <description>Registers Confluence shortcuts using the Atlassian Keyboard Shortcut plugin.</description>
+        <transformation extension="js">
+            <transformer key="jsI18n"/>
+        </transformation>
+        <transformation extension="soy">
+            <transformer key="soyTransformer" />
+        </transformation>
+        <resource name="confluence-keyboard-shortcuts.js" type="download" location="js/confluence-keyboard-shortcuts.js"/>
+        <resource name="shortcut-dialog.js" type="download" location="js/shortcut-dialog.js"/>
+        <resource name="keyboard-shortcuts.css" type="download" location="css/keyboard-shortcuts.css"/>
+        <resource name="key_bg.png" type="download" location="images/key_bg.png"/>
+        <resource name="shortcut-dialog-tab-autoformat.js" type="download" location="js/shortcut-dialog-tab-autoformat.js"/>
+        <resource name="shortcut-dialog-tab-autoformat-soy.js" type="download" location="templates/shortcut-dialog-tab-autoformat.soy"/>
+        <resource name="help-dialog-soy.js" type="download" location="templates/help-dialog.soy"/>
+        <dependency>confluence.web.resources:ajs</dependency>
+        <dependency>com.atlassian.plugins.shortcuts.atlassian-shortcuts-plugin:shortcuts</dependency>
+        <dependency>com.atlassian.soy.soy-template-plugin:soy-deps</dependency>
+        <context>main</context>
+        <context>admin</context>
+        <!-- This is redundant but it's important to explicitly state that editor-v4 depends on this web-resource. -->
+        <context>editor-v4</context>
+    </web-resource>
+
+    <web-resource key="confluence-tinymce-keyboard-shortcuts" name="Confluence TinyMCE Keyboard Shortcuts Resources">
+        <resource name="tinymce-plugin.js" type="download" location="js/tinymce-plugin.js"/>
+        <dependency>com.atlassian.plugins.editor:atlassian-rte-resources</dependency>
+        <context>editor-v3</context>
+        <context>editor-v4</context>
+    </web-resource>
+
+    <xwork name="Keyboard Shortcuts Actions" key="confluence-keyboard-shortcuts-action">
+        <description>Xwork actions for Confluence keyboard shortcuts</description>
+
+        <package name="keyboardshortcuts" extends="default" namespace="/plugins/keyboardshortcuts">
+            <action name="help-dialog" class="com.atlassian.confluence.core.ConfluenceActionSupport">
+                <result name="success" type="velocity">/templates/help-dialog.vm</result>
+            </action>
+        </package>
+    </xwork>
+
+    <web-item key="keyboard-shortcuts-dialog-help-menu" name="Keyboard Shortcuts Dialog" section="system.help/pages" weight="30">
+        <label key="keyboard.shortcuts.menu.item.sentence" />
+        <link linkId="keyboard-shortcuts-link" />
+        <tooltip key="keyboard.shortcuts.menu.item.tooltip" />
+
+        <condition class="com.atlassian.confluence.plugin.descriptor.web.conditions.IsConfluenceSpacesLicensedCondition"/>
+    </web-item>
+
+    <rest key="confluenceKeyboardShortcutsRest" path="/confluenceshortcuts" version="1.0"
+      description="Provides REST Resources for modifying keyboard shortcut settings"/>
+
+    <!-- Page Actions -->
+
+    <!-- TODO - CONFDEV-11214 Remove this shortcut when the header Create button goes live in 5.0 -->
+    <keyboard-shortcut key="create.page" i18n-name="admin.keyboard.shortcut.create.page" name="Create Page">
+    <order>10</order>
+        <description key="admin.keyboard.shortcut.create.page.desc">Add Page</description>
+        <shortcut>c</shortcut>
+        <operation type="followLink">#createPageLink</operation>
+        <context>viewcontent</context>
+    </keyboard-shortcut>
+
+    <keyboard-shortcut key="create.blog" i18n-name="admin.keyboard.shortcut.create.blog" name="Create Blog">
+    <order>20</order>
+        <description key="admin.keyboard.shortcut.create.blog.desc">Add Blog</description>
+        <shortcut>b</shortcut>
+        <operation type="followLink">#createBlogpostLink</operation>
+        <context>viewcontent</context>
+    </keyboard-shortcut>
+
+    <keyboard-shortcut key="edit.page" i18n-name="admin.keyboard.shortcut.edit.page" name="Edit Page">
+    <order>30</order>
+        <description key="admin.keyboard.shortcut.edit.page.desc">Edit Page</description>
+        <shortcut>e</shortcut>
+        <operation type="followLink">#editPageLink.full-load</operation>
+        <context>viewcontent</context>
+    </keyboard-shortcut>
+
+    <keyboard-shortcut key="add.comment" i18n-name="admin.keyboard.shortcut.add.comment" name="Add Comment">
+    <order>40</order>
+        <description key="admin.keyboard.shortcut.add.comment.desc">Add Comment</description>
+        <shortcut>m</shortcut>
+        <operation type="followLink">#add-comment-rte.full-load</operation>
+        <context>viewcontent</context>
+    </keyboard-shortcut>
+
+    <keyboard-shortcut key="addlabel" i18n-name="admin.keyboard.shortcut.addlabel.name" name="Add Label">
+    <order>50</order>
+        <description key="admin.keyboard.shortcut.addlabel.desc">Add Label</description>
+        <shortcut>l</shortcut>
+        <operation type="click">.view .show-labels-editor</operation>
+        <context>viewcontent</context>
+    </keyboard-shortcut>
+
+    <keyboard-shortcut key="view.attachments" i18n-name="admin.keyboard.shortcut.view.attachments" name="View Attachments">
+        <order>70</order>
+        <description key="admin.keyboard.shortcut.view.attachments.desc">View Attachments</description>
+        <shortcut>t</shortcut>
+        <operation type="followLink">#view-attachments-link</operation>
+        <context>viewcontent</context>
+    </keyboard-shortcut>
+
+    <!-- Global actions -->
+    <keyboard-shortcut key="goto.dashboard" i18n-name="admin.keyboard.shortcut.goto.dashboard" name="Goto Dashboard">
+        <order>10</order>
+        <description key="admin.keyboard.shortcut.goto.dashboard.desc">Goto Dashboard</description>
+        <shortcut>gd</shortcut>
+        <operation type="goTo">/dashboard.action</operation>
+        <context>global</context>
+
+        <condition class="com.atlassian.confluence.plugin.descriptor.web.conditions.IsConfluenceSpacesLicensedCondition"/>
+    </keyboard-shortcut>
+
+    <keyboard-shortcut key="goto.space" i18n-name="admin.keyboard.shortcut.goto.space" name="Browse Space">
+        <order>20</order>
+        <description key="admin.keyboard.shortcut.goto.space.desc">Browse Space</description>
+        <shortcut>gs</shortcut>
+        <operation type="followLink">#space-pages-link</operation>
+        <context>global</context>
+
+        <condition class="com.atlassian.confluence.plugin.descriptor.web.conditions.IsConfluenceSpacesLicensedCondition"/>
+    </keyboard-shortcut>
+
+    <keyboard-shortcut key="help" i18n-name="admin.keyboard.shortcut.help.name" name="Shortcut help">
+        <order>30</order>
+        <description key="admin.keyboard.shortcut.help.desc">Shortcut Help</description>
+        <shortcut>?</shortcut>
+        <operation type="click">#keyboard-shortcuts-link</operation>
+        <context>global</context>
+
+        <condition class="com.atlassian.confluence.plugin.descriptor.web.conditions.IsConfluenceSpacesLicensedCondition"/>
+    </keyboard-shortcut>
+
+    <!-- Same keyboard shortcut for doc and default themes -->
+    <keyboard-shortcut key="toggle.space.sidebar" i18n-name="admin.keyboard.shortcut.toggle.space.sidebar.name" name="Toggle Space Sidebar">
+        <order>60</order>
+        <description key="admin.keyboard.shortcut.toggle.space.sidebar.desc">Toggle Space Sidebar</description>
+        <shortcut>[</shortcut>
+        <operation type="click">#splitter-button, .ia-splitter-handle</operation>
+        <context>global</context>
+    </keyboard-shortcut>
+
+    <keyboard-shortcut key="favourite.page" i18n-name="admin.keyboard.shortcut.favourite.page" name="Favourite Page">
+        <order>70</order>
+        <description key="admin.keyboard.shortcut.favourite.page.desc">Favourite Page</description>
+        <shortcut>f</shortcut>
+        <operation type="click">#page-favourite</operation>
+        <context>viewcontent</context>
+    </keyboard-shortcut>
+
+    <!-- This shortcut is only useful when viewing a preview, so it does not need to be bound in the tinyMce context -->
+    <keyboard-shortcut key="return.to.edit.page" i18n-name="admin.keyboard.shortcut.return.to.edit.page" name="Return To Edit Page From Preview" hidden="true">
+        <order>70</order>
+        <description key="admin.keyboard.shortcut.return.to.edit.page.desc">Return To Edit Page From Preview</description>
+        <shortcut>e</shortcut>
+        <operation type="click">#rte-button-edit</operation>
+        <context>editor</context>
+    </keyboard-shortcut>
+
+    <!-- Editor shortcuts, these are repeated so they bound in the tinymce context too-->
+    <keyboard-shortcut key="go.to.preview.page" i18n-name="admin.keyboard.shortcut.go.to.preview.page" name="Return To Edit Page From Preview" hidden="true">
+        <order>80</order>
+        <description key="admin.keyboard.shortcut.go.to.preview.page.desc">Go to preview page</description>
+        <shortcut>[Ctrl+Shift+E]</shortcut>
+        <operation type="click">#rte-button-preview</operation>
+        <context>editor</context>
+    </keyboard-shortcut>
+    <keyboard-shortcut key="tinymce.go.to.preview.page" i18n-name="admin.keyboard.shortcut.go.to.preview.page" name="Return To Edit Page From Preview">
+        <order>80</order>
+        <description key="keyboard.shortcuts.editor.actions.preview"/>
+        <shortcut>[Ctrl+Shift+E]</shortcut>
+        <operation type="click">#rte-button-preview</operation>
+        <context>tinymce.actions</context>
+    </keyboard-shortcut>
+
+    <keyboard-shortcut key="save.editor.page" i18n-name="admin.keyboard.shortcut.save.editor.page" name="Save Editor Page" hidden="true">
+        <order>90</order>
+        <description key="admin.keyboard.shortcut.save.editor.page.desc">Save Editor Page</description>
+        <shortcut>[Ctrl+S]</shortcut>
+        <operation type="click">#rte-button-publish, #rte-button-overwrite</operation>
+        <context>editor</context>
+    </keyboard-shortcut>
+    <keyboard-shortcut key="tinymce.save.editor.page" i18n-name="admin.keyboard.shortcut.save.editor.page" name="Save Editor Page">
+        <order>90</order>
+        <description key="keyboard.shortcuts.editor.actions.save"/>
+        <shortcut>[Ctrl+S]</shortcut>
+        <operation type="click">#rte-button-publish, #rte-button-overwrite</operation>
+        <context>tinymce.actions</context>
+    </keyboard-shortcut>
+
+    <!-- TinyMCE Editor shortcuts -->
+    <keyboard-shortcut key="tinymce.p" i18n-name="admin.keyboard.shortcut.tinymce.p" name="Paragraph">
+        <order>10</order>
+        <description key="tinymce.advanced.paragraph"/>
+        <shortcut>[Ctrl+0]</shortcut>
+        <operation type="execute">FormatBlock-p</operation>
+        <context>tinymce.block</context>
+    </keyboard-shortcut>
+    <keyboard-shortcut key="tinymce.h1" i18n-name="admin.keyboard.shortcut.tinymce.h1" name="Heading 1">
+        <order>10</order>
+        <description key="tinymce.advanced.h1"/>
+        <shortcut>[Ctrl+1]</shortcut>
+        <operation type="execute">FormatBlock-h1</operation>
+        <context>tinymce.block</context>
+    </keyboard-shortcut>
+    <keyboard-shortcut key="tinymce.h2" i18n-name="admin.keyboard.shortcut.tinymce.h2" name="Heading 2" hidden="true">
+        <description key="tinymce.advanced.h2"/>
+        <shortcut>[Ctrl+2]</shortcut>
+        <operation type="execute">FormatBlock-h2</operation>
+        <context>tinymce.block</context>
+    </keyboard-shortcut>
+    <keyboard-shortcut key="tinymce.h3" i18n-name="admin.keyboard.shortcut.tinymce.h3" name="Heading 3" hidden="true">
+        <description key="tinymce.advanced.h3"/>
+        <shortcut>[Ctrl+3]</shortcut>
+        <operation type="execute">FormatBlock-h3</operation>
+        <context>tinymce.block</context>
+    </keyboard-shortcut>
+    <keyboard-shortcut key="tinymce.h4" i18n-name="admin.keyboard.shortcut.tinymce.h4" name="Heading 4" hidden="true">
+        <description key="tinymce.advanced.h4"/>
+        <shortcut>[Ctrl+4]</shortcut>
+        <operation type="execute">FormatBlock-h4</operation>
+        <context>tinymce.block</context>
+    </keyboard-shortcut>
+    <keyboard-shortcut key="tinymce.h5" i18n-name="admin.keyboard.shortcut.tinymce.h1" name="Heading 5" hidden="true">
+        <description key="tinymce.advanced.h5"/>
+        <shortcut>[Ctrl+5]</shortcut>
+        <operation type="execute">FormatBlock-h5</operation>
+        <context>tinymce.block</context>
+    </keyboard-shortcut>
+    <keyboard-shortcut key="tinymce.h6" i18n-name="admin.keyboard.shortcut.tinymce.h1" name="Heading 6">
+        <order>10</order>
+        <description key="tinymce.advanced.h6"/>
+        <shortcut>[Ctrl+6]</shortcut>
+        <operation type="execute">FormatBlock-h6</operation>
+        <context>tinymce.block</context>
+    </keyboard-shortcut>
+    <keyboard-shortcut key="tinymce.pre" i18n-name="admin.keyboard.shortcut.tinymce.pre" name="Preformat">
+        <order>20</order>
+        <description key="tinymce.advanced.pre"/>
+        <shortcut>[Ctrl+7]</shortcut>
+        <operation type="execute">FormatBlock-pre</operation>
+        <context>tinymce.block</context>
+    </keyboard-shortcut>
+    <keyboard-shortcut key="tinymce.blockquote" i18n-name="admin.keyboard.shortcut.tinymce.blockquote" name="Blockquote">
+        <order>30</order>
+        <description key="tinymce.advanced.blockquote"/>
+        <shortcut>[Ctrl+8]</shortcut>
+        <operation type="execute">FormatBlock-blockquote</operation>
+        <context>tinymce.block</context>
+    </keyboard-shortcut>
+    <keyboard-shortcut key="tinymce.bullist" i18n-name="admin.keyboard.shortcut.tinymce.bullist" name="Bullet List">
+        <order>40</order>
+        <description key="tinymce.advanced.bullist_desc"/>
+        <shortcut>[Ctrl+Shift+B]</shortcut>
+        <operation type="execute">InsertUnorderedList</operation>
+        <context>tinymce.block</context>
+    </keyboard-shortcut>
+    <keyboard-shortcut key="tinymce.numlist" i18n-name="admin.keyboard.shortcut.tinymce.numlist" name="Numbered List">
+        <order>50</order>
+        <description key="tinymce.advanced.numlist_desc"/>
+        <shortcut>[Ctrl+Shift+N]</shortcut>
+        <operation type="execute">InsertOrderedList</operation>
+        <context>tinymce.block</context>
+    </keyboard-shortcut>
+    <keyboard-shortcut key="tinymce.strikethrough" i18n-name="admin.keyboard.shortcut.tinymce.strikethrough" name="Strikethrough" hidden="true">
+        <description key="tinymce.advanced.striketrough_desc"/>
+        <shortcut>[Ctrl+Shift+S]</shortcut>
+        <operation type="execute">Strikethrough</operation>
+        <context>tinymce.block</context>
+    </keyboard-shortcut>
+
+    <keyboard-shortcut key="tinymce.file" i18n-name="admin.keyboard.shortcut.tinymce.file" name="Insert file">
+        <order>11</order>
+        <description key="tinymce.confluence.conf_file"/>
+        <shortcut>[Ctrl+M]</shortcut>
+        <operation type="click">#rte-insert-image</operation>
+        <context>tinymce.rich</context>
+    </keyboard-shortcut>
+
+    <keyboard-shortcut key="tinymce.link" i18n-name="admin.keyboard.shortcut.tinymce.link" name="Insert Link">
+        <order>20</order>
+        <description key="tinymce.confluence.conf_link"/>
+        <shortcut>[Ctrl+K]</shortcut>
+        <operation type="click">#rte-insert-link</operation>
+        <context>tinymce.rich</context>
+    </keyboard-shortcut>
+    <keyboard-shortcut key="tinymce.wikimarkup" i18n-name="admin.keyboard.shortcut.tinymce.wikimarkup" name="Insert WikiMarkup">
+        <order>30</order>
+        <description key="tinymce.confluence.conf_wikimarkup_desc"/>
+        <shortcut>[Ctrl+Shift+D]</shortcut>
+        <operation type="click">#rte-insert-wikimarkup</operation>
+        <context>tinymce.rich</context>
+    </keyboard-shortcut>
+    <keyboard-shortcut key="tinymce.macro" i18n-name="admin.keyboard.shortcut.tinymce.macro" name="Insert Macro">
+        <order>40</order>
+        <description key="tinymce.confluence.conf_macro_browser"/>
+        <shortcut>[Ctrl+Shift+A]</shortcut>
+        <operation type="click">#rte-insert-macro</operation>
+        <context>tinymce.rich</context>
+    </keyboard-shortcut>
+    <keyboard-shortcut key="tinymce.table" i18n-name="admin.keyboard.shortcut.tinymce.table" name="Insert Table">
+        <order>50</order>
+        <description key="tinymce.table"/>
+        <shortcut>[Ctrl+Shift+I]</shortcut>
+        <operation type="execute">mceInsertTable</operation>
+        <context>tinymce.rich</context>
+    </keyboard-shortcut>
+    <keyboard-shortcut key="tinymce.table.cut.row" i18n-name="admin.keyboard.shortcut.tinymce.table.cut.row" name="Cut Table Row">
+        <order>60</order>
+        <description key="tinymce.table.cut_row_desc"/>
+        <shortcut>[Ctrl+Shift+X]</shortcut>
+        <operation type="execute">mceTableCutRow</operation>
+        <context>tinymce.rich</context>
+    </keyboard-shortcut>
+    <keyboard-shortcut key="tinymce.table.copy.row" i18n-name="admin.keyboard.shortcut.tinymce.table.copy.row" name="Copy Table Row">
+        <order>70</order>
+        <description key="tinymce.table.copy_row_desc"/>
+        <shortcut>[Ctrl+Shift+C]</shortcut>
+        <operation type="execute">mceTableCopyRow</operation>
+        <context>tinymce.rich</context>
+    </keyboard-shortcut>
+    <keyboard-shortcut key="tinymce.table.paste.row" i18n-name="admin.keyboard.shortcut.tinymce.table.paste.row" name="Paste Table Row">
+        <order>80</order>
+        <description key="tinymce.table.paste_row_before_desc"/>
+        <shortcut>[Ctrl+Shift+V]</shortcut>
+        <operation type="execute">mceTablePasteRowBefore</operation>
+        <context>tinymce.rich</context>
+    </keyboard-shortcut>
+
+</atlassian-plugin>

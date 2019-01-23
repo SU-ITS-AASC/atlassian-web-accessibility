@@ -1,0 +1,1 @@
+define("confluence-ui-components/js/cql/internal/cql-negation-converter",["jquery","underscore"],function(c,a){function b(e){e.values=a.map(e.values,function(f){return"-"+f})}function d(f){var e=c.extend({},f);if(e.field.type==="equality"){if(e.operator==="!="){e.operator="=";b(e)}else{if(e.operator==="notin"){e.operator="in";b(e)}}}return e}return{convert:d}});

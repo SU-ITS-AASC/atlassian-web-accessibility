@@ -1,0 +1,28 @@
+{namespace aui}
+
+/**
+ * @param? extraAttributes String: attributename="attributevalue" or object: { "attributename" : "attributevalue" }
+ */
+{template .renderExtraAttributes private="true"}
+    {if hasData() and $extraAttributes}
+        {if isMap($extraAttributes)}
+            {foreach $attr in keys($extraAttributes)} {$attr}="{$extraAttributes[$attr]}"{/foreach}
+        {else}
+            {sp}{$extraAttributes|noAutoescape}
+        {/if}
+    {/if}
+{/template}
+
+
+/**
+ * @param? extraClasses String or array of strings to add to class attribute.
+ */
+{template .renderExtraClasses private="true"}
+    {if hasData() and $extraClasses}
+        {if isList($extraClasses)}
+            {foreach $class in $extraClasses} {$class}{/foreach}
+        {else}
+            {sp}{$extraClasses}
+        {/if}
+    {/if}
+{/template}

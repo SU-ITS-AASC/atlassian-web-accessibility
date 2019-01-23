@@ -1,0 +1,38 @@
+{namespace Confluence.ViewFileMacro.Templates}
+
+/**
+ * @param fileName stripped attachment file name
+ * @param previewURL URL to preview the file
+ * @param placeholderSrc URL of placeholder image
+ * @param height
+ * @param width
+ */
+{template .embeddedFileInNotification}
+    <a href="{$previewURL}">
+        <span style="background: url('{$placeholderSrc}');
+            width: {$width}px;
+            height: {$height - ($height / 2 + 30)}px;
+            display: inline-block;
+            padding-top: {$height / 2 + 30}px;
+            margin: 2px;
+            border: 1px solid #ddd;
+            text-align: center;
+            vertical-align: text-bottom;
+            text-decoration: none;
+            font-size: 12px;
+            color: #000;">
+            {$fileName}
+        </span>
+    </a>
+{/template}
+
+/**
+ * Template for view file macro in workbox
+ * @param fileName attachment file name
+ * @param previewURL URL to preview the file
+ */
+{template .embeddedFileInWorkBoxNotification}
+    <a href="{$previewURL}">
+        {$fileName}
+    </a>
+{/template}

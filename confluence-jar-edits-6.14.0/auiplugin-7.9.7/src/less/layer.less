@@ -1,0 +1,25 @@
+@import './imports/global';
+
+.aui-layer {
+    position: fixed;
+}
+
+.aui-layer[aria-hidden="true"] {
+    display: none;
+}
+
+.aui-blanket {
+    #aui.transition.fadeOut(@aui-blanket-fade-time, @aui-blanket-fade-delay);
+
+    background: @aui-blanket-bg-color;
+    height: 100%;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 2500;
+
+    &[aria-hidden="false"] {
+        #aui.transition.fadeIn(@aui-blanket-fade-time, @aui-blanket-fade-delay);
+    }
+}

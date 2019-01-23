@@ -1,0 +1,82 @@
+#if ($debug.equals("true"))
+    Event Types: #if ($eventTypes.isEmpty())all#else$eventTypes#end<br />
+    Spaces: #foreach ($space in $spaces) $space.key #end<br />
+    Content Types: $contentTypes<br />
+    Labels: $labels<br />
+    Max: $max<br />
+    #if ($afterTime)
+        Between: $afterTime and $beforeTime<br />
+    #end
+#end
+#if ($popular.size() > 0)
+    #if ($style.equals("list"))
+        <ol id="popular-list">
+            #foreach ($entity in $popular)
+            <li>
+                #if ($display.contains("icon"))
+                    #if ($entity.content)
+                        #contentIcon($entity.content)
+                    #elseif ($entity.space)
+                        <a href="$req.contextPath/display/$generalUtil.urlEncode($entity.space.key)"><img src="#if ($entity.space.isPersonal() == true)$req.contextPath/images/icons/personal_space_16.gif#else$req.contextPath/images/icons/browse_space.gif#end" height="16" width="16" border="0" align="absmiddle"></a>
+                    #end
+                #end
+
+                #if ($entity.content)
+                    #contentHref($entity.content)
+                #elseif ($entity.space)
+                    <a href="$req.contextPath/display/$generalUtil.urlEncode($entity.space.key)">$webwork.htmlEncode($entity.space.name)</a>
+                #end
+
+                #if ($display.contains("count"))
+                ($entity.count)
+                #end
+            </li>
+            #end
+        </ol>
+    #elseif ($style.equals("table") || $style.equals("lined"))
+        <table id="popular-table" #if ($style.equals("table")) class="grid" #else class="tableview" #end>
+            #foreach ($entity in $popular)
+            <tr>
+                <td>
+                #if ($display.contains("icon"))
+                    #if ($entity.content)
+                        #contentIcon($entity.content)
+                    #elseif ($entity.space)
+                        <a href="$req.contextPath/display/$generalUtil.urlEncode($entity.space.key)"><img src="#if ($entity.space.isPersonal() == true)$req.contextPath/images/icons/personal_space_16.gif#else$req.contextPath/images/icons/browse_space.gif#end" height="16" width="16" border="0" align="absmiddle"></a>
+                    #end
+                #end
+
+                #if ($entity.content)
+                    #contentHref($entity.content)
+                #elseif ($entity.space)
+                    <a href="$req.contextPath/display/$generalUtil.urlEncode($entity.space.key)">$webwork.htmlEncode($entity.space.name)</a>
+                #end
+                </td>
+
+                #if ($display.contains("count"))
+                    <td>$entity.count</td>
+                #end
+            </tr>
+            #end
+        </table>
+    #elseif ($style.equals("flat"))
+        #foreach ($entity in $popular)
+            #if ($display.contains("icon"))
+                #if ($entity.content)
+                    #contentIcon($entity.content)
+                #elseif ($entity.space)
+                    <a href="$req.contextPath/display/$generalUtil.urlEncode($entity.space.key)"><img src="#if ($entity.space.isPersonal() == true)$req.contextPath/images/icons/personal_space_16.gif#else$req.contextPath/images/icons/browse_space.gif#end" height="16" width="16" border="0" align="absmiddle"></a>
+                #end
+            #end
+
+            #if ($entity.content)
+                #contentHref($entity.content)
+            #elseif ($entity.space)
+                <a href="$req.contextPath/display/$generalUtil.urlEncode($entity.space.key)">$webwork.htmlEncode($entity.space.name)</a>
+            #end
+            #if ($display.contains("count")) ($entity.count)#end#if ($velocityCount < $popular.size()), #end
+        #end
+    #end
+#else
+    No popular content.
+#end

@@ -1,0 +1,5 @@
+/* AUI overrides */
+/* This override can be deleted once https://ecosystem.atlassian.net/browse/AUI-1737 is resolved */
+.tipsy-nw .tipsy-arrow-n {
+    margin-left: 0;
+}

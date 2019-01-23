@@ -1,0 +1,87 @@
+@import '../aui-theme/core/colors';
+@import '../aui-theme/core/text';
+
+// Why are we defining our own mixins when some already exist in Atlaskit? A few reasons:
+//
+// 1) Atlaskit's use the pure ADG3 proportions, which have different line heights and letter-spacing than we are taking on right now.
+// 2) Atlaskit's include margin info, which we don't want.
+//
+// Even if they were exactly the same, we'd probably create our mixins by extending theirs in this file.
+// The adapter pattern is generally useful in shielding us from external change by reducing its scope of impact to a single place.
+
+#aui {
+    .typography {
+        // First-level heading (h1) equivalent
+        .h800() {
+            @size: @aui-font-size-xxxlarge;
+            font-size: @size;
+            font-weight: @aui-font-weight-semibold;
+            line-height: unit(40 / @size);
+            letter-spacing: -0.01em;
+            text-transform: none;
+        }
+        // Second-level heading (h2) equivalent
+        .h700() {
+            @size: @aui-font-size-xxlarge;
+            font-size: @size;
+            font-weight: @aui-font-weight-medium;
+            line-height: unit(30 / @size);
+            letter-spacing: -0.01em;
+            text-transform: none;
+        }
+        // Third-level heading (h3) equivalent
+        .h600() {
+            @size: @aui-font-size-xlarge;
+            font-size: @size;
+            font-weight: @aui-font-weight-medium;
+            line-height: unit(30 / @size);
+            letter-spacing: -0.008em;
+            text-transform: none;
+        }
+        // Fourth-level heading (h4) equivalent
+        .h500() {
+            @size: @aui-font-size-large;
+            font-size: @size;
+            font-weight: @aui-font-weight-medium;
+            line-height: unit(20 / @size);
+            letter-spacing: -0.006em;
+            text-transform: none;
+        }
+        // Fifth-level heading (h5) equivalent
+        .h400() {
+            @size: @aui-font-size-medium;
+            font-size: @size;
+            font-weight: @aui-font-weight-semibold;
+            line-height: unit(20 / @size);
+            letter-spacing: -0.003em;
+            text-transform: none;
+        }
+        // Sixth-level heading (h6) equivalent
+        .h300() {
+            @size: @aui-font-size-small;
+            font-size: @size;
+            font-weight: @aui-font-weight-semibold;
+            line-height: unit(20 / @size);
+            letter-spacing: 0;
+            text-transform: none;
+        }
+        .h200(@color: @ak-color-N200) {
+            @size: @aui-font-size-small;
+            color: @color;
+            font-size: @size;
+            font-weight: @aui-font-weight-semibold;
+            line-height: unit(20 / @size);
+            letter-spacing: 0;
+            text-transform: none;
+        }
+        .h100(@color: @ak-color-N200) {
+            @size: @aui-font-size-xsmall;
+            color: @color;
+            font-size: @size;
+            font-weight: @aui-font-weight-semibold;
+            line-height: unit(16 / @size);
+            letter-spacing: 0;
+            text-transform: uppercase;
+        }
+    }
+}

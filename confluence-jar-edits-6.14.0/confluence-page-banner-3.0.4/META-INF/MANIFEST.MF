@@ -1,0 +1,41 @@
+Manifest-Version: 1.0
+Archiver-Version: Plexus Archiver
+Created-By: Apache Maven Bundle Plugin
+Built-By: root
+Build-Jdk: 1.8.0_181
+Atlassian-Build-Date: 2018-12-06T13:06:51+0000
+Atlassian-Plugin-Key: com.atlassian.confluence.plugins.confluence-page
+ -banner
+Bnd-LastModified: 1544101611911
+Bundle-Description: Displays a pluggable banner at the top of Confluen
+ ce pages.
+Bundle-DocURL: https://www.atlassian.com/
+Bundle-License: https://www.atlassian.com/legal/customer-agreement
+Bundle-ManifestVersion: 2
+Bundle-Name: Confluence Page Banner
+Bundle-SymbolicName: com.atlassian.confluence.plugins.confluence-page-
+ banner
+Bundle-Vendor: Atlassian
+Bundle-Version: 3.0.4
+Import-Package: com.atlassian.confluence.plugin.descriptor.web.conditi
+ ons,com.atlassian.confluence.core;resolution:=optional,com.atlassian.
+ confluence.pages;resolution:=optional,com.atlassian.confluence.pages.
+ actions;resolution:=optional,com.atlassian.confluence.plugin.descript
+ or.web;resolution:=optional,com.atlassian.confluence.security;resolut
+ ion:=optional,com.atlassian.confluence.spaces;resolution:=optional,co
+ m.atlassian.confluence.themes;resolution:=optional,com.atlassian.conf
+ luence.user;resolution:=optional,com.atlassian.core.filters;resolutio
+ n:=optional,com.atlassian.plugin;resolution:=optional,com.atlassian.p
+ lugin.spring.scanner.annotation.imports;resolution:=optional,com.atla
+ ssian.plugin.web;resolution:=optional,com.atlassian.plugin.web.descri
+ ptors;resolution:=optional,com.atlassian.plugin.web.model;resolution:
+ =optional,com.atlassian.plugin.webresource;resolution:=optional,com.a
+ tlassian.sal.api.features;resolution:=optional,com.atlassian.user;res
+ olution:=optional,com.google.common.base;resolution:=optional,com.goo
+ gle.common.collect;resolution:=optional,javax.servlet.http;resolution
+ :=optional,org.apache.commons.lang;resolution:=optional,com.atlassian
+ .confluence.plugin.descriptor.web.conditions.user
+Require-Capability: osgi.ee;filter:="(&(osgi.ee=JavaSE)(version=1.8))"
+Spring-Context: *
+Tool: Bnd-2.4.1.201501161923
+

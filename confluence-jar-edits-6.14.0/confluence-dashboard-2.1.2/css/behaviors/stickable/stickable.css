@@ -1,0 +1,20 @@
+/**
+ * Stickable.scss works together with the behavior stickable.js
+ *
+ * It offers a stick header like iOS calendar.
+ *
+ * The tricky is that during the scroll, when the top of the container gets out of the * screen, the header gets the class .stick and change its position to fixed. When the
+ * scroll is close to the bottom, it changes classes and became .stuck changing the
+ * position to absolute and stickying to the bottom
+ */
+.stickable {
+  position: relative; }
+  .stickable .stick, .stickable .stuck {
+    background: #fff;
+    z-index: 4; }
+  .stickable .stick {
+    position: fixed; }
+  .stickable .stuck {
+    position: absolute !important;
+    top: inherit !important;
+    bottom: 0; }

@@ -1,0 +1,100 @@
+@import './imports/global';
+
+/*! AUI Sortable Tables */
+.aui-table-sortable {
+    @aui-table-sortable-active-border: @aui-table-header-divider-width @aui-border-type @aui-table-sortable-active-border-color;
+    @aui-table-sortable-selected-border: @aui-table-header-divider-width @aui-border-type @aui-table-sortable-selected-border-color;
+
+    .tablesorter-header {
+        cursor: pointer;
+        border-bottom: @aui-border-tables-header;
+    }
+
+    // Unsortable columns should get no interactive styles.
+    .tablesorter-header.aui-table-column-unsortable {
+        cursor: default;
+    }
+
+    // Note: these state styles are similar to, but not 100% the same as, the #aui-nav.item-style() definitions.
+
+    // Focus header style
+    .tablesorter-header:focus,
+    .tablesorter-header:hover {
+        background-color: @aui-table-sortable-hover-bg-color;
+    }
+
+    // Active header style
+    .tablesorter-header:active {
+        background-color: @aui-table-sortable-active-bg-color;
+        border-color: @aui-table-sortable-active-border-color;
+        color: @aui-table-sortable-active-text-color;
+    }
+
+    // "Selected" (i.e., sorted via this column) header style
+    .tablesorter-headerAsc,
+    .tablesorter-headerDesc {
+        background-color: @aui-table-sortable-selected-bg-color;
+        color: @aui-text-color;
+    }
+
+    // Override the specificity of base AUI table's border styles.
+    table.aui& {
+        .tablesorter-header:active {
+            border-bottom: @aui-table-sortable-active-border;
+        }
+        .tablesorter-headerAsc,
+        .tablesorter-headerDesc {
+            border-bottom: @aui-table-sortable-selected-border;
+        }
+
+        // Unsortable headers should not change appearance, though.
+        .tablesorter-header.aui-table-column-unsortable {
+            &:focus,
+            &:hover,
+            &:active {
+                background-color: inherit;
+                border-color: inherit;
+                color: @aui-table-heading-text-color;
+            }
+        }
+    }
+
+    //
+    // Element wrapper used for rendering a glyph for the sort direction
+    //
+    .aui-table-header-content::after {
+        #aui.icon-pseudoelement();
+        content: "";
+        display: inline-block;
+        height: @aui-table-sortable-arrow-height;
+        line-height: 1;
+        font-size: @aui-table-sortable-arrow-height;
+        margin-left: 5px;
+        position: relative;
+        width: @aui-table-sortable-arrow-height;
+        vertical-align: text-bottom;
+    }
+
+    // Focus header, potentially changing sort order
+    .tablesorter-header:focus .aui-table-header-content::after,
+    .tablesorter-header:hover .aui-table-header-content::after {
+        content: @aui-glyph-sorted-descending;
+        opacity: 0.5;
+    }
+
+    // "Selected" sort, descending
+    .tablesorter-headerAsc .aui-table-header-content::after,
+    .tablesorter-headerAsc:focus .aui-table-header-content::after,
+    .tablesorter-headerAsc:hover .aui-table-header-content::after {
+        content: @aui-glyph-sorted-descending;
+        opacity: 1;
+    }
+
+    // "Selected" sort, ascending
+    .tablesorter-headerDesc .aui-table-header-content::after,
+    .tablesorter-headerDesc:focus .aui-table-header-content::after,
+    .tablesorter-headerDesc:hover .aui-table-header-content::after {
+        content: @aui-glyph-sorted-ascending;
+        opacity: 1;
+    }
+}

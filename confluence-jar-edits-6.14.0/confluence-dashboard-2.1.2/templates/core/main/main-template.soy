@@ -1,0 +1,164 @@
+{namespace DashboardTemplates.App}
+
+/**
+ * Renders the dashboard
+ * @param isAnonymous Whether or not this is rendering for the anonymous user
+ * @param? contentHtml The HTML for the content area of the dashboard (everything to the right of the nav sidebar)
+ */
+{template .layout}
+    <div class="confluence-dashboard">
+        {call aui.sidebar.sidebar}
+            {param id: 'nav-sidebar' /}
+            {param headerContent: '' /}
+            {param isResizable: true /}
+            {param content}
+                <nav class="aui-navgroup aui-navgroup-vertical">
+                    <div class="aui-navgroup-inner">
+                        <div id="sidebar-discover" class="aui-sidebar-group aui-sidebar-group-tier-one sidebar-discover spa">
+                        </div>
+                        {if not $isAnonymous}
+                            <div id="sidebar-my-work" class="aui-sidebar-group aui-sidebar-group-tier-one sidebar-my-work spa">
+                            </div>
+                        {/if}
+                        <div id="sidebar-spaces" class="aui-sidebar-group aui-sidebar-group-tier-one sidebar-spaces">
+                        </div>
+                    </div>
+                </nav>
+            {/param}
+        {/call}
+        {call aui.page.pagePanel}
+            {param content}
+                {if $contentHtml}
+                    {$contentHtml|noAutoescape}
+                {/if}
+            {/param}
+        {/call}
+    </div>
+    /* Dialogs container */
+    <div class="dialogs"></div>
+{/template}
+
+
+/**
+ * @param? sidebarHtmlContent
+ */
+{template .sidebarAndMainLayout}
+    {call aui.page.pagePanelContent}
+        {param extraClasses: 'content-body' /}
+        {param content}
+        {/param}
+    {/call}
+    {call aui.page.pagePanelSidebar}
+        {param extraClasses: 'content-sidebar' /}
+        {param content}
+            {if $sidebarHtmlContent}
+                {$sidebarHtmlContent|noAutoescape}
+            {/if}
+        {/param}
+    {/call}
+{/template}
+
+/**
+ * Server-side version of .layout
+ * @param welcomeMessageHtml The welcome message, rendered as HTML
+ * @param welcomeMessageEditUrl The relative url used to edit the welcome message template
+ * @param panelContext The context map to pass through when rendering web panels
+ * @param showWelcomeMessageEditHint Whether or not to show the hint to edit the welcome message
+ * @param showEditButton Whether or not to show the edit button
+ * @param isAnonymous Whether or not this is rendering for the anonymous user
+ */
+{template .serverSideLayout}
+    {call .layout}
+        {param isAnonymous: $isAnonymous /}
+        {param contentHtml}
+            {call .sidebarAndMainLayout}
+                {param sidebarHtmlContent}
+                    {let $items: itemsForSection(null, 'system.dashboard.button') /}
+                    {if length($items) > 0}
+                        <div class="dashboard-buttons">
+                            {call aui.buttons.buttons}
+                                {param content}
+                                    {call .renderWebItems}
+                                        {param webItems: $items /}
+                                    {/call}
+                                {/param}
+                            {/call}
+                        </div>
+                    {/if}
+                    <div class="welcome-message-wrapper">
+                        <div id="welcome-message" class="welcome-message wiki-content">
+                            {if $showEditButton}
+                                <a href="{ contextPath() }/{ $welcomeMessageEditUrl }" class="aui-button aui-icon aui-icon-small aui-iconfont-edit welcome-message-edit-button">
+                                </a>
+                            {/if}
+                            <div class="welcome-content">
+                                {$welcomeMessageHtml|noAutoescape}
+                            </div>
+
+                            {if $showWelcomeMessageEditHint}
+                                <div class="aui-help aui-help-text welcome-message-edit">
+                                    <div class="aui-help-content">
+                                        <p>{ getText('welcome.message.edit') }</p>
+                                        <a href="{ contextPath() }/{ $welcomeMessageEditUrl }" class="welcome-message-edit-button">
+                                          { getText('welcome.message.edit.link') }
+                                        </a>
+                                    </div>
+                                </div>
+                            {/if}
+                        </div>
+                    </div>
+
+                    {let $items: itemsForSection(null, 'system.dashboard') /}
+                    {if length($items) > 0}
+                        <div class="dashboard-items">
+                            {call aui.buttons.buttons}
+                                {param content}
+                                    {call .renderWebItems}
+                                        {param webItems: $items /}
+                                    {/call}
+                                {/param}
+                            {/call}
+                        </div>
+                    {/if}
+
+                    <ul id="web-panels">
+                        {call .renderWebPanels}
+                            {param panelContext: $panelContext /}
+                            {param webPanelLocation: 'atl.dashboard.secondary' /}
+                        {/call}
+                        // atl.dashboard.left is deprecated as of Confluence 5.9. Use atl.dashboard.secondary instead.
+                        {call .renderWebPanels}
+                            {param panelContext: $panelContext /}
+                            {param webPanelLocation: 'atl.dashboard.left' /}
+                        {/call}
+                    </ul>
+                {/param}
+            {/call}
+        {/param}
+    {/call}
+{/template}
+
+/**
+ * @param webPanelLocation The key of the web panel location
+ * @param panelContext The context map to pass through when rendering web panels
+ */
+{template .renderWebPanels private="true"}
+    {let $panels: panelsForLocation(null, $webPanelLocation, $panelContext) /}
+    {foreach $panel in $panels}
+        <li class="web-panel">{$panel.html|noAutoescape}</li>
+    {/foreach}
+{/template}
+
+/**
+ * @param webItems The list of web items to render as aui buttons
+ */
+{template .renderWebItems private="true"}
+    {foreach $item in $webItems}
+        {call aui.buttons.button}
+            {param text: $item.label /}
+            {param href: $item.linkUrl /}
+            {param id: $item.id /}
+            {param extraClasses: 'dashboard-button-web-item' /}
+        {/call}
+    {/foreach}
+{/template}

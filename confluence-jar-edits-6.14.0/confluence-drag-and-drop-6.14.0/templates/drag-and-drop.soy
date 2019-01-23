@@ -1,0 +1,102 @@
+{namespace AJS.DragAndDrop.Templates}
+
+/**
+ * Renders a file status entry.
+ *
+ * @param filename the name of the file to display
+ * @param progressElementId the id of the progress bar
+ * @param workId the work id for the file
+ * @param showCancel true if the cancel placeholder should be rendered
+ */
+{template .fileStatus}
+    <li id="file-status-block-{$workId}" data-filename="{$filename}">
+        <div class="aui-group aui-group-split file-status-item">
+            <div class="aui-item">
+                <label>{$filename}</label>
+            </div>
+            <div class="aui-item">
+                <div id="file-upload-progress-text-{$workId}" class="file-upload-progress-text">
+                    {getText('dnd.waiting.in.queue')}
+                </div>
+            </div>
+        </div>
+        <div class="file-upload-progress-block">
+            <div class="aui-progress-indicator" id="{$progressElementId}">
+                <span class="aui-progress-indicator-value"></span>
+            </div>
+            {if $showCancel}
+                <div id="cancel-or-success-placeholder-{$workId}" class="cancel-or-success-placeholder ui-state-default">
+                    <span id="file-upload-cancel-{$workId}" class="aui-icon aui-icon-small aui-iconfont-remove"
+                          title="{getText('dnd.cancel.upload.tooltip')}">
+                        {getText('dnd.cancel.upload.icon.text')}
+                    </span>
+                </div>
+            {/if}
+        </div>
+   </li>
+{/template}
+
+/**
+ * Returns the uplaod status container.
+ */
+{template .uploadFileStatusContainer}
+    <ul id="upload-statuses"></ul>
+{/template}
+
+/**
+ * Returns an icon representing a successful upload.
+ */
+{template .uploadFileStatusSuccessIcon}
+    <span class='aui-icon aui-icon-small aui-iconfont-success'></span>
+{/template}
+
+
+/**
+ * Renders a message for the upload progress.
+ * @param fileId the fileId
+ * @param uploadedSizeNice the uploaded bytes, formatted in a nice human readable number (like 350kb)
+ * @param totalSizeNice the total bytes to upload, formatted in a nice human readable number (like 350kb)
+ */
+{template .uploadFileStatusProgressMessage}
+    <span id="file-{$fileId}-uploaded">{$uploadedSizeNice}</span> {getText('dnd.upload.progress.text.of')} {$totalSizeNice}
+{/template}
+
+/**
+ * Drop zone for the drag and drop in the attachment view page
+ */
+{template .dropZone}
+    <div class="attachments-drop-zone">
+        <div class="drop-zone-image"></div>
+        <div class="drop-zone-text">{getText('dnd.drop.zone.text')}</div>
+    </div>
+{/template}
+
+/**
+ * Overlay for instruction when dragging to drop zone
+ */
+{template .dragOverlay}
+    <div id="dragOverlay">
+        <div class="overlay-blanket"></div>
+        <div class="overlay-center">
+            <p>{getText('dnd.drop.zone.overlay.text')}</p>
+        </div>
+        <span class="overlay-baseline"></span>
+        <div class="overlay-drop-zone"></div>
+    </div>
+{/template}
+
+/**
+ * Drag and Drop tip message
+ */
+{template .dragAndDropTip}
+    <div class="attach-tip-discovery">
+        <span class="img"></span>
+        <div class="text">
+            <strong>{getText('attach.files.tip.title')} </strong>
+            <p>{getText('attach.files.tip.desc')}</p>
+            <div>
+                <a class="close-tip" href="#">{getText('attach.files.tip.close')}</a>
+            </div>
+        </div>
+    </div>
+{/template}

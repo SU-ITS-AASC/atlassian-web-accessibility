@@ -1,0 +1,23 @@
+<html>
+	<head>
+		<script type="text/javascript" src="sh/src/shCore.js"></script>
+		<script type="text/javascript" src="SHBRUSHSCRIPT"></script>
+		<script type="text/javascript" >
+			SyntaxHighlighter.config.tagName = "highlight";
+			function execute() {
+				try {
+					SyntaxHighlighter.highlight();
+				} catch (err) {
+					alert(err);
+				}
+			}
+		</script>
+		<link rel="stylesheet" type="text/css" href="sh/styles/shCore.css">
+		<link rel="stylesheet" type="text/css" href="SHTHEMECSS">
+	</head>
+	<body onload="execute();">
+		<div id="root">
+		CODEPRE
+		</div>
+	</body>
+</html>

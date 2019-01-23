@@ -1,0 +1,358 @@
+@import './imports/global';
+
+/*! AUI Inline Dialog */
+
+aui-inline-dialog {
+    display: block;
+    position: absolute;
+    z-index: 100;
+
+    // Handle FOUC
+    &:not([resolved]) {
+        display: none;
+    }
+
+    .aui-inline-dialog-contents,
+    .contents {
+        overflow-y: auto;
+    }
+
+    &.aui-layer[aria-hidden="true"] {
+        #aui.transition.fadeOut();
+        display: block;
+    }
+
+    &.aui-layer[aria-hidden="false"] {
+        #aui.transition.fadeIn();
+    }
+
+    &.aui-layer {
+        height: auto;
+    }
+
+
+    // 'top _' alignment
+    &.aui-alignment-side-top {
+        padding-bottom: @aui-inline-dialog2-offset-default;
+        padding-top: 0;
+
+        &:before,
+        &:after {
+            top: calc(~"100%" - @aui-inline-dialog2-offset-default);
+            #aui.transform-rotate(180deg);
+        }
+
+        &:after {
+            top: calc(~"100%" - (@aui-inline-dialog2-offset-default + @aui-inline-dialog2-arrow-border-width));
+        }
+
+        // The flipped case
+        &.aui-alignment-element-attached-top {
+            padding-bottom: 0;
+            padding-top: @aui-inline-dialog2-offset-default;
+
+            &:before,
+            &:after {
+                #aui.transform-rotate(0deg);
+                top: (@aui-inline-dialog2-offset-default - @aui-inline-dialog2-arrow-side-length);
+            }
+
+            &:after {
+                top: (@aui-inline-dialog2-offset-default - @aui-inline-dialog2-arrow-side-length + @aui-inline-dialog2-arrow-border-width);
+            }
+        }
+    }
+
+    // 'bottom _' alignment
+    &.aui-alignment-side-bottom {
+        padding-bottom: 0;
+        padding-top: @aui-inline-dialog2-offset-default;
+
+        &:before {
+            top: (@aui-inline-dialog2-offset-default - @aui-inline-dialog2-arrow-side-length);
+        }
+        &:after {
+            top: (@aui-inline-dialog2-offset-default - @aui-inline-dialog2-arrow-side-length + @aui-inline-dialog2-arrow-border-width);
+        }
+
+        // The flipped case
+        &.aui-alignment-element-attached-bottom {
+            padding-bottom: @aui-inline-dialog2-offset-default;
+            padding-top: 0;
+
+            &:before,
+            &:after {
+                top: calc(~"100%" - @aui-inline-dialog2-offset-default);
+                #aui.transform-rotate(180deg);
+            }
+
+            &:after {
+                top: calc(~"100%" - (@aui-inline-dialog2-offset-default + @aui-inline-dialog2-arrow-border-width));
+            }
+        }
+    }
+
+    // 'left _' alignment
+    &.aui-alignment-side-left {
+        padding-left: 0;
+        padding-right: @aui-inline-dialog2-offset-default;
+
+        &:before,
+        &:after {
+            left: calc(~"100%" - (@aui-inline-dialog2-offset-default + (@aui-inline-dialog2-arrow-side-length / 2)));
+            #aui.transform-rotate(90deg);
+        }
+
+        &:after {
+            left: calc(~"100%" - (@aui-inline-dialog2-offset-default + (@aui-inline-dialog2-arrow-side-length / 2) + @aui-inline-dialog2-arrow-border-width));
+        }
+
+        // The flipped case
+        &.aui-alignment-element-attached-left {
+            padding-left: @aui-inline-dialog2-offset-default;
+            padding-right: 0;
+
+            &:before,
+            &:after {
+                #aui.transform-rotate(-90deg);
+                left: (@aui-inline-dialog2-offset-default - (@aui-inline-dialog2-arrow-side-length * 1.5));
+            }
+
+            &:after {
+                left: (@aui-inline-dialog2-offset-default - (@aui-inline-dialog2-arrow-side-length * 1.5) + @aui-inline-dialog2-arrow-border-width);
+            }
+        }
+    }
+
+    // 'right _' alignment
+    &.aui-alignment-side-right {
+        padding-left: @aui-inline-dialog2-offset-default;
+        padding-right: 0;
+
+        &:before,
+        &:after {
+            #aui.transform-rotate(-90deg);
+            left: (@aui-inline-dialog2-offset-default - (@aui-inline-dialog2-arrow-side-length * 1.5));
+        }
+
+        &:after {
+            left: (@aui-inline-dialog2-offset-default - (@aui-inline-dialog2-arrow-side-length * 1.5) + @aui-inline-dialog2-arrow-border-width);
+        }
+
+        // The flipped case
+        &.aui-alignment-element-attached-right {
+            padding-left: 0;
+            padding-right: @aui-inline-dialog2-offset-default;
+
+            &:before,
+            &:after {
+                left: calc(~"100%" - (@aui-inline-dialog2-offset-default + (@aui-inline-dialog2-arrow-side-length / 2)));
+                #aui.transform-rotate(90deg);
+            }
+
+            &:after {
+                left: calc(~"100%" - (@aui-inline-dialog2-offset-default + (@aui-inline-dialog2-arrow-side-length / 2) + @aui-inline-dialog2-arrow-border-width));
+            }
+        }
+    }
+
+    // '_ left' alignment
+    &.aui-alignment-snap-left:before,
+    &.aui-alignment-snap-left:after {
+        left: ((@aui-inline-dialog2-arrow-side-length / 2) + @aui-inline-dialog2-arrow-edge-offset);
+    }
+
+    // '_ center' alignment
+    &.aui-alignment-snap-center:before,
+    &.aui-alignment-snap-center:after {
+        left: calc(~"50%" - (@aui-inline-dialog2-arrow-side-length));
+    }
+
+    // '_ right' alignment
+    &.aui-alignment-snap-right:before,
+    &.aui-alignment-snap-right:after {
+        left: calc(~"100%" - ((@aui-inline-dialog2-arrow-side-length * 2.5) + @aui-inline-dialog2-arrow-edge-offset));
+    }
+
+    // '_ top' alignment
+    &.aui-alignment-snap-top:before,
+    &.aui-alignment-snap-top:after {
+        top: (@aui-inline-dialog2-arrow-side-length + @aui-inline-dialog2-arrow-edge-offset);
+    }
+
+    // '_ middle' alignment
+    &.aui-alignment-snap-middle:before,
+    &.aui-alignment-snap-middle:after {
+        top: calc(~"50%" - (@aui-inline-dialog2-arrow-side-length / 2));
+    }
+
+    // '_ bottom' alignment
+    &.aui-alignment-snap-bottom:before,
+    &.aui-alignment-snap-bottom:after {
+        top: calc(~"100%" - (@aui-inline-dialog2-arrow-side-length * 2) + @aui-inline-dialog2-arrow-edge-offset);
+    }
+
+    &:before,
+    &:after {
+        border-left: @aui-inline-dialog2-arrow-side-length solid transparent;
+        border-right: @aui-inline-dialog2-arrow-side-length solid transparent;
+        border-bottom: @aui-inline-dialog2-arrow-side-length solid @aui-inline-dialog-bg-color;
+        border-top: 0px;
+        content: "";
+        display: inline-block;
+        height: 0;
+        position: absolute;
+        width: 0;
+    }
+
+    &:before {
+        border-bottom-color: @aui-inline-dialog-border-color;
+    }
+}
+
+.aui-inline-dialog {
+    display: none;
+    position: absolute;
+    z-index: 100;
+}
+
+aui-inline-dialog, .aui-inline-dialog {
+    .aui-inline-dialog-contents,
+    .contents {
+        #aui.shadow.z200();
+        background: @aui-inline-dialog-bg-color;
+        border: 0 solid @aui-inline-dialog-border-color;
+        border-radius: @aui-border-radius-small;
+        overflow: hidden;
+        padding: 20px;
+    }
+
+    .aui-inline-dialog-contents.aui-inline-dialog-no-shadow,
+    .contents.aui-inline-dialog-no-shadow {
+        box-shadow: none;
+    }
+
+
+    .aui-inline-dialog-contents.aui-inline-dialog-auto-width,
+    .contents.aui-inline-dialog-auto-width {
+        width: auto;
+    }
+
+    /* Inline Dialog + Forms Integration - top labels and full width fields supported */
+    /* funny numbers to add up to 20px spacing in various places (border to cap height/baseline) */
+    .aui-inline-dialog-contents form.aui h2:first-child,
+    .contents form.aui h2:first-child {
+        border-bottom: 1px solid @aui-inline-dialog-border-color;
+        margin: -7px 0 11px 0;
+        padding: 0 0 12px 0;
+    }
+    .aui-inline-dialog-contents form.aui .buttons-container,
+    .contents form.aui .buttons-container {
+        margin-top: 16px;
+        padding: 0;
+    }
+    .aui-inline-dialog-contents .submit + .cancel,
+    .contents .submit + .cancel {
+        margin-left: 0;
+    }
+
+    /*Inline Dialog Arrow */
+
+    .aui-inline-dialog-arrow,
+    .arrow {
+        position: absolute;
+        height: 16px; /* for SVG positioning */
+        top: -7px; /* matches #inline-dialog-shim */
+        width: 16px; /* for SVG positioning */
+    }
+
+    .aui-inline-dialog-arrow.aui-css-arrow,
+    .arrow.aui-css-arrow {
+        width: 1px;
+    }
+
+    .aui-inline-dialog-arrow.aui-css-arrow::after,
+    .arrow.aui-css-arrow::after,
+    .aui-inline-dialog-arrow.aui-css-arrow::before,
+    .arrow.aui-css-arrow::before {
+        border-color: @aui-inline-dialog-border-color transparent;
+        border-style: solid;
+        border-width: 0 8px 8px;
+        content: "";
+        left: -8px;
+        position: absolute;
+        top: 0;
+    }
+
+    .aui-inline-dialog-arrow.aui-css-arrow:after,
+    .arrow.aui-css-arrow:after {
+        border-bottom-color: @aui-inline-dialog-bg-color;
+        top: 1px;
+    }
+
+    .aui-inline-dialog-arrow.aui-css-arrow.aui-bottom-arrow:after,
+    .arrow.aui-css-arrow.aui-bottom-arrow:after,
+    .aui-inline-dialog-arrow.aui-css-arrow.aui-bottom-arrow:before,
+    .arrow.aui-css-arrow.aui-bottom-arrow:before {
+        border-width: 8px 8px 0;
+    }
+
+    .aui-inline-dialog-arrow.aui-css-arrow.aui-bottom-arrow:after,
+    .arrow.aui-css-arrow.aui-bottom-arrow:after {
+        border-top-color: @aui-inline-dialog-bg-color;
+        top: -1px;
+    }
+
+    .aui-inline-dialog-arrow.aui-css-arrow.aui-right-arrow,
+    .arrow.aui-css-arrow.aui-right-arrow {
+        right: -7px;
+    }
+
+    .aui-inline-dialog-arrow.aui-css-arrow.aui-left-arrow:after,
+    .arrow.aui-css-arrow.aui-left-arrow:after,
+    .aui-inline-dialog-arrow.aui-css-arrow.aui-left-arrow:before,
+    .arrow.aui-css-arrow.aui-left-arrow:before {
+        border-width: 8px 8px 8px 0;
+        border-color: transparent @aui-inline-dialog-border-color;
+    }
+
+    .aui-inline-dialog-arrow.aui-css-arrow.aui-left-arrow:after,
+    .arrow.aui-css-arrow.aui-left-arrow:after {
+        border-color: transparent @aui-inline-dialog-bg-color transparent transparent;
+        top: 0;
+        right: 0;
+    }
+
+    .aui-inline-dialog-arrow.aui-css-arrow.aui-right-arrow:after,
+    .arrow.aui-css-arrow.aui-right-arrow:after,
+    .aui-inline-dialog-arrow.aui-css-arrow.aui-right-arrow:before,
+    .arrow.aui-css-arrow.aui-right-arrow:before {
+        border-width: 8px 0 8px 8px;
+        border-color: transparent @aui-inline-dialog-border-color;
+        left: -7px;
+    }
+}
+
+.aui-inline-dialog .aui-inline-dialog-arrow.aui-css-arrow.aui-right-arrow:after,
+.aui-inline-dialog .arrow.aui-css-arrow.aui-right-arrow:after {
+    border-color: transparent transparent transparent @aui-inline-dialog-bg-color;
+    top: 0;
+    right: 0;
+    left: -8px;
+}
+
+/* Shim is for lte IE9 - class is added via JS */
+.inline-dialog-shim {
+    border: none;
+    display: block;
+    height: 0;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 0;
+    z-index: -2;
+}
+
+#inline-dialog-shim {
+    display: none;
+}

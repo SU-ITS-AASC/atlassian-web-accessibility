@@ -1,0 +1,21 @@
+{namespace Confluence.Templates.File}
+
+/**
+ * The web panel for the image dialog
+ */
+{template .webPanel}
+    <div class="insert-web-image">
+        <form id="insert-web-image-form" action="#" class="aui">
+            <fieldset class="inline">
+                <div class="web-image-input">
+                <label for="insert-web-image-image-url" id="insert-web-image-image-url-label">{getText('image.browser.imageurl.label')}</label>
+                <input type="text" class="text image-url" id="insert-web-image-image-url" name="insert-web-image-image-url">
+                </div>
+                <input type="submit" class="image-preview aui-button" value="{getText('image.browser.preview.button')}">
+            </fieldset>
+        </form>
+        <p class="faraway image-preview-area"></p>
+        <p class="hidden image-preview-error">{getText('image.browser.preview.error.message')}</p>
+        <p class="hidden image-preview-throbber">&nbsp;</p>
+    </div>
+{/template}

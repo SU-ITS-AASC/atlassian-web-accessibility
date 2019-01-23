@@ -1,0 +1,92 @@
+@import '../theme';
+
+@aui-nav-text-color: @ak-color-N500;
+@aui-nav-heading-text-color: @ak-color-N200;
+@aui-nav-heading-text-font-size: @aui-font-size-xsmall;
+
+// ### Nav items
+
+@aui-nav-link-selected-text-color: @aui-nav-text-color;
+@aui-nav-link-selected-bg-color: @ak-color-N30A;
+@aui-nav-link-active-text-color: @aui-nav-text-color;
+@aui-nav-link-active-bg-color: @ak-color-B50;
+@aui-nav-link-bg-color: transparent;
+@aui-nav-link-color: @aui-nav-text-color;
+@aui-nav-link-border-radius: @aui-border-radius-small;
+
+// These values cannot change until a major version. See the item-base for an explanation.
+@aui-nav-link-effective-height: 30px;
+@aui-nav-link-spacing-horizontal: 10px;
+@aui-nav-link-spacing-vertical: 7px;
+
+// ### Nav sub-tree
+
+@aui-nav-group-divider-color: @ak-color-N40;
+@aui-nav-subtree-line-color: @ak-color-N40;
+@aui-nav-subtree-toggle-icon-color: @ak-color-N80;
+@aui-nav-subtree-toggle-icon-size: 20px;
+
+@aui-nav-subtree-indicator-width: 1px;
+@aui-nav-item-actions-dropdown-trigger-hover-color: @aui-button-default-hover-bg-color;
+
+// ### Actions lists
+
+@aui-nav-actions-list-margin-top: @aui-grid;
+@aui-nav-actions-list-item-margin-bottom: (@aui-grid / 2);
+@aui-nav-actions-list-item-font-size: @aui-font-size-medium;
+
+@aui-nav-actions-list-divider-color: @ak-color-N100;
+@aui-nav-actions-list-divider-size: 2px;
+@aui-nav-actions-list-divider-spacing: 10px;
+
+// ### Paginated
+
+@aui-nav-pagination-text-color: @aui-text-color;
+@aui-nav-pagination-active-text-color: @aui-color-gray;
+
+
+// ### Groups
+
+@aui-navgroup-horizontal-bg-color: @ak-color-N20;
+
+#aui-nav {
+    // See also: #aui-dropdowns.aui-dropdown-option-base();
+    .item-base(@height: @aui-nav-link-effective-height) {
+        border-radius: @aui-nav-link-border-radius;
+        box-sizing: content-box;
+        // This *cannot* be changed to flexbox until a major version.
+        // Plain-text often ends up in these items alongside elements that are currently floated;
+        // it wouldn't be possible to re-arrange them correctly using flexbox.
+        display: block;
+        // the line-height + padding adds up to an effective 30px height for the element,
+        // but the inner content box is only 16px tall. This enables things like
+        // lozenges and small icons to line up correctly with the text, without explicit treatment.
+        // this is assumed and exploited in places like the sidebar's navigation.
+        line-height: unit((@height - (2 * @aui-nav-link-spacing-vertical)) / @aui-nav-actions-list-item-font-size);
+        padding: @aui-nav-link-spacing-vertical @aui-nav-link-spacing-horizontal;
+    }
+
+    .item-style(normal) {
+        background-color: @aui-nav-link-bg-color;
+        color: @aui-nav-link-color;
+        text-decoration: none;
+    }
+
+    .item-style(hover) {
+        background-color: @aui-nav-link-selected-bg-color;
+        // color is not set; it should be determined by whether the item is selected or not.
+        text-decoration: none;
+    }
+
+    .item-style(active) {
+        background-color: @aui-nav-link-active-bg-color;
+        color: @aui-nav-link-active-text-color;
+        text-decoration: none;
+    }
+
+    .item-style(selected) {
+        background-color: @aui-nav-link-selected-bg-color;
+        color: @aui-nav-link-selected-text-color;
+        font-weight: @aui-font-weight-medium;
+    }
+}

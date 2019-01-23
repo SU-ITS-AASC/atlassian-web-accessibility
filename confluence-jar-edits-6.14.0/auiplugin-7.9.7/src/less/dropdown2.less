@@ -1,0 +1,400 @@
+@import './imports/global';
+
+/**
+ * Dropdown 2
+ */
+
+@aui-dropdown2-tail-size: 8px;
+
+/* Functional styles - these are always applied
+---------------------------------------------------------------------- */
+.aui-dropdown2 {
+    box-sizing: border-box;
+    max-width: 300px;
+    min-width: 160px;
+    position: absolute;
+    &[aria-hidden="true"] {
+        top: -999em;
+        left: -999em;
+    }
+    &:not([resolved]) {
+        display: none;
+    }
+}
+
+.aui-dropdown2 [role="menuitem"],
+.aui-dropdown2 [role="menuitemcheckbox"],
+.aui-dropdown2 [role="menuitemradio"],
+.aui-dropdown2 [role="radio"],
+.aui-dropdown2 [role="checkbox"],
+.aui-dropdown2 a {
+    #aui.prevent-text-selection();
+    #aui-dropdowns.aui-dropdown-item-base();
+
+    & :focus {
+        z-index: 1;
+    }
+}
+
+.aui-dropdown2 .aui-list-truncate [role="menuitem"],
+.aui-dropdown2 .aui-list-truncate [role="menuitemcheckbox"],
+.aui-dropdown2 .aui-list-truncate [role="menuitemradio"],
+.aui-dropdown2 .aui-list-truncate [role="radio"],
+.aui-dropdown2 .aui-list-truncate [role="checkbox"],
+.aui-dropdown2 .aui-list-truncate a {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Default style for Dropdown2, invoked with aui-style-default
+---------------------------------------------------------------------- */
+.aui-dropdown2.aui-style-default {
+    #aui-dropdowns.aui-dropdown-style();
+    padding: @aui-dropdown-group-spacing 0;
+}
+
+.aui-dropdown2.aui-style-default ul {
+    list-style: none;
+    margin: 0;
+    padding-left: 0;
+}
+
+.aui-dropdown2.aui-style-default .aui-dropdown2-section {
+    margin-top: @aui-dropdown-group-spacing;
+
+    &:first-child {
+        margin-top: 0;
+    }
+
+    + .aui-dropdown2-section {
+        border-top: 1px solid @aui-dropdown2-border-color;
+        padding-top: @aui-dropdown-group-spacing;
+    }
+}
+
+.aui-dropdown2.aui-style-default > strong,
+.aui-dropdown2.aui-style-default .aui-dropdown2-section > strong,
+.aui-dropdown2-heading {
+    #aui.typography.h100(@aui-dropdown2-header-text-color);
+    display: block;
+    padding: @aui-dropdown-option-spacing-vertical @aui-dropdown-option-spacing-horizontal;
+}
+
+.aui-dropdown2-heading > strong {
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+}
+
+.aui-dropdown2.aui-style-default strong + ul {
+    margin-top: 0;
+}
+
+
+//
+// Dropdown items
+//
+.aui-dropdown2.aui-style-default {
+    // Set the basic dropdown item style.
+    [role="menuitem"],
+    [role="menuitemcheckbox"],
+    [role="menuitemradio"],
+    [role="radio"],
+    [role="checkbox"],
+    a {
+        #aui-dropdowns.aui-dropdown-item-style(normal);
+    }
+
+    &:hover {
+        /*
+         * When a user hovers over the dropdown with the mouse, we set all but the hovered item to inactive display.
+         * If the user pressed 'enter' while this was happening, it wouldn't activate what was behind the cursor,
+         * but the likelihood of a mixed-mode user is fairly low. The only way to remedy this would be to set
+         * the document's active element to whatever is behind the mouse... but that has its own problems, such as
+         * unintentionally changing the selected item when the screen or dropdown content scrolls behind the mouse.
+         * This styling choice seems to be the best compromise.
+         */
+        .aui-dropdown2-checkbox,
+        .aui-dropdown2-radio,
+        a {
+            #aui-dropdowns.aui-dropdown-item-style(normal);
+
+            &:not(.aui-dropdown2-disabled):hover {
+                #aui-dropdowns.aui-dropdown-item-style(hover);
+            }
+
+            &:not(.aui-dropdown2-disabled):active {
+                #aui-dropdowns.aui-dropdown-item-style(active);
+            }
+        }
+    }
+
+    /* If not hovering on the dropdown, the "hover" style is best for whatever has browser focus. */
+    .active,
+    .aui-dropdown2-active {
+        #aui-dropdowns.aui-dropdown-item-style(hover);
+    }
+
+    /* Set disabled styles last, so that the cascade gives them a higher precedence. */
+    &:hover .aui-dropdown2-disabled,
+    .aui-dropdown2-disabled,
+    [aria-disabled="true"],
+    a.disabled {
+        #aui-dropdowns.aui-dropdown-item-style(disabled);
+    }
+}
+
+.aui-dropdown2.aui-style-default .aui-icon-container,
+.aui-dropdown2.aui-style-default .aui-dropdown2-radio,
+.aui-dropdown2.aui-style-default .aui-dropdown2-checkbox {
+    padding-left: 35px;
+    background-position: @aui-dropdown-option-spacing-horizontal @aui-dropdown-option-spacing-vertical;
+    background-repeat: no-repeat;
+    position: relative;
+}
+
+.aui-dropdown2.aui-style-default .aui-icon-container > img,
+.aui-dropdown2.aui-style-default .aui-icon-container > .aui-icon,
+.aui-dropdown2.aui-style-default .aui-icon-container > .aui-avatar {
+    border-width: 0;
+    display: inline-block;
+    left: @aui-dropdown-option-spacing-horizontal;
+    overflow: hidden;
+    position: absolute;
+    top: @aui-dropdown-option-spacing-vertical;
+}
+
+/* Checkbox items */
+.aui-dropdown2.aui-style-default .aui-dropdown2-checkbox.aui-dropdown2-checked {
+    #aui.icon(@aui-glyph-check, {
+        margin-left: (@aui-icon-size-small / 2);
+    });
+}
+
+/* Radio items */
+.aui-dropdown2.aui-style-default .aui-dropdown2-radio.aui-dropdown2-checked {
+    #aui.icon(@aui-glyph-radio, {
+        margin-left: (@aui-icon-size-small / 2);
+    });
+}
+
+/* Tailed dropdown variant */
+.aui-dropdown2.aui-dropdown2-tailed::before,
+.aui-dropdown2.aui-dropdown2-tailed::after {
+    border-color: transparent;
+    border-style: outset outset solid outset;
+    border-width: @aui-dropdown2-tail-size;
+    bottom: 100%;
+    content: "";
+    display: block;
+    height: 0;
+    position: absolute;
+    width: 0;
+}
+
+.aui-dropdown2.aui-dropdown2-tailed::before {
+    border-bottom-color: @aui-dropdown2-border-color;
+    margin-bottom: 1px;
+}
+
+.aui-dropdown2.aui-dropdown2-tailed::after {
+    border-bottom-color: @aui-dropdown2-bg-color;
+}
+
+/* basic in-page dropdown trigger style DEPRECATED as of 4.2 */
+.aui-dropdown2-trigger.aui-style-dropdown2triggerlegacy1 {
+    padding: 5px 8px;
+    text-decoration: none;
+}
+
+.aui-dropdown2-trigger.aui-style-dropdown2triggerlegacy1:hover,
+.aui-dropdown2-trigger.aui-style-dropdown2triggerlegacy1:focus,
+.aui-dropdown2-trigger.aui-style-dropdown2triggerlegacy1.active,
+.aui-dropdown2-trigger.aui-style-dropdown2triggerlegacy1.aui-dropdown2-active {
+    background-color: #326ca6;
+    border-radius: 4px;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.aui-dropdown2-trigger.aui-style-dropdown2triggerlegacy1[aria-disabled="true"],
+.aui-dropdown2-trigger.aui-style-dropdown2triggerlegacy1[aria-disabled="true"]:hover,
+.aui-dropdown2-trigger.aui-style-dropdown2triggerlegacy1[aria-disabled="true"]:focus,
+.aui-dropdown2-trigger.aui-style-dropdown2triggerlegacy1[aria-disabled="true"]:active {
+    background: inherit;
+    color: #99b6d3; /* equivalent of opacity: 0.5 */
+    cursor: default;
+}
+
+/* Arrow for sub menus */
+.aui-dropdown2-sub-trigger {
+    position: relative;
+
+    #aui.icon(@aui-glyph-chevron-right, {
+        // "left" + "margin-left" required because of webkit not working properly with "right"
+        left: 100%;
+        margin-left: -(@aui-icon-size-small-canvas);
+    });
+}
+
+.aui-dropdown2-trigger:not(.aui-dropdown2-trigger-arrowless) {
+    padding-right: @aui-icon-size-small-canvas !important; // Someone else was greedy to set padding
+    position: relative;
+}
+
+/* Dropdown2 button integration
+---------- */
+.aui-button-link.aui-dropdown2-trigger.active:first-child,
+.aui-button-link.aui-dropdown2-trigger.active,
+.aui-button-text.aui-dropdown2-trigger.active:first-child,
+.aui-button-text.aui-dropdown2-trigger.active {
+    box-shadow: none;
+}
+
+.aui-buttons .aui-button.aui-button-subtle.aui-dropdown2-trigger.active,
+.aui-button.aui-button-subtle.aui-dropdown2-trigger.active {
+    border-color: @aui-button-subtle-border-color;
+}
+
+.aui-button.aui-button-subtle.aui-dropdown2-trigger:hover {
+    border-color: @aui-button-subtle-dropdown2-trigger-arrow-color;
+}
+
+/* Compact Dropdown2 Trigger */
+.aui-button.aui-button-compact.aui-dropdown2-trigger:not(.aui-dropdown2-trigger-arrowless) {
+    padding-right: 21px !important; /* 8px (arrow width) + 8px (right padding) + 5 (margin between arrow and logo) */
+}
+
+.aui-button.aui-button-compact.aui-dropdown2-trigger::after {
+    margin-left: -16px; /*  Override the margin-left from below for to compensate for the smaller padding-right */
+}
+
+/* adjust padding for smaller height */
+.aui-button.aui-dropdown2-trigger.aui-button-compact.active:first-child:not(.aui-dropdown2-trigger-arrowless),
+.aui-button.aui-dropdown2-trigger.aui-button-compact.active:not(.aui-dropdown2-trigger-arrowless) {
+    padding-bottom: 3px; /* increase the padding to cater for the lack of border so the button doesn't change size */
+}
+
+/* End Compact Dropdown2 Trigger */
+.aui-button.aui-dropdown2-trigger:not(.aui-dropdown2-trigger-arrowless)::after {
+    #aui.aui-dropdown2-trigger-chevron-icon();
+}
+
+/* suppress old icon pattern for dropdown widget so we don't get double arrows */
+.aui-button.aui-dropdown2-trigger > .icon-dropdown,
+.aui-button.aui-dropdown2-trigger > .aui-icon-dropdown {
+    display: none;
+}
+
+/* INPUT does not play with ::after - dropdown2 does not support arrow styles for INPUT buttons */
+/* We cannot position arrows on aui-button-text because we don't know what size they will be all the time */
+input.aui-button.aui-dropdown2-trigger,
+.aui-button.aui-button-text.aui-dropdown2-trigger {
+    padding-right: 10px !important; /* someone used important now we're all doomed */
+}
+
+input.aui-button.aui-dropdown2-trigger::after,
+.aui-button.aui-button-text.aui-dropdown2-trigger::after {
+    display: none;
+}
+
+/* Dropdown2-only / Split Button
+---------- */
+.aui-buttons .aui-button.aui-button-split-more.aui-dropdown2-trigger,
+.aui-buttons .aui-button.aui-button-split-more.aui-dropdown2-trigger.active {
+    /* don't touch vertical padding or things jump around, jump around, jump up jump up and get down */
+    padding-left: 0;
+    padding-right: 0;
+    width: @aui-icon-size-small-canvas;
+    text-indent: -9999em;
+    overflow: hidden;
+
+    &::after {
+        content: @aui-glyph-more-actions;
+    }
+}
+
+/**
+ * Dropdown2 triggers in header
+ */
+.aui-header .aui-dropdown2-trigger.active,
+.aui-header a:focus,
+.aui-header a:hover,
+.aui-header a:active {
+    color: @aui-header-link-text-color;
+    background-color: @aui-header-link-active-bg-color;
+}
+
+/* In case showIcon is not set to false for header dropdown triggers */
+.aui-header .aui-dropdown2-trigger .aui-icon-dropdown {
+    display: none;
+}
+
+/* Styling the dropdown2 triggers differently in the header to avoid inline-block spacing issues with other icons */
+.aui-header .aui-dropdown2-trigger:not(.aui-dropdown2-trigger-arrowless)::after {
+    #aui.aui-dropdown2-trigger-chevron-icon();
+}
+
+/* Dropdown2 layer integration */
+.aui-dropdown2.aui-layer {
+    // To override the specific height calculations for layer.
+    // The height will be handled by JS.
+    & {
+        -webkit-height: auto;
+        height: auto;
+    }
+
+    &.aui-style-default {
+        &.aui-alignment-element-attached-top {
+            margin-top: @aui-dropdown-trigger-offset;
+
+            &.aui-dropdown2-tailed {
+                margin-top: @aui-dropdown-trigger-offset + @aui-dropdown2-tail-size;
+            }
+        }
+
+        &.aui-alignment-side-submenu {
+            // so that the first item in a submenu dropdown aligns horizontally
+            // with the submenu's trigger.
+            margin-top: -(@aui-dropdown-group-spacing);
+        }
+    }
+}
+
+/**
+ * Dropdown2 web components
+ */
+aui-dropdown-menu,
+aui-dropdown-group,
+aui-section,
+aui-item-checkbox,
+aui-item-radio,
+aui-item-link {
+    display: block;
+}
+
+aui-dropdown-menu.aui-dropdown2 {
+    //Selector copied from above: need this for specificity, want to keep separate from the rest of the DD2 CSS.
+    .aui-dropdown2-heading, .aui-style-default .aui-dropdown2-section > strong, .aui-dropdown2.aui-style-default > strong {
+        &:empty {
+            display: none;
+        }
+    }
+}
+
+// Async dropdown
+aui-dropdown-menu {
+    &:not([resolved]) {
+        display: none;
+    }
+
+    .aui-dropdown-loading {
+        padding: 5px;
+
+        aui-spinner {
+            display: inline-block;
+            vertical-align: bottom;
+        }
+    }
+}

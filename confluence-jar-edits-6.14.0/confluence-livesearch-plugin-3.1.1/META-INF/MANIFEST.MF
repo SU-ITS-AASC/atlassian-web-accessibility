@@ -1,0 +1,27 @@
+Manifest-Version: 1.0
+Archiver-Version: Plexus Archiver
+Created-By: Apache Maven Bundle Plugin
+Built-By: bamboo-agent
+Build-Jdk: 1.8.0_144
+Atlassian-Build-Date: 2018-09-18T11:26:48+0000
+Bnd-LastModified: 1537270009369
+Bundle-Description: Macro which shows search results keystroke by keys
+ troke.
+Bundle-DocURL: https://www.atlassian.com/
+Bundle-License: https://maven.atlassian.com/public/licenses/license.txt
+Bundle-ManifestVersion: 2
+Bundle-Name: Confluence Live Search Macros Plugin
+Bundle-SymbolicName: com.atlassian.confluence.plugins.confluence-lives
+ earch-plugin
+Bundle-Vendor: Atlassian
+Bundle-Version: 3.1.1
+Import-Package: com.atlassian.confluence.content.render.xhtml;resoluti
+ on:=optional,com.atlassian.confluence.macro;resolution:=optional,com.
+ atlassian.confluence.plugin.services;resolution:=optional,com.atlassi
+ an.confluence.spaces;resolution:=optional,com.atlassian.renderer;reso
+ lution:=optional,com.atlassian.renderer.v2;resolution:=optional,com.a
+ tlassian.renderer.v2.macro;resolution:=optional,org.apache.commons.la
+ ng;resolution:=optional
+Require-Capability: osgi.ee;filter:="(&(osgi.ee=JavaSE)(version=1.8))"
+Tool: Bnd-2.4.1.201501161923
+

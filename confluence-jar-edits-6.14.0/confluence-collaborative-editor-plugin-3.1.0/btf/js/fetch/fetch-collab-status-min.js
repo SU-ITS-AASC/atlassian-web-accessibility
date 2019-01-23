@@ -1,0 +1,1 @@
+define("confluence-collaborative-editor-plugin/btf/fetch/fetch-collab-status",["ajs","confluence-collaborative-editor-plugin/btf/ajax/ajax"],function(a,b){var c=a.contextPath()+"/rest/synchrony-interop/status";return function d(){var e=a.$.Deferred();b.get(c).done(function(f){e.resolve(f)});return e.promise()}});

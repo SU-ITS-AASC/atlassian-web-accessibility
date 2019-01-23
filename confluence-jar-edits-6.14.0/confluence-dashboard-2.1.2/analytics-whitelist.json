@@ -1,0 +1,153 @@
+{
+  "confluence.spa.opt-out-confirm": [
+    "message",
+    "version"
+  ],
+  "confluence.spa.root-loaded": [
+    "currentSection",
+    "redirectedTo",
+    "version"
+  ],
+  "confluence.spa.rendered": [
+    "currentSection",
+    "version"
+  ],
+  "confluence.spa.view": [
+    "currentSection",
+    "previousSection",
+    "version"
+  ],
+  "confluence.spa.global-sidebar.clicked": [
+    "currentSection",
+    "version",
+    "usingMeta"
+  ],
+  "confluence.spa.global-sidebar.clicked.using-meta": [
+    "currentSection",
+    "version"
+  ],
+  "confluence.spa.item.clicked": [
+    "currentSection",
+    "version",
+    "usingMeta"
+  ],
+  "confluence.spa.filter.submit": [
+    "currentSection",
+    "version"
+  ],
+  "confluence.spa.filter.clear": [
+    "currentSection",
+    "version"
+  ],
+  "confluence.spa.global-sidebar.spaces-menu.item.clicked": [
+    "currentSection",
+    "version",
+    "usingMeta"
+  ],
+  "confluence.spa.space-directory.clicked": [
+    "currentSection",
+    "version",
+    "usingMeta"
+  ],
+  "confluence.spa.edit-welcome-message.clicked": [
+    "currentSection",
+    "version",
+    "usingMeta"
+  ],
+  "confluence.spa.global-sidebar.spaces-menu.remove-favourite.clicked": [
+    "currentSection",
+    "version"
+  ],
+  "confluence.spa.global-sidebar.spaces-menu.remove-favourite.undo": [
+    "currentSection",
+    "version"
+  ],
+  "confluence.spa.spacenav.rendered": [
+    "tabName",
+    "spaceKey"
+  ],
+  "confluence.spa.spacenav.tab.click": [
+    "tabName",
+    "spaceKey",
+    "usingMeta"
+  ],
+  "confluence.spa.spacenav.space-tools.click": [
+    "spaceKey",
+    "usingMeta"
+  ],
+  "confluence.spa.spacenav.page-tree.rendered": [
+    "tabName",
+    "spaceKey"
+  ],
+  "confluence.spa.spacenav.page-tree.item.clicked": [
+    "tabName",
+    "spaceKey",
+    "usingMeta",
+    "depthLevel"
+  ],
+  "confluence.spa.spacenav.page-tree.sort.column.clicked": [
+    "columnName",
+    "usingMeta",
+    "order"
+  ],
+  "confluence.spa.spacenav.page-tree.expanded": [
+    "depthLevel"
+  ],
+  "confluence.spa.spacenav.page-tree.collapsed": [
+    "depthLevel"
+  ],
+  "confluence.spa.favourites.remove-favourite.clicked": [
+    "currentSection",
+    "version"
+  ],
+  "confluence.spa.favourites.remove-favourite.undo": [
+    "currentSection",
+    "version"
+  ],
+  "confluence.spa.error-handler.connection.lost": [
+    "currentSection",
+    "version"
+  ],
+  "confluence.spa.error-handler.connection.recovered": [
+    "currentSection",
+    "version"
+  ],
+  "confluence.spa.error-handler.session.expired": [
+    "currentSection",
+    "version"
+  ],
+  "confluence.footer.item.click": [
+    "pageId",
+    "version",
+    "isDashboard"
+  ],
+  "confluence.spa.space.rendered": [
+    "version"
+  ],
+
+  "confluence.spa.space.homepage.rendered": [
+    "version"
+  ],
+
+  "confluence.spa.space.page-tree.rendered": [
+    "version"
+  ],
+
+  "confluence.spa.space.overview.rendered": [
+    "version"
+  ],
+
+  "confluence.spa.space.page-view.rendered": [
+    "version"
+  ],
+
+  "confluence.spa.recommended.item.clicked": [
+    "model",
+    "id"
+  ],
+
+  "confluence.spa.recommended.item.deleted": [
+    "model",
+    "id"
+  ]
+}

@@ -1,0 +1,1 @@
+AJS.toInit(function(a){Confluence.OfficeConnector=Confluence.OfficeConnector||{};Confluence.OfficeConnector.Analytics=(function(d,c){function e(f,g){AJS.trigger("analytics",{name:f,data:g})}function b(f){e("confluence.office.connector.word.import.submit",f)}return{importWord:b}})(AJS.$,window._)});

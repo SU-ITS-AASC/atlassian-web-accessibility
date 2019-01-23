@@ -1,0 +1,43 @@
+#* @vtlvariable name="action" type="com.benryan.webwork.WordImportAction" *#
+<html>
+    <head>
+        <title>$!page.title</title>
+    </head>
+
+    #applyDecorator("root")
+        #decoratorParam("helper" $action.helper)
+        #decoratorParam("mode" "importworditem")
+        #decoratorParam("context" "page")
+
+        <content tag="spacekey">$page.space.key</content>
+		
+        <body>
+        </body>
+    #end
+    
+    <div>
+    	<form action="processwarn.action" method="post">
+            #form_xsrfToken()
+            <input type="hidden" name="pageId" value="$helper.page.id"/>
+            <input type="hidden" name="advanced" value="$action.advanced"/>
+            <input type="hidden" name="treeDepth" value="$action.treeDepth"/>
+            <input type="hidden" name="docTitle" value="$action.docTitle" />
+            <input type="hidden" name="importSpace" value="$action.importSpace" />
+            <input type="hidden" name="conflict" value="$action.importInfo.conflict" />
+            <input type="hidden" name="lvl" value="$action.lvl" />
+            <input type="hidden" name="overwriteAll" value="$action.overwriteAll" />
+            <table>
+                <tr>
+                    <td style="font-weight:bold">$action.explanationHtml
+                        <div style="text-align:center">&nbsp;</div>
+                    </td>
+                </tr><tr>
+                    <td style="text-align:center">
+                        <input name="submit" type="submit" value="Continue" />
+                        <input name="submit" type="submit" value="Cancel" />
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>    
+</html>

@@ -1,0 +1,433 @@
+@import './imports/global';
+@import './imports/aui-theme/components/dropdown';
+
+/*
+    ADG styles to be added to select2 items.
+
+    There are 5 main components that select2 uses.
+    # select2-container - the top-level container that wraps the original <input> element
+    ## select2-choice - the <a> the user clicks on to trigger the dropdown, shows the selected item
+    # select2-drop - the top-level container directly in the <body> that displays the dropdown
+    ## select2-search - the search box in the dropdown
+    ## select2-results - the list of results in the dropdown, including groups
+
+    Overrides in this CSS file should start with:
+    # .aui-select2-container - in auiSelect2 JS we add this class to the top container
+    # .aui-select2-drop - in auiSelect2 JS we add this class to the dropdown container
+
+    By sticking to these two selector elements we won't accidentally break other code that uses select2. If they want
+    sexy ADG styles they can call auiSelect2() instead of select2().
+    Please don't add application-specific styles/rules in here, as these styles will eventually be pulled into AUI.
+*/
+
+@aui-select2-dropdown-border-radius: @aui-button-border-radius;
+@aui-select2-choice-border-radius: @aui-border-radius-smallish;
+@aui-select2-form-field-border-radius: @aui-border-radius-smallish;
+
+.aui-select2-drop .select2-search input {
+    min-height: 0;
+    font-family: inherit;
+}
+
+.aui-select2-drop .select2-result-selectable .select2-match,
+.aui-select2-drop .select2-result-unselectable .select2-match {
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.aui-select2-drop .select2-results ul.select2-result-sub {
+    padding: 0;
+}
+
+.aui-select2-drop.aui-dropdown2 .select2-search {
+    padding: 5px;
+}
+
+.aui-select2-drop {
+    margin-top: @aui-dropdown-trigger-offset;
+    margin-bottom: 0;
+    z-index: 9999; // re-instated style from core select2 style
+}
+
+.aui-select2-drop.select2-drop-above.select2-drop-active {
+    #aui-dropdowns.aui-dropdown-style();
+    margin-bottom: @aui-dropdown-trigger-offset;
+    margin-top: 0;
+}
+
+.aui-select2-drop .select2-results ul.select2-result-sub > li .select2-result-label,
+.aui-select2-drop .select2-results .select2-result-label,
+.aui-select2-drop .select2-results .select2-searching,
+.aui-select2-drop .select2-results .select2-no-results,
+.aui-select2-drop .select2-results .select2-more-results {
+    #aui-dropdowns.aui-dropdown-item-base();
+}
+
+.aui-select2-drop .select2-result-label {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    cursor: inherit; // this will be set by the dropdown item style
+}
+
+.aui-select2-drop .select2-results {
+    margin: 0;
+    padding: 0;
+}
+
+.aui-select2-drop .select2-more-results,
+.aui-select2-drop .select2-searching,
+.aui-select2-drop .select2-no-results {
+    background-color: transparent;
+}
+
+.aui-select2-drop .select2-search input,
+.aui-select2-drop {
+    border: 1px solid @aui-button-default-border-color; /* make border color consistent with AUI button border color */
+}
+
+.aui-select2-drop .select2-search input {
+    border-radius: @aui-select2-form-field-border-radius;
+}
+
+.aui-select2-container.select2-container .select2-choice,
+.aui-select2-drop {
+    color: inherit;
+    max-width: none;
+}
+
+.aui-select2-drop.aui-dropdown2.aui-style-default {
+    margin-left: 0;
+}
+
+.aui-select2-drop .select2-results .select2-result-selectable {
+    #aui-dropdowns.aui-dropdown-item-style(normal);
+}
+
+.aui-select2-drop .select2-results .select2-highlighted {
+    #aui-dropdowns.aui-dropdown-item-style(hover);
+}
+
+.aui-select2-drop .select2-results .select2-result-unselectable {
+    #aui-dropdowns.aui-dropdown-item-style(disabled);
+}
+
+// Add dividers between grouped options
+.aui-select2-drop .select2-results {
+    .select2-result-with-children {
+        // We need to add both borders because the results double
+        // as group containers and we don't know where in
+        // the source order they'll appear.
+        border-top: 1px solid @aui-dropdown-border-color;
+        border-bottom: 1px solid @aui-dropdown-border-color;
+        margin: @aui-dropdown-group-spacing 0;
+        padding: 0;
+
+        &:first-child {
+            border-top: 0;
+            margin-top: 0;
+        }
+
+        &:last-child {
+            border-bottom: 0;
+            margin-bottom: 0;
+        }
+
+        > :first-child {
+            margin-top: @aui-dropdown-group-spacing;
+        }
+
+        > :last-child {
+            margin-bottom: @aui-dropdown-group-spacing;
+        }
+
+        > .select2-result-label {
+            #aui.typography.h100();
+        }
+    }
+
+    // We now selectively remove borders and add margins, depending
+    // on subsequent elements after a group of results.
+    // This occurs when an <optgroup> is sandwiched
+    // in between <option> elements.
+    .select2-result-with-children + .select2-result > .select2-result-label {
+        margin-top: @aui-dropdown-group-spacing;
+    }
+
+    .select2-result-with-children + .select2-result-with-children {
+        border-top: 0;
+    }
+}
+
+.aui-select2-container.select2-container .select2-choice > span {
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.aui-select2-container.select2-container .select2-choice .select2-arrow {
+    background: none;
+    border: none;
+    filter: none;
+}
+
+.aui-select2-container.select2-container-active .select2-choice,
+.aui-select2-container.select2-container-active .select2-choices {
+    border: none;
+    outline: none;
+    box-shadow: none;
+}
+
+.aui-select2-container.select2-container .select2-choice .select2-arrow b {
+    display: none;
+    background: none;
+}
+
+.aui-select2-container.select2-container .select2-choice {
+    padding-right: 23px; /* 8px (arrow width) + 10px (right padding) + 5px (margin between arrow and logo) */
+    position: relative;
+    width: inherit;
+}
+
+.aui-select2-container.select2-container a.select2-choice,
+.aui-select2-container.select2-container a.select2-choice:focus,
+.aui-select2-container.select2-container a.select2-choice:hover,
+.aui-select2-container.select2-container a.select2-choice:active {
+    text-decoration: none;
+}
+
+.aui-select2-container.select2-container .select2-choice:after {
+    border: 4px solid transparent;
+    content: "";
+    height: 0;
+    left: 100%; /* "left" + "margin-left" required because of webkit not working properly with "right" */
+    margin-left: -18px;
+    margin-top: -2px;
+    opacity: 1;
+    position: absolute;
+    top: 50%;
+    width: 0;
+}
+
+.aui-select2-container.select2-container .select2-choice:after {
+    border-top-color: @aui-select2-choice-text-color;
+}
+
+.aui-select2-container.select2-container .select2-choice:hover:after,
+.aui-select2-container.select2-container .select2-choice.active:after {
+    opacity: 1;
+}
+
+.aui-select2-container.select2-container .select2-choice:after {
+    margin-top: 0;
+    top: 12px;
+}
+
+/* Set the default text color to inherit.
+   NOTE: this class is only marked as !important because Select2 marks the same
+   selector as !important in it's styles. */
+.aui-select2-container .select2-input {
+    color: inherit !important;
+}
+
+/* Since select2 uses the placeholder text as the value of the input,
+  the following style is used to override text color to mach ADG placeholder.
+  Select2 gives the input a class of select2-default when the value represents the placeholder value.
+  NOTE: this class is only marked as !important because Select2 marks the same
+  selector as !important in its styles. */
+.aui-select2-container .select2-default {
+    color: @aui-select2-placeholder-text-color !important;
+}
+
+.aui-select2-container .select2-choices .select2-search-field input {
+    font-family: inherit;
+    font-size: 14px;
+    height: 1.4285714285714em; /* 20px - using ems so the fields increase in line with user specified font-sizes */
+    line-height: 1.4285714285714;
+    margin: 0;
+    padding: 0;
+}
+
+.aui-select2-container.select2-container-multi .select2-choices {
+    min-height: 0;
+    background: @aui-form-input-text-bg-color;
+}
+
+.aui-select2-container.select2-container-multi.text {
+    height: auto;
+}
+
+.aui-select2-container .select2-choices .select2-search-choice {
+    background: @aui-select2-choice-bg-color;
+    border: 1px solid @aui-border-color;
+    border-radius: @aui-select2-choice-border-radius;
+    color: @aui-select2-choice-text-color;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 1;
+    padding: 1px 18px 1px 5px;
+    position: relative;
+    margin: 1px 5px 1px 0;
+    text-align: left;
+    text-decoration: none;
+}
+
+.aui-select2-container .select2-choices .select2-search-choice-focus {
+    border-color: @aui-select2-dropdown-focused-border-color;
+}
+
+.aui-select2-container .select2-choice abbr {
+    padding-top: 10px;
+    position: absolute;
+    top: 10px;
+}
+
+.aui-select2-container.select2-allowclear .select2-choice abbr {
+    display: block;
+}
+
+.aui-select2-container .select2-search-choice-close {
+    cursor: pointer;
+    display: block;
+    height: 8px;
+    left: auto;
+    position: absolute;
+    right: 5px;
+    top: 4px;
+    width: 8px;
+}
+
+/* Clear select2's overrides for retina displays */
+@media all, (-webkit-min-device-pixel-ratio: 1.5), (min--moz-device-pixel-ratio: 1.5) {
+    .aui-select2-container.select2-container .select2-search-choice-close,
+    .aui-select2-container.select2-container .select2-choice abbr {
+        /* !important to ensure that the select2 hover state doesn't modify the background position */
+        background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAQAAABuBnYAAAAAKUlEQVQI12NgYFj0nwEKwKxF/9P+Q4TgLAgDIQEVQuJiCKBpwWoosrUAzbg31XT4p6QAAAAASUVORK5CYII=') 0 0 no-repeat !important;
+        background-size: 8px !important;
+    }
+}
+
+/* In order to beat out select2's overrides, the aui-button style had to be copied in below.
+   Unfortunately, any changes to that style will have to be copied here as well to keep the select2
+   element consistent.*/
+.aui-select2-container.select2-container .select2-choice,
+.aui-select2-container.select2-container a.select2-choice,
+.aui-select2-container.select2-container .select2-choice:visited {
+    #aui.box-sizing();
+    #aui.transition(@aui-button-transition);
+    background: @aui-button-default-bg-color;
+    border: @aui-button-border-width @aui-button-border-style @aui-button-default-border-color;
+    border-radius: @aui-select2-choice-border-radius;
+    color: @aui-button-default-text-color;
+    cursor: pointer;
+    display: inline-block;
+    filter: none;
+    font-family: inherit;
+    font-size: inherit;
+    font-variant: normal;
+    font-weight: normal;
+    height: 2.1428571428571em; /* 30px - using ems so the fields increase in line with user specified font-sizes */
+    line-height: 1.4285714285714;
+    margin: 0;
+    padding: 4px 10px;
+    text-decoration: none;
+    text-shadow: none;
+    vertical-align: top;
+    white-space: nowrap;
+}
+
+.aui-select2-container.select2-container .select2-choice:hover {
+    background: @aui-select2-choice-hover-bg-color;
+    border-color: @aui-select2-choice-border-color;
+    box-shadow: none;
+    color: @aui-select2-choice-hover-text-color;
+    text-decoration: none;
+
+    // Arrow
+    &::after {
+        border-top-color: @aui-select2-choice-hover-text-color;
+    }
+}
+
+// Dropdown active
+.aui-select2-container.select2-container.select2-container-active .select2-choice,
+.aui-select2-container.select2-container .select2-choice:active {
+    background: @aui-select2-choice-active-bg-color;
+    border-color: @aui-select2-choice-border-color;
+    color: @aui-select2-choice-active-text-color;
+    box-shadow: none;
+    filter: none;
+    text-shadow: none;
+    text-decoration: none;
+
+    // Arrow
+    &::after {
+        border-top-color: @aui-select2-choice-active-text-color;
+    }
+}
+
+// Dropdown selected
+.aui-select2-container.select2-container.select2-dropdown-open:not(.select2-container-multi) .select2-choice,
+.aui-select2-container.select2-container.select2-dropdown-open:not(.select2-container-multi) .select2-choices {
+    /* square off bottom corners */
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    border-bottom-width: 0; /* avoid double border when the dropdown is active - increase padding to cater for this reduction */
+    padding-bottom: 5px; /* increase the padding to cater for the lack of border so the button doesn't change size */
+    background: @aui-select2-choice-selected-bg-color;
+    color: @aui-select2-choice-selected-text-color;
+
+    // Arrow
+    &::after {
+        border-top-color: @aui-select2-choice-selected-text-color;
+    }
+}
+
+.aui-select2-container.select2-container.select2-dropdown-open.select2-drop-above .select2-choice,
+.aui-select2-container.select2-container.select2-dropdown-open.select2-drop-above .select2-choices {
+    border-radius: @aui-select2-choice-border-radius; /* restore border-radius */
+    border-bottom-width: 1px; /* restore bottom border */
+    /* square off top corners instead */
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+    border-top-width: 0; /* avoid double border when the dropdown is active - increase padding to cater for this reduction */
+    padding-bottom: 4px; /* restore bottom padding */
+    padding-top: 5px; /* increase the padding to cater for the lack of border so the button doesn't change size */
+}
+
+.aui-select2-container.select2-container.select2-drop-above .select2-choice,
+.aui-select2-container.select2-dropdown-open.select2-drop-above .select2-choice,
+.aui-select2-container.select2-dropdown-open.select2-drop-above .select2-choices,
+.aui-select2-container.select2-container-multi .select2-choices .select2-search-choice {
+    filter: none;
+}
+
+.aui-select2-container.select2-container .select2-choice abbr {
+    display: none;
+}
+
+.aui-select2-container .aui-avatar {
+    margin-right: 5px;
+}
+
+.aui-select2-container.aui-has-avatar .select2-search-choice-close {
+    top: 5px;
+}
+
+.aui-select2-container.aui-has-avatar .select2-choices .select2-search-field input {
+    padding: 1px 0;
+}
+
+.aui-select2-drop.aui-has-avatar .select2-results .select2-result-label .aui-avatar {
+    margin-right: 5px;
+    vertical-align: middle;
+}
+
+.aui-select2-drop.aui-has-avatar .select2-more-results,
+.aui-select2-drop.aui-has-avatar .select2-searching,
+.aui-select2-drop.aui-has-avatar .select2-no-results {
+    padding-bottom: 5px;
+    padding-top: 5px;
+}

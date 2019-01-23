@@ -1,0 +1,16 @@
+{namespace aui.badges}
+
+/**
+ * Creates a single badge
+ * @param text Visible text of the badge (usually a number).
+ * @param? id ID attribute.
+ * @param? extraClasses
+ * @param? extraAttributes
+ **/
+{template .badge}
+<aui-badge
+    {if $id} id="{$id}"{/if}
+    {sp}class="{call aui.renderExtraClasses data="all" /}"
+    {call aui.renderExtraAttributes data="all" /}
+>{$text}</aui-badge>
+{/template}

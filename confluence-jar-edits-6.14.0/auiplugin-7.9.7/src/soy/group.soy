@@ -1,0 +1,28 @@
+{namespace aui.group}
+
+/**
+ * @param content Can contain instances of .item
+ * @param? id
+ * @param? extraClasses
+ * @param? extraAttributes
+ * @param? tagName
+ * @param? isSplit Boolean. Default false. If true, uses preset "split" layout; two items should be added.
+ */
+{template .group}
+    <{$tagName ? $tagName : 'div' }{if $id} id="{$id}"{/if} class="aui-group{if $isSplit} aui-group-split{/if}{call aui.renderExtraClasses data="all" /}"{call aui.renderExtraAttributes data="all" /}>
+        {$content|noAutoescape}
+    </{$tagName ? $tagName : 'div' }>
+{/template}
+
+/**
+ * @param content Can contain any content.
+ * @param? id
+ * @param? extraClasses
+ * @param? extraAttributes
+ * @param? tagName
+ */
+{template .item}
+    <{$tagName ? $tagName : 'div' }{if $id} id="{$id}"{/if} class="aui-item{call aui.renderExtraClasses data="all" /}"{call aui.renderExtraAttributes data="all" /}>
+        {$content|noAutoescape}
+    </{$tagName ? $tagName : 'div' }>
+{/template}

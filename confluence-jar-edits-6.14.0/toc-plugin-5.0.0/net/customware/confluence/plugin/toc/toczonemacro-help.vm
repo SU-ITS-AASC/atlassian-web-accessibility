@@ -1,0 +1,41 @@
+<tr bgcolor=ffffff>
+    <td>$action.getText("template.toczonemacro.help.label.example")</td>
+    <td>
+        <p>
+        $action.getText("template.toczonemacro.help.label.about")
+        </p>
+        <ul>
+        <li><b>$action.getText("template.toczonemacro.help.label.location.name")</b> - $action.getText("template.toczonemacro.help.label.location.description")</li>
+        <li><b>$action.getText("template.tocmacro.help.label.param.type.name")</b> - $action.getText("template.tocmacro.help.label.param.type.description")
+          <ul>
+            <li><b>$action.getText("template.tocmacro.help.label.param.type.list.name")</b> - $action.getText("template.tocmacro.help.label.param.type.list.description")</li>
+            <li><b>$action.getText("template.tocmacro.help.label.param.type.flat.name")</b> - $action.getText("template.tocmacro.help.label.param.type.flat.description")</li>
+          </ul>
+        </li>
+        <li><b>$action.getText("template.tocmacro.help.label.param.class.name")</b> - $action.getText("template.tocmacro.help.label.param.class.description")</li>
+        <li><b>$action.getText("template.tocmacro.help.label.param.style.name")</b> - $action.getText("template.tocmacro.help.label.param.style.description")
+          <ul>
+            <li><b>$action.getText("template.tocmacro.help.label.param.style.none.name")</b> - $action.getText("template.tocmacro.help.label.param.style.none.description")</li>
+            <li><b>$action.getText("template.tocmacro.help.label.param.style.any.name")</b> - $action.getText("template.tocmacro.help.label.param.style.any.description")</li>
+          </ul>
+        </li>
+        <li><b>$action.getText("template.tocmacro.help.label.param.outline.name")</b> - $action.getText("template.tocmacro.help.label.param.outline.description")</li>
+        <li><b>$action.getText("template.tocmacro.help.label.param.indent.name")</b> - $action.getText("template.tocmacro.help.label.param.indent.description")</li>
+        <li><b>$action.getText("template.tocmacro.help.label.param.separator.name")</b> - $action.getText("template.tocmacro.help.label.param.separator.description")</li>
+        	<ul>
+        		<li><b>$action.getText("template.tocmacro.help.label.param.separator.bracket.name")</b> - $action.getText("template.tocmacro.help.label.param.separator.bracket.description")</li>
+        		<li><b>$action.getText("template.tocmacro.help.label.param.separator.brace.name")</b> - $action.getText("template.tocmacro.help.label.param.separator.bracket.description")</li>
+        		<li><b>$action.getText("template.tocmacro.help.label.param.separator.comma.name")</b> - $action.getText("template.tocmacro.help.label.param.separator.comma.description")</li>
+        		<li><b>$action.getText("template.tocmacro.help.label.param.separator.paren.name")</b> - $action.getText("template.tocmacro.help.label.param.separator.paren.description")</li>
+        		<li><b>$action.getText("template.tocmacro.help.label.param.separator.pipe.name")</b> - $action.getText("template.tocmacro.help.label.param.separator.pipe.description")</li>
+        		<li><b>$action.getText("template.tocmacro.help.label.param.separator.newline.name")</b> - $action.getText("template.tocmacro.help.label.param.separator.newline.description")</li>
+        		<li><b>$action.getText("template.tocmacro.help.label.param.separator.custom.name")</b> - $action.getText("template.tocmacro.help.label.param.separator.custom.description")</li>
+        	</ul>
+        <li><b>$action.getText("template.tocmacro.help.label.param.minlevel.name")</b> - $action.getText("template.tocmacro.help.label.param.minlevel.description")</li>
+        <li><b>$action.getText("template.tocmacro.help.label.param.maxlevel.name")</b> - $action.getText("template.tocmacro.help.label.param.maxlevel.description")</li>
+        <li><b>$action.getText("template.tocmacro.help.label.param.include.name")</b> - $action.getText("template.tocmacro.help.label.param.include.description")</li>
+        <li><b>$action.getText("template.tocmacro.help.label.param.exclude.name")</b> - $action.getText("template.tocmacro.help.label.param.exclude.description")</li>
+        <li><b>$action.getText("template.tocmacro.help.label.param.printable.name")</b> - $action.getText("template.tocmacro.help.label.param.printable.description")</li>
+        </ul>
+    </td>
+</tr>

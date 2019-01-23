@@ -1,0 +1,92 @@
+{namespace DashboardTemplates.Stream}
+
+/**
+*   @param canViewProfile
+*   @param currentUsername
+*   @param profilePictureInfo
+*   @param recentUpdates
+*   @param modifier
+*/
+{template .item}
+    <div class="update-item-profile">
+        <span class="aui-avatar aui-avatar-large">
+            <span class="aui-avatar-inner">
+                {call Confluence.Templates.User.logo}
+                    {param canView: $canViewProfile /}
+                    {param currentUsername: $currentUsername /}
+                    {param username}
+                        {if $modifier}
+                            {$modifier.name|noAutoescape}
+                        {/if}
+                    {/param}
+                    {param profilePictureInfo: $profilePictureInfo /}
+                {/call}
+            </span>
+        </span>
+    </div>
+    <div class="update-items">
+        <h4>
+            {call Confluence.Templates.User.usernameLink}
+                {param canView: $canViewProfile /}
+                {param username}
+                    {if $modifier}
+                        {$modifier.name|noAutoescape}
+                    {/if}
+                {/param}
+                {param fullName}
+                    {if $modifier}
+                        {$modifier.fullName|noAutoescape}
+                    {/if}
+                {/param}
+            {/call}
+        </h4>
+        <ul>
+            {foreach $changeItem in $recentUpdates}
+                <li class="update-item">
+                    {call .updateItem}
+                        {param changeItem: $changeItem /}
+                        {param changeSetNumber: 0 /}
+                        {param changeItemNumber: index($changeItem) /}
+                    {/call}
+                </li>
+            {/foreach}
+        </ul>
+    </div>
+{/template}
+
+/**
+ * Renders an individual update item
+ * @param changeItem
+ * @param changeSetNumber
+ * @param changeItemNumber
+ */
+{template .updateItem private="true"}
+    <a href="{$changeItem.urlPath}" title="{$changeItem.title}">
+        <div class="update-item-icons">
+            {if $changeItem.thumbnailable}
+                <span id="twixie-{$changeSetNumber}{$changeItemNumber}" data-thumbnail-id="{$changeSetNumber}{$changeItemNumber}" class="update-item-arrow icon icon-section-closed"></span>
+            {else}
+                <span class="update-item-arrow"></span>
+            {/if}
+            <span class="aui-icon {$changeItem.iconCss}">{$changeItem.friendlyContentType}</span>
+        </div>
+        <div class="update-item-content">
+            <span class="update-item-title">{$changeItem.title}</span>
+            {if $changeItem.summary}
+                <p class="update-item-summary text-wrapped">{$changeItem.summary}</p>
+            {/if}
+            <div class="update-item-date-wrapper">
+                <time datetime="" class="update-item-date">{$changeItem.updateDescription}
+                {if $changeItem.viewChangesLink}
+                    &nbsp;(<a href="{$changeItem.viewChangesLink}">{getText('view.change')}</a>)
+                {/if}
+                </time>
+            </div>
+            {if $changeItem.thumbnailable}
+                <div class="update-item-thumbnail-container">
+                    <span><img id="thumbnail-{$changeSetNumber}{$changeItemNumber}" class="thumbnail" src="{$changeItem.thumbnailUrl}" width="{$changeItem.thumbnailWidth}" height="{$changeItem.thumbnailHeight}" style="display: none" /></span>
+                </div>
+            {/if}
+        </div>
+    </a>
+{/template}

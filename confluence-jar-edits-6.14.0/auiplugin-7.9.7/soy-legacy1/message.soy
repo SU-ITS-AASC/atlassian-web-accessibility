@@ -1,0 +1,140 @@
+{namespace atlassian.message}
+
+/**
+ * @param content
+ * @param? id
+ * @param? title the title text of the message. NOT the title attribute for the message.
+ * @param? extraClasses
+ * @param? extraAttributes
+ * @param? tagName
+ *
+ * @param? isCloseable
+ * @param? isShadowed
+ */
+{template .info}
+    {call .message data="all"}
+        {param type: 'info' /}
+    {/call}
+{/template}
+
+/**
+ * @param content
+ * @param? id
+ * @param? title the title text of the message. NOT the title attribute for the message.
+ * @param? extraClasses
+ * @param? extraAttributes
+ * @param? tagName
+ *
+ * @param? isCloseable
+ * @param? isShadowed
+ */
+{template .warning}
+    {call .message data="all"}
+        {param type: 'warning' /}
+    {/call}
+{/template}
+
+/**
+ * @param content
+ * @param? id
+ * @param? title the title text of the message. NOT the title attribute for the message.
+ * @param? extraClasses
+ * @param? extraAttributes
+ * @param? tagName
+ *
+ * @param? isCloseable
+ * @param? isShadowed
+ */
+{template .error}
+    {call .message data="all"}
+        {param type: 'error' /}
+    {/call}
+{/template}
+
+/**
+ * @param content
+ * @param? id
+ * @param? title the title text of the message. NOT the title attribute for the message.
+ * @param? extraClasses
+ * @param? extraAttributes
+ * @param? tagName
+ *
+ * @param? isCloseable
+ * @param? isShadowed
+ */
+{template .success}
+    {call .message data="all"}
+        {param type: 'success' /}
+    {/call}
+{/template}
+
+/**
+ * @param content
+ * @param? id
+ * @param? title the title text of the message. NOT the title attribute for the message.
+ * @param? extraClasses
+ * @param? extraAttributes
+ * @param? tagName
+ *
+ * @param? isCloseable
+ * @param? isShadowed
+ */
+{template .hint}
+    {call .message data="all"}
+        {param type: 'hint' /}
+    {/call}
+{/template}
+
+/**
+ * @param content
+ * @param? id
+ * @param? title the title text of the message. NOT the title attribute for the message.
+ * @param? extraClasses
+ * @param? extraAttributes
+ * @param? tagName
+ *
+ * @param? isCloseable
+ * @param? isShadowed
+ */
+{template .generic}
+    {call .message data="all"}
+        {param type: 'generic' /}
+    {/call}
+{/template}
+
+/**
+ * NOTE: This markup differs from what is currently returned by the AJS.message function. This is to support AUI
+ * messages without titles - a case that currently does not render correctly in the JS functions.
+ *
+ * @param content
+ * @param? id
+ * @param? title the title text of the message. NOT the title attribute for the message.
+ * @param? extraClasses
+ * @param? extraAttributes
+ * @param? tagName
+ *
+ * @param? type internal use only. Use the specific template for the type you want. (.error, .success, etc)
+ * @param? isCloseable
+ * @param? isShadowed
+ */
+{template .message private="true"}
+    <{$tagName ? $tagName : 'div'}
+    {if $id} id="{$id}"{/if}
+     {sp}class="aui-message {$type ? $type : 'generic'}{if $isCloseable} closeable{/if}{if $isShadowed} shadowed{/if}{call atlassian.renderExtraClasses data="all" /}"
+     {call atlassian.renderExtraAttributes data="all" /}>
+        {if $title}
+            <p class="title">
+                <strong>{$title}</strong>
+            </p>
+        {/if}
+
+        {$content|noAutoescape}
+
+        <span class="aui-icon icon-{$type ? $type : 'generic'}"></span>
+
+        {if $isCloseable}
+            // mimic JS function's closeable attribute
+            <span class="aui-icon icon-close" role="button" tabindex="0"></span>
+        {/if}
+    </{$tagName ? $tagName : 'div'}>
+{/template}

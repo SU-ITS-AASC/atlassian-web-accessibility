@@ -1,0 +1,116 @@
+/**
+ * SyntaxHighlighter
+ * http://alexgorbatchev.com/SyntaxHighlighter
+ *
+ * SyntaxHighlighter is donationware. If you are using it, please donate.
+ * http://alexgorbatchev.com/SyntaxHighlighter/donate.html
+ *
+ * @version
+ * 3.0.83 (July 02 2010)
+ * 
+ * @copyright
+ * Copyright (C) 2004-2010 Alex Gorbatchev.
+ *
+ * @license
+ * Dual licensed under the MIT and GPL licenses.
+ */
+.syntaxhighlighter.sh-emacs {
+  background-color: black !important;
+}
+.syntaxhighlighter.sh-emacs .line.alt1 {
+  background-color: black !important;
+}
+.syntaxhighlighter.sh-emacs .line.alt2 {
+  background-color: black !important;
+}
+.syntaxhighlighter.sh-emacs .line.highlighted.alt1, .syntaxhighlighter.sh-emacs .line.highlighted.alt2 {
+  background-color: #2a3133 !important;
+}
+.syntaxhighlighter.sh-emacs .line.highlighted.number {
+  color: white !important;
+}
+.syntaxhighlighter.sh-emacs table caption {
+  color: #d3d3d3 !important;
+}
+.syntaxhighlighter.sh-emacs .gutter {
+  color: #d3d3d3 !important;
+}
+.syntaxhighlighter.sh-emacs .gutter .line.highlighted {
+  background-color: #990000 !important;
+  color: black !important;
+}
+.syntaxhighlighter.sh-emacs.printing .line .content {
+  border: none !important;
+}
+.syntaxhighlighter.sh-emacs.collapsed {
+  overflow: visible !important;
+}
+.syntaxhighlighter.sh-emacs.collapsed .toolbar {
+  color: #ebdb8d !important;
+  background: black !important;
+  border: 1px solid #990000 !important;
+}
+.syntaxhighlighter.sh-emacs.collapsed .toolbar a {
+  color: #ebdb8d !important;
+}
+.syntaxhighlighter.sh-emacs.collapsed .toolbar a:hover {
+  color: #ff7d27 !important;
+}
+.syntaxhighlighter.sh-emacs .toolbar {
+  color: white !important;
+  background: #990000 !important;
+  border: none !important;
+}
+.syntaxhighlighter.sh-emacs .toolbar a {
+  color: white !important;
+}
+.syntaxhighlighter.sh-emacs .toolbar a:hover {
+  color: #9ccff4 !important;
+}
+.syntaxhighlighter.sh-emacs .plain, .syntaxhighlighter.sh-emacs .plain a {
+  color: #d3d3d3 !important;
+}
+.syntaxhighlighter.sh-emacs .comments, .syntaxhighlighter.sh-emacs .comments a {
+  color: #ff7d27 !important;
+}
+.syntaxhighlighter.sh-emacs .string, .syntaxhighlighter.sh-emacs .string a {
+  color: #ff9e7b !important;
+}
+.syntaxhighlighter.sh-emacs .keyword {
+  color: aqua !important;
+}
+.syntaxhighlighter.sh-emacs .preprocessor {
+  color: #aec4de !important;
+}
+.syntaxhighlighter.sh-emacs .variable {
+  color: #ffaa3e !important;
+}
+.syntaxhighlighter.sh-emacs .value {
+  color: #009900 !important;
+}
+.syntaxhighlighter.sh-emacs .functions {
+  color: #81cef9 !important;
+}
+.syntaxhighlighter.sh-emacs .constants {
+  color: #ff9e7b !important;
+}
+.syntaxhighlighter.sh-emacs .script {
+  font-weight: bold !important;
+  color: aqua !important;
+  background-color: none !important;
+}
+.syntaxhighlighter.sh-emacs .color1, .syntaxhighlighter.sh-emacs .color1 a {
+  color: #ebdb8d !important;
+}
+.syntaxhighlighter.sh-emacs .color2, .syntaxhighlighter.sh-emacs .color2 a {
+  color: #ff7d27 !important;
+}
+.syntaxhighlighter.sh-emacs .color3, .syntaxhighlighter.sh-emacs .color3 a {
+  color: #aec4de !important;
+}
+
+
+/* with PDL enabled in Confluence */
+.pdl .codeContent .gutter {
+    background: black !important;
+}

@@ -1,0 +1,13 @@
+/* Storing these styles in a CSS file until LESS is upgraded to handle "2-" in a data attribute */
+.aui-dropdown2-tailed[data-dropdown2-alignment="left"]:before,
+.aui-dropdown2-tailed[data-dropdown2-alignment="left"]:after,
+.aui-dropdown2-tailed.aui-alignment-snap-left:before,
+.aui-dropdown2-tailed.aui-alignment-snap-left:after {
+    left: 20px;
+}
+.aui-dropdown2-tailed[data-dropdown2-alignment="right"]:before,
+.aui-dropdown2-tailed[data-dropdown2-alignment="right"]:after,
+.aui-dropdown2-tailed.aui-alignment-snap-right:before,
+.aui-dropdown2-tailed.aui-alignment-snap-right:after {
+    right: 20px;
+}

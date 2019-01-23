@@ -1,0 +1,8 @@
+{
+"version":3,
+"file":"/dummy-file-path",
+"lineCount":2,
+"mappings":"AAGAA,MAAA,sFAGG,QAAA,CACCC,CADD,CAECC,CAFD,cAOYC,QAAAA,CAASC,CAATD,EACHC,CAAAC,OAAAC,IAAA,CAAc,QAAA,OACNC,EAAQN,CAAA,mBADF,CAENO,EAAoBD,CAAAE,KAAA,qBAGrBF,EAAAG,OALO,IAKUF,CAAAG,IAAA,EALV,EAKqCC,QAAAC,SALrC,GAMNL,CAAAG,IAAA,CAAsBC,QAAAC,SAAtB,CANM,CAAd,CADGV,CAPZ,SAmBeW,QAAAA,kHAKQZ,CAAAa,aALRD,KAKqCZ,CAAAc,aALrCF,EAnBf,EAHH,CAiCAG;OAAA,8BAAAC,YAAA,iEACsF,QAAA,CAASC,CAAT,MACtEjB,EAAUe,OAAA,WAEdf,EAAAkB,OAAA,4BAA2CD,CAA3C,CAGAjB,EAAAmB,cAAAf,IAAA,YAAsCJ,CAAAoB,QAAAC,SAAtC,CAN0E,CADtF;",
+"sources":["input.js"],
+"names":["define","$","tinymce","init","ed","onInit","add","$form","$originalReferrer","find","length","val","document","referrer","getInfo","majorVersion","minorVersion","require","safeRequire","ReferrerPlugin","create","PluginManager","plugins","Referrer"]
+}

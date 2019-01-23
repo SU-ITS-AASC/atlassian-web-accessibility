@@ -1,0 +1,1392 @@
+<extra-modules>
+
+    <web-resource key="internal-src-js-aui-jquery" name="internal-src-js-aui-jquery">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+        
+        <resource type="download" name="internal-src-js-aui-jquery.js" location="src/js/aui/jquery.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-create-element" name="internal-src-js-aui-create-element">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-src-js-aui-jquery</dependency>
+        <resource type="download" name="internal-src-js-aui-create-element.js" location="src/js/aui/create-element.js" />
+    </web-resource>
+    <web-resource key="internal-object-assign-4.0.1-index" name="internal-object-assign-4.0.1-index">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+        
+        <resource type="download" name="internal-node-modules-object-assign-index.js" location="node_modules/object-assign/index.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-internal-globalize" name="internal-src-js-aui-internal-globalize">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-src-js-aui-create-element</dependency>
+        <dependency>com.atlassian.auiplugin:internal-object-assign-4.0.1-index</dependency>
+        <resource type="download" name="internal-src-js-aui-internal-globalize.js" location="src/js/aui/internal/globalize.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-internal-deprecation" name="internal-src-js-aui-internal-deprecation">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-src-js-aui-jquery</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-globalize</dependency>
+        <resource type="download" name="internal-src-js-aui-internal-deprecation.js" location="src/js/aui/internal/deprecation.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-internal-amdify" name="internal-src-js-aui-internal-amdify">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+        
+        <resource type="download" name="internal-src-js-aui-internal-amdify.js" location="src/js/aui/internal/amdify.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-internal-deprecation-deprecated-adg2-icons" name="internal-src-js-aui-internal-deprecation-deprecated-adg2-icons">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+        
+        <resource type="download" name="internal-src-js-aui-internal-deprecation-deprecated-adg2-icons.js" location="src/js/aui/internal/deprecation/deprecated-adg2-icons.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-css-deprecations" name="internal-src-js-aui-css-deprecations">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-deprecation</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-amdify</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-deprecation-deprecated-adg2-icons</dependency>
+        <resource type="download" name="internal-src-js-aui-css-deprecations.js" location="src/js/aui-css-deprecations.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-vendor-jquery-jquery-ui-jquery-ui-datepicker" name="internal-src-js-vendor-jquery-jquery-ui-jquery-ui-datepicker">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+        
+        <resource type="download" name="internal-src-js-vendor-jquery-jquery-ui-jquery-ui-datepicker.js" location="src/js-vendor/jquery/jquery-ui/jquery.ui.datepicker.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-internal-log" name="internal-src-js-aui-internal-log">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-globalize</dependency>
+        <resource type="download" name="internal-src-js-aui-internal-log.js" location="src/js/aui/internal/log.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-internal-browser" name="internal-src-js-aui-internal-browser">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+        
+        <resource type="download" name="internal-src-js-aui-internal-browser.js" location="src/js/aui/internal/browser.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-key-code" name="internal-src-js-aui-key-code">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-globalize</dependency>
+        <resource type="download" name="internal-src-js-aui-key-code.js" location="src/js/aui/key-code.js" />
+    </web-resource>
+    <web-resource key="internal-css.escape-1.5.0-css-escape" name="internal-css.escape-1.5.0-css-escape">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+        
+        <resource type="download" name="internal-node-modules-css-escape-css-escape.js" location="node_modules/css.escape/css.escape.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-inline-dialog" name="internal-src-js-aui-inline-dialog">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-src-js-aui-jquery</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-browser</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-deprecation</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-log</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-globalize</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-key-code</dependency>
+        <dependency>com.atlassian.auiplugin:internal-css.escape-1.5.0-css-escape</dependency>
+        <resource type="download" name="internal-src-js-aui-inline-dialog.js" location="src/js/aui/inline-dialog.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-format" name="internal-src-js-aui-format">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-globalize</dependency>
+        <resource type="download" name="internal-src-js-aui-format.js" location="src/js/aui/format.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-internal-i18n-aui" name="internal-src-js-aui-internal-i18n-aui">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+        
+        <resource type="download" name="internal-src-js-aui-internal-i18n-aui.js" location="src/js/aui/internal/i18n/aui.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-i18n" name="internal-src-js-aui-i18n">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-src-js-aui-format</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-globalize</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-i18n-aui</dependency>
+        <resource type="download" name="internal-src-js-aui-i18n.js" location="src/js/aui/i18n.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-date-picker" name="internal-src-js-aui-date-picker">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-src-js-aui-jquery</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-vendor-jquery-jquery-ui-jquery-ui-datepicker</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-log</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-browser</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-globalize</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-inline-dialog</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-key-code</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-i18n</dependency>
+        <resource type="download" name="internal-src-js-aui-date-picker.js" location="src/js/aui/date-picker.js" />
+    </web-resource>
+    <web-resource key="internal-skatejs-0.13.17-lib-constants" name="internal-skatejs-0.13.17-lib-constants">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+        
+        <resource type="download" name="internal-node-modules-skatejs-lib-constants.js" location="node_modules/skatejs/lib/constants.js" />
+    </web-resource>
+    <web-resource key="internal-skatejs-0.13.17-lib-version" name="internal-skatejs-0.13.17-lib-version">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+        
+        <resource type="download" name="internal-node-modules-skatejs-lib-version.js" location="node_modules/skatejs/lib/version.js" />
+    </web-resource>
+    <web-resource key="internal-skatejs-0.13.17-lib-globals" name="internal-skatejs-0.13.17-lib-globals">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-skatejs-0.13.17-lib-version</dependency>
+        <dependency>com.atlassian.auiplugin:internal-skatejs-0.13.17-lib-version</dependency>
+        <resource type="download" name="internal-node-modules-skatejs-lib-globals.js" location="node_modules/skatejs/lib/globals.js" />
+    </web-resource>
+    <web-resource key="internal-skatejs-0.13.17-lib-data" name="internal-skatejs-0.13.17-lib-data">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+        
+        <resource type="download" name="internal-node-modules-skatejs-lib-data.js" location="node_modules/skatejs/lib/data.js" />
+    </web-resource>
+    <web-resource key="internal-skatejs-0.13.17-lib-mutation-observer" name="internal-skatejs-0.13.17-lib-mutation-observer">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+        
+        <resource type="download" name="internal-node-modules-skatejs-lib-mutation-observer.js" location="node_modules/skatejs/lib/mutation-observer.js" />
+    </web-resource>
+    <web-resource key="internal-skatejs-0.13.17-lib-utils" name="internal-skatejs-0.13.17-lib-utils">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-skatejs-0.13.17-lib-constants</dependency>
+        <dependency>com.atlassian.auiplugin:internal-skatejs-0.13.17-lib-constants</dependency>
+        <resource type="download" name="internal-node-modules-skatejs-lib-utils.js" location="node_modules/skatejs/lib/utils.js" />
+    </web-resource>
+    <web-resource key="internal-skatejs-0.13.17-lib-registry" name="internal-skatejs-0.13.17-lib-registry">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-skatejs-0.13.17-lib-constants</dependency>
+        <dependency>com.atlassian.auiplugin:internal-skatejs-0.13.17-lib-globals</dependency>
+        <dependency>com.atlassian.auiplugin:internal-skatejs-0.13.17-lib-utils</dependency>
+        <dependency>com.atlassian.auiplugin:internal-skatejs-0.13.17-lib-constants</dependency>
+        <dependency>com.atlassian.auiplugin:internal-skatejs-0.13.17-lib-globals</dependency>
+        <dependency>com.atlassian.auiplugin:internal-skatejs-0.13.17-lib-utils</dependency>
+        <resource type="download" name="internal-node-modules-skatejs-lib-registry.js" location="node_modules/skatejs/lib/registry.js" />
+    </web-resource>
+    <web-resource key="internal-skatejs-0.13.17-lib-lifecycle" name="internal-skatejs-0.13.17-lib-lifecycle">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-skatejs-0.13.17-lib-constants</dependency>
+        <dependency>com.atlassian.auiplugin:internal-skatejs-0.13.17-lib-data</dependency>
+        <dependency>com.atlassian.auiplugin:internal-skatejs-0.13.17-lib-mutation-observer</dependency>
+        <dependency>com.atlassian.auiplugin:internal-skatejs-0.13.17-lib-registry</dependency>
+        <dependency>com.atlassian.auiplugin:internal-skatejs-0.13.17-lib-utils</dependency>
+        <dependency>com.atlassian.auiplugin:internal-skatejs-0.13.17-lib-constants</dependency>
+        <dependency>com.atlassian.auiplugin:internal-skatejs-0.13.17-lib-data</dependency>
+        <dependency>com.atlassian.auiplugin:internal-skatejs-0.13.17-lib-mutation-observer</dependency>
+        <dependency>com.atlassian.auiplugin:internal-skatejs-0.13.17-lib-registry</dependency>
+        <dependency>com.atlassian.auiplugin:internal-skatejs-0.13.17-lib-utils</dependency>
+        <resource type="download" name="internal-node-modules-skatejs-lib-lifecycle.js" location="node_modules/skatejs/lib/lifecycle.js" />
+    </web-resource>
+    <web-resource key="internal-skatejs-0.13.17-lib-fix-ie-innerhtml" name="internal-skatejs-0.13.17-lib-fix-ie-innerhtml">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+        
+        <resource type="download" name="internal-node-modules-skatejs-lib-fix-ie-innerhtml.js" location="node_modules/skatejs/lib/fix-ie-innerhtml.js" />
+    </web-resource>
+    <web-resource key="internal-skatejs-0.13.17-lib-document-observer" name="internal-skatejs-0.13.17-lib-document-observer">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-skatejs-0.13.17-lib-globals</dependency>
+        <dependency>com.atlassian.auiplugin:internal-skatejs-0.13.17-lib-lifecycle</dependency>
+        <dependency>com.atlassian.auiplugin:internal-skatejs-0.13.17-lib-mutation-observer</dependency>
+        <dependency>com.atlassian.auiplugin:internal-skatejs-0.13.17-lib-fix-ie-innerhtml</dependency>
+        <dependency>com.atlassian.auiplugin:internal-skatejs-0.13.17-lib-utils</dependency>
+        <dependency>com.atlassian.auiplugin:internal-skatejs-0.13.17-lib-globals</dependency>
+        <dependency>com.atlassian.auiplugin:internal-skatejs-0.13.17-lib-lifecycle</dependency>
+        <dependency>com.atlassian.auiplugin:internal-skatejs-0.13.17-lib-mutation-observer</dependency>
+        <dependency>com.atlassian.auiplugin:internal-skatejs-0.13.17-lib-fix-ie-innerhtml</dependency>
+        <dependency>com.atlassian.auiplugin:internal-skatejs-0.13.17-lib-utils</dependency>
+        <resource type="download" name="internal-node-modules-skatejs-lib-document-observer.js" location="node_modules/skatejs/lib/document-observer.js" />
+    </web-resource>
+    <web-resource key="internal-skatejs-0.13.17-lib-skate" name="internal-skatejs-0.13.17-lib-skate">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-skatejs-0.13.17-lib-constants</dependency>
+        <dependency>com.atlassian.auiplugin:internal-skatejs-0.13.17-lib-document-observer</dependency>
+        <dependency>com.atlassian.auiplugin:internal-skatejs-0.13.17-lib-lifecycle</dependency>
+        <dependency>com.atlassian.auiplugin:internal-skatejs-0.13.17-lib-registry</dependency>
+        <dependency>com.atlassian.auiplugin:internal-skatejs-0.13.17-lib-utils</dependency>
+        <dependency>com.atlassian.auiplugin:internal-skatejs-0.13.17-lib-version</dependency>
+        <dependency>com.atlassian.auiplugin:internal-skatejs-0.13.17-lib-constants</dependency>
+        <dependency>com.atlassian.auiplugin:internal-skatejs-0.13.17-lib-document-observer</dependency>
+        <dependency>com.atlassian.auiplugin:internal-skatejs-0.13.17-lib-lifecycle</dependency>
+        <dependency>com.atlassian.auiplugin:internal-skatejs-0.13.17-lib-registry</dependency>
+        <dependency>com.atlassian.auiplugin:internal-skatejs-0.13.17-lib-utils</dependency>
+        <dependency>com.atlassian.auiplugin:internal-skatejs-0.13.17-lib-version</dependency>
+        <resource type="download" name="internal-node-modules-skatejs-lib-skate.js" location="node_modules/skatejs/lib/skate.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-internal-skate" name="internal-src-js-aui-internal-skate">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-skatejs-0.13.17-lib-skate</dependency>
+        <resource type="download" name="internal-src-js-aui-internal-skate.js" location="src/js/aui/internal/skate.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-polyfills-placeholder" name="internal-src-js-aui-polyfills-placeholder">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-src-js-aui-jquery</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-skate</dependency>
+        <resource type="download" name="internal-src-js-aui-polyfills-placeholder.js" location="src/js/aui/polyfills/placeholder.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-internal-animation" name="internal-src-js-aui-internal-animation">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+        
+        <resource type="download" name="internal-src-js-aui-internal-animation.js" location="src/js/aui/internal/animation.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-escape-html" name="internal-src-js-aui-escape-html">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-globalize</dependency>
+        <resource type="download" name="internal-src-js-aui-escape-html.js" location="src/js/aui/escape-html.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-template" name="internal-src-js-aui-template">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-src-js-aui-jquery</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-escape-html</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-globalize</dependency>
+        <resource type="download" name="internal-src-js-aui-template.js" location="src/js/aui/template.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-banner" name="internal-src-js-aui-banner">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-src-js-aui-jquery</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-animation</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-amdify</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-globalize</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-template</dependency>
+        <resource type="download" name="internal-src-js-aui-banner.js" location="src/js/aui/banner.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-vendor-underscorejs-underscore" name="internal-src-js-vendor-underscorejs-underscore">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+        
+        <resource type="download" name="internal-src-js-vendor-underscorejs-underscore.js" location="src/js-vendor/underscorejs/underscore.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-underscore" name="internal-src-js-aui-underscore">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-src-js-vendor-underscorejs-underscore</dependency>
+        <resource type="download" name="internal-src-js-aui-underscore.js" location="src/js/aui/underscore.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-spinner" name="internal-src-js-aui-spinner">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-skatejs-0.13.17-lib-skate</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-deprecation</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-underscore</dependency>
+        <resource type="download" name="internal-src-js-aui-spinner.js" location="src/js/aui/spinner.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-button" name="internal-src-js-aui-button">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-log</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-amdify</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-skate</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-spinner</dependency>
+        <resource type="download" name="internal-src-js-aui-button.js" location="src/js/aui/button.js" />
+    </web-resource>
+    <web-resource key="internal-skatejs-template-html-0.0.0-dist-template-html" name="internal-skatejs-template-html-0.0.0-dist-template-html">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+        
+        <resource type="download" name="internal-node-modules-skatejs-template-html-dist-template-html.js" location="node_modules/skatejs-template-html/dist/template-html.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-debounce" name="internal-src-js-aui-debounce">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-globalize</dependency>
+        <resource type="download" name="internal-src-js-aui-debounce.js" location="src/js/aui/debounce.js" />
+    </web-resource>
+    <web-resource key="internal-tether-0.6.5-tether" name="internal-tether-0.6.5-tether">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+        
+        <resource type="download" name="internal-node-modules-tether-tether.js" location="node_modules/tether/tether.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-internal-alignment" name="internal-src-js-aui-internal-alignment">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-tether-0.6.5-tether</dependency>
+        <resource type="download" name="internal-src-js-aui-internal-alignment.js" location="src/js/aui/internal/alignment.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-polyfills-custom-event" name="internal-src-js-aui-polyfills-custom-event">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+        
+        <resource type="download" name="internal-src-js-aui-polyfills-custom-event.js" location="src/js/aui/polyfills/custom-event.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-blanket" name="internal-src-js-aui-blanket">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-src-js-aui-jquery</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-deprecation</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-animation</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-globalize</dependency>
+        <resource type="download" name="internal-src-js-aui-blanket.js" location="src/js/aui/blanket.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-focus-manager" name="internal-src-js-aui-focus-manager">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-src-js-aui-jquery</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-globalize</dependency>
+        <resource type="download" name="internal-src-js-aui-focus-manager.js" location="src/js/aui/focus-manager.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-internal-widget" name="internal-src-js-aui-internal-widget">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-src-js-aui-jquery</dependency>
+        <resource type="download" name="internal-src-js-aui-internal-widget.js" location="src/js/aui/internal/widget.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-layer" name="internal-src-js-aui-layer">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-src-js-aui-jquery</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-blanket</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-focus-manager</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-globalize</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-key-code</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-widget</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-polyfills-custom-event</dependency>
+        <resource type="download" name="internal-src-js-aui-layer.js" location="src/js/aui/layer.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-internal-state" name="internal-src-js-aui-internal-state">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+        
+        <resource type="download" name="internal-src-js-aui-internal-state.js" location="src/js/aui/internal/state.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-dropdown2" name="internal-src-js-aui-dropdown2">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-src-js-aui-i18n</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-spinner</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-jquery</dependency>
+        <dependency>com.atlassian.auiplugin:internal-skatejs-template-html-0.0.0-dist-template-html</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-deprecation</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-log</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-debounce</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-browser</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-alignment</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-polyfills-custom-event</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-key-code</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-layer</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-state</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-skate</dependency>
+        <resource type="download" name="internal-src-js-aui-dropdown2.js" location="src/js/aui/dropdown2.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-vendor-jquery-jquery-tipsy" name="internal-src-js-vendor-jquery-jquery-tipsy">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+        
+        <resource type="download" name="internal-src-js-vendor-jquery-jquery-tipsy.js" location="src/js-vendor/jquery/jquery.tipsy.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-tooltip" name="internal-src-js-aui-tooltip">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-src-js-aui-jquery</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-vendor-jquery-jquery-tipsy</dependency>
+        <resource type="download" name="internal-src-js-aui-tooltip.js" location="src/js/aui/tooltip.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-unique-id" name="internal-src-js-aui-unique-id">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-globalize</dependency>
+        <resource type="download" name="internal-src-js-aui-unique-id.js" location="src/js/aui/unique-id.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-checkbox-multiselect" name="internal-src-js-aui-checkbox-multiselect">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-src-js-aui-jquery</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-dropdown2</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-tooltip</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-i18n</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-amdify</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-skate</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-unique-id</dependency>
+        <resource type="download" name="internal-src-js-aui-checkbox-multiselect.js" location="src/js/aui/checkbox-multiselect.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-dialog2" name="internal-src-js-aui-dialog2">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-src-js-aui-jquery</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-amdify</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-globalize</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-layer</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-widget</dependency>
+        <resource type="download" name="internal-src-js-aui-dialog2.js" location="src/js/aui/dialog2.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-expander" name="internal-src-js-aui-expander">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-src-js-aui-jquery</dependency>
+        <resource type="download" name="internal-src-js-aui-expander.js" location="src/js/aui/expander.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-flag" name="internal-src-js-aui-flag">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-src-js-aui-jquery</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-animation</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-amdify</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-globalize</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-key-code</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-template</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-polyfills-custom-event</dependency>
+        <resource type="download" name="internal-src-js-aui-flag.js" location="src/js/aui/flag.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-form-notification" name="internal-src-js-aui-form-notification">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-src-js-aui-jquery</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-vendor-jquery-jquery-tipsy</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-log</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-amdify</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-key-code</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-skate</dependency>
+        <resource type="download" name="internal-src-js-aui-form-notification.js" location="src/js/aui/form-notification.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-form-validation-validator-register" name="internal-src-js-aui-form-validation-validator-register">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-src-js-aui-jquery</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-log</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-amdify</dependency>
+        <resource type="download" name="internal-src-js-aui-form-validation-validator-register.js" location="src/js/aui/form-validation/validator-register.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-form-validation-basic-validators" name="internal-src-js-aui-form-validation-basic-validators">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-src-js-aui-jquery</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-amdify</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-format</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-i18n</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-form-validation-validator-register</dependency>
+        <resource type="download" name="internal-src-js-aui-form-validation-basic-validators.js" location="src/js/aui/form-validation/basic-validators.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-form-validation" name="internal-src-js-aui-form-validation">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-src-js-aui-jquery</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-form-notification</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-form-validation-basic-validators</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-amdify</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-deprecation</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-globalize</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-skate</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-form-validation-validator-register</dependency>
+        <resource type="download" name="internal-src-js-aui-form-validation.js" location="src/js/aui/form-validation.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-internal-enforcer" name="internal-src-js-aui-internal-enforcer">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-log</dependency>
+        <resource type="download" name="internal-src-js-aui-internal-enforcer.js" location="src/js/aui/internal/enforcer.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-internal-constants" name="internal-src-js-aui-internal-constants">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+        
+        <resource type="download" name="internal-src-js-aui-internal-constants.js" location="src/js/aui/internal/constants.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-label" name="internal-src-js-aui-label">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-skate</dependency>
+        <dependency>com.atlassian.auiplugin:internal-skatejs-template-html-0.0.0-dist-template-html</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-enforcer</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-constants</dependency>
+        <resource type="download" name="internal-src-js-aui-label.js" location="src/js/aui/label.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-progress-indicator" name="internal-src-js-aui-progress-indicator">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-src-js-aui-jquery</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-underscore</dependency>
+        <dependency>com.atlassian.auiplugin:internal-skatejs-0.13.17-lib-skate</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-animation</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-browser</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-deprecation</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-globalize</dependency>
+        <resource type="download" name="internal-src-js-aui-progress-indicator.js" location="src/js/aui/progress-indicator.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-vendor-backbone-backbone" name="internal-src-js-vendor-backbone-backbone">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-src-js-vendor-underscorejs-underscore</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-jquery</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-vendor-underscorejs-underscore</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-jquery</dependency>
+        <resource type="download" name="internal-src-js-vendor-backbone-backbone.js" location="src/js-vendor/backbone/backbone.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-backbone" name="internal-src-js-aui-backbone">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-src-js-aui-underscore</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-vendor-backbone-backbone</dependency>
+        <resource type="download" name="internal-src-js-aui-backbone.js" location="src/js/aui/backbone.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-progressive-data-set" name="internal-src-js-aui-progressive-data-set">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-src-js-aui-underscore</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-backbone</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-globalize</dependency>
+        <resource type="download" name="internal-src-js-aui-progressive-data-set.js" location="src/js/aui/progressive-data-set.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-query-input" name="internal-src-js-aui-query-input">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-src-js-aui-underscore</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-backbone</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-globalize</dependency>
+        <resource type="download" name="internal-src-js-aui-query-input.js" location="src/js/aui/query-input.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-restful-table-class-names" name="internal-src-js-aui-restful-table-class-names">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+        
+        <resource type="download" name="internal-src-js-aui-restful-table-class-names.js" location="src/js/aui/restful-table/class-names.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-restful-table-custom-create-view" name="internal-src-js-aui-restful-table-custom-create-view">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-src-js-aui-backbone</dependency>
+        <resource type="download" name="internal-src-js-aui-restful-table-custom-create-view.js" location="src/js/aui/restful-table/custom-create-view.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-restful-table-custom-edit-view" name="internal-src-js-aui-restful-table-custom-edit-view">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-src-js-aui-backbone</dependency>
+        <resource type="download" name="internal-src-js-aui-restful-table-custom-edit-view.js" location="src/js/aui/restful-table/custom-edit-view.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-restful-table-custom-read-view" name="internal-src-js-aui-restful-table-custom-read-view">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-src-js-aui-backbone</dependency>
+        <resource type="download" name="internal-src-js-aui-restful-table-custom-read-view.js" location="src/js/aui/restful-table/custom-read-view.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-restful-table-data-keys" name="internal-src-js-aui-restful-table-data-keys">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+        
+        <resource type="download" name="internal-src-js-aui-restful-table-data-keys.js" location="src/js/aui/restful-table/data-keys.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-vendor-jquery-serializetoobject" name="internal-src-js-vendor-jquery-serializetoobject">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+        
+        <resource type="download" name="internal-src-js-vendor-jquery-serializetoobject.js" location="src/js-vendor/jquery/serializetoobject.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-restful-table-events" name="internal-src-js-aui-restful-table-events">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+        
+        <resource type="download" name="internal-src-js-aui-restful-table-events.js" location="src/js/aui/restful-table/events.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-restful-table-throbber" name="internal-src-js-aui-restful-table-throbber">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+        
+        <resource type="download" name="internal-src-js-aui-restful-table-throbber.js" location="src/js/aui/restful-table/throbber.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-restful-table-edit-row" name="internal-src-js-aui-restful-table-edit-row">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-src-js-aui-jquery</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-vendor-jquery-serializetoobject</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-backbone</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-restful-table-class-names</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-restful-table-data-keys</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-restful-table-events</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-i18n</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-restful-table-throbber</dependency>
+        <resource type="download" name="internal-src-js-aui-restful-table-edit-row.js" location="src/js/aui/restful-table/edit-row.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-events" name="internal-src-js-aui-events">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-src-js-aui-jquery</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-deprecation</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-globalize</dependency>
+        <resource type="download" name="internal-src-js-aui-events.js" location="src/js/aui/events.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-restful-table-entry-model" name="internal-src-js-aui-restful-table-entry-model">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-src-js-aui-jquery</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-events</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-underscore</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-backbone</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-restful-table-events</dependency>
+        <resource type="download" name="internal-src-js-aui-restful-table-entry-model.js" location="src/js/aui/restful-table/entry-model.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-event" name="internal-src-js-aui-event">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-src-js-aui-jquery</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-log</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-globalize</dependency>
+        <resource type="download" name="internal-src-js-aui-event.js" location="src/js/aui/event.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-forms" name="internal-src-js-aui-forms">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-src-js-aui-jquery</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-globalize</dependency>
+        <resource type="download" name="internal-src-js-aui-forms.js" location="src/js/aui/forms.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-dialog" name="internal-src-js-aui-dialog">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-src-js-aui-jquery</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-key-code</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-log</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-deprecation</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-event</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-blanket</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-forms</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-globalize</dependency>
+        <resource type="download" name="internal-src-js-aui-dialog.js" location="src/js/aui/dialog.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-restful-table-row" name="internal-src-js-aui-restful-table-row">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-src-js-aui-jquery</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-dialog</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-backbone</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-restful-table-class-names</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-restful-table-data-keys</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-restful-table-events</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-i18n</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-restful-table-throbber</dependency>
+        <resource type="download" name="internal-src-js-aui-restful-table-row.js" location="src/js/aui/restful-table/row.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-restful-table" name="internal-src-js-aui-restful-table">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-src-js-aui-jquery</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-log</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-backbone</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-restful-table-class-names</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-restful-table-custom-create-view</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-restful-table-custom-edit-view</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-restful-table-custom-read-view</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-restful-table-data-keys</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-restful-table-edit-row</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-restful-table-entry-model</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-restful-table-events</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-globalize</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-i18n</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-restful-table-row</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-restful-table-throbber</dependency>
+        <resource type="download" name="internal-src-js-aui-restful-table.js" location="src/js/aui/restful-table.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-result-set" name="internal-src-js-aui-result-set">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-src-js-aui-backbone</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-globalize</dependency>
+        <resource type="download" name="internal-src-js-aui-result-set.js" location="src/js/aui/result-set.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-results-list" name="internal-src-js-aui-results-list">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-src-js-aui-underscore</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-backbone</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-globalize</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-result-set</dependency>
+        <resource type="download" name="internal-src-js-aui-results-list.js" location="src/js/aui/results-list.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-spin" name="internal-src-js-aui-spin">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-src-js-aui-jquery</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-spinner</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-skate</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-deprecation</dependency>
+        <resource type="download" name="internal-src-js-aui-spin.js" location="src/js/aui/spin.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-internal-select-option" name="internal-src-js-aui-internal-select-option">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-skate</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-escape-html</dependency>
+        <resource type="download" name="internal-src-js-aui-internal-select-option.js" location="src/js/aui/internal/select/option.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-internal-select-suggestion-model" name="internal-src-js-aui-internal-select-suggestion-model">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-src-js-aui-backbone</dependency>
+        <resource type="download" name="internal-src-js-aui-internal-select-suggestion-model.js" location="src/js/aui/internal/select/suggestion-model.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-internal-select-suggestions-model" name="internal-src-js-aui-internal-select-suggestions-model">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+        
+        <resource type="download" name="internal-src-js-aui-internal-select-suggestions-model.js" location="src/js/aui/internal/select/suggestions-model.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-internal-select-suggestions-view" name="internal-src-js-aui-internal-select-suggestions-view">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-src-js-aui-jquery</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-i18n</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-alignment</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-layer</dependency>
+        <resource type="download" name="internal-src-js-aui-internal-select-suggestions-view.js" location="src/js/aui/internal/select/suggestions-view.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-internal-select-template" name="internal-src-js-aui-internal-select-template">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-skatejs-template-html-0.0.0-dist-template-html</dependency>
+        <resource type="download" name="internal-src-js-aui-internal-select-template.js" location="src/js/aui/internal/select/template.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-select" name="internal-src-js-aui-select">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-src-js-aui-jquery</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-button</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-i18n</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-spin</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-select-option</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-amdify</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-polyfills-custom-event</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-globalize</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-key-code</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-progressive-data-set</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-skate</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-state</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-select-suggestion-model</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-select-suggestions-model</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-select-suggestions-view</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-select-template</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-unique-id</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-constants</dependency>
+        <resource type="download" name="internal-src-js-aui-select.js" location="src/js/aui/select.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-vendor-jquery-plugins-jquery-select2" name="internal-src-js-vendor-jquery-plugins-jquery-select2">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+        
+        <resource type="download" name="internal-src-js-vendor-jquery-plugins-jquery-select2.js" location="src/js-vendor/jquery/plugins/jquery.select2.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-select2" name="internal-src-js-aui-select2">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-src-js-aui-jquery</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-vendor-jquery-plugins-jquery-select2</dependency>
+        <resource type="download" name="internal-src-js-aui-select2.js" location="src/js/aui/select2.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-vendor-raf-raf" name="internal-src-js-vendor-raf-raf">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+        
+        <resource type="download" name="internal-src-js-vendor-raf-raf.js" location="src/js-vendor/raf/raf.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-clone" name="internal-src-js-aui-clone">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-src-js-aui-jquery</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-globalize</dependency>
+        <resource type="download" name="internal-src-js-aui-clone.js" location="src/js/aui/clone.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-internal-has-touch" name="internal-src-js-aui-internal-has-touch">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+        
+        <resource type="download" name="internal-src-js-aui-internal-has-touch.js" location="src/js/aui/internal/has-touch.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-internal-is-input" name="internal-src-js-aui-internal-is-input">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+        
+        <resource type="download" name="internal-src-js-aui-internal-is-input.js" location="src/js/aui/internal/is-input.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-internal-mediaQuery" name="internal-src-js-aui-internal-mediaQuery">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+        
+        <resource type="download" name="internal-src-js-aui-internal-mediaQuery.js" location="src/js/aui/internal/mediaQuery.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-sidebar" name="internal-src-js-aui-sidebar">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-src-js-aui-jquery</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-vendor-jquery-jquery-tipsy</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-vendor-raf-raf</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-i18n</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-clone</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-deprecation</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-globalize</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-has-touch</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-is-input</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-key-code</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-mediaQuery</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-skate</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-unique-id</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-widget</dependency>
+        <resource type="download" name="internal-src-js-aui-sidebar.js" location="src/js/aui/sidebar.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-vendor-jquery-jquery-tablesorter" name="internal-src-js-vendor-jquery-jquery-tablesorter">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+        
+        <resource type="download" name="internal-src-js-vendor-jquery-jquery-tablesorter.js" location="src/js-vendor/jquery/jquery.tablesorter.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-tables-sortable" name="internal-src-js-aui-tables-sortable">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-src-js-aui-jquery</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-vendor-jquery-jquery-tablesorter</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-globalize</dependency>
+        <resource type="download" name="internal-src-js-aui-tables-sortable.js" location="src/js/aui/tables-sortable.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-tipsy" name="internal-src-js-aui-tipsy">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-src-js-vendor-jquery-jquery-tipsy</dependency>
+        <resource type="download" name="internal-src-js-aui-tipsy.js" location="src/js/aui/tipsy.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-internal-attributes" name="internal-src-js-aui-internal-attributes">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+        
+        <resource type="download" name="internal-src-js-aui-internal-attributes.js" location="src/js/aui/internal/attributes.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-toggle" name="internal-src-js-aui-toggle">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-src-js-aui-spin</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-tooltip</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-attributes</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-jquery</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-enforcer</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-key-code</dependency>
+        <dependency>com.atlassian.auiplugin:internal-skatejs-template-html-0.0.0-dist-template-html</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-skate</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-constants</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-polyfills-custom-event</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-spinner</dependency>
+        <resource type="download" name="internal-src-js-aui-toggle.js" location="src/js/aui/toggle.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-trigger" name="internal-src-js-aui-trigger">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-src-js-aui-jquery</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-amdify</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-skate</dependency>
+        <resource type="download" name="internal-src-js-aui-trigger.js" location="src/js/aui/trigger.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-truncating-progressive-data-set" name="internal-src-js-aui-truncating-progressive-data-set">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-globalize</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-progressive-data-set</dependency>
+        <resource type="download" name="internal-src-js-aui-truncating-progressive-data-set.js" location="src/js/aui/truncating-progressive-data-set.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-internal-header-create-header" name="internal-src-js-aui-internal-header-create-header">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-src-js-aui-jquery</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-polyfills-custom-event</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-debounce</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-i18n</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-skate</dependency>
+        <dependency>com.atlassian.auiplugin:internal-skatejs-template-html-0.0.0-dist-template-html</dependency>
+        <resource type="download" name="internal-src-js-aui-internal-header-create-header.js" location="src/js/aui/internal/header/create-header.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-header-async" name="internal-src-js-aui-header-async">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-header-create-header</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-skate</dependency>
+        <resource type="download" name="internal-src-js-aui-header-async.js" location="src/js/aui/header-async.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-polyfills-console" name="internal-src-js-aui-polyfills-console">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+        
+        <resource type="download" name="internal-src-js-aui-polyfills-console.js" location="src/js/aui/polyfills/console.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-binder" name="internal-src-js-aui-binder">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-src-js-aui-jquery</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-deprecation</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-log</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-globalize</dependency>
+        <resource type="download" name="internal-src-js-aui-binder.js" location="src/js/aui/binder.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-binders-placeholder" name="internal-src-js-aui-binders-placeholder">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-src-js-aui-jquery</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-binder</dependency>
+        <resource type="download" name="internal-src-js-aui-binders-placeholder.js" location="src/js/aui/binders/placeholder.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-jquery-jquery-os" name="internal-src-js-jquery-jquery-os">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+        
+        <resource type="download" name="internal-src-js-jquery-jquery-os.js" location="src/js/jquery/jquery.os.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-jquery-jquery-moveto" name="internal-src-js-jquery-jquery-moveto">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+        
+        <resource type="download" name="internal-src-js-jquery-jquery-moveto.js" location="src/js/jquery/jquery.moveto.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-cookie" name="internal-src-js-aui-cookie">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-deprecation</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-globalize</dependency>
+        <resource type="download" name="internal-src-js-aui-cookie.js" location="src/js/aui/cookie.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-firebug" name="internal-src-js-aui-firebug">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-src-js-aui-jquery</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-deprecation</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-globalize</dependency>
+        <resource type="download" name="internal-src-js-aui-firebug.js" location="src/js/aui/firebug.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-internal-add-id" name="internal-src-js-aui-internal-add-id">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-src-js-aui-jquery</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-globalize</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-unique-id</dependency>
+        <resource type="download" name="internal-src-js-aui-internal-add-id.js" location="src/js/aui/internal/add-id.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-alphanum" name="internal-src-js-aui-alphanum">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-globalize</dependency>
+        <resource type="download" name="internal-src-js-aui-alphanum.js" location="src/js/aui/alphanum.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-contain-dropdown" name="internal-src-js-aui-contain-dropdown">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-src-js-aui-jquery</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-globalize</dependency>
+        <resource type="download" name="internal-src-js-aui-contain-dropdown.js" location="src/js/aui/contain-dropdown.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-index-of" name="internal-src-js-aui-index-of">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-globalize</dependency>
+        <resource type="download" name="internal-src-js-aui-index-of.js" location="src/js/aui/index-of.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-contains" name="internal-src-js-aui-contains">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-globalize</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-index-of</dependency>
+        <resource type="download" name="internal-src-js-aui-contains.js" location="src/js/aui/contains.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-vendor-jquery-plugins-jquery-aop" name="internal-src-js-vendor-jquery-plugins-jquery-aop">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+        
+        <resource type="download" name="internal-src-js-vendor-jquery-plugins-jquery-aop.js" location="src/js-vendor/jquery/plugins/jquery.aop.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-drop-down" name="internal-src-js-aui-drop-down">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-src-js-aui-jquery</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-vendor-jquery-plugins-jquery-aop</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-deprecation</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-log</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-globalize</dependency>
+        <resource type="download" name="internal-src-js-aui-drop-down.js" location="src/js/aui/drop-down.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-escape" name="internal-src-js-aui-escape">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-globalize</dependency>
+        <resource type="download" name="internal-src-js-aui-escape.js" location="src/js/aui/escape.js" />
+    </web-resource>
+    <web-resource key="internal-fancy-file-input-2.0.3-dist-fancy-file-input" name="internal-fancy-file-input-2.0.3-dist-fancy-file-input">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-src-js-aui-jquery</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-jquery</dependency>
+        <resource type="download" name="internal-node-modules-fancy-file-input-dist-fancy-file-input.js" location="node_modules/fancy-file-input/dist/fancy-file-input.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-fancy-file-input" name="internal-src-js-aui-fancy-file-input">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-fancy-file-input-2.0.3-dist-fancy-file-input</dependency>
+        <resource type="download" name="internal-src-js-aui-fancy-file-input.js" location="src/js/aui/fancy-file-input.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-filter-by-search" name="internal-src-js-aui-filter-by-search">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-deprecation</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-globalize</dependency>
+        <resource type="download" name="internal-src-js-aui-filter-by-search.js" location="src/js/aui/filter-by-search.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-include" name="internal-src-js-aui-include">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-src-js-aui-jquery</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-deprecation</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-contains</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-globalize</dependency>
+        <resource type="download" name="internal-src-js-aui-include.js" location="src/js/aui/include.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-inline-dialog2" name="internal-src-js-aui-inline-dialog2">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-src-js-aui-jquery</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-alignment</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-amdify</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-attributes</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-enforcer</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-globalize</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-layer</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-skate</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-state</dependency>
+        <resource type="download" name="internal-src-js-aui-inline-dialog2.js" location="src/js/aui/inline-dialog2.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-is-clipped" name="internal-src-js-aui-is-clipped">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-src-js-aui-jquery</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-globalize</dependency>
+        <resource type="download" name="internal-src-js-aui-is-clipped.js" location="src/js/aui/is-clipped.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-is-visible" name="internal-src-js-aui-is-visible">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-src-js-aui-jquery</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-deprecation</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-globalize</dependency>
+        <resource type="download" name="internal-src-js-aui-is-visible.js" location="src/js/aui/is-visible.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-layer-manager" name="internal-src-js-aui-layer-manager">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-globalize</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-layer</dependency>
+        <resource type="download" name="internal-src-js-aui-layer-manager.js" location="src/js/aui/layer-manager.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-messages" name="internal-src-js-aui-messages">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-src-js-aui-jquery</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-deprecation</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-log</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-globalize</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-key-code</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-skate</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-template</dependency>
+        <resource type="download" name="internal-src-js-aui-messages.js" location="src/js/aui/messages.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-navigation" name="internal-src-js-aui-navigation">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-src-js-aui-i18n</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-jquery</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-skate</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-globalize</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-widget</dependency>
+        <resource type="download" name="internal-src-js-aui-navigation.js" location="src/js/aui/navigation.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-on-text-resize" name="internal-src-js-aui-on-text-resize">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-src-js-aui-jquery</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-globalize</dependency>
+        <resource type="download" name="internal-src-js-aui-on-text-resize.js" location="src/js/aui/on-text-resize.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-params" name="internal-src-js-aui-params">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-globalize</dependency>
+        <resource type="download" name="internal-src-js-aui-params.js" location="src/js/aui/params.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-populate-parameters" name="internal-src-js-aui-populate-parameters">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-src-js-aui-jquery</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-globalize</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-params</dependency>
+        <resource type="download" name="internal-src-js-aui-populate-parameters.js" location="src/js/aui/populate-parameters.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-prevent-default" name="internal-src-js-aui-prevent-default">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-globalize</dependency>
+        <resource type="download" name="internal-src-js-aui-prevent-default.js" location="src/js/aui/prevent-default.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-header" name="internal-src-js-aui-header">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-src-js-aui-jquery</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-header-create-header</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-deprecation</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-globalize</dependency>
+        <resource type="download" name="internal-src-js-aui-header.js" location="src/js/aui/header.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-set-current" name="internal-src-js-aui-set-current">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-src-js-aui-jquery</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-deprecation</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-globalize</dependency>
+        <resource type="download" name="internal-src-js-aui-set-current.js" location="src/js/aui/set-current.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-set-visible" name="internal-src-js-aui-set-visible">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-src-js-aui-jquery</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-deprecation</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-globalize</dependency>
+        <resource type="download" name="internal-src-js-aui-set-visible.js" location="src/js/aui/set-visible.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-stop-event" name="internal-src-js-aui-stop-event">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-deprecation</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-globalize</dependency>
+        <resource type="download" name="internal-src-js-aui-stop-event.js" location="src/js/aui/stop-event.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-tabs" name="internal-src-js-aui-tabs">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-skatejs-template-html-0.0.0-dist-template-html</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-log</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-debounce</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-jquery</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-add-id</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-globalize</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-is-clipped</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-skate</dependency>
+        <resource type="download" name="internal-src-js-aui-tabs.js" location="src/js/aui/tabs.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-toggle-class-name" name="internal-src-js-aui-toggle-class-name">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-src-js-aui-jquery</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-deprecation</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-globalize</dependency>
+        <resource type="download" name="internal-src-js-aui-toggle-class-name.js" location="src/js/aui/toggle-class-name.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-to-init" name="internal-src-js-aui-to-init">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-src-js-aui-jquery</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-log</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-globalize</dependency>
+        <resource type="download" name="internal-src-js-aui-to-init.js" location="src/js/aui/to-init.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-unbind-text-resize" name="internal-src-js-aui-unbind-text-resize">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-globalize</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-on-text-resize</dependency>
+        <resource type="download" name="internal-src-js-aui-unbind-text-resize.js" location="src/js/aui/unbind-text-resize.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-jquery-jquery-hotkeys" name="internal-src-js-jquery-jquery-hotkeys">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+        
+        <resource type="download" name="internal-src-js-jquery-jquery-hotkeys.js" location="src/js/jquery/jquery.hotkeys.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-when-i-type" name="internal-src-js-aui-when-i-type">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-src-js-aui-jquery</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-jquery-jquery-hotkeys</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-jquery-jquery-moveto</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-log</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-dialog</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-globalize</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-browser</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-key-code</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-underscore</dependency>
+        <resource type="download" name="internal-src-js-aui-when-i-type.js" location="src/js/aui/when-i-type.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-version" name="internal-src-js-aui-version">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-globalize</dependency>
+        <resource type="download" name="internal-src-js-aui-version.js" location="src/js/aui/version.js" />
+    </web-resource>
+    <web-resource key="internal-src-js-aui-setup" name="internal-src-js-aui-setup">
+        <transformation extension="js">
+            <transformer key="jsI18n" />
+        </transformation>
+                <dependency>com.atlassian.auiplugin:internal-src-js-aui-jquery</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-internal-globalize</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-populate-parameters</dependency>
+        <dependency>com.atlassian.auiplugin:internal-src-js-aui-version</dependency>
+        <resource type="download" name="internal-src-js-aui-setup.js" location="src/js/aui/setup.js" />
+    </web-resource></extra-modules>

@@ -1,0 +1,56 @@
+@import './imports/global';
+
+@aui-progress-height: 6px;
+
+aui-progressbar {
+    display: block;
+}
+
+.aui-progress-indicator {
+    background: @aui-progress-indicator-bg-color;
+    border-radius: @aui-progress-indicator-border-radius;
+    height: @aui-progress-height;
+    overflow: hidden;
+    position: relative;  /* so that animations work */
+    width: 100%;
+}
+
+.aui-progress-indicator-value {
+    -webkit-animation: progressSlide 5s infinite ease-in-out;
+    animation: progressSlide 5s infinite ease-in-out;
+    border-radius: @aui-progress-indicator-border-radius;
+    display: block;
+    height: @aui-progress-height;
+    #aui.transition(none);
+    position: absolute;
+    width: 10%;
+    background: @aui-progress-indicator-color;
+}
+
+@-webkit-keyframes progressSlide {
+    0% { left: 0%; }
+    50% { left: 90%; }
+    100% { left: 0%; }
+}
+
+@keyframes progressSlide {
+    0% { left: 0%; }
+    50% { left: 90%; }
+    100% { left: 0%; }
+}
+
+.aui-progress-indicator[data-value] .aui-progress-indicator-value {
+    -webkit-animation: none;
+    animation: none;
+    left: 0;
+    background: @aui-progress-indicator-color;
+    border-radius: @aui-progress-indicator-border-radius;
+    #aui.transition(width 0.5s);
+}
+
+.aui-progress-indicator-static[data-value] .aui-progress-indicator-value {
+    -webkit-animation: none;
+    animation: none;
+    left: 0;
+    #aui.transition(none);
+}

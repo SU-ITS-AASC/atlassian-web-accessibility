@@ -1,0 +1,11 @@
+{namespace Confluence.Templates.Pagetree.Macro}
+
+/**
+ * Renders the html necessary to display the loading indicator
+ */
+{template .loadingIndicator}
+    <div class="plugin_pagetree_children_loading_wrapper">
+        <div class="spinner"/>
+        <span class="plugin_pagetree_children_loading">{getText('pagetree.loading')}</span>
+    </div>
+{/template}

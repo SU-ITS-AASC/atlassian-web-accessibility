@@ -1,0 +1,3 @@
+<p>
+$action.getText('newcode.config.help')
+</p>

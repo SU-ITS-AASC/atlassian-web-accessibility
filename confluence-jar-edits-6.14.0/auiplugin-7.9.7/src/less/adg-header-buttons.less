@@ -1,0 +1,52 @@
+@import './imports/global';
+
+// App Header Buttons and Split Button
+// ----------
+.aui-header .aui-nav {
+    .aui-button,
+    .aui-button-primary {
+        border: 0;
+        line-height: @aui-header-nav-btn-primary-line-height;
+        margin: (5px + @aui-header-padding-y) 0 0 10px;
+        padding: 4px 10px; // Make sure the correct padding applies (overrides the above padding: 13px 10px; for .aui-header a if ordering is missed up
+    }
+
+    .aui-button.aui-button-split-main {
+        margin-right: 0;
+    }
+
+    // long selector set required to avoid a jump in non-hover focus
+    .aui-buttons .aui-button ~ .aui-button,
+    .aui-buttons .aui-button ~ .aui-button:hover,
+    .aui-buttons .aui-button ~ .aui-button:focus,
+    .aui-buttons .aui-button ~ .aui-button:active,
+    .aui-button.aui-button-split-more {
+        margin-left: 1px; // to add a transparent divider between the primary & secondary section of a split button.
+    }
+
+    .aui-button,
+    .aui-button:link,
+    .aui-button:visited {
+        color: @aui-header-nav-btn-primary-text-color;
+    }
+
+    .aui-button-primary,
+    .aui-button-primary:link,
+    .aui-button-primary:visited {
+        background-color: @aui-header-nav-btn-primary-bg-color;
+        color: @aui-header-nav-btn-primary-text-color;
+    }
+
+    .aui-button.aui-button-primary:focus,
+    .aui-button.aui-button-primary:hover {
+        background-color: @aui-header-nav-btn-primary-hover-bg-color;
+        color: @aui-header-nav-btn-primary-hover-text-color;
+    }
+
+    .aui-button.aui-button-primary:active,
+    .aui-button.aui-button-primary.active {
+        background-color: @aui-header-nav-btn-primary-active-bg-color;
+        background-image: none;
+        padding-bottom: 4px; // header doesn't need the button/dropdown integration padding change because it has no border
+    }
+}

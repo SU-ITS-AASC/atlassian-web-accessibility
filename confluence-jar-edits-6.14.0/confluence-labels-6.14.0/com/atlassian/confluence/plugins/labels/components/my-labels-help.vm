@@ -1,0 +1,5 @@
+<p>$action.getText('mylabel.help.page.desc')</p>
+#parse("/com/atlassian/confluence/plugins/labels/components/labels-help.vm")
+<p>
+    $action.getText('mylabel.help.related.label.desc')
+</p>

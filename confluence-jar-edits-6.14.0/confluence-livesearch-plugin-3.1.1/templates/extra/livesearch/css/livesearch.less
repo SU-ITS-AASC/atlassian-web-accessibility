@@ -1,0 +1,129 @@
+@large-input-max-width: 600px;
+@medium-input-width: 240px;
+@button-width: 38px;
+@button-margin-left: 5px;
+
+.search-macro {
+  .search-macro-dropdown {
+    position: absolute;
+    width: 100%;
+
+    ol {
+      list-style: none;
+      border-bottom: solid 1px #ccc;
+    }
+
+    .with-additional {
+      height: auto;
+      padding-top: 3px;
+      padding-bottom: 3px;
+    }
+
+    .active,
+    .active a.additional {
+      color: #FFF;
+    }
+
+    li {
+      a {
+        color: #333;
+        padding: 0;
+
+        &.additional {
+          max-height: 26px;
+          line-height: 13px;
+          font-size: 11px;
+          padding-left: 30px;
+          padding-right: 20px;
+          color: #666;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: normal;
+        }
+      }
+
+      span {
+        background-position: 6px center;
+        padding-left: 30px;
+
+        em {
+          font-style: normal;
+        }
+      }
+      span:before {
+        color: #707070;
+      }
+      &.active span:before {
+        color: #ffffff;
+      }
+    }
+  }
+
+  .search-macro-query input {
+    max-width: none;
+  }
+
+  .search-macro-query {
+    float: left;
+  }
+
+  .search-macro-button {
+    float: left;
+    margin-left: @button-margin-left;
+    width: @button-width;
+    height: 30px;
+    color: #707070;
+  }
+
+}
+
+.search-macro-medium {
+  width: @medium-input-width + @button-margin-left + @button-width;
+
+  .search-macro-query {
+    width: @medium-input-width;
+  }
+
+  .search-macro-dropdown {
+    width:  @medium-input-width;
+    margin-left: -1px;
+  }
+}
+
+.search-macro-large {
+  width: 100%;
+  max-width: @large-input-max-width;
+  margin: 0 auto;
+
+  .search-macro-query {
+    .aui-icon {
+      position: absolute;
+      top: 11px;
+      left: 9px;
+      color: #707070;
+    }
+
+    .aui-icon-large {
+      width: 18px;
+      height: 18px;
+    }
+
+    .aui-icon-large:before {
+      font-size: 18px;
+      margin-top: -9px;
+    }
+
+    input {
+      padding: 2px 12px 2px 30px;
+      height: 40px;
+      font-size: 20px;
+      font-weight: normal;
+      line-height: 1.5;
+      position: relative;
+    }
+  }
+
+  .search-macro-query {
+    float: none;
+  }
+}

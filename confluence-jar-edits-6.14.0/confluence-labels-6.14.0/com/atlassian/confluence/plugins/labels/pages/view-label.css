@@ -1,0 +1,113 @@
+.spacetools.with-space-sidebar #main-header {
+    background-color: #fff;
+}
+
+/* copied from content by label macro in advanced macros plugin */
+
+.content-by-label {
+    margin: 10px 0;
+    padding: 0;
+}
+
+ul.content-by-label {
+    list-style: none; /* override .wiki-content ul */
+}
+
+.content-by-label > li {
+    overflow: auto;
+    margin-top: 7px;
+}
+
+.content-by-label > li:first-child {
+    margin-top: 0;
+}
+
+.content-by-label > li > div:first-child {
+    float: left;
+}
+
+.content-by-label > li .details {
+    padding-left: 21px;
+}
+
+.content-by-label .label-details {
+    overflow: auto;
+}
+
+/* currently a duplication of the styles in core */
+.labels-content .label-container {
+    float: left;
+    background: #F2F2F2;
+    padding: 2px 4px;
+    border: 1px solid #DDD;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    margin: 3px 6px 3px 0;
+    line-height: 1;
+    font-size: 13px;
+}
+
+.labels-content .remove-label {
+    display: none;
+}
+
+/* HACK: space currently outputed inside a span with class smalltext */
+.content-by-label .details a + .smalltext {
+    font-size: inherit; /* force it to use 14px font instead of smaller font */
+}
+
+/* copied from content by label macro in advanced macros plugin */
+
+/* global.vmd HACKs: when view labels "globally", the global decorator forcefully applies dashboard styles?? */
+.dashboard-group > div {
+    margin-top: 0; /* override margin-top: 20px */
+}
+
+.dashboard-group {
+    width: auto;
+    display: block;
+}
+
+/* global.vmd HACKs: when view labels "globally", the global decorator forcefully applies dashboard styles?? */
+
+
+.labels-alphabetical-subset {
+    overflow: auto; /* to close over the floated labels inside this container */
+}
+
+.labels-alphabetical-subset-heading {
+    margin-top: 10px; /* override default margin-top */
+}
+
+.related-labels {
+    float: right;
+    width: 200px;
+}
+
+.labels-main {
+    margin-top: 10px;
+    padding-right: 220px; /* +20px grid padding */
+}
+
+.labels-main .labels-main-description .label-list {
+    display:inline-block;
+}
+
+.label-containers {
+    margin-top: 10px;
+    overflow: auto;
+}
+
+.label-item-meta {
+    font-size: 12px;
+    line-height: 16px;
+    color: #707070;
+}
+
+.label-item-meta a,
+.label-item-meta a:visited,
+.label-item-meta a:active,
+.label-item-meta a:hover {
+    color: #707070;
+}

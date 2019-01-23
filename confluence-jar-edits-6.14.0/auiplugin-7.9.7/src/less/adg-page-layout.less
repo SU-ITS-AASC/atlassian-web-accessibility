@@ -1,0 +1,29 @@
+@import 'imports/global';
+
+@atlassian-logo-neutral-image: 'images/logos/atlassian/atlassian-horizontal-neutral.svg';
+@atlassian-logo-blue-image: 'images/logos/atlassian/atlassian-horizontal-blue.svg';
+
+@atlassian-logo-image-width: 127px; // todo when we can use LESS > 1.7.0: image-width(@atlassian-logo-neutral-image);
+@atlassian-logo-image-height: 24px; // todo when we can use LESS > 1.7.0: image-height(@atlassian-logo-neutral-image);
+
+#footer-logo {
+    margin-top: (@aui-grid * 2);
+
+    a {
+        background: url(@atlassian-logo-neutral-image) center center no-repeat;
+        background-size: @atlassian-logo-image-width @atlassian-logo-image-height;
+        display: block;
+        height: @atlassian-logo-image-height;
+        margin: 0 auto;
+        overflow: hidden;
+        text-align: left;
+        text-indent: -9999em;
+        width: @atlassian-logo-image-width;
+
+        &:focus,
+        &:hover,
+        &:active {
+            background-image: url(@atlassian-logo-blue-image);
+        }
+    }
+}

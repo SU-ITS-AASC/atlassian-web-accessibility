@@ -1,0 +1,45 @@
+<html>
+<head>
+    <title>$action.getText("title.labels.all")</title>
+</head>
+
+<content tag="key">$action.space.key</content>
+
+<body>
+
+#set ($mode = "view-labels-all")
+#if ($action.space)
+    #set ($decoratorContext = "space-labels")
+#else
+    #set ($decoratorContext = "labels")
+#end
+
+#requireResource("com.atlassian.confluence.plugins.confluence-labels:view-label-resources")
+
+#parse ("/com/atlassian/confluence/plugins/labels/components/labels-nav.vm")
+
+#applyDecorator("root")
+#decoratorParam("helper" $action.helper)
+	#decoratorParam("context" $decoratorContext)
+	#decoratorParam("mode" $mode)
+    #decoratorParam("collector-key" "view-label-alpha")
+    #decoratorParam("suppress-default-navigation" "true")
+
+
+    #if ($contents.size() > 0)
+        #if ($action.space)
+            <p>
+                $action.getText("labels.see.also"):
+                <a href="$req.contextPath/labels/listlabels-alphaview.action">$action.getText("labels.from.all.spaces")</a>
+            </p>
+        #end
+
+        #parse( "/com/atlassian/confluence/plugins/labels/components/alphaview.vm" )
+
+    #else
+        <p>$action.getText("no.labels.defined")</p>
+    #end
+
+#end
+</body>
+</html>

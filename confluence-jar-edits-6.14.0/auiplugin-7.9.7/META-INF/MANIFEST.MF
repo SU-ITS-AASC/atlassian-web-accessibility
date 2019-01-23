@@ -1,0 +1,26 @@
+Manifest-Version: 1.0
+Archiver-Version: Plexus Archiver
+Created-By: Apache Maven Bundle Plugin
+Built-By: bamboo-agent
+Build-Jdk: 1.8.0_144
+Atlassian-Build-Date: 2018-08-23T08:10:59+0000
+Atlassian-Plugin-Key: com.atlassian.auiplugin
+Atlassian-Scan-Folders: META-INF/plugin-descriptor
+Bnd-LastModified: 1535011861856
+Bundle-Description: An Atlassian plugin that contains the core javascr
+ ipt files used in Atlassian products.
+Bundle-DocURL: https://www.atlassian.com/
+Bundle-License: https://developer.atlassian.com/platform/marketplace/a
+ tlassian-developer-terms/
+Bundle-ManifestVersion: 2
+Bundle-Name: Atlassian UI Plugin
+Bundle-SymbolicName: com.atlassian.aui.plugin
+Bundle-Vendor: Atlassian
+Bundle-Version: 7.9.7
+Export-Package: com.atlassian.aui.obr.install;version="7.9.7"
+Import-Package: com.atlassian.plugin.servlet,com.atlassian.plugin.webr
+ esource.transformer,com.google.common.base
+Require-Capability: osgi.ee;filter:="(&(osgi.ee=JavaSE)(version=1.8))"
+Spring-Context: *
+Tool: Bnd-2.3.0.201405100607
+

@@ -1,0 +1,31 @@
+/* If the error message ever shows, put some space between it and the first CQL form field. */
+.cql-error-container .aui-message {
+    margin-bottom: 10px;
+}
+
+/* Pull the first CQL field up a little, it doesn't need padding under the missing description block. */
+.cql-filter:first-child .aui-nav-heading {
+    padding-top: 0;
+    border-top: 0;
+}
+
+/* The X icon to the right of the CQL field's label */
+.cql-filter .aui-iconfont-remove {
+    display: inline-block;
+    float: right;
+    padding-top: 2px;   /* pixel pushing to label baseline */
+}
+
+.cql-render-heading {
+    margin-top: 2em;    /* give the filter fields some MORE breathing room */
+}
+
+/* Float the "Show/Hide" button to the right of the heading. */
+.cql-render-heading button {
+    float: right;
+    margin-top: -5px;   /* Pixel-pushing. I am sorry. */
+}
+
+.cql-add-filter-container {
+    padding: 10px 0 0 0;
+}

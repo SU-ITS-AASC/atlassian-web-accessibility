@@ -1,0 +1,57 @@
+{namespace Confluence.Templates.Pagination}
+
+/**
+ * @param url
+ * @param startIndex
+ * @param pageNumber
+ */
+{template .item}
+    <li>
+        <a href="{$url}" data-index="{$startIndex}">{$pageNumber}</a>
+    </li>
+{/template}
+
+/**
+ * @param pageNumber
+ */
+{template .current}
+    <li class="aui-nav-selected">{$pageNumber}</li>
+{/template}
+
+/**
+ * @param url
+ * @param startIndex
+ */
+{template .next}
+    <li class="aui-nav-next">
+        <a href="{$url}" data-index="{$startIndex}">{getText('aui.next.name')}</a>
+    </li>
+{/template}
+
+/**
+ * Renders a disabled next link.
+ */
+{template .nextDisabled}
+    <li class="aui-nav-next">
+        <a aria-disabled="true">{getText('aui.next.name')}</a>
+    </li>
+{/template}
+
+/**
+ * @param url
+ * @param startIndex
+ */
+{template .previous}
+    <li class="aui-nav-previous">
+        <a href="{$url}" data-index="{$startIndex}">{getText('aui.prev.name')}</a>
+    </li>
+{/template}
+
+/**
+ * Renders a disabled previous link.
+ */
+{template .previousDisabled}
+    <li class="aui-nav-previous">
+        <a aria-disabled="true">{getText('aui.prev.name')}</a>
+    </li>
+{/template}

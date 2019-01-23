@@ -1,0 +1,8 @@
+{
+"version":3,
+"file":"/dummy-file-path",
+"lineCount":1,
+"mappings":"AAEAA,OAAAC,W,CAAqBD,OAAAC;",
+"sources":["input.js"],
+"names":["tinymce","confluence"]
+}

@@ -1,0 +1,32 @@
+{namespace aui}
+
+/**
+ * @param? id
+ * @param? extraClasses
+ * @param? extraAttributes
+ * @param? contentIncludesTbody if true, the caller is responsible for rendering their own tbody element within $content. This allows you to include multiple <tbody>s or customize the tbody element in other ways.
+ * @param content tr elements to be inserted into the tbody element
+ * @param? theadContent tr elements to be inserted into the thead element
+ * @param? tfootContent tr elements to be inserted into the tfoot element
+ * @param? captionContent tr elements to be inserted into the caption element
+ * @param? columnsContent colgroup or col elements to be insterted directly into the table element.
+ */
+{template .table}
+    <table{if $id} id="{$id}"{/if} class="aui{call aui.renderExtraClasses data="all" /}"{call aui.renderExtraAttributes data="all" /}>
+        {if $columnsContent}
+            {$columnsContent|noAutoescape}
+        {/if}
+        {if $captionContent}
+            <caption>{$captionContent |noAutoescape}</caption>
+        {/if}
+        {if $theadContent}
+            <thead>{$theadContent |noAutoescape}</thead>
+        {/if}
+        {if $tfootContent}
+            <tfoot>{$tfootContent |noAutoescape}</tfoot>
+        {/if}
+        {if not $contentIncludesTbody}<tbody>{/if}
+            {$content |noAutoescape}
+        {if not $contentIncludesTbody}</tbody>{/if}
+    </table>
+{/template}

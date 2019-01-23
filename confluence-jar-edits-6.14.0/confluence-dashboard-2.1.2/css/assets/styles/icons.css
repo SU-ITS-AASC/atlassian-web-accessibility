@@ -1,0 +1,8 @@
+#sidebar-discover .aui-icon,
+#sidebar-my-work .aui-icon,
+#sidebar-spaces .aui-icon {
+  width: 24px;
+  height: 24px; }
+
+button.aui-icon:before {
+  color: #666; }

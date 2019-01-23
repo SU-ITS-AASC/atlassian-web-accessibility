@@ -1,0 +1,17 @@
+{namespace Confluence.Templates.CollaborativeEditor.StatusIndicator}
+
+/**
+ * Template for the status indicator.
+ * @param statusMessage - Status message to show the user.
+ * @param tooltipMessage - Tooltip.
+ * @param saving - Are we currently saving the page?
+ * @param error - Have we encountered an error state?
+ */
+{template .container}
+     <div class="synchrony-status-indicator">
+        <div class="status-indicator-icon aui-icon aui-icon-small{if $error} aui-iconfont-warning{elseif $saving} aui-iconfont-devtools-task-in-progress{else} aui-iconfont-approve{/if}" data-tooltip="{$tooltipMessage}"></div>
+        <div class="status-indicator-message" data-tooltip="{$tooltipMessage}">
+            {$statusMessage}
+        </div>
+     </div>
+{/template}

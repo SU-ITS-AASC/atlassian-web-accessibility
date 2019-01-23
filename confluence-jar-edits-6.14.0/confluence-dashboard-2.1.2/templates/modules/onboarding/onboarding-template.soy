@@ -1,0 +1,142 @@
+{namespace DashboardTemplates.Onboarding}
+
+/**
+*/
+{template .newSimplifyOnboarding}
+    {call .chromelessDialog data="all"}
+        {param id: 'simplify-onboarding' /}
+        {param content}
+            <h3>{getText('simplify.onboarding.dialog.new-user.title')}</h3>
+            <p>{getText('simplify.onboarding.dialog.new-user.content')|noAutoescape}</p>
+        {/param}
+        {param actions}
+            <button class="aui-button aui-button-primary show-onboarding">{getText('onboarding.dialog.new-user.confirm')}</button>
+        {/param}
+    {/call}
+{/template}
+
+/**
+*   @param content
+*   @param actions
+*/
+{template .chromelessDialog}
+    <!-- Main dialog content -->
+    <div class="aui-dialog2-content">
+        <div class="dialog-image-container">
+            <div class="onboarding-image"></div>
+        </div>
+        <div class="dialog-content-container">
+        {$content |noAutoescape}
+        </div>
+    </div>
+    <footer class="aui-dialog2-footer">
+        <div class="aui-dialog2-footer-actions">
+            {$actions |noAutoescape}
+        </div>
+    </footer>
+{/template}
+
+/**
+*   @param title
+*   @param content
+*   @param actions
+*   @param? page
+*/
+{template .tooltipBaseContent}
+    <h6>{$title}</h6>
+    <p>{$content}</p>
+    <footer class="tip-footer">
+        {$actions|noAutoescape}
+        {if $page}
+        <span class="onboarding-page-info">{$page}</span>
+        {/if}
+    </footer>
+{/template}
+
+/**
+*   @param id
+*   @param title
+*   @param content
+*   @param actions
+*   @param? page
+*/
+{template .tooltipBase}
+    <button aria-controls="{$id}" data-aui-trigger class="onboarding-hotspot"></button>
+    <aui-inline-dialog id="{$id}" class="onboarding-tooltips aui-help onboarding-inline-dialog" alignment="left top" responds-to="toggle" aria-hidden="true">
+        {call .tooltipBaseContent data="all" /}
+    </aui-inline-dialog>
+{/template}
+
+/**
+*/
+{template .tooltipStep1}
+    {call .tooltipBase data="all"}
+        {param actions}
+            <button class="aui-button btn-next">{getText('onboarding.tooltip.actions.next')}</button>
+            <button class="aui-button aui-button-link btn-skip">{getText('onboarding.tooltip.actions.skip')}</button>
+        {/param}
+        {param page: '1/2' /}
+    {/call}
+{/template}
+
+/**
+*/
+{template .tooltipStep2}
+    {call .tooltipBase data="all"}
+        {param actions}
+            <button class="aui-button btn-skip">{getText('onboarding.tooltip.actions.done')}</button>
+        {/param}
+        {param page: '2/2' /}
+    {/call}
+{/template}
+
+/**
+*/
+{template .existingUserStep1}
+    {call .tooltipStep1 data="all"}
+        {param title: getText('onboarding.tooltip.existing-user.sidebar.title') /}
+        {param content: getText('onboarding.tooltip.existing-user.sidebar.content') /}
+    {/call}
+{/template}
+
+/**
+*/
+{template .existingUserStep2}
+    {call .tooltipStep2 data="all"}
+        {param title: getText('onboarding.tooltip.existing-user.favourite-spaces.title') /}
+        {param content: getText('onboarding.tooltip.existing-user.favourite-spaces.content') /}
+    {/call}
+{/template}
+
+/**
+*/
+{template .newUserStep1}
+    {call .tooltipStep1 data="all"}
+        {param title: getText('onboarding.tooltip.new-user.sidebar.title') /}
+        {param content: getText('onboarding.tooltip.new-user.sidebar.content') /}
+    {/call}
+{/template}
+
+/**
+*/
+{template .newUserStep2}
+    {call .tooltipStep2 data="all"}
+        {param title: getText('onboarding.tooltip.new-user.favourite-spaces.title') /}
+        {param content: getText('onboarding.tooltip.new-user.favourite-spaces.content') /}
+    {/call}
+{/template}
+
+/**
+*/
+{template .transitionSavedForLater}
+    {call .tooltipBase data="all"}
+        {param actions}
+            <button class="aui-button btn-skip">{getText('onboarding.tooltip.actions.done')}</button>
+        {/param}
+        {param title: getText('onboarding.tooltip.saved-for-later.title') /}
+        {param content}
+            {getText('onboarding.tooltip.saved-for-later.content')|noAutoescape}
+        {/param}
+    {/call}
+{/template}
+

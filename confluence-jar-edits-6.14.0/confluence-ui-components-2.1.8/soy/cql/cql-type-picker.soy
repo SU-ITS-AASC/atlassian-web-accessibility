@@ -1,0 +1,22 @@
+{namespace Confluence.UI.Components.CQL.TypePicker.templates}
+
+/**
+ * Render CQL Type picker suggestions.
+ *
+ * @param types the types to display
+ */
+{template .suggestions}
+// We use aui-nav classes to match the style of the search screen.
+<div class="aui-navgroup-vertical">
+    <ul class="aui-nav">
+        {foreach $type in $types}
+        <li {if isFirst($type)} class="aui-nav-selected"{/if}>
+            <a data-value="{$type.type}">{$type.label}</a>
+        </li>
+        {/foreach}
+         <li>
+            <a data-value="custom">{getText('confluence-ui-components.date-picker.custom')}</a>
+         </li>
+    </ul>
+</div>
+{/template}

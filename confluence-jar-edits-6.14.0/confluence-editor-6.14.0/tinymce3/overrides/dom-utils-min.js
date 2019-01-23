@@ -1,0 +1,2 @@
+define("confluence-editor/tinymce3/overrides/dom-utils",["ajs","jquery"],function(b,d){return{getRoot:function(){var a=b.Rte.getEditor(),e=a.dom,c=e.settings;if(!(c=c&&e.get(c.root_element)))a=d(a.selection.getNode()).closest("div.innerCell"),c=0<a.length?a[0]:e.doc.body;return c},setRoot:function(a){b.Rte.getEditor().dom.settings.root_element=a}}});
+require("confluence/module-exporter").safeRequire("confluence-editor/tinymce3/overrides/dom-utils",function(b){var d=require("tinymce");d.dom.DOMUtils.prototype.getRoot=b.getRoot;d.dom.DOMUtils.prototype.setRoot=b.setRoot});

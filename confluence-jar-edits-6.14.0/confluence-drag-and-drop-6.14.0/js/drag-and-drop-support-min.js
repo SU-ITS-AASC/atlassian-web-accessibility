@@ -1,0 +1,1 @@
+define("confluence-drag-and-drop/drag-and-drop-support",["jquery"],function(c){var a,b;try{a=new XMLHttpRequest,b=!(!a.sendAsBinary&&!a.upload)&&!(c.browser.mozilla&&-1<c.browser.version.indexOf("1.9.1"))}catch(d){b=!1}return{hasXhrSupport:b}});require("confluence/module-exporter").exportModuleAsGlobal("confluence-drag-and-drop/drag-and-drop-support","DragnDropSupport");

@@ -1,0 +1,56 @@
+@import './media-queries';
+
+#aui {
+    .shadow {
+        // For use on cards and other things that sit flush on top of other layers.
+        .z100() {
+            box-shadow:
+                0 1px 1px @ak-color-N40A,
+                0 0 1px 0 @ak-color-N50A;
+        }
+
+        // For inline dialogs
+        .z200() {
+            .z-base(0 4px 8px -2px @ak-color-N50A);
+        }
+
+        // For modal dialogs
+        .z300() {
+            .z-base(0 8px 16px -4px @ak-color-N50A);
+        }
+
+        // For flags and notifications
+        .z500() {
+            .z-base(0 20px 32px -8px @ak-color-N50A);
+        }
+
+        // Internal use only
+        .z-base(@shadow) {
+            box-shadow: @shadow, 0 0 1px @ak-color-N60A;
+            // Improve legibility of the element's "border" in IE.
+            .ie11({
+                box-shadow: @shadow,
+                    0 0 1px @ak-color-N40A,
+                    1px 0 1px @ak-color-N40A,
+                    -1px 0 1px @ak-color-N40A,
+                    0 -1px 1px @ak-color-N40A;
+            });
+        }
+
+        // Deprecated since AUI 7.3
+        .inner(@inner: 0 1px 0 0 rgba(255, 255, 255, 0.1) inset) {
+            box-shadow+: @inner;
+        }
+
+        // Deprecated since AUI 7.3
+        .outer(@outer: 0 1px 1px 0 rgba(0, 0, 0, 0.2)) {
+            box-shadow+: @outer;
+        }
+
+        // Deprecated since AUI 7.3
+        .inner-and-outer(@inner: 0 1px 0 0 rgba(255, 255, 255, 0.1) inset, @outer: 0 1px 1px 0 rgba(0, 0, 0, 0.2)) {
+            .inner(@inner);
+            .outer(@outer);
+        }
+    }
+}

@@ -1,0 +1,45 @@
+{namespace DashboardTemplates.NavSpaces}
+
+/**
+	@param name
+	@param logo
+	@param url
+	@param virtuallyDeleted
+	@param isAnonymousUser
+*/
+{template .space}
+    <a href="{ $url }" class="aui-nav-item" title="{ $name }">
+    	<span class="aui-avatar aui-avatar-small aui-avatar-project">
+            <span class="aui-avatar-inner"><img src="{ $logo }" alt="{ $name }"></span>
+        </span>
+    	<span class="aui-nav-item-label">
+    	    { $name }
+        </span>
+    </a>
+    {if not $isAnonymousUser}
+        {if $virtuallyDeleted}
+            <button title="{getText('my.spaces.tooltip.add')}" class="undo-remove toggle-favourite aui-icon aui-icon-small aui-iconfont-unstar"></button>
+        {else}
+            <button title="{getText('my.spaces.tooltip.remove')}" class="remove toggle-favourite aui-icon aui-icon-small aui-iconfont-star"></button>
+        {/if}
+    {/if}
+{/template}
+
+/**
+    @param text
+    @param callToActionLink
+    @param callToActionText
+*/
+{template .mySpacesBlank}
+    <a href="{ $callToActionLink }" class="aui-nav-item nav-item-spaces" title="{ $callToActionText }">
+        <span class="aui-icon aui-icon-small content-type-spaces"></span><span class="aui-nav-item-label">{ $callToActionText }</span>
+    </a>
+    <p><small>{ $text }</small></p>
+    <p><a href="{ $callToActionLink }">{ $callToActionText }</a></p>
+{/template}
+
+/**
+*/
+{template .allSpacesBlank}
+    <p><small>{getText('nav.controller.all.spaces.blank')}</small></p>
+{/template}

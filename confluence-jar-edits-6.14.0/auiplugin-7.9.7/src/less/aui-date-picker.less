@@ -1,0 +1,253 @@
+@import './imports/global';
+
+/*! AUI Date Picker, using jQuery UI Date Picker */
+/*
+ * CSS is a bit curious because it has to work both with and without jQuery UI's theme CSS present.
+ * jQuery UI themes are not meant to be loaded, but we can't prevent the scenario.
+ */
+
+.aui-datepicker-dialog .aui-datepicker-hint {
+    background: @aui-datepicker-panel-bg-color;
+    border-bottom: 1px solid @aui-datepicker-panel-divider-color;
+    color: @aui-datepicker-hint-text-color;
+    font-size: 14px;
+    padding: 2px 5px;
+}
+
+.aui-datepicker-dialog .aui-inline-dialog-contents,
+.aui-datepicker-dialog .contents {
+    padding: 0;
+}
+.aui-datepicker-dialog .aui-inline-dialog-arrow.aui-css-arrow:not(.aui-bottom-arrow):after,
+.aui-datepicker-dialog .arrow.aui-css-arrow:not(.aui-bottom-arrow):after {
+    border-bottom-color: @aui-datepicker-panel-bg-color;
+    top: 2px; //AUI-2522: fix for top arrow in FF
+}
+
+.aui-datepicker-dialog .ui-datepicker {
+    background: inherit;
+    color: inherit;
+    font-size: 14px;
+    font-family: @aui-font-family;
+    padding: 0;
+    width: 100%;
+}
+
+.aui-datepicker-dialog .ui-datepicker .ui-datepicker-header {
+    background: @aui-datepicker-panel-bg-color;
+    height: 14px;
+    margin: 0;
+    padding: 10px;
+    position:relative;
+}
+
+.aui-datepicker-dialog .ui-datepicker .ui-datepicker-prev,
+.aui-datepicker-dialog .ui-datepicker .ui-datepicker-prev-hover,
+.aui-datepicker-dialog .ui-datepicker .ui-datepicker-next,
+.aui-datepicker-dialog .ui-datepicker .ui-datepicker-next-hover {
+    cursor: default;
+    height: 20px;
+    line-height: 35px;
+    padding: 0;
+    position: absolute;
+    text-align: center;
+    top: 0;
+    width: 38px; /* 40px - border width */
+}
+.aui-datepicker-dialog .ui-datepicker .ui-datepicker-prev,
+.aui-datepicker-dialog .ui-datepicker .ui-datepicker-prev-hover { left: 0; }
+.aui-datepicker-dialog .ui-datepicker .ui-datepicker-next,
+.aui-datepicker-dialog .ui-datepicker .ui-datepicker-next-hover { right: 0; }
+
+.aui-datepicker-dialog .ui-datepicker .ui-datepicker-prev span,
+.aui-datepicker-dialog .ui-datepicker .ui-datepicker-next span {
+    display: block;
+    position: absolute;
+    left: 15px;
+    top: 0;
+    margin: 0;
+}
+
+.aui-datepicker-dialog .ui-datepicker .ui-datepicker-title {
+    color: @aui-datepicker-month-text-color;
+    font-size: 14px;
+    font-weight: bold;
+    height: 14px;
+    line-height: 14px;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+/* jQuery UI Date Picker - Calendar */
+
+.aui-datepicker-dialog .ui-datepicker .ui-datepicker-calendar {
+    border-spacing: 0;
+    margin: 0;
+    table-layout: fixed;
+    width: 100%;
+}
+
+.aui-datepicker-dialog .ui-datepicker .ui-datepicker-calendar thead {
+    background: @aui-datepicker-panel-bg-color;
+}
+
+.aui-datepicker-dialog .ui-datepicker .ui-datepicker-calendar tbody {
+    background-color: @aui-datepicker-day-bg-color;
+}
+.aui-datepicker-dialog .ui-datepicker .ui-datepicker-calendar th {
+    line-height: 15px;
+}
+
+.aui-datepicker-dialog .ui-datepicker .ui-datepicker-calendar td,
+.aui-datepicker-dialog .ui-datepicker .ui-datepicker-calendar td a,
+.aui-datepicker-dialog .ui-datepicker .ui-datepicker-calendar td span {
+    line-height: 25px;
+}
+
+.aui-datepicker-dialog .ui-datepicker .ui-datepicker-calendar th {
+    color: @ak-color-N100;
+    font-size: 10px;
+    font-family: @aui-font-family;
+    font-weight: bold;
+    letter-spacing: 1px;
+    padding: 1px 0;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.aui-datepicker-dialog.aui-datepicker-dialog-large .ui-datepicker .ui-datepicker-calendar th {
+    letter-spacing: 0;
+}
+
+.aui-datepicker-dialog .ui-datepicker .ui-datepicker-calendar td {
+    text-align: right;
+}
+
+.aui-datepicker-dialog .ui-datepicker .ui-datepicker-calendar td a {
+    background: @aui-datepicker-day-bg-color;
+    color: @aui-datepicker-day-text-color;
+    text-decoration: none;
+    text-align: center;
+}
+
+.aui-datepicker-dialog .ui-datepicker .ui-datepicker-calendar td a,
+.aui-datepicker-dialog .ui-datepicker .ui-datepicker-calendar td span {
+    cursor: default;
+    display: block;
+    font-size: 14px;
+    font-family: @aui-font-family;
+    padding: 0 8px;
+}
+
+.aui-datepicker-dialog .ui-datepicker .ui-datepicker-calendar .ui-datepicker-current-day a {
+    background: @aui-datepicker-selected-bg-color;
+    border-radius: @aui-datepicker-selected-border-radius;
+    color: @aui-datepicker-selected-text-color;
+}
+
+.aui-datepicker-dialog .ui-datepicker .ui-datepicker-calendar .ui-datepicker-current-day a:hover {
+    background: @aui-datepicker-selected-bg-color;
+}
+
+.aui-datepicker-dialog .ui-datepicker .ui-datepicker-today {
+    font-weight: bold;
+}
+
+.aui-datepicker-dialog .ui-datepicker .ui-datepicker-unselectable {
+    background-color: @aui-datepicker-unselectable-bg-color;
+    color: @aui-datepicker-unselectable-text-color;
+}
+
+.aui-datepicker-dialog .ui-datepicker .ui-datepicker-other-month.ui-datepicker-unselectable {
+    background-color: @aui-datepicker-day-bg-color;
+}
+
+/* jQuery UI Overides (defaul theme) */
+
+.aui-datepicker-dialog .ui-widget-header {
+    font-weight: normal;
+}
+
+.aui-datepicker-dialog .ui-state-default,
+.aui-datepicker-dialog .ui-widget-content .ui-state-default,
+.aui-datepicker-dialog .ui-widget-header .ui-state-default,
+.aui-datepicker-dialog .ui-widget-header,
+.aui-datepicker-dialog .ui-widget-content {
+    border: none;
+}
+
+.aui-datepicker-dialog .ui-state-hover,
+.aui-datepicker-dialog .ui-widget-content .ui-state-hover,
+.aui-datepicker-dialog .ui-widget-header .ui-state-hover,
+.aui-datepicker-dialog .ui-state-focus,
+.aui-datepicker-dialog .ui-widget-content .ui-state-focus,
+.aui-datepicker-dialog .ui-widget-header .ui-state-focus {
+    background: none;
+    border: none;
+    color: @aui-datepicker-day-text-color;
+}
+
+/* jQuery UI Date Picker - Common; note that we need the extra specificity for .ui-datepicker-prev and .ui-datepicker-next to override the demo style sheets */
+.aui-datepicker-dialog .ui-datepicker .ui-datepicker-header .ui-datepicker-prev:hover,
+.aui-datepicker-dialog .ui-datepicker .ui-datepicker-header .ui-datepicker-prev:active,
+.aui-datepicker-dialog .ui-datepicker .ui-datepicker-header .ui-datepicker-prev:focus,
+.aui-datepicker-dialog .ui-datepicker .ui-datepicker-header .ui-datepicker-next:hover,
+.aui-datepicker-dialog .ui-datepicker .ui-datepicker-header .ui-datepicker-next:active,
+.aui-datepicker-dialog .ui-datepicker .ui-datepicker-header .ui-datepicker-next:focus,
+.aui-datepicker-dialog .ui-datepicker .ui-datepicker-calendar td a:hover,
+.aui-datepicker-dialog .ui-datepicker .ui-datepicker-calendar td a:active,
+.aui-datepicker-dialog .ui-datepicker .ui-datepicker-calendar td a:focus {
+    text-decoration: none;
+}
+
+.aui-datepicker-dialog .ui-datepicker .ui-datepicker-calendar td a:hover,
+.aui-datepicker-dialog .ui-datepicker .ui-datepicker-calendar td a:active,
+.aui-datepicker-dialog .ui-datepicker .ui-datepicker-calendar td a:focus {
+    background-color: @aui-datepicker-day-focus-bg-color;
+    border-radius: @aui-datepicker-selected-border-radius;
+    box-shadow: @aui-datepicker-box-shadow;
+}
+
+.aui-datepicker-dialog .ui-datepicker .ui-datepicker-prev.ui-state-disabled,
+.aui-datepicker-dialog .ui-datepicker .ui-datepicker-header .ui-datepicker-prev.ui-state-disabled:hover,
+.aui-datepicker-dialog .ui-datepicker .ui-datepicker-header .ui-datepicker-prev.ui-state-disabled:active,
+.aui-datepicker-dialog .ui-datepicker .ui-datepicker-header .ui-datepicker-prev.ui-state-disabled:focus,
+.aui-datepicker-dialog .ui-datepicker .ui-datepicker-next.ui-state-disabled,
+.aui-datepicker-dialog .ui-datepicker .ui-datepicker-header .ui-datepicker-next.ui-state-disabled:hover,
+.aui-datepicker-dialog .ui-datepicker .ui-datepicker-header .ui-datepicker-next.ui-state-disabled:active,
+.aui-datepicker-dialog .ui-datepicker .ui-datepicker-header .ui-datepicker-next.ui-state-disabled:focus {
+    color: @aui-datepicker-disabled-text-color;
+}
+
+.aui-datepicker-dialog .ui-datepicker .ui-datepicker-calendar > thead > tr > th {
+    padding-bottom: 5px;
+    border-bottom: 1px solid @aui-datepicker-panel-divider-color;
+}
+
+.aui-datepicker-dialog .ui-datepicker .ui-datepicker-calendar > thead > tr > th:first-child,
+.aui-datepicker-dialog .ui-datepicker .ui-datepicker-calendar > tbody > tr > td:first-child {
+      padding-left: 5px;
+  }
+
+.aui-datepicker-dialog .ui-datepicker .ui-datepicker-calendar > thead > tr > th:last-child,
+.aui-datepicker-dialog .ui-datepicker .ui-datepicker-calendar > tbody > tr > td:last-child  {
+      padding-right: 5px;
+  }
+
+.aui-datepicker-dialog .ui-datepicker .ui-datepicker-calendar > tbody > tr:first-child > td {
+    padding-top: 5px;
+}
+
+.aui-datepicker-dialog .ui-datepicker .ui-datepicker-calendar > tbody > tr:last-child > td {
+    padding-bottom: 5px;
+}
+
+.aui-datepicker-dialog .ui-datepicker .ui-datepicker-calendar > tbody > tr > td {
+    text-align: center;
+}
+
+.aui-datepicker-dialog .ui-datepicker .ui-datepicker-calendar td a {
+    display: block;
+    padding: 0;
+}

@@ -1,0 +1,66 @@
+@import './imports/global';
+
+/**
+ * RESET
+ */
+html, body, p, div, h1, h2, h3, h4, h5, h6, img, pre, form, fieldset {
+    margin: 0;
+    padding: 0;
+}
+ul, ol, dl {
+    margin: 0;
+}
+img, fieldset {
+    border: 0;
+}
+@-moz-document url-prefix() {
+    img {
+        font-size: 0;
+    }
+    img:-moz-broken {
+        font-size: inherit;
+    }
+}
+
+/* https://github.com/necolas/normalize.css */
+/* Customised to remove styles for unsupported browsers */
+// HTML5 display definitions
+// ==========================================================================
+// Correct `block` display not defined for `details` or `summary` in IE 9/10/11 and Firefox.
+// Correct `block` display not defined for `main` in IE 9/10/11.
+details,
+main,
+summary {
+    display: block;
+}
+
+// 1. Correct `inline-block` display not defined in IE 9.
+// 2. Normalize vertical alignment of `progress` in Chrome, Firefox, and Opera.
+audio,
+canvas,
+progress,
+video {
+    display: inline-block; // 1
+    vertical-align: baseline; // 2
+}
+
+// Prevent modern browsers from displaying `audio` without controls.
+// Remove excess height in iOS 5 devices.
+audio:not([controls]) {
+    display: none;
+    height: 0;
+}
+
+// Address `[hidden]` styling not present in IE 8/9/10.
+// Hide the `template` element in IE 8/9/11, Safari, and Firefox < 22.
+[hidden],
+template {
+    display: none;
+}
+
+// Prevent iOS defaulting to push-button which ignores many styles unless a bg image is set
+input[type="button"],
+input[type="submit"],
+input[type="reset"] {
+    -webkit-appearance: button;
+}

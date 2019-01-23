@@ -1,0 +1,33 @@
+@import '../theme';
+@import '../../mixins';
+@import 'buttons';
+
+// Toggle button
+@aui-toggle-border-radius: 3em;
+@aui-toggle-border-style: @aui-button-border-style;
+@aui-toggle-border-width: @aui-button-border-width;
+@aui-toggle-horizontal-padding: 8px;
+@aui-toggle-vertical-padding: 6px;
+@aui-toggle-icon-size: 16px;
+@aui-toggle-font-size: @aui-font-size-small;
+@aui-toggle-width: (@aui-toggle-border-width * 2 + @aui-toggle-horizontal-padding * 3 + @aui-toggle-icon-size * 2);
+
+@aui-toggle-effective-height: 26px;
+@aui-toggle-height: unit(@aui-toggle-effective-height / @aui-toggle-font-size, em); // note: this is the same as a compact AUI button.
+@aui-toggle-icon-top: unit((@aui-toggle-effective-height - @aui-toggle-icon-size) / 2, px);
+@aui-toggle-handle-width: (@aui-toggle-icon-size + @aui-toggle-horizontal-padding);
+@aui-toggle-slide-width: (@aui-toggle-icon-size * 2);
+
+@aui-toggle-default-bg-color: @ak-color-N200;
+@aui-toggle-default-bg-hover-color: @ak-color-N70;
+@aui-toggle-button-color: @ak-color-N0;
+@aui-toggle-on-color: @ak-color-G400;
+@aui-toggle-on-hover-color: @ak-color-G300;
+@aui-toggle-disabled-overlay-color: rgba(255, 255, 255, 0.5);
+@aui-toggle-tick-color: @aui-button-primary-text-color;
+@aui-toggle-cross-color: @aui-button-primary-text-color;
+
+@aui-toggle-animation-slide-delay: 150ms;
+@aui-toggle-animation-background-color-delay: 100ms;
+@aui-toggle-animation-visible-delay: 250ms;
+

@@ -1,0 +1,38 @@
+@import '../aui-theme/core/grid';
+@import '../aui-theme/components/tabs';
+
+#aui {
+    .horizontal-tab-indicator(@background, @index: auto, @horizontal-gutter: @aui-grid) {
+        position: relative;
+
+        &::after {
+            background: @background;
+            bottom: 0;
+            content: "";
+            display: block;
+            height: @aui-tab-break-height;
+            left: @horizontal-gutter;
+            position: absolute;
+            right: @horizontal-gutter;
+            width: initial;
+            z-index: @index;
+        }
+    }
+
+    .vertical-tab-indicator(@background, @index: auto, @vertical-gutter: @aui-grid) {
+        position: relative;
+
+        &::after {
+            background: @background;
+            bottom: @vertical-gutter;
+            content: "";
+            display: block;
+            height: initial;
+            position: absolute;
+            top: @vertical-gutter;
+            right: 0;
+            width: @aui-tab-break-height;
+            z-index: @index;
+        }
+    }
+}

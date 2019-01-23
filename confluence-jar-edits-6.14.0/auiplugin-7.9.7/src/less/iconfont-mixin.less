@@ -1,0 +1,17 @@
+// This mixin and this file are in this exact location
+// in order to guarantee that the relative paths will match and agree
+// for compiled LESS output, both when gulp, webpack, and P2 take their turn at compiling the file.
+#aui {
+    .load-custom-font(@family, @filename, @fontId: @family, @weight: normal, @style: normal) {
+        @font-face {
+            font-family: @family;
+            src: url('fonts/@{filename}.eot');
+            src: url('fonts/@{filename}.eot?#iefix') format('embedded-opentype'),
+            url('fonts/@{filename}.woff') format('woff'),
+            url('fonts/@{filename}.ttf') format('truetype'),
+            url('fonts/@{filename}.svg#@{fontId}') format('svg');
+            font-weight: @weight;
+            font-style: @style;
+        }
+    }
+}

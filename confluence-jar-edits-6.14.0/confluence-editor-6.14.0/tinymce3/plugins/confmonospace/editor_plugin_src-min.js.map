@@ -1,0 +1,8 @@
+{
+"version":3,
+"file":"/dummy-file-path",
+"lineCount":2,
+"mappings":"AAIAA,MAAA,kFAEG,QAAA,CACCC,CADD,cAMYC,QAAAA,CAASC,CAATD,EAEHC,CAAAC,WAAA,iBAA+B,QAAA,GAC3BD,CAAAE,UAAAC,OAAA,oBAD2B,CAA/B,CAIAL,EAAAM,aAAAC,OAAAC,IAAA,CAAgC,QAAA,CAASN,CAAT,EAC5BA,CAAAE,UAAAK,SAAA,6BAEAP,EAAAQ,eAAAC,YAAA,gBACqBC,QAAAA,SACNV,EAAAE,UAAAS,MAAA,aADMD,CADrB,UAH4B,CAAhC,CAWAV,EAAAY,UAAA,qDAjBGb,CANZ,SA0Bec,QAAAA;gEAKQf,CAAAgB,aALRD,KAKqCf,CAAAiB,aALrCF,EA1Bf,EAFH,CAuCAG,QAAA,8BAAAC,YAAA,sEAC2F,QAAA,CAASC,CAAT,MAC3EpB,EAAUkB,OAAA,WAEdlB,EAAAqB,OAAA,uCAAsDD,CAAtD,CAGApB,EAAAsB,cAAAd,IAAA,iBAA2CR,CAAAuB,QAAAH,oBAA3C,CAN+E,CAD3F;",
+"sources":["input.js"],
+"names":["define","tinymce","init","ed","addCommand","formatter","toggle","activeEditor","onInit","add","register","editorCommands","addCommands","confMonospace","match","addButton","getInfo","majorVersion","minorVersion","require","safeRequire","ConfMonospacePlugin","create","PluginManager","plugins"]
+}

@@ -1,0 +1,28 @@
+{namespace atlassian.group}
+
+/**
+ * @param content
+ * @param? id
+ * @param? extraClasses
+ * @param? extraAttributes
+ * @param? tagName
+ * @param? isSplit
+ */
+{template .group}
+    <{$tagName ? $tagName : 'div' }{if $id} id="{$id}"{/if} class="aui-group{if $isSplit} aui-group-split{/if}{call atlassian.renderExtraClasses data="all" /}"{call atlassian.renderExtraAttributes data="all" /}>
+        {$content|noAutoescape}
+    </{$tagName ? $tagName : 'div' }>
+{/template}
+
+/**
+ * @param content
+ * @param? id
+ * @param? extraClasses
+ * @param? extraAttributes
+ * @param? tagName
+ */
+{template .item}
+    <{$tagName ? $tagName : 'div' }{if $id} id="{$id}"{/if} class="aui-item{call atlassian.renderExtraClasses data="all" /}"{call atlassian.renderExtraAttributes data="all" /}>
+        {$content|noAutoescape}
+    </{$tagName ? $tagName : 'div' }>
+{/template}

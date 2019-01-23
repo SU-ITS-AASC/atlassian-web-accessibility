@@ -1,0 +1,286 @@
+.attachments-container {
+  ul.pagination li a {
+    text-decoration: none;
+  }
+
+  .attachments-file-extension {
+    margin-bottom: 20px;
+
+    .label-filter-desc {
+      margin-left: 8px;
+    }
+
+    .labelFilter {
+      margin-right: 15px;
+    }
+  }
+}
+
+.plugin_attachments_container {
+  .download-all-link {
+    display: inline-block;
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAFVBMVEX///9wcHBwcHBwcHBwcHBwcHBwcHA3RenHAAAAB3RSTlMAEYi7zN3/VyoyVQAAAD1JREFUeNqNyNEKACAIQ9Fmc///ySVUUkF08cGd8p37AdILjAgAbQBVIYHigHjVjygpvdgpc6ds+0yrG35qltUBSh0GXHoAAAAASUVORK5CYII=) no-repeat left center;
+    margin-top: 10px;
+    padding-left: 20px;
+  }
+
+  /* We need to be very specific to restore AUIs style on the buttons because ".wiki-content a" overrides it */
+  .attachment-buttons a.aui-button {
+    color: #333;
+  }
+}
+
+table.attachments {
+  table-layout:fixed;
+
+  td {
+    &.attachment-filesize {
+      white-space: nowrap;
+    }
+  }
+
+  thead {
+    .expand-column {
+      width: 16px;
+    }
+
+    .filename-column {
+      width: 75%;
+    }
+
+    .modified-column {
+      width: 25%;
+      white-space: nowrap;
+    }
+  }
+
+  tbody {
+    .filename-column {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+
+  th {
+    &.attachments-comment {
+      white-space: normal;
+      width: auto;
+    }
+
+    /* These overrides could be in Confluence core, but we should probably migrate this plugin to use
+   Confluence.SortableTables and not the #sortLink macro */
+    a {
+      &:link, &:visited, &:hover, &:active {
+        color: #333;
+        text-decoration: none;
+      }
+    }
+  }
+
+  .attachment-summary-toggle {
+    width: 16px;
+    padding-right: 0;
+    padding-left: 0;
+
+    .icon {
+      cursor: pointer;
+    }
+  }
+}
+
+.empty-attachment-table {
+  line-height: 30px;
+}
+
+/**
+ * Override AUI margin behaviour so that the upload form is centred in the drop area
+ */
+.plugin_attachments_uploadform {
+  text-align: left;
+  width: 450px;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.attachments-table-drop-zone {
+  border-radius: 10px;
+  -moz-border-radius: 10px;
+  border: 2px dashed #cccccc;
+  height: auto;
+  width: auto;
+  text-align: center;
+  padding: 40px;
+
+  .drop-zone-image {
+    background-image: url(../../resources/confluence.extra.attachments/icons/arrow.gif);
+    margin: -1px 5px 2px 2px;
+    height: 25px;
+    width: 25px;
+    float: left;
+  }
+
+  .drop-zone-text {
+    display: inline-block;
+    color: #999;
+  }
+
+  .drop-zone-empty-text {
+    color: #707070;
+    font-weight: 500;
+    padding-bottom: 10px;
+  }
+}
+
+.empty-attachment-text {
+    color: #707070;
+    font-weight: bold;
+    padding-bottom: 10px;
+    text-align: center;
+}
+
+.attachments {
+  & tbody tr {
+    &.hovered {
+      background-color: #F0F0F0;
+    }
+
+    &.focused {
+      background-color: #EAF1FD
+    }
+  }
+
+  .attachment-details-wrapper {
+    padding-left: 26px;
+    padding-bottom: 20px;
+
+    .attachment-labels {
+      font-weight: bold;
+    }
+
+    .labels-section-content {
+      margin-bottom: 10px;
+    }
+
+    th, td {
+      padding-left: 0;
+    }
+
+    .attachment-buttons {
+      padding-top: 10px;
+    }
+  }
+
+  .attachment-row {
+    border-top: 1px solid rgb(204, 204, 204);
+    /*Override AUI's desire to use border-bottom*/
+    border-bottom: none;
+
+    .attachment-comment {
+      display: block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .attachment-dropdown-actions .action-dropdown .aui-dd-parent {
+      height: 18px;
+      width: 25px;
+      position: relative;
+
+      .aui-dropdown {
+        .hide-menu {
+          display: none;
+        }
+
+        li a span {
+          padding-left: 8px;
+          padding-right: 8px;
+        }
+      }
+
+      .aui-dd-trigger {
+        background: url(../../resources/confluence.extra.attachments/icons/tools_17.png) no-repeat 0% 50%;
+
+        &:hover {
+          background-color:#3c78b5;
+          color:#fff;
+          cursor: pointer;
+        }
+
+        span, &:hover span {
+          background: url(../../resources/confluence.extra.attachments/icons/menu_indicator.gif) no-repeat 100% 50%;
+          overflow:hidden;
+          width:25px;
+          height:18px;
+          display:block;
+        }
+
+        .hide-icons {
+          display: none;
+        }
+      }
+    }
+
+    /* To cater for Confluence 5.0 + ADG */
+    .action-menu {
+      text-align: right;
+    }
+
+    .aui-dropdown2-trigger {
+      color: #707070;
+      text-decoration: none;
+      display: none; /* Only show on hover/focused */
+    }
+
+    .aui-icon-dropdown {
+      border-top-color: #707070;
+    }
+  }
+
+  // FIXME: Remove this as soon as we start using Confluence.SortableTables or similar
+  th span.propersortedby {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAKBAMAAACQ3rmwAAAAA3NCSVQICAjb4U/gAAAAHlBMVEX///9QYXNQYXNQYXNQYXNQYXNQYXNQYXNQYXNQYXOMgbQDAAAACnRSTlMAESIzRGZ3maq7ZAl7FAAAAAlwSFlzAAALEgAACxIB0t1+/AAAAB50RVh0U29mdHdhcmUAQWRvYmUgRmlyZXdvcmtzIENTNS4xqx9I6wAAAHl0RVh0bmFtZVNldHMAeyBkZXNjcmlwdGlvbjoiRG93bmxvYWQgdGhlIFwiTmFtZWQgU2VsZWN0aW9uIFNldHNcIiBwYW5lbCBmcm9tIGh0dHA6Ly9maXJld29ya3MuYWJlYWxsLmNvbSIsIGlkOi0xLCBzZXRzOnsgIH0gfVikr5sAAAAVdEVYdENyZWF0aW9uIFRpbWUAMjkvMy8xMlxvLTUAAAAdSURBVAiZY2AIYwAB5pkOIEpiZhOIqpw5nYEUAADZjgQPuazuBAAAAABJRU5ErkJggg==);
+    background-repeat: no-repeat;
+    background-position: right 50%;
+    padding-right: 20px;
+    &.descending {
+      background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAKBAMAAACQ3rmwAAAAA3NCSVQICAjb4U/gAAAAHlBMVEX///9QYXNQYXNQYXNQYXNQYXNQYXNQYXNQYXNQYXOMgbQDAAAACnRSTlMAESIzRGZ3maq7ZAl7FAAAAAlwSFlzAAALEgAACxIB0t1+/AAAAB50RVh0U29mdHdhcmUAQWRvYmUgRmlyZXdvcmtzIENTNS4xqx9I6wAAAHl0RVh0bmFtZVNldHMAeyBkZXNjcmlwdGlvbjoiRG93bmxvYWQgdGhlIFwiTmFtZWQgU2VsZWN0aW9uIFNldHNcIiBwYW5lbCBmcm9tIGh0dHA6Ly9maXJld29ya3MuYWJlYWxsLmNvbSIsIGlkOi0xLCBzZXRzOnsgIH0gfVikr5sAAAAVdEVYdENyZWF0aW9uIFRpbWUAMjkvMy8xMlxvLTUAAAAdSURBVAiZY2AgGlTOnA6iNGY2giiWmQZg0VQQAQBOSAQedpgI7AAAAABJRU5ErkJggg==);
+    }
+  }
+}
+
+.plugin_attachments_table_container {
+  margin-bottom: 10px;
+}
+
+.plugin_attachments_uploadwaiticon {
+  visibility: hidden;
+}
+
+.plugin_attachments_dropzone_uploadwaiticon {
+  visibility: hidden;
+}
+
+.attachment-dropdown-actions {
+  width: 30px;
+}
+
+#aui-message-bar {
+  position: fixed;
+  left: 50%;
+  max-width: 500px;
+  top: 10px;
+}
+
+.attachment-image-preview > img {
+  max-height: 150px;
+  max-width: 100%;
+}
+
+.editor-inline-macro[data-macro-name='attachments'] {
+  padding: 26px 6px 6px 6px;
+}
+
+span.attachments-macro .companion-edit-button {
+  margin-left: 10px;
+}

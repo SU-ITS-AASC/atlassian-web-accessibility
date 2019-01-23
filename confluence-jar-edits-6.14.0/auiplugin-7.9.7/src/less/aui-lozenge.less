@@ -1,0 +1,74 @@
+@import './imports/global';
+
+/*! AUI Lozenge */
+.aui-lozenge {
+    background: @aui-lozenge-bg-color;
+    border: 1px solid @aui-lozenge-border-color;
+    border-radius: @aui-lozenge-border-radius;
+    color: @aui-lozenge-text-color;
+    display: inline-block;
+    font-size: 11px;
+    font-weight: bold;
+    line-height: 99%; /* cross-browser compromise to make the line-height match the font-size */
+    margin: 0;
+    padding: 2px 5px;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+.aui-lozenge.aui-lozenge-subtle {
+    background-color: @aui-lozenge-subtle-bg-color;
+    border-color: @aui-lozenge-subtle-border-color;
+    color: @aui-lozenge-subtle-text-color;
+}
+.aui-lozenge-success {
+    background-color: @aui-lozenge-success-bg-color;
+    border-color: @aui-lozenge-success-border-color;
+    color: @aui-lozenge-success-text-color;
+}
+.aui-lozenge-success.aui-lozenge-subtle {
+    background-color: @aui-lozenge-subtle-bg-color;
+    border-color: @aui-lozenge-success-subtle-border-color;
+    color: @aui-lozenge-success-subtle-text-color;
+}
+.aui-lozenge-error {
+    background-color: @aui-lozenge-error-bg-color;
+    border-color: @aui-lozenge-error-border-color;
+    color: @aui-lozenge-error-text-color;
+}
+.aui-lozenge-error.aui-lozenge-subtle {
+    background-color: @aui-lozenge-subtle-bg-color;
+    border-color: @aui-lozenge-error-subtle-border-color;
+    color: @aui-lozenge-error-subtle-text-color;
+}
+.aui-lozenge-current {
+    background-color: @aui-lozenge-current-bg-color;
+    border-color: @aui-lozenge-current-border-color;
+    color: @aui-lozenge-current-text-color;
+}
+.aui-lozenge-current.aui-lozenge-subtle {
+    background-color: @aui-lozenge-subtle-bg-color;
+    border-color: @aui-lozenge-current-subtle-border-color;
+    color: @aui-lozenge-current-subtle-text-color;
+}
+.aui-lozenge-complete, .aui-lozenge-new {
+    background-color: @aui-lozenge-new-bg-color;
+    border-color: @aui-lozenge-new-border-color;
+    color: @aui-lozenge-new-text-color;
+
+    &.aui-lozenge-subtle {
+        background-color: @aui-lozenge-subtle-bg-color;
+        border-color: @aui-lozenge-new-subtle-border-color;
+        color: @aui-lozenge-new-subtle-text-color;
+    }
+}
+.aui-lozenge-moved {
+    background-color: @aui-lozenge-moved-bg-color;
+    border-color: @aui-lozenge-moved-border-color;
+    color: @aui-lozenge-moved-text-color;
+}
+.aui-lozenge-moved.aui-lozenge-subtle {
+    background-color: @aui-lozenge-subtle-bg-color;
+    border-color: @aui-lozenge-moved-subtle-border-color;
+    color: @aui-lozenge-moved-subtle-text-color;
+}

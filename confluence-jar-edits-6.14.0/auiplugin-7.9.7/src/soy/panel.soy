@@ -1,0 +1,14 @@
+{namespace aui}
+
+/**
+ * @param content
+ * @param? id
+ * @param? extraClasses
+ * @param? extraAttributes
+ * @param? tagName
+ */
+{template .panel}
+    <{$tagName ? $tagName : 'div'}{if $id} id="{$id}"{/if} class="aui-panel{call aui.renderExtraClasses data="all" /}"{call aui.renderExtraAttributes data="all" /}>
+        {$content |noAutoescape}
+    </{$tagName ? $tagName : 'div'}>
+{/template}

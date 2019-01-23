@@ -1,0 +1,15 @@
+/** Drop shadow for the code example **/
+div.syntaxhighlighter
+{
+    box-shadow: 3px 5px 5px 6px #ccc;
+}
+
+#code-example .container
+{
+    padding: 0.5em !important; /* the box shadow looks a bit weird with the default 'no-padding' approach of the SyntaxHighlighter */
+}
+
+#code-example
+{
+    width: 500px;
+}

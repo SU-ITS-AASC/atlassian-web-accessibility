@@ -1,0 +1,7 @@
+.starred .blank-slate-text {
+  max-width: 410px; }
+
+.starred .blank-slate-image {
+  width: 120px;
+  height: 95px;
+  background-image: url("assets/images/3.0/icon-starred-empty.svg"); }

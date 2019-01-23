@@ -1,0 +1,53 @@
+#breadcrumb-section,
+.recently-updated-section h4.sub-heading {
+    display: none;
+}
+
+/* PAGES COLLECTOR */
+#content.pages-collector {
+    overflow: auto;
+}
+.recently-updated-section {
+    padding-right: 15px;
+}
+.tree-browser-section {
+    padding-left: 15px;
+}
+.recently-updated-section .recently-updated {
+    margin-top: 0;
+}
+.results-container {
+    margin-top: 10px;
+}
+.collector-section-header {
+    display: table;
+    width: 100%;
+    vertical-align: middle;
+}
+.collector-section-header > div {
+    display: table-row;
+}
+.collector-section-header-title {
+    display: table-cell;
+}
+.collector-section-header-browse-link {
+    display: table-cell;
+    text-align: right;
+}
+.recently-updated-section, .tree-browser-section {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    width: 50%;
+    float: left;
+}
+
+.tree-browser-section div.plugin_pagetree > ul.plugin_pagetree_children_list,
+.tree-browser-section div.plugin_pagetree > ul.plugin_pagetree_children_list > div > ul.plugin_pagetree_children_list {
+    padding-left: 0;
+    margin-top: 0;
+}
+.recently-updated, .plugin_pagetree {
+    margin-top: 10px;
+}
+
+/** 52 lines*/

@@ -1,0 +1,71 @@
+#htmlSafe()
+
+#set ($moveUrl = "/pages/editattachment.action?pageId=$page.id")
+#set ($removeUrl = "/pages/removeattachment.action?pageId=$page.id")
+#set ($viewUrl = "/pages/viewattachments.action?pageId=$page.id")
+
+#requireResource("confluence.extra.attachments:attachments-javascript")
+
+<div class="plugin_attachments_container">
+    <div class="plugin_attachments_table_container">
+        <fieldset class="hidden">
+            <input type="hidden" class="plugin_attachments_macro_render_param" name="pageId" value="$page.id">
+            <input type="hidden" name="deleteConfirmMessage" value="$i18n.getText('remove.attachment.confirmation.message')"/>
+            #foreach ( $entry in $macroParams.entrySet() )
+                #if ( $entry.key != ": = | RAW | = :") ## We don't need the raw macro parameters
+                    <input type="hidden" class="plugin_attachments_macro_render_param" name="$generalUtil.htmlEncode( $entry.key )" value="$generalUtil.htmlEncode( $entry.value )">
+                #end
+            #end
+            <input type="hidden" name="outputType" value="$outputType">
+        </fieldset>
+        #set ($sortPathPrefixHtml = "${req.contextPath}$generalUtil.appendAmpersandOrQuestionMark($page.urlPath)sortBy=")
+        #set ($attachmentHelper = $attachmentsMacroHelper)
+        #parse("/templates/extra/attachments/attachments-table.vm")
+    </div>
+    <div class="plugin_attachments_upload_container">
+        #if( $hasAttachFilePermissions && $upload && !$renderedInPreview)
+            #if( !$remoteUser )
+                #parse ("/includes/alert-anonymous.vm")
+            #end
+            <div class="attachments-table-drop-zone">
+                #if ($latestVersionsOfAttachments.size() == 0)
+                    <div class="drop-zone-empty-text">
+                        $i18n.getText('attachments.empty.drag.files')
+                    </div>
+                #end
+                <li class="drop-zone-text">
+                    <div class="drop-zone-image"></div>
+                    <span>$i18n.getText('attachments.drag.files') <a class="aui-button aui-button-link browse-files">$i18n.getText('attachments.browse.files')</a></span>
+                    <img src="${req.contextPath}/images/icons/wait.gif" class='plugin_attachments_dropzone_uploadwaiticon'/>
+                </li>
+                <form method="POST" class="plugin_attachments_uploadform aui hidden" action="${req.contextPath}/pages/plugins/attachments/doattachfile.action?pageId=${page.id}" enctype="multipart/form-data">
+                    #form_xsrfToken()
+                    <div class="field-group">
+                        <label>$i18n.getText('attachments.browse.files.label')</label>
+                        <input type="file" name="file_0" size="30">
+                    </div>
+                    <div class="field-group">
+                        <label>$i18n.getText('attachments.browse.file.comment.label')</label>
+                        <input type="text" class="blank-search text" name="comment_0" size="20" placeholder="$i18n.getText('attachments.commenthint')" >
+                        <input type="hidden" name="labels" value="$macroParams.labels"/>
+                    </div>
+                    <div class="field-group">
+                        <input type="submit" class="submit aui-button" name="confirm" value="$i18n.getText('attachments.attachbutton')">
+                    </div>
+                    <iframe class="plugin_attachments_uploadiframe hidden" name="$uploadIFrameName" src=""></iframe>
+                </form>
+            </div>
+        #elseif( !$hasAttachFilePermissions && $upload && !$renderedInPreview && $latestVersionsOfAttachments.size() == 0)
+            <div class="empty-attachment-text">
+                $i18n.getText('attachments.empty.drag.files')
+            </div>
+        #end
+    </div>
+
+    <div>
+        #if ($latestVersionsOfAttachments.size() > 1)
+            <a class="download-all-link" href="$req.contextPath/pages/downloadallattachments.action?pageId=$page.id" title="$action.getText('download.all.desc')">$action.getText('download.all')</a>
+        #end
+    </div>
+</div>
+

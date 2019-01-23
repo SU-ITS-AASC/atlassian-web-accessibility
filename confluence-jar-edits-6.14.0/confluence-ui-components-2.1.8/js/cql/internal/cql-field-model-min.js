@@ -1,0 +1,1 @@
+define("confluence-ui-components/js/cql/internal/cql-field-model",[],function(){function a(b){return b.uiSupport.label.translation}return{getLabel:a}});

@@ -1,0 +1,18 @@
+@import './icon-pseudoelement';
+
+#aui {
+    .aui-dropdown2-trigger-chevron-icon(@glyphsize: @aui-icon-size-small; @canvassize: @aui-icon-size-small-canvas) {
+        @canvas-padding: ((@canvassize - @glyphsize) / 2);
+        #aui.icon-pseudoelement(@aui-icon-font-family);
+        content: @aui-glyph-chevron-down;
+        font-size: @glyphsize;
+        height: @glyphsize;
+        line-height: 1;
+        margin-top: -(@glyphsize / 2);
+        position: absolute;
+        right: @canvas-padding;
+        top: 50%;
+        text-indent: 0; // Reset indentation set by split button
+        width: @glyphsize;
+    }
+}

@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.atlassian.confluence.plugins</groupId>
+        <artifactId>confluence-collaborative-editor-plugin-parent</artifactId>
+        <version>3.1.0</version>
+    </parent>
+
+    <artifactId>confluence-collaborative-editor-plugin</artifactId>
+    <packaging>atlassian-plugin</packaging>
+    <name>Confluence Collaborative Editor Plugin</name>
+    <description>Provides the integration of concurrent editing inside confluence.</description>
+
+    <licenses>
+        <license>
+            <name>Atlassian Customer Agreement</name>
+            <url>https://www.atlassian.com/customer-agreement/</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.atlassian.confluence.plugins</groupId>
+            <artifactId>confluence-collaborative-editor-config-api</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.atlassian.confluence</groupId>
+            <artifactId>confluence</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.atlassian.plugins.rest</groupId>
+            <artifactId>atlassian-rest-common</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.nimbusds</groupId>
+            <artifactId>nimbus-jose-jwt</artifactId>
+            <version>4.9</version>
+        </dependency>
+        <!-- ensure we don't compile in nimbus dependencies -->
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>net.jcip</groupId>
+            <artifactId>jcip-annotations</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+          <groupId>com.google.guava</groupId>
+          <artifactId>guava</artifactId>
+          <scope>provided</scope>
+       </dependency>
+
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.atlassian.plugin</groupId>
+            <artifactId>atlassian-spring-scanner-annotation</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- test dependencies -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-library</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.googlecode.json-simple</groupId>
+            <artifactId>json-simple</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.atlassian.confluence</groupId>
+            <artifactId>confluence-rest-client</artifactId>
+            <version>${confluence.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.atlassian.confluence</groupId>
+            <artifactId>confluence-testutils</artifactId>
+            <version>${confluence.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.atlassian.confluence.plugins</groupId>
+            <artifactId>analytics-jobs-plugin</artifactId>
+            <version>${confluence.version}</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.atlassian.plugin</groupId>
+                <artifactId>atlassian-spring-scanner-maven-plugin</artifactId>
+                <version>${atlassian.spring.scanner.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>atlassian-spring-scanner</goal>
+                        </goals>
+                        <phase>process-classes</phase>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>com.atlassian.maven.plugins</groupId>
+                <artifactId>maven-confluence-plugin</artifactId>
+                <version>${amps.version}</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <extractDependencies>true</extractDependencies>
+                    <instructions>
+                        <Atlassian-Plugin-Key>${atlassian.plugin.key}</Atlassian-Plugin-Key>
+                        <Spring-Context>*</Spring-Context>
+                        <Import-Package>
+                            <!-- for SystemAdministratorCondition -->
+                            com.atlassian.confluence.plugin.descriptor.web.conditions,
+                            sun.misc.*;resolution:="optional",
+                            <!-- TODO: CONFDEV-40956, make the org.springframework.transaction version situation better -->
+                            org.springframework.transaction.*;version="[0.0.0,0.0.0]",
+                            *
+                        </Import-Package>
+                        <Export-Package>
+                            com.atlassian.confluence.plugins.synchrony.config,
+                            com.atlassian.confluence.plugins.synchrony.importexport
+                        </Export-Package>
+                    </instructions>
+                    <output>${project.build.directory}/output.log</output>
+                    <skipManifestValidation>true</skipManifestValidation>
+                    <productVersion>${confluence.version}</productVersion>
+                    <productDataVersion>${confluence.data.version}</productDataVersion>
+                    <systemPropertyVariables>
+                        <xvfb.enable>${xvfb.enable}</xvfb.enable>
+                        <discovery.test.mode>true</discovery.test.mode>
+                        <upm.pac.disable>true</upm.pac.disable>
+                        <atlassian.darkfeature.confluence.onboarding.bypass>true</atlassian.darkfeature.confluence.onboarding.bypass>
+                        <atlassian.darkfeature.collaborative.editing.frictionless.upgrade>true</atlassian.darkfeature.collaborative.editing.frictionless.upgrade>
+                        <atlassian.darkfeature.dashboard.onboarding.disabled>true</atlassian.darkfeature.dashboard.onboarding.disabled>
+                        <atlassian.event.thread_pool_configuration.queue_size>2048</atlassian.event.thread_pool_configuration.queue_size>
+                    </systemPropertyVariables>
+                    <jvmArgs>${jvm.args}</jvmArgs>
+                    <allowGoogleTracking>false</allowGoogleTracking>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>com.atlassian.lesscss</groupId>
+                <artifactId>lesscss-maven-plugin</artifactId>
+                <version>3.2.1</version>
+                <executions>
+                    <execution>
+                        <id>compile-less</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <properties>
+        <atlassian.plugin.key>com.atlassian.confluence.plugins.confluence-collaborative-editor-plugin</atlassian.plugin.key>
+    </properties>
+</project>

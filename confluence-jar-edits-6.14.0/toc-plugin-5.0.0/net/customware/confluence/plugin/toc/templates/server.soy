@@ -1,0 +1,14 @@
+{namespace Confluence.Plugins.TableOfContents.Server}
+
+/**
+ * Renders the container for the client-side TOC macro
+ * @param dataAttributes
+ * @param nonPrintable
+ * @param customCssClass
+ */
+{template .clientSideTocContainer}
+<div class="toc-macro client-side-toc-macro {$customCssClass}{if $nonPrintable} non-printable{/if}"
+{foreach $name in keys($dataAttributes)}{sp}data-{$name}="{$dataAttributes[$name]}"{/foreach}
+>
+</div>
+{/template}

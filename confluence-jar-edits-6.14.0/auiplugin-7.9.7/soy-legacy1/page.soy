@@ -1,0 +1,224 @@
+{namespace atlassian.page}
+
+/**
+ * AUI Document
+ * @param windowTitle
+ * @param? headContent
+ * @param content
+ * @param? extraClasses
+ * @param? extraAttributes
+ */
+{template .document}
+<!DOCTYPE html>
+<html lang="{($ij.language ? $ij.language : 'en')}">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>{$windowTitle}</title>
+    {if $headContent}
+        {$headContent|noAutoescape}
+    {/if}
+</head>
+<body{call atlassian.renderExtraClasses data="all"}{param fullAttr: true /}{/call}{call atlassian.renderExtraAttributes data="all" /}>
+    {$content|noAutoescape}
+</body>
+</html>
+{/template}
+
+/**
+ * AUI Page
+ * @param headerContent Header content - commonly an AUI Header.
+ * @param contentContent Main page content.
+ * @param footerContent Footer content.
+ */
+{template .page}
+<div id="page">
+    <header id="header" role="banner">
+        {$headerContent|noAutoescape}
+    </header><!-- #header -->
+    <section id="content" role="main">
+        {$contentContent|noAutoescape}
+    </section><!-- #content -->
+    <footer id="footer" role="contentinfo">
+        {$footerContent|noAutoescape}
+    </footer><!-- #footer -->
+</div><!-- #page -->
+{/template}
+
+/**
+ * AUI Header
+ * @param headerLogoText String containing the alternative text for the logo (required, can be instance name)
+ * @param? headerLogoImageUrl String containing the path and filename to generate an IMG tag with a custom logo
+ * @param? headerText String containing the instance name (optional, displayed IN ADDITION to logo)
+ * @param? headerLink String containing a URL to the home of the instance
+ * @param? logo String containing product name (e.g. 'aui', 'bamboo', 'stash') to render a logo or 'textonly' for a text-only logo
+ * @param? primaryNavContents Contents of the primary navigation. Usually an unordered list of items.
+ * @param? secondaryNavContents Contents of the secondary navigation. Usually an unordered list of items.
+ * @param? headerBeforeContent Content of the "before" header extension point (e.g. to insert an icon & dropdown)
+ * @param? headerAfterContent Content of the "after" header extension point
+ * @param? extraClasses
+ * @param? extraAttributes
+ * @param? id
+ */
+{template .header}
+<nav{if $id} id="{$id}"{/if} class="aui-header aui-dropdown2-trigger-group{call atlassian.renderExtraClasses data="all" /}"{call atlassian.renderExtraAttributes data="all" /} role="navigation">
+    <div class="aui-header-inner">
+        {if $headerBeforeContent}
+            <div class="aui-header-before">
+                {$headerBeforeContent|noAutoescape}
+            </div>
+        {/if}
+        <div class="aui-header-primary">
+            <h1 id="logo" class="aui-header-logo{if $headerLogoImageUrl} aui-header-logo-custom{elseif $logo} aui-header-logo-{$logo}{/if}">
+                <a href="{($headerLink ? $headerLink : '/')}">
+                    {if $headerLogoImageUrl}
+                        <img src="{$headerLogoImageUrl}" alt="{$headerLogoText}" />
+                    {else}
+                        <span class="aui-header-logo-device">{($headerLogoText? $headerLogoText : '')}</span>
+                    {/if}
+                    {if $headerText}<span class="aui-header-logo-text">{$headerText}</span>{/if}
+                </a>
+            </h1>
+            {if $primaryNavContents}
+                {$primaryNavContents|noAutoescape}
+            {/if}
+        </div>
+        {if $secondaryNavContents}
+            <div class="aui-header-secondary">
+                {$secondaryNavContents|noAutoescape}
+            </div>
+        {/if}
+        {if $headerAfterContent}
+            <div class="aui-header-after">
+                {$headerAfterContent|noAutoescape}
+            </div>
+        {/if}
+    </div><!-- .aui-header-inner-->
+</nav><!-- .aui-header -->
+{/template}
+
+/**
+ * AUI Page Panel
+ * @param content Contents can be a combination of atlassian.page.nav, atlassian.page.content, atlassian.page.sidebar or atlassian.page.item
+ * @param? id
+ * @param? tagName String containing the HTML element to use (default is div)
+ * @param? extraClasses
+ * @param? extraAttributes
+ */
+{template .pagePanel}
+<{$tagName ? $tagName : 'div'} class="aui-page-panel{call atlassian.renderExtraClasses data="all" /}"{if $id} id="{$id}"{/if}{call atlassian.renderExtraAttributes data="all" /}>
+    <div class="aui-page-panel-inner">
+        {$content|noAutoescape}
+    </div><!-- .aui-page-panel-inner -->
+</{$tagName ? $tagName : 'div'}><!-- .aui-page-panel -->
+{/template}
+
+/**
+ * AUI Page Panel Nav
+ * @param content Contents should be navigation-related, generally a vertical navgroup would go in here
+ * @param? id
+ * @param? tagName String containing the HTML element to use (default is div)
+ * @param? extraClasses
+ * @param? extraAttributes
+ */
+{template .pagePanelNav}
+<{$tagName ? $tagName : 'div'} class="aui-page-panel-nav{call atlassian.renderExtraClasses data="all" /}"{if $id} id="{$id}"{/if}{call atlassian.renderExtraAttributes data="all" /}>
+    {$content|noAutoescape}
+</{$tagName ? $tagName : 'div'}><!-- .aui-page-panel-nav -->
+{/template}
+
+/**
+ * AUI Page Panel Content
+ * @param content
+ * @param? id
+ * @param? tagName String containing the HTML element to use (default is section)
+ * @param? extraClasses
+ * @param? extraAttributes
+ */
+{template .pagePanelContent}
+<{$tagName ? $tagName : 'section'} class="aui-page-panel-content{call atlassian.renderExtraClasses data="all" /}"{if $id} id="{$id}"{/if}{call atlassian.renderExtraAttributes data="all" /}>
+    {$content|noAutoescape}
+</{$tagName ? $tagName : 'section'}><!-- .aui-page-panel-content -->
+{/template}
+
+/**
+ * AUI Page Panel Sidebar
+ * @param content
+ * @param? id
+ * @param? tagName String containing the HTML element to use (default is aside)
+ * @param? extraClasses
+ * @param? extraAttributes
+ */
+{template .pagePanelSidebar}
+<{$tagName ? $tagName : 'aside'} class="aui-page-panel-sidebar{call atlassian.renderExtraClasses data="all" /}"{if $id} id="{$id}"{/if}{call atlassian.renderExtraAttributes data="all" /}>
+    {$content|noAutoescape}
+</{$tagName ? $tagName : 'aside'}><!-- .aui-page-panel-sidebar -->
+{/template}
+
+/**
+ * AUI Page Panel Item - use this one when doing custom columns (collapsing areas, "sticky" columns, etc)
+ * @param content
+ * @param? id
+ * @param? tagName String containing the HTML element to use (default is section)
+ * @param? extraClasses
+ * @param? extraAttributes
+ */
+{template .pagePanelItem}
+<{$tagName ? $tagName : 'section'} class="aui-page-panel-item{call atlassian.renderExtraClasses data="all" /}"{if $id} id="{$id}"{/if}{call atlassian.renderExtraAttributes data="all" /}>
+    {$content|noAutoescape}
+</{$tagName ? $tagName : 'section'}><!-- .aui-page-panel-item -->
+{/template}
+
+/**
+ * AUI Page Header
+ * @param content
+ * @param? id
+ * @param? extraClasses
+ * @param? extraAttributes
+ */
+{template .pageHeader}
+<header class="aui-page-header{call atlassian.renderExtraClasses data="all" /}"{if $id} id="{$id}"{/if}{call atlassian.renderExtraAttributes data="all" /}>
+    <div class="aui-page-header-inner">
+        {$content|noAutoescape}
+    </div><!-- .aui-page-header-inner -->
+</header><!-- .aui-page-header -->
+{/template}
+
+/**
+ * AUI Page Header Image
+ * @param content
+ * @param? id
+ * @param? extraClasses
+ * @param? extraAttributes
+ */
+{template .pageHeaderImage}
+<div class="aui-page-header-image{call atlassian.renderExtraClasses data="all" /}"{if $id} id="{$id}"{/if}{call atlassian.renderExtraAttributes data="all" /}>
+    {$content|noAutoescape}
+</div><!-- .aui-page-header-image -->
+{/template}
+
+/**
+ * AUI Page Header Main
+ * @param content
+ * @param? id
+ * @param? extraClasses
+ * @param? extraAttributes
+ */
+{template .pageHeaderMain}
+<div class="aui-page-header-main{call atlassian.renderExtraClasses data="all" /}"{if $id} id="{$id}"{/if}{call atlassian.renderExtraAttributes data="all" /}>
+    {$content|noAutoescape}
+</div><!-- .aui-page-header-main -->
+{/template}
+
+/**
+ * AUI Page Header Actions
+ * @param content
+ * @param? id
+ * @param? extraClasses
+ * @param? extraAttributes
+ */
+{template .pageHeaderActions}
+<div class="aui-page-header-actions{call atlassian.renderExtraClasses data="all" /}"{if $id} id="{$id}"{/if}{call atlassian.renderExtraAttributes data="all" /}>
+    {$content|noAutoescape}
+</div><!-- .aui-page-header-actions -->
+{/template}

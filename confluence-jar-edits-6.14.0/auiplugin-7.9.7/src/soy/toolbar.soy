@@ -1,0 +1,215 @@
+{namespace aui.toolbar}
+
+/**
+ * NOTE: Toolbar is superceded by Toolbar2, you should use Toolbar2 if possible.
+ * @param content
+ * @param? id
+ * @param? extraClasses
+ * @param? extraAttributes
+ * @param? tagName
+ **/
+{template .toolbar}
+    <{$tagName ? $tagName : 'div'}{if $id} id="{$id}"{/if} class="aui-toolbar{call aui.renderExtraClasses data="all" /}"
+        {call aui.renderExtraAttributes data="all" /}>
+        {$content|noAutoescape}
+    </{$tagName ? $tagName : 'div'}>
+{/template}
+
+/**
+ * @param split "right" or "left"
+ * @param content
+ * @param? id
+ * @param? extraClasses
+ * @param? extraAttributes
+ * @param? tagName
+ **/
+{template .split}
+    <{$tagName ? $tagName : 'div'}{if $id} id="{$id}"{/if} class="toolbar-split toolbar-split-{$split}{call aui.renderExtraClasses data="all" /}"
+        {call aui.renderExtraAttributes data="all" /}>
+        {$content|noAutoescape}
+    </{$tagName ? $tagName : 'div'}>
+{/template}
+
+/**
+ * @param content
+ * @param? id
+ * @param? extraClasses
+ * @param? extraAttributes
+ **/
+{template .group}
+    <ul{if $id} id="{$id}"{/if} class="toolbar-group{call aui.renderExtraClasses data="all" /}"
+        {call aui.renderExtraAttributes data="all" /}>
+         {$content|noAutoescape}
+    </ul>
+{/template}
+
+/**
+ * Generally not meant for public use.  Primarily for when you want to write your own custom type of toolbar item
+ * @param content
+ * @param? isPrimary
+ * @param? isActive
+ * @param? id
+ * @param? extraClasses
+ * @param? extraAttributes
+ **/
+{template .item}
+    <li {if $id} id="{$id}"{/if} class="toolbar-item{if $isPrimary} primary{/if}{if $isActive} active{/if}{call aui.renderExtraClasses data="all" /}"
+        {call aui.renderExtraAttributes data="all" /}>
+        {$content|noAutoescape}
+    </li>
+{/template}
+
+/**
+ * Generally not meant for public use.  Primarily for when you want to write your own custom type of toolbar item
+ * @param content
+ * @param? url
+ * @param? title
+ * @param? id
+ * @param? extraClasses
+ * @param? extraAttributes
+ **/
+{template .trigger}
+    <a{if $id} id="{$id}"{/if} class="toolbar-trigger{call aui.renderExtraClasses data="all" /}" href="{$url ? $url : '#'}"
+        {if $title} title="{$title}"{/if}
+        {call aui.renderExtraAttributes data="all" /}>
+        {$content|noAutoescape}
+    </a>
+{/template}
+
+/**
+ * @param? id
+ * @param? extraClasses
+ * @param? extraAttributes
+ * @param? url the url for the button, default is '#'
+ * @param? text text to display in the button
+ * @param? title accessibility text to display when using icons - usually mutually exclusive with the $text parameter.
+ * @param? iconClass a user-defined css class used to apply your icon as a background image in the button
+ * @param? isActive whether this button is currently depressed
+ * @param? isPrimary whether this is a primary button (more prominant stylings will apply)
+ **/
+{template .button}
+    {if not hasData()}
+        Either $text or both $title and $iconClass must be provided.
+    {else}
+        {call .item}
+            {param isActive: $isActive /}
+            {param isPrimary : $isPrimary/}
+            {param id: $id /}
+            {param extraClasses : $extraClasses /}
+            {param extraAttributes : $extraAttributes /}
+            {param content}
+                {call .trigger}
+                    {param url : $url/}
+                    {param title : $title/}
+                    {param content}
+                        {if $iconClass}<span class="icon {$iconClass}"></span>{/if}
+                        {if $text}<span class="trigger-text">{$text}</span>{/if}
+                    {/param}
+                {/call}
+            {/param}
+        {/call}
+    {/if}
+{/template}
+
+/**
+ * @param? id
+ * @param? extraClasses
+ * @param? extraAttributes
+ * @param url the url for the link, default is '#'
+ * @param text text for the link
+ **/
+{template .link}
+    {call .item}
+        {param id: $id /}
+        {param extraClasses}toolbar-item-link{call aui.renderExtraClasses data="all" /}{/param}
+        {param extraAttributes : $extraAttributes /}
+        {param content}
+            {call .trigger}
+                {param url : $url/}
+                {param content}{$text}{/param}
+            {/call}
+        {/param}
+    {/call}
+{/template}
+
+/**
+ * for reuse of the structure in toolbar-splitbutton and toolbar-dropdown
+ * @param itemClass toolbar-splitbutton or toolbar-dropdown
+ * @param? text text to display in the button
+ * @param? id
+ * @param? extraClasses
+ * @param? extraAttributes
+ * @param? isPrimary whether this is a primary button (more prominant stylings will apply)
+ * @param dropdownItemsContent rendered output of one or more atlassian.dropdownItem s
+ * @param? splitButtonContent
+ */
+{template .dropdownInternal private="true"}
+    {call .item}
+        {param isPrimary : $isPrimary/}
+        {param id: $id /}
+        {param extraClasses}{$itemClass|noAutoescape}{call aui.renderExtraClasses data="all" /}{/param}
+        {param extraAttributes : $extraAttributes /}
+        {param content}
+            {if $splitButtonContent}
+                {$splitButtonContent|noAutoescape}
+            {/if}
+            {call aui.dropdown.parent}
+                {param content}
+                    {call aui.dropdown.trigger}
+                        {param extraClasses : 'toolbar-trigger' /}
+                        {param accessibilityText : $text /}
+                    {/call}
+                    {call aui.dropdown.menu}
+                        {param content: $dropdownItemsContent /}
+                    {/call}
+                {/param}
+            {/call}
+        {/param}
+    {/call}
+{/template}
+
+/**
+ * @param? id
+ * @param? extraClasses
+ * @param? extraAttributes
+ * @param text text to display in the dropdown button
+ * @param? isPrimary whether this is a primary button (more prominant stylings will apply)
+ * @param dropdownItemsContent rendered output of one or more atlassian.dropdownItem()s
+ */
+{template .dropdown}
+    {call .dropdownInternal}
+        {param isPrimary : $isPrimary/}
+        {param id: $id /}
+        {param itemClass : 'toolbar-dropdown' /}
+        {param extraClasses : $extraClasses /}
+        {param extraAttributes : $extraAttributes /}
+        {param text : $text /}
+        {param dropdownItemsContent : $dropdownItemsContent /}
+    {/call}
+{/template}
+
+/**
+ * @param? id
+ * @param? extraClasses
+ * @param? extraAttributes
+ * @param text text to display in the split button
+ * @param? url url for the split button to link to, defaults to '#'
+ * @param? isPrimary whether this is a primary button (more prominant stylings will apply)
+ * @param dropdownItemsContent rendered output of one or more atlassian.dropdownItem()s
+ */
+{template .splitButton}
+    {call .dropdownInternal}
+        {param isPrimary : $isPrimary/}
+        {param id: $id /}
+        {param itemClass : 'toolbar-splitbutton' /}
+        {param extraClasses : $extraClasses /}
+        {param extraAttributes : $extraAttributes /}
+        {param dropdownItemsContent : $dropdownItemsContent /}
+        {param splitButtonContent}
+            {call .trigger}
+                {param url : $url/}
+                {param content}{$text}{/param}
+            {/call}
+        {/param}
+    {/call}
+{/template}

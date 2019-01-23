@@ -1,0 +1,8 @@
+{
+"version":3,
+"file":"/dummy-file-path",
+"lineCount":2,
+"mappings":"AAGAA,MAAA,wFAGG,QAAA,CACCC,CADD,CAECC,CAFD,QAMQ,SAAA,MACED,CAAAE,OADF,EAEMF,CAAAE,OAAAC,YAFN,EAGMH,CAAAE,OAAAC,YAAAC,eAHN,MAOCC,EAAgBL,CAAAE,OAAAI,WAAAD,cAPjB,CAQCE,EAAoBP,CAAAE,OAAAI,WAAAC,kBARrB,CASCC,EAAkBR,CAAAE,OAAAI,WAAAE,gBATnB,CAUCC,EAAuBT,CAAAE,OAAAI,WAAAG,qBAVxB,CAWCC,EAAkBV,CAAAE,OAAAC,YAAAC,eAXnB,cAaAH,CAAAU,KAAAC,IAAA,gBAbA,GAcKC,CAdL,CAcoC,IAAAJ,CAAA,gBAChBJ,CADgB,EAdpC,CAiBCK,CAAAI,KAAA,CAAqBD,CAArB,CAjBD,CAoBHH,EAAAI,KAAA,CAAyB,IAAAP,CAAzB,CAEAG,EAAAI,KAAA,CAAyB,IAAAN,CAAzB,CAtBG,EANR,CAHH,CAmCAO;OAAA,8BAAAC,YAAA,4DAA8G,QAAA,CAASC,CAAT,EAC1GF,OAAA,OAAAG,OAAA,CAAsBD,CAAtB,CAD0G,CAA9G;",
+"sources":["input.js"],
+"names":["define","Confluence","AJS","Editor","ImageDialog","panelComponent","eventListener","FileDialog","ExternalPanelView","SearchPanelView","AttachmentsPanelView","panelComponents","Meta","get","attachmentPanelComponent","push","require","safeRequire","PanelComponents","toInit"]
+}

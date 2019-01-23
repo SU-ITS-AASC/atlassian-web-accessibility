@@ -1,0 +1,46 @@
+@import './imports/global';
+
+#aui-flag-container {
+    @gutter: @aui-grid * 3;
+    pointer-events: none; // so that users can click through the margin of the flag.
+    position: fixed;
+    top: @aui-header-logo-height + @gutter;
+    right: @gutter;
+    z-index: 4000;
+}
+
+.aui-flag {
+    left: 0;
+    max-height: 300px; //We need to set an explicit value to be able to animate the property
+    opacity: 0;
+    position: relative;
+    top: -10px;
+    #aui.transition(opacity @aui-flag-fade-in-time);
+    #aui.transition(top @aui-flag-slide-in-time);
+
+    &[aria-hidden="true"] {
+        left: 300px;
+        max-height: 0;
+        opacity: 0;
+        overflow: hidden;
+        top: 0;
+        #aui.transition(max-height @aui-flag-stack-shrink-time @aui-flag-stack-shrink-delay);
+        #aui.transition(margin-bottom @aui-flag-stack-shrink-time @aui-flag-stack-shrink-delay);
+        #aui.transition(opacity @aui-flag-fade-out-time);
+        #aui.transition(left @aui-flag-slide-out-time);
+    }
+
+    &[aria-hidden="false"] {
+        margin-bottom: @aui-flag-vertical-padding; // it's on the bottom so there's less clunky animation when flags in a stack disappear
+        opacity: 1;
+        top: 0;
+        left: 0;
+    }
+
+    .aui-message {
+        #aui.shadow.z500();
+        pointer-events: auto; // to allow normal interaction with messages inside flags
+        border-width: 0;
+        width: 300px;
+    }
+}

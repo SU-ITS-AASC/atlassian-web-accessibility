@@ -1,0 +1,8 @@
+{
+"version":3,
+"file":"/dummy-file-path",
+"lineCount":1,
+"mappings":"AAGAA,MAAA,mEACG,QAAA,IADH;",
+"sources":["input.js"],
+"names":["define"]
+}

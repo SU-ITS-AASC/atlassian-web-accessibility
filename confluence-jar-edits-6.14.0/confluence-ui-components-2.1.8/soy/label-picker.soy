@@ -1,0 +1,30 @@
+{namespace Confluence.UI.Components.LabelPicker.templates}
+
+/**
+ * Annotate new labels, or return the label as is.
+ *
+ * @param label a label object
+ */
+{template .labelResult}
+    {if $label.isNew}
+        {getText('confluence-ui.components.label-picker.add.new', $label.labelName)}
+    {else}
+        {$label.labelName}
+    {/if}
+{/template}
+
+/**
+ * Render invalid label result
+ *
+ * @param inputValue
+ * @param invalidCharacters
+ */
+{template .labelInvalid}
+    {let $inputValueHtml}
+        <b>{$inputValue}</b>
+    {/let}
+    {let $invalidCharactersHtml}
+        <b>{$invalidCharacters}</b>
+    {/let}
+    {getText('confluence-ui.components.label-picker.invalid.characters', $inputValueHtml, $invalidCharactersHtml)|noAutoescape}
+{/template}

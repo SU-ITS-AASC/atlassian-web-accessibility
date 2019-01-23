@@ -1,0 +1,33 @@
+#* @vtlvariable name="labels" type="java.util.List<com.atlassian.confluence.labels.Label>" *#
+#if ($labels && $labels.size())
+    <ul class="label-list#if($alignLabelsRight) label-list-right#end #if($labelable && ($remoteUser || $permissionHelper.canEdit($remoteUser, $labelable))) has-pen#end">
+    #if ($labels.size() == 0)
+        <li class="no-labels-message">
+            $action.getText('labels.none')
+        </li>
+    #else
+        #if($helper.spaceKey)
+            #set ($reolvedSpaceKey = $helper.spaceKey)
+        #else
+            #set ($reolvedSpaceKey = $spaceKey)
+        #end
+
+        $soyTemplateRendererHelper.getRenderedTemplateHtml(
+            "com.atlassian.confluence.plugins.confluence-labels:labels-resources-server",
+            "Confluence.Templates.Labels.labels.soy",
+            {
+                "labels" : $labels,
+                "spaceKey" : $reolvedSpaceKey,
+                "editable" : $!isSpace
+            })
+    #end
+    #if($accessMode == "READ_WRITE" && $labelable && ($remoteUser || $permissionHelper.canEdit($remoteUser, $labelable)))
+        <li class="labels-edit-container">
+            <a href="#" class="show-labels-editor" title="$action.getText('edit.labels.tooltip')">
+                <span class="aui-icon aui-icon-small aui-iconfont-devtools-tag-small">$action.getText('edit.labels')</span>
+            </a>
+        </li>
+    #end
+    </ul>
+#end
+

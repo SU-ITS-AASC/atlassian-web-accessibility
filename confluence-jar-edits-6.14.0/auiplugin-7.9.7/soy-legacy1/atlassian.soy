@@ -1,0 +1,39 @@
+{namespace atlassian}
+
+/**
+ * @param? extraAttributes String: attributename="attributevalue" or object: { "attributename" : "attributevalue" }
+ */
+{template .renderExtraAttributes private="true"}
+    {if hasData() and $extraAttributes}
+        {if isMap($extraAttributes)}
+            {foreach $attr in keys($extraAttributes)} {$attr}="{$extraAttributes[$attr]}"{/foreach}
+        {else}
+            {sp}{$extraAttributes|noAutoescape}
+        {/if}
+    {/if}
+{/template}
+
+
+/**
+ * @param? extraClasses String or array of strings to add to class attribute.
+ * @param? fullAttr Boolean. When set to true, adds the class attribute.
+ */
+{template .renderExtraClasses private="true"}
+    {if hasData() and $extraClasses}
+        {if $fullAttr}
+            {sp}class="
+                {if isList($extraClasses)}
+                    {foreach $class in $extraClasses}{if not isFirst($class)}{sp}{/if}{$class}{/foreach}
+                {else}
+                    {$extraClasses}
+                {/if}
+            "
+        {else}
+            {if isList($extraClasses)}
+                {foreach $class in $extraClasses} {$class}{/foreach}
+            {else}
+                {sp}{$extraClasses}
+            {/if}
+        {/if}
+    {/if}
+{/template}

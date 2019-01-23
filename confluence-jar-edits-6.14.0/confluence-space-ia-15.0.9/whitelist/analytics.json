@@ -1,0 +1,25 @@
+{
+    "space-ia-nav": [ "linkType" ],
+    "create-space-from-header": [],
+    "open-space-menu": [],
+
+    "confluence.viewpage.src.spacetools": [],
+    "confluence.viewpage.src.spacemenu": [],
+    "confluence.viewpage.src.contextnav": [],
+    "confluence.viewpage.src.contextnavpagetreemode": [],
+    "confluence.viewpage.src.contextnavchildmode": [],
+    "confluence.viewpage.src.spaceshortcut": [],
+    "confluence.viewpage.src.sidebar": [],
+    "confluence.viewpage.src.sidebar-pages": [],
+    "confluence.viewpage.src.sidebar-blogs": [],
+
+    "sidebar.relevant.mode.switch-to-keyboard": [],
+    "sidebar.relevant.mode.switch-to-space": [],
+    "sidebar.relevant.mode.switch-to-page": [],
+    "sidebar.relevant.navigate.toc-heading": [],
+    "sidebar.relevant.navigate.comment-section": [],
+    "sidebar.relevant.navigate.add-comment": [],
+
+    "confluence.space-sidebar.favourite.click": [],
+    "confluence.space-sidebar.favourite-remove.click": []
+}

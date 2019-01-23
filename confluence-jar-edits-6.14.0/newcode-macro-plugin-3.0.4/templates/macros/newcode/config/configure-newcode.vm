@@ -1,0 +1,68 @@
+#* @vtlvariable name="action" type="com.atlassian.confluence.ext.code.config.ConfigureNewcodeAction" *#
+#* @vtlvariable name="permissionHelper" type="com.atlassian.confluence.security.PermissionHelper" *#
+
+#requireResource("com.atlassian.confluence.ext.newcode-macro-plugin:syntaxhighlighter")
+#requireResource("com.atlassian.confluence.ext.newcode-macro-plugin:newcode-admin")
+#requireResource($action.defaultThemeResource)
+#requireResource($action.defaultLanguageResource)
+#requireResource("com.atlassian.confluence.ext.newcode-macro-plugin:syntaxhighlighter-init")
+
+<html>
+<head>
+    <title>$action.getText("newcode.config.title")</title>
+    <meta name="help-path" content="/templates/macros/newcode/config/newcode-help.vm"/>
+    <content tag="selectedWebItem">newcode-admin-link</content>
+</head>
+<body>
+    #parse ( "/template/includes/actionmessages.vm" )
+    #parse ( "/template/includes/actionerrors.vm" )
+
+    <div id="code-example">
+        <script type="syntaxhighlighter" class="theme: $action.currentDefaultThemeName; brush: $action.defaultLanguageAlias; gutter: false">
+<![CDATA[/**
+ * Default code macro appearance.
+ */
+public class MyJavaClass extends AbstractJavaClass
+{
+    @Override
+    public boolean sayHello(String name)
+    {
+        System.out.println("Hello " + name);
+        return name != null && name.length() > 0;
+    }
+}]]>
+        </script>
+    </div>
+    <form name="configure" action="save.action" method="POST" class="aui">
+        #form_xsrfToken()
+        <div class="field-group">
+            <label for="defaultThemeName">$action.getText("newcode.config.default.theme"):</label>
+            <select id="defaultThemeName" class="select" name="defaultThemeName">
+                #foreach ($theme in $action.themes)
+                    <option value="$theme" #if ($theme.equals($action.currentDefaultThemeName))selected="true"#end>$theme</option>
+                #end
+            </select>
+        </div>
+        <div class="field-group">
+            <label for="defaultLanguageName">$action.getText("newcode.config.default.language"):</label>
+            <select id="defaultLanguageName" class="select" name="defaultLanguageName">
+                #foreach ($language in $action.languages)
+                    <option value="$language.name"
+                        #if ($language.name.equals($action.getDefaultLanguageName()))selected="true"#end>$language.friendlyName
+                    </option>
+                #end
+            </select>
+        </div>
+        <div class="button-group">
+            <input class="button submit" type="submit" value="$action.getText("newcode.config.button.save")">
+        </div>
+    </form>
+    <br>
+    ## Only users with system admin permissions are allowed to install new (JavaScript-based) highlighting languages.
+    ## This is also checked in the action, but no point showing a link to users who can't access it.
+    #if ($action.displayUpload)
+    <a id="add-language" href="#">$action.getText("newcode.config.language.add.link")</a>
+    #end
+    #parse ( "/admin/admin-breadcrumbs.vm" )
+</body>
+</html>

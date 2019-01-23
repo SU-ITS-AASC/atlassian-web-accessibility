@@ -1,0 +1,18 @@
+#requireResource("com.atlassian.confluence.extra.officeconnector:office-connector-css")
+#requireResource("com.atlassian.confluence.plugins.confluence-previews:embedded-edit")
+<div class="office-container">
+    <div data-id="$attachmentObj"></div>
+    #if ($allowEdit)
+        <div class="container-menu-butttons">
+            <div
+                class="companion-edit-button-placeholder"
+                data-template-name="companionEditButon"
+                data-linked-resource-id="$attachmentId"
+                data-linked-resource-container-id="$pageId" >
+            </div>
+        </div>
+    #end
+    <div class="office-document">
+    $contentHtml
+    </div>
+</div>

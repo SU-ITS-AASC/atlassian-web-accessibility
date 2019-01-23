@@ -1,0 +1,111 @@
+<html>
+	<head>
+		<title>$action.getText("label.view.title")</title>
+	</head>
+
+    #if ($action.space)
+        #set ($decoratorContext = "space-labels")
+    #else
+        #set ($decoratorContext = "labels")
+    #end
+
+	<body>
+
+    #parse ("/com/atlassian/confluence/plugins/labels/components/labels-nav.vm")
+
+    #requireResource("com.atlassian.confluence.plugins.confluence-labels:view-label-resources")
+
+    #applyDecorator("root")
+		#decoratorParam("context" $decoratorContext)
+        #decoratorParam("helper" $action.helper)
+        #decoratorParam("collector-key" "view-label")
+        #decoratorParam("suppress-default-navigation" "true")
+
+        <div class="labels-content">
+            <div class="related-labels">
+                #if ($related.size() > 0)
+                    <div>$action.getText("related.name")</div>
+                    <ul class="label-list">
+
+## This code block is outdented to avoid bothersome whitespace issues.  We want to eliminate any extra
+## spaces between the <li> elements because they are displayed inline and the margin between them will be too large
+#foreach ($label in $related)
+#if( $velocityCount > 25)
+    #break
+#end
+<li class="aui-label" data-label-id="$label.id">
+    <a class="plus-label" rel="nofollow" href="#labelLinkUrl($action.getAddLabel($label))">$htmlUtil.htmlEncode($label.realTitle)</a>
+</li>##leave comment here to eliminate whitespace following this element
+#end
+
+                    </ul>
+                #end
+            </div>
+
+            <div class="labels-main">
+                <div class="labels-main-description">
+                #if ($action.labels.size() == 1)
+                    $action.getText("label.view.single.label")
+                    #set ($labels = $action.labels)
+                    #parse("/com/atlassian/confluence/plugins/labels/components/labels-list.vm")
+                    <p>$action.getText("label.view.add.label")</p>
+                #else
+                    $action.getText("label.view.multiple.label")
+                    <ul class="label-list">
+
+## This code block is outdented to avoid bothersome whitespace issues.  We want to eliminate any extra
+## spaces between the <li> elements because they are displayed inline and the margin between them will be too large
+#foreach($label in $action.labels)
+<li class="aui-label" data-label-id="$label.id">
+    <a class="minus-label" rel="nofollow" href="#labelLinkUrl($action.getRemoveLabel($label))">$htmlUtil.htmlEncode($label.realTitle)</a>
+</li>##leave comment here to eliminate whitespace following this element
+#end
+
+                    </ul>
+                    <p>$action.getText("label.view.add.label")<br>
+                       $action.getText("label.view.remove.label")</p>
+                #end
+                </div>
+
+                #if ($description)<p>$description</p>#end
+                <ul class="content-by-label">
+                    #if(!$action.content || $action.content.size() == 0)
+                        <li>$action.getText("there.are.no.pages")</li>
+                    #else
+                        #foreach ($thing in $action.content)
+                            <li>
+                                <div>
+                                    #contentIconWithLinkPrefix($thing $staticResourceUrlPrefix)
+                                </div>
+
+                                <div class="details">
+                                    #contentHrefWithLinkPrefix($thing $req.contextPath)
+                                    #if ($decoratorContext == "labels") #contentOther($thing) #end
+
+                                    <div class="label-item-meta">
+                                        $friendlyDateFormatterHelper.format($thing.creationDate)<span class="separator"> &bull; </span>#userLink($thing.creator)
+                                    </div>
+
+                                    <div class="label-details">
+                                        #if( $limitLabelLinksToSpace )
+                                            #set( $spaceKey = $thing.getSpaceKey() )
+                                        #else
+                                            #set( $spaceKey = "" )
+                                        #end
+
+                                        #set ($labels = $thing.getVisibleLabels($action.authenticatedUser))
+                                            #parse("/com/atlassian/confluence/plugins/labels/components/labels-list.vm")
+                                    </div>
+                                </div>
+                            </li>
+                        #end
+                    #end
+                </ul>
+
+                #pagination($action.paginationSupport "$action.paginationUrl")
+            </div>
+        </div>
+
+    #end
+</body>
+</html>

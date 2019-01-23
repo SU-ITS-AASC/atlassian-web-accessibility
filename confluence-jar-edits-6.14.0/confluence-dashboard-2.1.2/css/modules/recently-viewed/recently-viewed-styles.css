@@ -1,0 +1,7 @@
+.recently-viewed .blank-slate-text {
+  max-width: 410px; }
+
+.recently-viewed .blank-slate-image {
+  width: 120px;
+  height: 90px;
+  background-image: url("assets/images/3.0/icon-recent-viewed-empty.svg"); }

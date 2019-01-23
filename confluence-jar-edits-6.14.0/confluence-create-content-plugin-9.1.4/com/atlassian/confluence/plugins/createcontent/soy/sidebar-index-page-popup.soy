@@ -1,0 +1,17 @@
+{namespace Confluence.Templates.Blueprints}
+
+/**
+ * Content for the popup the user sees the first time (s)he creates a blueprint pointing to the index page on the sidebar
+ * @param indexPageTitle title
+ */
+{template .sidebarIndexPagePopup}
+<h2>{getText('create.content.plugin.sidebar.index.page.popup.title', $indexPageTitle)}</h2>
+<p>{getText('create.content.plugin.sidebar.index.page.popup.desc', $indexPageTitle)}</p>
+<br/>
+<form>
+    {call aui.buttons.button}
+        {param text: getText('create.content.plugin.sidebar.index.page.popup.dismiss') /}
+        {param id: 'dismiss-index-popup' /}
+    {/call}
+</form>
+{/template}

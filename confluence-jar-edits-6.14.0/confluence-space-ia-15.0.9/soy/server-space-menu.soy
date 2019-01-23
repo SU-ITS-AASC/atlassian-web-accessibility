@@ -1,0 +1,36 @@
+{namespace Confluence.Templates.BrowseSpaces}
+
+/**
+ * Template to render drop down menu for Spaces in header panel
+ *
+ * @param? recentSpaces a list of recent spaces
+ */
+{template .dropdownMenu}
+    {if $recentSpaces and length($recentSpaces) > 0}
+        <div class="aui-dropdown2-section" id="recent-spaces-section">
+            <strong>{getText('sidebar.header.spaces.menu.recent.spaces')}</strong>
+            <ul class="aui-list-truncate">
+                {foreach $space in $recentSpaces}
+                    <li>
+                        <a href="{contextPath()}{$space.href}" class="aui-icon-container">
+                        <img class="icon space-logo" src="{$space.logo}">{$space.name}</a>
+                    </li>
+                {/foreach}
+            </ul>
+        </div>
+    {/if}
+    <div class="aui-dropdown2-section">
+        <ul id="view-all-spaces-link-content" class="aui-list-truncate section-user-content">
+            {let $items: itemsForSection(null, 'system.header/spaces-menu') /}
+            {foreach $item in $items}
+                <li>
+                    <a id="{$item.id}" href="{$item.linkUrl}"
+                        {if $item.tooltip}title="{$item.tooltip}" {/if}
+                        {if $item.styleClass}class="{$item.styleClass}" {/if}>
+                        {$item.label}
+                    </a>
+                </li>
+            {/foreach}
+        </ul>
+    </div>
+{/template}

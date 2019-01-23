@@ -1,0 +1,16 @@
+<tr bgcolor=ffffff>
+	<td>
+		<a name="pagetreesearch"/>
+		<p>{pagetreesearch}<p>
+		<p>{pagetreesearch:rootPage=PageName}</p>
+		<p>{pagetreesearch:rootPage=Space:PageName}</p>
+	</td>
+	<td>
+		<p>Provides a search box to search a page hierachal tree within a space.</p>
+		<p>If no parameters are specified the root of the tree will be the current
+		page, a different root page can be specified by providing the page to the <em>rootPage</em> parameter.
+		</p>
+	</td>
+</tr>
+				
+				

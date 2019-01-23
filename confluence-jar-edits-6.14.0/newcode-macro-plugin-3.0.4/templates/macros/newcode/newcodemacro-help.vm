@@ -1,0 +1,169 @@
+<tr bgcolor="ffffff">
+	<td>
+<pre>{newcode}
+public class Test {
+  public static void main (String[] args) {
+    System.out.println("Hello World!");
+  }
+}
+{newcode}</pre>
+	</td>
+
+	<td>
+		<p>
+			Shows a syntax highlighted version of the code. The language defaults to Java.<br/>
+			<img src="$req.contextPath/download/resources/${atlassian.plugin.key}:newcode/default.png" alt="Default highlighted code"/>
+  		</p>
+	</td>
+</tr>
+
+<tr>	
+	<td>
+<pre>{newcode:vbnet}
+Public Module Test
+  Public Sub Main()
+    Console.WriteLine("Hello World!");
+  End Sub
+End Module
+{newcode}</pre>
+		
+<pre>{newcode:language=vbnet}
+Public Module Test
+  Public Sub Main()
+    Console.WriteLine("Hello World!");
+  End Sub
+End Module
+{newcode}</pre>
+	</td>
+
+	<td>
+		<p>
+			Specify the language using the default parameter of the "lang" parameter.<br/>
+			<img src="$req.contextPath/download/resources/${atlassian.plugin.key}:newcode/vbnet.png" alt="VisualBasic.Net highlighted code"/>
+  		</p>
+	</td>
+	
+</tr>
+<tr>
+	
+	<td>
+<pre>{newcode:title=Test title}
+public class Test {
+  public static void main (String[] args) {
+    System.out.println("Hello World!");
+  }
+}
+{newcode}</pre>
+	</td>
+
+	<td>
+		<p>
+			Shows a syntax highlighted version of the code, including a title.<br/>
+			<img src="$req.contextPath/download/resources/${atlassian.plugin.key}:newcode/title.png" alt="Highlighted code, including title"/>
+  		</p>
+	</td>
+	
+</tr>	
+<tr>
+	
+	<td>
+<pre>{newcode:collapse=true}
+public class Test {
+  public static void main (String[] args) {
+    System.out.println("Hello World!");
+  }
+}
+{newcode}</pre>
+	</td>
+
+	<td>
+		<p>
+			Shows a collapsed version of syntax highlighted version of the code.<br/>
+			<img src="$req.contextPath/download/resources/${atlassian.plugin.key}:newcode/collapse.png" alt="Highlighted code, collapsed"/>
+  		</p>
+	</td>
+	
+</tr>	
+
+<tr>
+	
+	<td>
+<pre>{newcode:linenumbers=false}
+public class Test {
+  public static void main (String[] args) {
+    System.out.println("Hello World!");
+  }
+}
+{newcode}</pre>
+	</td>
+
+	<td>
+		<p>
+			Shows a syntax highlighted version of the code, without line numbers.<br/>
+			<img src="$req.contextPath/download/resources/${atlassian.plugin.key}:newcode/linenumbers.png" alt="Highlighted code, excluding line numbers"/>
+  		</p>
+	</td>
+	
+</tr>	
+
+<tr>
+	
+	<td>
+<pre>{newcode:firstline=10}
+public class Test {
+  public static void main (String[] args) {
+    System.out.println("Hello World!");
+  }
+}
+{newcode}</pre>
+	</td>
+
+	<td>
+		<p>
+			Shows a syntax highlighted version of the code, without an alternative number as the first line.<br/>
+			<img src="$req.contextPath/download/resources/${atlassian.plugin.key}:newcode/firstline.png" alt="Highlighted code, alternative firstline"/>
+  		</p>
+	</td>
+	
+</tr>
+	
+<tr>
+	
+	<td>
+<pre>{newcode:ruler=true}
+public class Test {
+  public static void main (String[] args) {
+    System.out.println("Hello World!");
+  }
+}
+{newcode}</pre>
+	</td>
+
+	<td>
+		<p>
+			Shows a syntax highlighted version of the code, with a ruler to indicate the columns.<br/>
+			<img src="$req.contextPath/download/resources/${atlassian.plugin.key}:newcode/ruler.png" alt="Highlighted code, including ruler"/>
+  		</p>
+	</td>
+	
+</tr>	
+
+<tr>
+	
+	<td>
+<pre>{newcode:theme=django}
+public class Test {
+  public static void main (String[] args) {
+    System.out.println("Hello World!");
+  }
+}
+{newcode}</pre>
+	</td>
+
+	<td>
+		<p>
+			Shows a syntax highlighted version of the code, without an alternative theme.<br/>
+			<img src="$req.contextPath/download/resources/${atlassian.plugin.key}:newcode/django.png" alt="Highlighted code, including ruler"/>
+  		</p>
+	</td>
+</tr>	

@@ -1,0 +1,18 @@
+{namespace Confluence.UI.Components.UserGroupSelect2}
+
+/**
+ * @param size either 'xsmall', 'small', 'medium', 'large', 'xlarge', 'xxlarge' or 'xxxlarge'
+ * @param avatarImageUrl
+ * @param displayName
+ * @param userId
+ */
+{template .avatarWithName}
+    {call aui.avatar.avatar}
+        {param size: $size /}
+        {param avatarImageUrl: $avatarImageUrl /}
+        {param accessibilityText: $displayName /}
+        {param title: $displayName /}
+        {param extraAttributes: ['data-username': $userId] /}
+    {/call}
+    {$displayName}
+{/template}

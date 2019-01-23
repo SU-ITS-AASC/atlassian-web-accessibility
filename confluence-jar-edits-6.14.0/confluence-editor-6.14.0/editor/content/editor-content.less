@@ -1,0 +1,318 @@
+.box-sizing (@sizing) {
+  -moz-box-sizing: @sizing;
+  -webkit-box-sizing: @sizing;
+  box-sizing: @sizing;
+}
+
+.border-radius (@radius) {
+  -webkit-border-radius: @radius;
+  -moz-border-radius:    @radius;
+  border-radius:         @radius;
+
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+}
+
+.box-shadow (@string) {
+  -webkit-box-shadow: @string;
+  -moz-box-shadow:    @string;
+  box-shadow:         @string;
+}
+
+.tab-size (@number) {
+  -moz-tab-size: @number;
+  -ms-tab-size: @number;
+  -webkit-tab-size: @number;
+  tab-size: @number;
+}
+// This represents the html of the editor inside the tinymce iframe
+html {
+  // CONFDEV-6723, CONFDEV-20398 - ensure that the body is as large as the html
+  // element so that clicking into the page will put focus on the cursor
+  height: 100%;
+
+  // This is user for the insert->insert markup dialog
+  &.insert-wiki-markup-dialog {
+    .box-sizing(border-box);
+    height: 96%;
+    overflow: auto;
+  }
+}
+// This represents the body of the editor inside the tinymce iframe
+body {
+  &.wiki-content {
+    height: 100%;
+    min-height: 100%; // CONFDEV-24730
+  }
+  &.previewWiki { // This is for the insert-wiki-markup body iframe
+    .box-sizing(border-box);
+    background: #fff;
+    height: 100%;
+    overflow: auto;
+    padding: 10px;
+  }
+  &.resizable {
+    // CONFDEV-4568 - if you remove this, please come see jared for your beating
+    height: auto;
+    margin: 0;
+    padding: 0;
+  }
+  &.fullsize {
+    .box-sizing(border-box);
+    border: 0;
+    margin: 0 10px;
+    padding: 10px 0;
+  }
+  &.mceContentBody {
+    background: #fff;
+    border: none;
+    text-align: left;
+  }
+}
+
+/**
+ * All styles below are for things that lives inside the tinymce body.
+ */
+.mceContentBody {
+  .wysiwyg-macro-body-preformat {
+    border: #ccc solid 1px; // stick to neutral colour, or move to colors-css.vm if required
+
+    // horizontal margin matches .panel
+    margin: 5px 20px;
+  }
+  .wysiwyg-macro-inline {
+    display: inline;
+  }
+  .user-new-line,
+  .wysiwyg-macro-body-newline {
+    display: none;
+    line-height: 0;
+  }
+}
+img.emoticon {
+  vertical-align: text-bottom;
+  width: 16px;
+  height: 16px;
+}
+#autocomplete {
+  background-color: #EBECF0; /* N30-northeast-snow */
+  border-radius: 3px;
+  padding: 1px 0;
+}
+// Other rules for the Fabric dropdown are in includes/css/fabric/dropdown.css
+#autocomplete.fabric {
+  background-color: transparent;
+  border: transparent;
+  color: #0052CC;
+
+  #autocomplete-trigger {
+    background-color: transparent;
+    border: transparent;
+  }
+}
+
+#autocomplete-trigger {
+  background-color: #EBECF0; /* N30-northeast-snow */
+  padding: 0 2px;
+  border-radius: 3px 0px 0px 3px;
+}
+#autocomplete-search-text {
+  padding: 1px 6px 1px 3px;
+}
+
+.macro {
+  span.macro-name {
+    .border-radius(3px);
+    background-color: #f0f0f0;
+    padding: 4px;
+  }
+}
+.wysiwyg-macro {
+  // https://jira.atlassian.com/browse/CONF-24095
+  // https://jira.atlassian.com/browse/CONF-23923
+  //
+  // Had to remove the background-color from .wysiwyg-macro as it was causing issues in safari.
+  // As a work around I've added box-shadow to .wysiwyg-macro-body. The visual effect is the same.
+  // Please don't change it back. Thanks
+  background-color: #f0f0f0;
+  background-position: 0 0;
+  background-repeat: no-repeat;
+  border: 1px solid #ddd;
+}
+
+.wiki-content {
+  .wysiwyg-macro {
+    padding: 24px 2px 2px 2px;
+    width: 100%;
+  }
+  .wysiwyg-macro-body {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    margin: 0;
+    padding: 10px;
+    & > p:first-child {
+      margin-top: 0;
+    }
+    & > p:last-child {
+      margin-bottom: 0;
+    }
+    & > pre {
+      .tab-size(4);
+      margin: 0;
+      white-space: pre-wrap;
+    }
+  }
+  td {
+    .wysiwyg-macro-body {
+      min-width: 200px;
+    }
+  }
+  .confluence-embedded-image {
+    cursor: default;
+    max-width: calc(~"100% - 4px");
+    margin-left: 2px;
+    margin-right: 2px;
+    vertical-align: text-bottom;
+    &[width],
+    &[height] {
+      // CONFDEV-26672: fix CONFDEV-27029 / CONFDEV-27137
+      max-width: none;
+    }
+  }
+  .image-left {
+    float: left;
+    margin: 0 10px 10px 0;
+  }
+  .image-center {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+  }
+  .image-right {
+    float: right;
+    margin: 0 0 10px 10px;
+  }
+  table.wysiwyg-macro {
+    border-collapse: separate; // IE9 collapses the border of macros that render inside a table
+  }
+  .highlight-marker {
+    background-color: #FEEECD;
+  }
+}
+.wysiwyg-unknown-macro {
+  vertical-align: text-bottom;
+}
+
+p + table.wysiwyg-macro,
+table.wysiwyg-macro + p {
+  // macro placeholders are positioned too closely to text above it.
+  //We should simulate the spacing that would be in place if it had a
+  //textual line-height of 20px (i.e. 20px line height - 14px font size / 2)
+  margin-top: 10px;
+}
+.editor-inline-macro {
+  background-color: #f0f0f0;
+  border: 1px solid #ddd;
+  margin: 0 2px; // So that the caret won't disappear behind the placeholder in FireFox.
+  min-height: 24px; // This closely coincides with the height of the images rendered by DefaultPlaceholderImageFactory
+  vertical-align: text-bottom;
+}
+.editor-inline-macro.with-chrome {
+  background-position: 0 0;
+  background-repeat: no-repeat;
+  height: auto;
+  padding: 24px 2px 2px 2px;
+}
+.confluenceTh > .editor-inline-macro,
+.confluenceTh > .wysiwyg-unknown-macro,
+.confluenceTd > .editor-inline-macro,
+.confluenceTd > .wysiwyg-unknown-macro {
+  vertical-align: inherit; // to prevent the misalignment of other content in table cells.
+}
+.macro-placeholder-icon {
+  // Default base style. Inclusive of default macro icon to fall back to if a specific icon has not been configured for a macro
+  background-image: url(../../../images/icons/macrobrowser/dropdown/placeholder.png);
+  background-position: 0 3px;
+  background-repeat: no-repeat;
+}
+.image-hotswap {
+  background-image: url(../../../images/icons/wait.gif);
+  background-position: 4px 50%;
+  background-repeat: no-repeat;
+}
+table.layout, table.layout td.layout-cell {
+  border: 1px dotted #ccc;
+}
+table.confluenceTable {
+ // override the bottom margin declared in wiki-content.css. Firstly because cursor targets space out tables enough so additional margin is not necessary.
+ // secondly because there is a bug in FF, where if you have a table followed by a paragraph, it (a) thinks the paragraph has a top margin (which it doesn't) and
+ // (b) that the table's bottom-margin and the paragraph's top-margin should not collapse - producing a large space
+  margin-bottom: 0;
+}
+
+.wiki-content table tbody td.mceSelected,
+.wiki-content table tbody th.mceSelected.nohighlight {
+  // no sanity in our selectors makes it hard to validate this will always be applied so make it important to stop regressions
+  background-color: #edf5ff !important;
+}
+
+.wiki-content table tbody td.mceSelected.highlight,
+.wiki-content table tbody th.mceSelected {
+  // no sanity in our selectors makes it hard to validate this will always be applied so make it important to stop regressions
+  background-color: #e0e0e0 !important;
+}
+.wiki-content table tbody td.mceSelected.info,
+.wiki-content table tbody th.mceSelected.info,
+.wiki-content table tbody td.mceSelected.highlight-blue,
+.wiki-content table tbody th.mceSelected.highlight-blue {
+  // no sanity in our selectors makes it hard to validate this will always be applied so make it important to stop regressions
+  background-color: #d3e3f7 !important;
+}
+.wiki-content table tbody td.mceSelected.success,
+.wiki-content table tbody th.mceSelected.success,
+.wiki-content table tbody td.mceSelected.highlight-green,
+.wiki-content table tbody th.mceSelected.highlight-green {
+  // no sanity in our selectors makes it hard to validate this will always be applied so make it important to stop regressions
+  background-color: #d3f4cc !important;
+}
+.wiki-content table tbody td.mceSelected.warning,
+.wiki-content table tbody th.mceSelected.warning,
+.wiki-content table tbody td.mceSelected.highlight-red,
+.wiki-content table tbody th.mceSelected.highlight-red {
+  // no sanity in our selectors makes it hard to validate this will always be applied so make it important to stop regressions
+  background-color: #f3dada !important;
+}
+.wiki-content table tbody td.mceSelected.note,
+.wiki-content table tbody th.mceSelected.note,
+.wiki-content table tbody td.mceSelected.highlight-yellow,
+.wiki-content table tbody th.mceSelected.highlight-yellow {
+  // no sanity in our selectors makes it hard to validate this will always be applied so make it important to stop regressions
+  background-color: #f6f7ca !important;
+}
+
+// EOL styling
+.wiki-content.show-eol-markup p:after,
+.wiki-content.show-eol-markup h1:after,
+.wiki-content.show-eol-markup h2:after,
+.wiki-content.show-eol-markup h3:after,
+.wiki-content.show-eol-markup h4:after,
+.wiki-content.show-eol-markup h5:after,
+.wiki-content.show-eol-markup h6:after,
+.wiki-content.show-eol-markup li:after {
+  color: #777;
+  content: " \00B6";
+}
+.find-current {
+    /* need to do the marker reset style here */
+    background-color: inherit;
+    color: inherit;
+}
+.find-current[data-searching] {
+  .border-radius(5px);
+  .box-shadow(0 2px 2px #ccc);
+  background-color: #ffde00;
+  margin: -2px;
+  padding: 2px;
+  position: relative;
+}

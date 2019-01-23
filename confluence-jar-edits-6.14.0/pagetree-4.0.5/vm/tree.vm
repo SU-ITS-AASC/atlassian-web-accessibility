@@ -1,0 +1,103 @@
+## Copyright (c) 2005, BNP Paribas
+## By william jones & zohar melamed
+##All rights reserved.
+##
+##Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+##
+##Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+##Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+##Neither the name of the BNP Paribas nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
+##THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+##
+
+#set ($aui-form = "aui")
+#set ($aui-medium-text = "text medium-field")
+#set ($aui-button = "aui-button")
+
+##The following directive ensures all variables are html encoded to prevent XSS. If removed several macro parameters
+##will be vulnerable to XSS
+#htmlSafe()
+
+<div class="plugin_pagetree">
+
+#set( $rootPageId = $rtpage.id )
+#if( $errors && !$errors.isEmpty())
+    <div id="pagetree-error" class="error">
+        <span class="errorMessage">
+            #foreach($error in $errors)
+                ## there could be XSS in root page name in error message
+                $generalUtil.htmlEncode($error) <br>
+            #end
+        <span>
+    </div>
+#else
+    ## search box
+    #if ( $searchBox )
+        #if(!$mobile)
+        <div id="pagetreesearch">
+            <form method="POST" class="$!aui-form" action="${contextPath}/plugins/pagetreesearch/pagetreesearch.action" name="pagetreesearchform">
+                #if ( $noRoot )
+                    <input type="hidden" name="ancestorId" value="">
+                #else
+                    <input type="hidden" name="ancestorId" value="$!rootPageId">
+                #end
+                <input type="hidden" name="spaceKey" value="$!generalUtil.htmlEncode( $spaceKey )">
+                <input type="text"  class="$!aui-medium-text" size="20" name="queryString">
+                <input type="submit" class="$!aui-button" value="$action.getText('pagetreesearch.button.text')">
+            </form>
+        </div>
+        #else
+            <div class="open-flyout-button">
+                <button type="button" class="open-flyout-to-search">$i18n.getText('pagetreesearch.open.flyout.to.search')</button>
+            </div>
+        #end
+    #end
+
+    ## expand/collapse all feature
+    #if ( $expandCollapseAll )
+        <div>
+            <span class="plugin_pagetree_status hidden">$action.getText("pagetree.link.collapseall")</span>
+            <div class="plugin_pagetree_expandcollapse">
+                <a class="plugin_pagetree_expandall" href="#">$action.getText("pagetree.link.expandall")</a>&nbsp;&nbsp;
+                <a class="plugin_pagetree_collapseall" href="#">$action.getText("pagetree.link.collapseall")</a>
+            </div>
+        </div>
+    #end
+
+    <ul class="plugin_pagetree_children_list plugin_pagetree_children_list_noleftspace">
+        <div class="plugin_pagetree_children">
+        </div>
+    </ul>
+
+    <fieldset class="hidden">
+        <input type="hidden" name="treeId" value="">
+        <input type="hidden" name="treeRequestId" value="${contextPath}/plugins/pagetree/naturalchildren.action?decorator=none&amp;excerpt=${excerpt}&amp;sort=${sort}&amp;reverse=${reverse}&amp;disableLinks=${disableLinks}&amp;expandCurrent=${expandCurrent}">
+        <input type="hidden" name="treePageId" value="$!tgtpage.id">
+
+        <input type="hidden" name="noRoot" value="${noRoot}">
+        <input type="hidden" name="rootPageId" value="${rootPageId}">
+
+        <input type="hidden" name="rootPage" value="">
+        <input type="hidden" name="startDepth" value="${startDepth}">
+        <input type="hidden" name="spaceKey" value="$generalUtil.htmlEncode( $spaceKey )" >
+
+        <input type="hidden" name="i18n-pagetree.loading" value="$action.getText('pagetree.loading')">
+        <input type="hidden" name="i18n-pagetree.error.permission" value="$action.getText('pagetree.error.permission')">
+        <input type="hidden" name="i18n-pagetree.eeror.general" value="$action.getText('pagetree.error.general')">
+        <input type="hidden" name="loginUrl" value="$generalUtil.htmlEncode( $loginUrl )">
+        <input type="hidden" name="mobile" value="${mobile}">
+
+        ## Ancestor IDs
+        <fieldset class="hidden">
+            #if ($ancestors && !$ancestors.isEmpty())
+                #foreach( $ancestor in $ancestors )
+                    <input type="hidden" name="ancestorId" value="${ancestor.id}">
+                #end
+            #else
+                <input type="hidden" name="ancestorId" value="${rootPageId}">
+            #end
+        </fieldset>
+    </fieldset>
+#end
+</div>
+

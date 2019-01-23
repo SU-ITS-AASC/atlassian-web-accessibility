@@ -1,0 +1,1 @@
+define("confluence-ui-components/js/cql/internal/cql-ignored-field-expression-converter",[],function(){function a(f,e,d){if(e){f=f.filter(function(g){if(e.indexOf(g.field.fieldName)>-1){return d}return !d})}return f}function c(e,d){return a(e,d,true)}function b(e,d){return a(e,d,false)}return{removeFieldsByName:b,getFieldsByName:c}});

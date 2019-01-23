@@ -1,0 +1,27 @@
+<tr bgcolor=ffffff>
+	<td>
+		<a name="pagetree"/>
+		<p>{pagetree}<p>
+		<p>{pagetree:root=PageName}</p>
+		<p>{pagetree:root=PageName|sort=natural|excerpt=true|reverse=false}</p>
+		<p>{pagetree:root=@home|startDepth=3}</p>
+		<p>{pagetree:searchBox=true}</p>
+		<p>{pagetree:expandCollapseAll=true}</p>
+	</td>
+	<td>
+		<p>Provides page hierachal tree within a space. If no parameters are specified the root of the tree will
+		   be the home page, a different root page can be specified by providing the page to the <em>root</em>
+		   parameter.
+		</p>
+	    <ul>
+	        <li><b>root:</b> - (optional) page where the tree would be rooted from. Meta root names <i>@self, @parent, @home</i> can also be used.</li>
+	        <li><b>sort:</b> - (optional) sorts the tree node. It my be one of the following: <b>bitwise, creation, modified, natural, position</b>. Default sorting is <b>position</b></li>
+	        <li><b>excerpt:</b> - (optional) true/false flag that indicate if a page excerpt would be included in the tree display (default is false).</li>
+	        <li><b>reverse:</b> - (optional) true/false flag that allows you to reverse the order of the display (default is false).</li>
+	        <li><b>searchBox:</b> - (optional) true/false flag that allows you to add a search box in the tree that would search from the <b>root</b> page (default is false).</li>
+	        <li><b>expandCollapseAll:</b> - (optional) true/false flag that allows you to add an <i>expand all</i> and a <i>collapse all</i> row (default is false).</li>
+	        <li><b>startDepth:</b> - (optional) a number that indicates the initial depth that the tree would display (default value is 1).</li>
+	</td>
+</tr>
+				
+				

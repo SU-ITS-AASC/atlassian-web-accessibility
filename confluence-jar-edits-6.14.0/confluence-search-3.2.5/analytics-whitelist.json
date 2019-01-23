@@ -1,0 +1,21 @@
+{
+  "confluence.search.v3QueryExecution": [
+    "durationMillis"
+  ],
+  "confluence.search.SiteSearchResultClick": [
+    "position",
+    "uuid",
+    "numberOfDocs",
+    "pageSize"
+  ],
+  "confluence.search.SiteSearchComplete": [
+    "queryHash",
+    "cqlHash",
+    "numberOfTerms",
+    "numberOfDocs",
+    "uuid",
+    "odd"
+  ],
+  "confluence.search.SiteSearchContainsSearchSyntax": [
+  ]
+}

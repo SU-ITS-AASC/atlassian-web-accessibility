@@ -1,0 +1,11 @@
+// In Create Content blueprints wizard, we specify a maximum height on the user autocomplete fields with the overflow
+// set to scroll. AUI select2 styles do not work with scrolling select2 input fields, so we need to provide
+// these overrides to make things pretty again.
+form.aui .aui-select2-container.users-autocomplete {
+    border: 1px solid #ccc;
+
+    .select2-choices {
+        border-radius: 0;
+        border: none;
+    }
+}

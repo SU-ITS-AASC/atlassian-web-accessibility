@@ -1,0 +1,21 @@
+<tr bgcolor=ffffff>
+    <td>
+        <a name="atlassian-macro-section">
+{topusers:spaces=@all}<br/><br/>
+{topusers:spaces=dog,cat|types=page,blogpost}<br/><br/>
+{topusers:timespan=1w|period=daily|events=create,view,update|display=icon,title,count}<br/>
+    </td>
+    <td>
+        <p>
+        $action.getText('usage.topusers.macro.desc')
+        <ul>
+        <li><b>spaces:</b> - $action.getText("usage.macro.param.spaces")</li>
+        <li><b>display:</b> - $action.getText("usage.macro.param.display")</li>
+        <li><b>events:</b> - $action.getText("usage.topusers.macro.param.events")</li>
+        <li><b>columns:</b> - $action.getText("usage.macro.param.columns")</li>
+        <li><b>timespan:</b> - $action.getText("usage.macro.param.timespan")</li>
+        <li><b>period:</b> - $action.getText("usage.macro.param.period")</li>
+        </ul>
+        </p>
+    </td>
+</tr>

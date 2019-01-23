@@ -1,0 +1,1 @@
+("undefined"===typeof window?global:window).__b95257c5ba3aaa36d3a5493aa734a2d7=function(){"use strict";"undefined"===typeof window.console?window.console={messages:[],log:function(a){this.messages.push(a)},show:function(){alert(this.messages.join("\n"));this.messages=[]}}:window.console.show=function(){};return{}}.call(this);

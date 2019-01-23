@@ -1,0 +1,35 @@
+{namespace Confluence.ExpandMacro}
+
+/**
+ * Renders the "before" part of the dynamic expand macro (i.e. allow toggling of expansion via JS)
+ * @param toggleId The ID of the expand toggle control
+ * @param title The title of the expand toggle control
+ */
+{template .dynamicBefore}
+    <div id="expander-{$toggleId}" class="expand-container">
+    <div id="expander-control-{$toggleId}" class="expand-control">
+        <span class="expand-icon aui-icon aui-icon-small aui-iconfont-chevron-right">&nbsp;</span><span class="expand-control-text">{$title}</span>
+    </div>
+    <div id="expander-content-{$toggleId}" class="expand-content expand-hidden">
+{/template}
+
+/**
+ * Renders the "before" part of the static expand macro (i.e. the content is fully expanded at render time)
+ * @param toggleId The ID of the expand toggle control
+ * @param title The title of the expand toggle control
+ */
+{template .staticBefore}
+    <div id="expander-{$toggleId}" class="expand-container">
+    <div id="expander-control-{$toggleId}" class="expand-control">
+        <span class="expand-icon aui-icon aui-icon-small aui-iconfont-chevron-down"></span><span class="expand-control-text">{$title}</span>
+    </div>
+    <div id="expander-content-{$toggleId}" class="expand-content">
+{/template}
+
+/**
+ * Renders the part of the expand macro layout that follows the body. This is the same for both static and dynamic variants.
+ */
+{template .after}
+    </div>
+    </div>
+{/template}

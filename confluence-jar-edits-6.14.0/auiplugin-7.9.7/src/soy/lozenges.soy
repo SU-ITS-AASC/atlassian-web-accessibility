@@ -1,0 +1,28 @@
+{namespace aui.lozenges}
+
+/**
+ * Creates an AUI Lozenge
+ * @param text
+ * @param? tagName Default is 'span'
+ * @param? id
+ * @param? title sets a tooltip using the title attribute
+ * @param? type the lozenge type. Valid options are 'success', 'error', 'current', 'complete', or 'moved'. Leave empty for the generic (grey) lozenge.
+ * @param? isSubtle Boolean. Specify if it's a subtle lozenge style
+ * @param? maxLength truncates the lozenge text to a maximum number of characters
+ * @param? extraClasses Standard option.
+ * @param? extraAttributes Standard option.
+ */
+{template .lozenge}
+    <{$tagName ? $tagName : 'span'}
+        {if $id} id="{$id}"{/if}
+        {if $title} title="{$title}"{/if}
+        {sp}class="aui-lozenge{$type ? ' aui-lozenge-' + $type : ''}{$isSubtle ? ' aui-lozenge-subtle' : ''}
+        {call aui.renderExtraClasses data="all" /}"
+        {call aui.renderExtraAttributes data="all" /}>
+        {if $maxLength}
+            {$text|truncate:$maxLength}
+        {else}
+            {$text}
+        {/if}
+    </{$tagName ? $tagName : 'span'}>
+{/template}

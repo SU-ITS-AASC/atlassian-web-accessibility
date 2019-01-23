@@ -1,0 +1,73 @@
+@import './imports/global';
+
+/**
+ * GROUP/ITEM
+ */
+
+.aui-group {
+    display: table;
+    box-sizing: border-box;
+    border-spacing: 0;
+    table-layout: fixed;
+    width: 100%;
+}
+
+.aui-group > .aui-item {
+    box-sizing: border-box;
+    display: table-cell;
+    margin: 0;
+    vertical-align: top;
+}
+
+.aui-group > .aui-item + .aui-item {
+    padding-left: (@aui-grid * 2);
+}
+
+/* defensive header allowance */
+.aui-layout .aui-group > header {
+    display: table-caption;
+}
+
+/* .aui-group-split: two items; alignment is left, then right (splits the layout). */
+.aui-group.aui-group-split > .aui-item {
+    text-align: right;
+}
+
+.aui-group.aui-group-split > .aui-item:first-child {
+    text-align: left;
+}
+
+/* .aui-group-trio: three items; alignment is left, center, right */
+.aui-group.aui-group-trio > .aui-item {
+    text-align: left;
+}
+
+.aui-group.aui-group-trio > .aui-item + .aui-item {
+    text-align: center;
+}
+
+.aui-group.aui-group-trio > .aui-item + .aui-item + .aui-item {
+    text-align: right;
+}
+
+#aui.responsive-small({
+    .aui-group {
+        > .aui-item {
+            display: block;
+            width: auto;
+
+            + .aui-item {
+                padding-left: 0;
+                padding-top: @aui-grid;
+            }
+        }
+
+        &.aui-group-split,
+        &.aui-group-trio {
+            > .aui-item, > .aui-item + .aui-item,
+            > .aui-item + .aui-item + .aui-item {
+                text-align: left;
+            }
+        }
+    }
+});

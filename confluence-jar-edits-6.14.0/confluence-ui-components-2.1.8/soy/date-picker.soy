@@ -1,0 +1,35 @@
+{namespace Confluence.UI.Components.DatePicker.templates}
+
+/**
+ * Render a CQL date picker field.
+ */
+{template .input}
+// We use aui-nav classes to match the style of the search screen.
+<div class="aui-navgroup-vertical">
+    <ul class="aui-nav">
+        <li class="aui-nav-selected">
+            <a data-value="">{getText('confluence-ui-components.date-picker.blank')}</a>
+        </li>
+        <li>
+            <a data-value="now('-1d')">{getText('confluence-ui-components.date-picker.last.day')}</a>
+        </li>
+        <li>
+            <a data-value="now('-1w')">{getText('confluence-ui-components.date-picker.last.week')}</a>
+        </li>
+        <li>
+            <a data-value="now('-1M')">{getText('confluence-ui-components.date-picker.last.month')}</a>
+        </li>
+        <li>
+            <a data-value="now('-1y')">{getText('confluence-ui-components.date-picker.last.year')}</a>
+        </li>
+        <li>
+            <a data-value="custom">{getText('confluence-ui-components.date-picker.custom')}</a>
+            <span class="absolute-date-pickers">
+                <input class="from-date-picker text" type="date" />
+                <span>&ndash;</span>
+                <input class="to-date-picker text" type="date" />
+            </span>
+        </li>
+    </ul>
+</div>
+{/template}

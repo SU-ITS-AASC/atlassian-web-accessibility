@@ -1,0 +1,122 @@
+.acs-side-bar .current-item .icon,
+.acs-side-bar .contextual-nav-child-pages .children .icon {
+    opacity: 1;
+}
+
+.ia-splitter-handle-highlight {
+    background-position: right center;
+    background-repeat: no-repeat;
+}
+
+/* SIDEBAR LINK ICONS */
+.collapsed .acs-nav-item .icon {
+    height: 34px;
+    width: 34px;
+}
+
+.acs-nav-item-link {
+    position: relative;
+}
+
+.acs-side-bar .acs-side-bar-content .acs-nav-list .icon,
+#inline-dialog-sidebar-quick-links-flyout .acs-side-bar-flyout .icon,
+.collapsed .acs-side-bar-content li.acs-nav-item .icon,
+.collapsed .acs-side-bar-content li.parent-item .icon,
+.collapsed .acs-side-bar-content .ia-secondary-header-title .icon,
+.collapsed .acs-side-bar-content .quick-links-section {
+    background-position: center;
+    position: relative;
+    left: 0;
+    top: 0;
+}
+
+.collapsed .ia-secondary-header {
+    padding-top: 5px;
+    height: 0;
+}
+
+.collapsed .ia-secondary-header-title {
+    margin: 0;
+}
+
+.collapsed .ia-secondary-header-title.wiki .icon,
+.collapsed .ia-secondary-header-title.page-tree .icon {
+    display: block;
+    height: 100%;
+    width: 100%;
+    margin-top: 0;
+}
+
+/* SIDEBAR CONFIGURATION ICONS */
+.acs-side-bar-space-info .flyout-handle.icon.loading {
+    background: transparent;
+}
+
+table.acs-nav-list .aui-restfultable-order .aui-restfultable-draghandle {
+    /* Data URI for img/configuresidebar/configuration-drag.png */
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAUCAQAAADrGe9tAAAAFElEQVQY02NgoB5Y9R8ZDphimgEAfPMi3rCaO/8AAAAASUVORK5CYII=');
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 10px;
+}
+
+/* CONTEXTUAL NAVIGATION ICONS */
+.ia-secondary-header-title .icon,
+.create-child-page-link .icon,
+.more-children-link .icon {
+    display: inline-block;
+    height: 16px;
+    margin-right: 3px;
+    width: 16px;
+}
+
+.ia-secondary-header-title.page-tree .icon {
+    height: 0;
+    margin-right: 0;
+    width: 0;
+    min-width: 0;
+}
+
+.create-child-page-link .aui-icon,
+.more-children-link .aui-icon,
+.acs-add-link .aui-icon {
+    margin-right: 3px;
+}
+
+.ia-secondary-content .child-item .icon,
+.ia-secondary-currentPage-title .icon,
+#inline-dialog-sidebar-children-flyout .child-item .icon {
+    float: left;
+    display: block;
+    margin: -15px 3px 0 0;
+    height: 30px;
+    width: 20px;
+    background-repeat: no-repeat;
+    background-position: bottom center;
+}
+
+.ia-secondary-parent-content .parent-item .icon {
+    height: 16px;
+    width: 16px;
+    margin-top: 0;
+    background-position: center center;
+}
+
+.ia-secondary-content .children .child-item:first-child .icon,
+.ia-secondary-currentPage-title .icon,
+#inline-dialog-sidebar-children-flyout .children .child-item:first-child .icon {
+    margin-top: 0;
+    height: 15px;
+}
+
+.ia-secondary-content .child-item .icon,
+.ia-secondary-currentPage-title .icon,
+#inline-dialog-sidebar-children-flyout .child-item .icon {
+    /* Data URI for img/contextualnav/child-page.png */
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAeCAQAAAClQKc1AAAAE0lEQVQYV2M4858BAUY59OQgIAA3nj7C66R89wAAAABJRU5ErkJggg==');
+}
+
+.acs-tree-item .icon {
+    margin: 0 3px 0 1px;
+}
+/*245 lines*/

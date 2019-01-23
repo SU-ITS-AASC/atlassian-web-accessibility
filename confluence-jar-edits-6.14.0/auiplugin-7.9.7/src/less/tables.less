@@ -1,0 +1,148 @@
+@import 'imports/global';
+
+/*! AUI Tables */
+/*! Note child combinator are used to ensure nested non-AUI tables don't receive any AUI styles. */
+
+.aui-table-row-style() {
+    background: @aui-table-row-bg-color;
+    color: @aui-table-row-text-color;
+}
+
+.aui-table-header-style() {
+    #aui.typography.h200(@aui-table-heading-text-color);
+}
+
+.aui-table-cell-style() {
+    padding: @aui-table-padding-y @aui-table-padding-x;
+    text-align: @aui-table-text-align;
+    vertical-align: @aui-table-vertical-align;
+    > ul.menu {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        > li {
+            float: left;
+            margin: 0 @aui-grid 0 0;
+            width: auto;
+        }
+    }
+}
+
+table.aui {
+    border-collapse: collapse;
+    width: 100%;
+
+    // Table inside a table
+    & & {
+        margin: 0;
+    }
+
+    > caption {
+        color: @aui-table-caption-text-color;
+        background: @aui-table-caption-bg-color;
+        border-bottom: @aui-border-tables;
+        caption-side: top;
+        padding: @aui-table-padding-y @aui-table-padding-x;
+        text-align: @aui-table-text-align;
+    }
+
+    > thead,
+    > tbody,
+    > tfoot {
+        > tr {
+            > th,
+            > td {
+                .aui-table-cell-style();
+            }
+        }
+    }
+
+    > tbody,
+    > tfoot {
+        > tr {
+            .aui-table-row-style();
+            &:first-child {
+                > td,
+                > th {
+                    border-top: @aui-border-tables;
+                }
+            }
+        }
+    }
+
+    > thead {
+        border-bottom: @aui-border-tables-header;
+        > tr {
+            > th {
+                .aui-table-header-style();
+            }
+        }
+    }
+
+    > tbody {
+        > tr {
+            > th {
+                .aui-table-header-style();
+                font-size: inherit; // Needs to be the same as the content, otherwise the x-height doesn't line up and looks weird.
+                background: @aui-table-header-bg-color;
+            }
+        }
+    }
+
+    /* stripes - deprecated */
+    &.aui-zebra {
+        tr {
+            border-bottom: 0;
+        }
+
+        & > thead > tr:nth-child(even),
+        & > tbody > tr:nth-child(even),
+        & > tfoot > tr:nth-child(even),
+        & > tbody > tr:nth-child(even) > th {
+            background: @aui-table-zebra-even-bg-color;
+            color: @aui-table-zebra-even-text-color;
+        }
+    }
+
+    // Buttons
+    .aui-button-link {
+        padding-top: 0;
+        padding-bottom: 0;
+        line-height: inherit;
+        height: auto;
+        border: 0;
+    }
+}
+
+table.aui:not(.aui-table-list) {
+    > tbody,
+    > tfoot {
+        > tr {
+            > th,
+            > td {
+                border-bottom: @aui-border-tables;
+            }
+        }
+    }
+}
+
+/* Tables for lists of data */
+table.aui.aui-table-list,
+table.aui.aui-table-interactive {
+    > tbody {
+        > tr {
+            &:hover, &:focus-within {
+                background: @aui-table-list-row-hover-color;
+            }
+            &.aui-row-subtle * {
+                color: @aui-table-list-row-subtle-color;
+
+                .aui-avatar,
+                .aui-icon,
+                .aui-button {
+                    opacity: .8;
+                }
+            }
+        }
+    }
+}

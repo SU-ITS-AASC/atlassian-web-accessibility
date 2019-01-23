@@ -1,0 +1,15 @@
+{namespace Confluence.Templates.Editor.SaveBar.VersionComment}
+
+/**
+ * Renders the version comment UI
+ *
+ * @param versionComment
+ */
+{template .render}
+<span class="rte-toolbar-comment toolbar-item">
+    <input id="versionComment" name="versionComment" {if $versionComment}value="{$versionComment}"{/if}
+           placeholder="{getText('editor.change.comment')}"
+           class="text" type="text" size="35">
+    <label for="versionComment" class="assistive">{getText('editor.change.comment')}</label>
+</span>
+{/template}

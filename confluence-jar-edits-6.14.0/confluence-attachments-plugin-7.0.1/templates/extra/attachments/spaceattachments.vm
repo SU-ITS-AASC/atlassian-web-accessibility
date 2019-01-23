@@ -1,0 +1,79 @@
+#htmlSafe()
+
+#requireResource("confluence.extra.attachments:space-attachments-javascript")
+#requireResource("confluence.extra.attachments:attachments-css")
+
+
+<div class="space-attachments">
+			
+	<div class="attachments-container">
+		#if ($showFilter && $allowFilterByFileExtension)
+			<div class="attachments-file-extension">
+            	<span class="formtitle">$i18n.getText('filter.by.ext'):</span> 
+            	<input class="fileExtensionType" type="text" name="fileExtensionType" value="$generalUtil.htmlEncode($!fileExtension)" size="5" />
+				
+				## filter by label
+				<span class="formtitle label-filter-desc">$i18n.getText('spaceattachments.filter.by.label'):</span>
+				<input class="labelFilter" type="text" name="labelFilter" value="$generalUtil.htmlEncode($!labelFilter)" size="12" />
+				<input class="filterButton" type="button" value="$i18n.getText('filter.name')" />
+				#if ($stringUtils.isNotBlank($labelFilter) || $stringUtils.isNotBlank($fileExtension))
+					<a class="removeFilterLink" href="#">$i18n.getText("spaceattachments.remove.filter")</a>
+				#end
+        	</div>
+		#end
+		
+		#fielderror ('attachmentLabelsString')
+		
+		#if ($latestVersionsOfAttachments && $latestVersionsOfAttachments.size() > 0)
+	
+			#parse("/templates/extra/attachments/spaceattachmentstable.vm")
+			
+			#pagination($paginationSupport)
+			<div class="pagination">
+    			<ul class="pagination">
+        			#set($pageStart = 1)
+                	#set($pageEnd = $totalPage)
+                	#set($range = [$pageStart..$pageEnd])
+        						
+        			## Previous Page
+        			#if($totalPage>1 && $pageNumber!=1)
+        				<li><a class="spaceAttachmentsPage" href="#" clickedPage="$!pageNumber-1">&lt;&lt; $i18n.getText("spaceattachments.pagination.previous")</a></li>
+        			#end
+                		
+        			#foreach ($i in $range)
+        				#if($pageNumber == $i)
+        					<li><strong class="pagination-curr">$i</strong></li>
+        				#else
+        					<li><a class="spaceAttachmentsPage" href="#" clickedPage="$!i">$i</a></li>
+        				#end
+        			#end
+        						
+        			## Next Page
+        			#if($totalPage>1 && $pageNumber!=$totalPage)
+        				#set($nextPage=$pageNumber+1)
+        				<li><a class="spaceAttachmentsPage" href="#" clickedPage="$!nextPage">$i18n.getText("spaceattachments.pagination.next") &gt;&gt</a></li>
+    				#end
+            	</ul>	
+    		</div>
+			
+        #else
+	        #if ($showAttachmentsNotFound) 
+				<div class="greybox">$i18n.getText($messageKey, $messageParameter)</div>
+	        #end
+        #end
+			
+	</div>
+	
+    <fieldset class="hiddenfieldset hidden">
+		<input type="hidden" class="param" name="spaceKey" value="$!generalUtil.htmlEncode($spaceKey)"/>
+        <input type="hidden" class="param" name="totalAttachments" value="$!totalAttachments"/>
+		<input type="hidden" class="param" name="sortBy" value="$!generalUtil.htmlEncode($sortBy)"/>
+		<input type="hidden" class="param" name="showFilter" value="$showFilter"/>
+		<input type="hidden" class="param" name="allowFilterByFileExtension" value="$allowFilterByFileExtension"/>
+		
+    </fieldset>
+	
+	
+</div>	
+
+	

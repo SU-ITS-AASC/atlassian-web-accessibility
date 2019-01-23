@@ -1,0 +1,8 @@
+{
+"version":3,
+"file":"/dummy-file-path",
+"lineCount":3,
+"mappings":"AAIAA,MAAA,uFAGG,QAAA,CACCC,CADD,CAECC,CAFD,cAOYC,QAAAA,CAASC,CAATD,GAKFD,CAAAG,MALEF,EAKeC,CAAAE,UAAAC,IAAA,CAAiB,QAAA,CAAUH,CAAV,CAAcI,CAAd,KAC1BA,CAAAC,OAD0B,SACbD,CAAAE,QADa,OACOF,CAAAE,QADP,OAK3BC,EAAQP,CAAAQ,UAAAC,OAAA,IALmB,CAM3BC,EAAcb,CAAA,CAAEU,CAAAI,eAAF,CAAAC,QAAA,kDANa,QAQ3BF,CAAAG,OAR2B,EAY/Bb,CAAAc,YAAA,MAAeV,CAAAE,QAAf,oDAZ+B,KAe3BS,EAAYL,CAAAM,OAAA,EAAA,MAAqBZ,CAAAE,QAArB,eAAA,EAAAW,KAAA,kBAAA,GAfe;AAkB3BC,EAAarB,CAAA,CAAEkB,CAAF,CACbG,EAAAC,SAAA,mBAnB2B,GAoB3BJ,CApB2B,CAoBfG,CAAAE,KAAA,EAAA,GApBe,CAuB/Bb,EAAAc,SAAA,CAAeN,CAAf,GACAR,EAAAe,OAAA,CAAaP,CAAb,GACAf,EAAAQ,UAAAe,OAAA,CAAoBhB,CAApB,CAzB+B,OA2BxBT,EAAA0B,IAAAC,MAAAC,QAAA,CAA0BtB,CAA1B,CA3BwB,GAAjB,CALfL,CAPZ,SA2Ce4B,QAAAA,6GAKQ7B,CAAA8B,aALRD,KAKqC7B,CAAA+B,aALrCF,EA3Cf,EAHH,CAyDAG;OAAA,8BAAAC,YAAA,kEACuF,QAAA,CAASC,CAAT,MACvElC,EAAUgC,OAAA,WAEdhC,EAAAmC,OAAA,yCAAwDD,CAAxD,CAEAlC,EAAAoC,cAAA/B,IAAA,aAAuCL,CAAAqC,QAAAH,sBAAvC,CAL2E,CADvF;",
+"sources":["input.js"],
+"names":["define","$","tinymce","init","ed","isIE8","onKeyDown","add","e","altKey","keyCode","range","selection","getRng","$targetCell","startContainer","closest","length","execCommand","firstCell","parent","find","$firstCell","hasClass","next","setStart","setEnd","setRng","dom","Event","prevent","getInfo","majorVersion","minorVersion","require","safeRequire","ConfluenceTablePlugin","create","PluginManager","plugins"]
+}

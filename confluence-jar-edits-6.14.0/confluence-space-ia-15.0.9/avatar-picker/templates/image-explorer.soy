@@ -1,0 +1,30 @@
+{namespace Confluence.Templates.AvatarPicker}
+
+/**
+ * @param? imageSrc Source of image if it's to be supplied initially
+ */
+{template .imageExplorer}
+<div class="image-explorer-container {if not $imageSrc}empty{/if}">
+    <div class="image-explorer-image-view">
+        <img class="image-explorer-source" {if $imageSrc}src="{$imageSrc}"{/if}/>
+        <div class="image-explorer-mask circle-mask"></div>
+        <div class="image-explorer-drag-delegate"></div>
+    </div>
+    <div class="image-explorer-scale-slider-wrapper">
+        <input class="image-explorer-scale-slider {if not $imageSrc}disabled{/if}"
+            type="range" min="0" max="100" step="1" value="0" {if not $imageSrc}disabled{/if}/>
+    </div>
+</div>
+{/template}
+
+/**
+* @param json
+*/
+{template .iframeResponse}
+<html>
+    <body>
+        <div id="json-response">{$json|noAutoescape}</div>
+    </body>
+</html>
+
+{/template}

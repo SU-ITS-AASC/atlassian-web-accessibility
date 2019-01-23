@@ -1,0 +1,139 @@
+{namespace aui.message}
+
+/**
+ * Info message.
+ * @param content Content to display within the message.
+ * @param? id
+ * @param? titleContent Title text of the message. NOT the title attribute for the message.
+ * @param? extraClasses
+ * @param? extraAttributes
+ * @param? tagName
+ * @param? isCloseable Boolean. Set to true, adds affordance and behaviour to close and remove the message.
+ * @param? isShadowed Legacy. Has no effect.
+ */
+{template .info}
+    {call .message data="all"}
+        {param type: 'info' /}
+    {/call}
+{/template}
+
+/**
+ * Warning message - minor error or warning state.
+ * @param content Content to display within the message.
+ * @param? id
+ * @param? titleContent Title text of the message. NOT the title attribute for the message.
+ * @param? extraClasses
+ * @param? extraAttributes
+ * @param? tagName
+ * @param? isCloseable Boolean. Set to true, adds affordance and behaviour to close and remove the message.
+ * @param? isShadowed Legacy. Has no effect.
+ */
+{template .warning}
+    {call .message data="all"}
+        {param type: 'warning' /}
+    {/call}
+{/template}
+
+/**
+ * Error message - critical error, user intervention required.
+ * @param content Content to display within the message.
+ * @param? id
+ * @param? titleContent Title text of the message. NOT the title attribute for the message.
+ * @param? extraClasses
+ * @param? extraAttributes
+ * @param? tagName
+ * @param? isCloseable Boolean. Set to true, adds affordance and behaviour to close and remove the message.
+ * @param? isShadowed Legacy. Has no effect.
+ */
+{template .error}
+    {call .message data="all"}
+        {param type: 'error' /}
+    {/call}
+{/template}
+
+/**
+ * Success message - provides confirmation that a process has completed successfully.
+ * @param content Content to display within the message.
+ * @param? id
+ * @param? titleContent Title text of the message. NOT the title attribute for the message.
+ * @param? extraClasses
+ * @param? extraAttributes
+ * @param? tagName
+ * @param? isCloseable Boolean. Set to true, adds affordance and behaviour to close and remove the message.
+ * @param? isShadowed Legacy. Has no effect.
+ */
+{template .success}
+    {call .message data="all"}
+        {param type: 'success' /}
+    {/call}
+{/template}
+
+/**
+ * Hint message.
+ * @param content Content to display within the message.
+ * @param? id
+ * @param? titleContent Title text of the message. NOT the title attribute for the message.
+ * @param? extraClasses
+ * @param? extraAttributes
+ * @param? tagName
+ * @param? isCloseable Boolean. Set to true, adds affordance and behaviour to close and remove the message.
+ * @param? isShadowed Legacy. Has no effect.
+ */
+{template .hint}
+    {call .message data="all"}
+        {param type: 'hint' /}
+    {/call}
+{/template}
+
+/**
+ * Generic message.
+ * @param content Content to display within the message.
+ * @param? id
+ * @param? titleContent Title text of the message. NOT the title attribute for the message.
+ * @param? extraClasses
+ * @param? extraAttributes
+ * @param? tagName
+ * @param? isCloseable Boolean. Set to true, adds affordance and behaviour to close and remove the message.
+ * @param? isShadowed Legacy. Has no effect.
+ */
+{template .generic}
+    {call .message data="all"}
+        {param type: 'generic' /}
+    {/call}
+{/template}
+
+/**
+ * NOTE: This markup differs from what is currently returned by the AJS.message function. This is to support AUI
+ * messages without titles - a case that currently does not render correctly in the JS functions.
+ *
+ * @param content Content to display within the message.
+ * @param? id
+ * @param? titleContent Title text of the message. NOT the title attribute for the message.
+ * @param? extraClasses
+ * @param? extraAttributes
+ * @param? tagName
+ * @param? type
+ * @param? isCloseable Boolean. Set to true, adds affordance and behaviour to close and remove the message.
+ * @param? isShadowed Legacy. Has no effect.
+ */
+{template .message private="true"}
+    {let $theTagName: $tagName ? $tagName : 'div' /}
+    {let $theType: $type ? $type : 'generic' /}
+    <{$theTagName}
+    {if $id} id="{$id}"{/if}
+     {sp}class="aui-message aui-message-{$theType} {$theType}{if $isCloseable} closeable{/if}{if $isShadowed} shadowed{/if}{call aui.renderExtraClasses data="all" /}"
+     {call aui.renderExtraAttributes data="all" /}>
+        {if $titleContent}
+            <p class="title">
+                <strong>{$titleContent|noAutoescape}</strong>
+            </p>
+        {/if}
+
+        {$content|noAutoescape}
+
+        {if $isCloseable}
+            // mimic JS function's closeable attribute
+            <span class="aui-icon icon-close" role="button" tabindex="0"></span>
+        {/if}
+    </{$theTagName}>
+{/template}

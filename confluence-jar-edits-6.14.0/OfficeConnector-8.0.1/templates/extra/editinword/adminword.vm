@@ -1,0 +1,85 @@
+#* @vtlvariable name="action" type="com.benryan.webwork.WordAdminAction" *#
+<html>
+    <head>
+        <title>$action.getActionName($action.getClass().getName())</title>
+        <content tag="selectedWebItem">worddavadmin</content>
+    </head>
+    <body>
+        #parse ( "/template/includes/actionerrors.vm" )
+        #if (!$action.hasErrors() && $action.updated)
+            <div class="aui-message success">
+                $action.getText("office.connector.config.message.success")
+            </div>
+        #end
+        <form class="aui long-label" action="adminwordsubmit.action" method="POST" name="adminword">
+            #form_xsrfToken()
+            <h3>$action.getText("office.connector.config.wordimport.options")</h3>
+            <fieldset class="group">
+                <legend><span>$action.getText("office.connector.config.warnings"):<span></legend>
+                <div class="checkbox">
+                    <input class="checkbox" type="checkbox" name="showWarning" value="true" #if($action.showWarning)checked#end/>
+                    <label>$action.getText("office.connector.config.dowarning")</label>
+                </div>
+            </fieldset>
+
+            <fieldset class="group">
+                <legend><span>$action.getText("office.connector.config.advanced"):</span></legend>
+                <div class="checkbox">
+                    <input class="checkbox" type="checkbox" name="doFootnotes" value="true" #if($action.doFootnotes)checked#end/>
+                    <label>$action.getText("office.connector.config.dofootnotes")</label>
+                </div>
+            </fieldset>
+
+            <div class="field-group">
+                <label for="maxImportImageHeight">$action.getText("office.connector.config.imagesize"):</label>
+            <input class="text" type="text" name="maxImportImageHeight" value="$action.maxImportImageHeight"/>&nbsp;$action.getText("office.connector.config.imagesize.height")
+            </div>
+            <div class="field-group">
+                <input class="text" type="text" name="maxImportImageWidth" value="$action.maxImportImageWidth"/>&nbsp;$action.getText("office.connector.config.imagesize.width")
+            </div>
+
+            <h3>$action.getText("office.connector.config.memoryusage.options")</h3>
+            
+            <fieldset class="group">
+                <legend><span>$action.getText("office.connector.config.caching"):</span></legend>
+                <div class="radio">
+                    <input class="radio" type="radio" onclick="document.getElementById('maxCacheSize').disabled=false;" name="cacheType" value="0" #if($action.cacheType == 0 || $action.cacheType == 2)checked#end/>
+                    <label>$action.getText("office.connector.config.caching.home"): $action.pathUnderHomeDir</label>
+                </div>
+                <div class="radio">
+                #if(!$action.cacheFileValid)
+                    <input class="radio" type="radio" onclick="document.getElementById('maxCacheSize').disabled=false;" name="cacheType" value="1" disabled="disabled"/>
+                #else
+                    <input class="radio" type="radio" onclick="document.getElementById('maxCacheSize').disabled=false;" name="cacheType" value="1" #if($action.cacheType == 1)checked#end/>
+                #end
+                    <label>$action.cacheFileMessage</label>
+                </div>
+            </fieldset>
+            <div class="field-group">
+                <label for="maxCacheSize">$action.getText("office.connector.config.caching.size"):</label>
+                <input maxlength="7" id="maxCacheSize" class="text" type="text" name="maxCacheSize" value="$action.maxCacheSize"/>
+            </div>
+            <div class="field-group">
+                <label for="maxQueues">$action.getText("office.connector.config.maxqueues"):</label>
+                <input class="text" type="text" name="maxQueues" value="$action.maxQueues" size="3" />&nbsp;<a href="$req.contextPath/admin/worddav/managequeue.action">$action.getText("office.connector.config.managequeue")</a>
+            </div>
+
+            <h3>$action.getText("office.connector.config.security.options")</h3>
+            <fieldset class="group">
+                <legend><span>$action.getText("office.connector.config.pathauth"):</span></legend>
+                <div class="checkbox">
+                    <input class="checkbox" type="checkbox" name="pathAuth" value="true" #if($action.pathAuth)checked#end/>
+                    <label>$action.getText("office.connector.config.dopathauth")</label>
+                </div>
+            </fieldset>
+
+            <div class="buttons-container">
+                <div class="buttons">
+                    <input class="button" type="submit" value="$action.getText("office.connector.config.submit")"/>
+                </div>
+            </div>
+        </form>
+
+        #parse ( "/admin/admin-breadcrumbs.vm" )
+    </body>
+</html>

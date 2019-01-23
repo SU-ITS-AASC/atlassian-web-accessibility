@@ -1,0 +1,54 @@
+{namespace aui}
+
+/**
+ * @param? isVertical whether the tabs should be displayed vertically. Default is horizontal
+ * @param? isDisabled tab links will function as normal links, rather than modifying the active tab.
+ * @param? id
+ * @param? extraClasses
+ * @param? extraAttributes
+ * @param? tagName
+ * @param menuItems A list of objects with the properties: 'url' and 'text'.  May optionally specify 'isActive', 'id', 'extraClasses', and 'extraAttributes'
+ * @param paneContent rendered HTML output from one or more calls to the aui.tabPane template
+ */
+{template .tabs}
+<{$tagName ? $tagName : 'div'}{if $id} id="{$id}"{/if} class="aui-tabs {$isVertical ? 'vertical-tabs' : 'horizontal-tabs'}{if $isDisabled} aui-tabs-disabled{/if}{call aui.renderExtraClasses data="all" /}"
+    {call aui.renderExtraAttributes data="all" /}>
+    <ul class="tabs-menu">
+        {foreach $item in $menuItems}
+            {call .tabMenuItem data="$item" /}
+        {/foreach}
+    </ul>
+    {$paneContent|noAutoescape}
+</{$tagName ? $tagName : 'div'}>
+{/template}
+
+/**
+ * @param url Usually points to the id of a tab pane, like "#my-tab-pane".  But a full url can be used if $isDisabled is set to true in aui.tabs
+ * @param text
+ * @param? isActive whether this is the active tab
+ * @param? id
+ * @param? extraClasses
+ * @param? extraAttributes
+ */
+{template .tabMenuItem}
+    <li{if $id} id="{$id}"{/if} class="menu-item{if $isActive} active-tab{/if}{call aui.renderExtraClasses data="all" /}"
+        {call aui.renderExtraAttributes data="all" /}>
+        <a href="{$url}">{$text}</a>
+    </li>
+{/template}
+
+/**
+ * @param? isActive whether this is the active tab
+ * @param? id
+ * @param content
+ * @param? extraClasses
+ * @param? extraAttributes
+ * @param? tagName
+ */
+{template .tabPane}
+    <{$tagName ? $tagName : 'div'}
+        {if $id} id="{$id}"{/if} class="tabs-pane{if $isActive} active-pane{/if}{call aui.renderExtraClasses data="all" /}"
+        {call aui.renderExtraAttributes data="all" /}>
+        {$content |noAutoescape}
+    </{$tagName ? $tagName : 'div'}>
+{/template}

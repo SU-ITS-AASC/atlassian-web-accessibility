@@ -1,0 +1,191 @@
+{namespace aui.dialog}
+
+/**
+ * @param content HTML-escaped content for the dialog's main area
+ * @param? modal whether the dialog can be closed before the interaction is complete
+ * @param? removeOnHide if true, the dialog is removed from the DOM when it's hidden
+ * @param? visible whether the dialog should be made visible. By default, dialogs are rendered as hidden
+ * @param? id An ID for the dialog. Though not required, it is encouraged for better ARIA support
+ * @param? tagName tag to be used for the outer-most dialog element. Defaults to SECTION. FORM can also be used.
+ * @param? extraClasses
+ * @param? extraAttributes
+ * @param? size small, medium, large, xlarge. If none specified, medium will be used
+ * @param? titleText raw text for the dialog's title. Either this or $titleContent is required.
+ * @param? titleContent HTML-escaped input for the dialog's title. Either this or $titleText is required.
+ * @param? headerActionContent HTML-escaped content to add to the headerActions
+ * @param? headerSecondaryContent HTML-escaped content to display secondary content (e.g., a search field)
+ * @param? footerActionContent HTML-escaped content to add to the footerActions
+ * @param? footerHintText Guiding text to be displayed in the hint section of the dialog footer
+ * @param? footerHintContent  HTML-escaped content to be displayed in the hint section of the dialog footer
+ */
+{template .dialog2}
+    {call .dialog2Chrome}
+        {param id: $id /}
+        {param titleId: $id ? $id + '-dialog-title' : null /}
+        {param modal: $modal /}
+        {param tagName: $tagName /}
+        {param removeOnHide: $removeOnHide /}
+        {param visible: $visible /}
+        {param size: $size /}
+        {param extraClasses: $extraClasses /}
+        {param extraAttributes: $extraAttributes /}
+        {param content}
+            {call .dialog2Content}
+                {param id: null /}
+                {param titleText: $titleText /}
+                {param titleContent: $titleContent /}
+                {param headerActionContent: $headerActionContent /}
+                {param headerSecondaryContent: $headerSecondaryContent /}
+                {param modal: $modal /}
+                {param content: $content /}
+                {param footerHintText: $footerHintText /}
+                {param footerHintContent: $footerHintContent /}
+                {param footerActionContent: $footerActionContent /}
+            {/call}
+        {/param}
+    {/call}
+{/template}
+
+
+/**
+ * @param? id
+ * @param? titleId
+ * @param? tagName
+ * @param? size
+ * @param? modal
+ * @param? removeOnHide
+ * @param? visible
+ * @param? extraClasses
+ * @param? extraAttributes
+ * @param? content
+ */
+{template .dialog2Chrome}
+    <{$tagName ? $tagName : 'section'}{if $id} id="{$id}"{/if}{if $titleId} aria-labelledby="{$titleId}"{/if} role="dialog"{sp}
+        class="
+            aui-layer aui-dialog2 aui-dialog2-{$size ? $size : 'medium'}
+            {call aui.renderExtraClasses data="all" /}
+        "
+        {if $modal}data-aui-modal="true"{/if}
+        {if $removeOnHide}data-aui-remove-on-hide="true"{/if}
+        {if $visible != true}aria-hidden="true"{/if}
+        {call aui.renderExtraAttributes data="all" /}>
+        {if $content}
+            {$content|noAutoescape}
+        {/if}
+    </{$tagName ? $tagName : 'section'}>
+{/template}
+
+/**
+ * @param? id
+ * @param? titleText
+ * @param? titleContent
+ * @param? headerActionContent
+ * @param? headerSecondaryContent
+ * @param? modal
+ * @param? content
+ * @param? footerHintText
+ * @param? footerHintContent
+ * @param? footerActionContent
+ */
+{template .dialog2Content}
+    {call .dialog2Header}
+        {param titleId: $id ? $id + '-dialog-title' : null /}
+        {param titleText: $titleText /}
+        {param titleContent: $titleContent /}
+        {param actionContent: $headerActionContent /}
+        {param secondaryContent: $headerSecondaryContent /}
+        {param modal: $modal /}
+    {/call}
+    {call .dialog2Panel}
+        {param content : $content /}
+    {/call}
+    {call .dialog2Footer}
+        {param hintText: $footerHintText /}
+        {param hintContent: $footerHintContent /}
+        {param actionContent: $footerActionContent /}
+    {/call}
+{/template}
+
+/**
+ * @param? id
+ * @param? titleId
+ * @param? titleText
+ * @param? titleContent
+ * @param? actionContent
+ * @param? secondaryContent
+ * @param? modal
+ * @param? extraClasses
+ * @param? extraAttributes
+ */
+{template .dialog2Header}
+    <header{if $id} id="{$id}"{/if} class="aui-dialog2-header{call aui.renderExtraClasses data="all" /}"{call aui.renderExtraAttributes data="all" /}>
+        <h2 {if $titleId} id="{$titleId}"{/if} class="aui-dialog2-header-main">
+            {if $titleText}
+                {$titleText}
+            {/if}
+            {if $titleContent}
+                {$titleContent|noAutoescape}
+            {/if}
+        </h2>
+        {if $actionContent}
+            <div class="aui-dialog2-header-actions">
+                {$actionContent|noAutoescape}
+            </div>
+        {/if}
+        {if $secondaryContent}
+            <div class="aui-dialog2-header-secondary">
+                {$secondaryContent|noAutoescape}
+            </div>
+        {/if}
+        {if $modal != true}
+            <a class="aui-dialog2-header-close">
+                <span class="aui-icon aui-icon-small aui-iconfont-close-dialog">{getText('aui.words.close')}</span>
+            </a>
+        {/if}
+    </header>
+{/template}
+
+
+/**
+ * @param? id
+ * @param? hintText
+ * @param? hintContent
+ * @param? actionContent
+ * @param? extraClasses
+ * @param? extraAttributes
+ */
+{template .dialog2Footer}
+    <footer{if $id} id="{$id}"{/if} class="aui-dialog2-footer{call aui.renderExtraClasses data="all" /}"{call aui.renderExtraAttributes data="all" /}>
+        {if $actionContent}
+            <div class="aui-dialog2-footer-actions">
+                {$actionContent|noAutoescape}
+            </div>
+        {/if}
+        {if $hintText or $hintContent}
+            <div class="aui-dialog2-footer-hint">
+                {if $hintText}
+                    {$hintText}
+                {/if}
+                {if $hintContent}
+                    {$hintContent|noAutoescape}
+                {/if}
+            </div>
+        {/if}
+    </footer>
+{/template}
+
+
+/**
+ * @param? id
+ * @param? content
+ * @param? extraClasses
+ * @param? extraAttributes
+ */
+{template .dialog2Panel}
+    <div{if $id} id="{$id}"{/if} class="aui-dialog2-content{call aui.renderExtraClasses data="all" /}"{call aui.renderExtraAttributes data="all" /}>
+        {if $content}
+            {$content|noAutoescape}
+        {/if}
+    </div>
+{/template}
+

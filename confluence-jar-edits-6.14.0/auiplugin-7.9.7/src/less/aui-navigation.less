@@ -1,0 +1,408 @@
+@import './imports/global';
+
+/*! AUI Navigation */
+
+/* Nav defaults - put very little here!
+-------------------- */
+.aui-nav,
+.aui-nav > li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* Horizontal, breadcrumbs and pagination are all horizontal */
+.aui-nav-breadcrumbs:after,
+.aui-nav-pagination:after,
+.aui-nav-horizontal:after,
+.aui-navgroup-horizontal .aui-nav:after,
+.aui-navgroup-horizontal .aui-navgroup-inner:after {
+    clear: both;
+    content: " ";
+    display: table;
+}
+.aui-nav-breadcrumbs > li,
+.aui-nav-pagination > li {
+    float: left;
+}
+
+/* Navigation headings
+-------------------- */
+.aui-nav-heading {
+    #aui.typography.h100(@aui-nav-heading-text-color);
+    line-height: unit(20 / @aui-nav-heading-text-font-size);
+    padding: 0 @aui-nav-link-spacing-horizontal; // to match the nav-item layout.
+
+    & > strong {
+        font-size: inherit;
+        font-weight: inherit;
+        line-height: inherit;
+    }
+}
+
+/* Breadcrumb navigation
+-------------------- */
+.aui-nav-breadcrumbs > li {
+    padding: 0 @aui-grid 0 0;
+}
+
+.aui-nav-breadcrumbs > li + li:before {
+    content: "/";
+    padding-right: @aui-grid;
+}
+
+/* Pagination
+-------------------- */
+.aui-nav-pagination {
+    margin: @aui-grid 0 0 0;
+}
+.aui-nav-pagination > li {
+    padding: 0;
+}
+/* Need padding on the A elements for big click areas.
+   Set equal left/right to help align the inline dialog on truncation. */
+.aui-nav-pagination > li > a {
+    padding: @aui-grid @aui-grid 0 @aui-grid;
+}
+/* Don't set top/bottom as that throws non-linked items out of whack. */
+.aui-nav-pagination > li.aui-nav-selected,
+.aui-nav-pagination > li.aui-nav-truncation {
+    padding-left: @aui-grid;
+    padding-right: @aui-grid;
+}
+.aui-nav-pagination .aui-nav-truncation > a {
+    padding-left: 0;
+    padding-right: 0;
+}
+/* Remove whitespace from first and last child */
+.aui-nav-pagination > li:first-child > a,
+.aui-nav-pagination > li.aui-nav-truncation:first-child,
+.aui-nav-pagination > li.aui-nav-selected:first-child {
+    padding-left: 0;
+}
+.aui-nav-pagination > li:last-child > a,
+.aui-nav-pagination > li.aui-nav-truncation:last-child,
+.aui-nav-pagination > li.aui-nav-selected:last-child {
+    padding-right: 0;
+}
+
+.aui-nav-pagination a[aria-disabled="true"],
+.aui-nav-pagination a[aria-disabled="true"]:link,
+.aui-nav-pagination a[aria-disabled="true"]:visited,
+.aui-nav-pagination a[aria-disabled="true"]:focus,
+.aui-nav-pagination a[aria-disabled="true"]:hover,
+.aui-nav-pagination a[aria-disabled="true"]:active {
+    color: @aui-nav-pagination-active-text-color;
+    text-decoration: none;
+}
+
+/* "current" is deprecated in 5.1 */
+.aui-nav-pagination > li.aui-nav-current,
+.aui-nav-pagination > li.aui-nav-selected {
+    color: @aui-nav-pagination-text-color;
+    font-weight: @aui-font-weight-semibold;
+}
+
+/* Vertical Navigation
+-------------------- */
+.aui-navgroup-vertical .aui-nav > li > a,
+.aui-nav-vertical > li > a {
+    #aui-nav.item-base();
+    #aui-nav.item-style(normal);
+    word-wrap: break-word;
+
+    &:hover {
+        #aui-nav.item-style(hover);
+    }
+
+    &:active {
+        #aui-nav.item-style(active);
+    }
+
+    &:focus {
+        text-decoration: none;
+    }
+}
+
+.aui-navgroup-vertical .aui-nav .aui-nav-selected > a,
+.aui-nav-vertical .aui-nav .aui-nav-selected > a {
+    #aui-nav.item-style(selected);
+}
+
+.aui-navgroup-vertical .aui-nav,
+.aui-navgroup-vertical .aui-nav-heading {
+    margin: 0;
+}
+
+.aui-navgroup-vertical .aui-nav + .aui-nav {
+    // If a sequential group does not have a heading, add a divider between them.
+    margin-top: @aui-grid;
+    padding-top: @aui-grid;
+    border-top: 1px solid @aui-nav-group-divider-color;
+}
+
+.aui-navgroup-vertical .aui-nav + .aui-nav-heading {
+    // If a sequential group *does* have a heading, don't add a divider, but space it out a little bit more.
+    margin-top: @aui-grid * 2;
+}
+
+.aui-navgroup-vertical .aui-nav:first-child,
+.aui-navgroup-vertical .aui-navgroup-inner > .aui-nav-heading:first-child,
+.aui-navgroup-vertical .aui-navgroup-primary > .aui-nav-heading:first-child {
+    margin-top: 0;
+    padding-top: 0;
+}
+
+/* nested vertical navigation menus
+----------------------------------- */
+.aui-navgroup-vertical .aui-nav {
+
+    // the sub-menu styles
+    .aui-nav {
+        margin-top: 0;
+        padding: 0 0 0 @aui-nav-subtree-toggle-icon-size;
+
+        > li {
+            position: relative;
+        }
+    }
+
+    // the twixi and submenu expansion/collapsing styles
+    > li[aria-expanded] {
+        position: relative;
+
+        .aui-nav-heading {
+            padding-left: 0;
+        }
+
+        .aui-nav-subtree-toggle {
+            // All of these calculations exist because of two problems with the markup pattern:
+            // (1) the subtree toggle sits outside and to the left of the aui-nav-item
+            // (2) the nested list sits inside the <li> adjacent to the sutree toggle and nav item.
+            // these both mean that using flexbox is... inadvisable.
+            @box-size: (@aui-nav-link-effective-height); // note: it is assumed, but not guaranteed, that the .aui-nav-item will be the same height.
+            box-sizing: border-box;
+            color: @aui-nav-subtree-toggle-icon-color;
+            left: 0;
+            margin: 0;
+            position: absolute;
+            padding: ((@aui-nav-subtree-toggle-icon-size - @aui-icon-size-small) / 2);
+            top: ((@box-size - @aui-nav-subtree-toggle-icon-size) / 2);
+            width: @aui-nav-subtree-toggle-icon-size;
+            z-index: 1; // because it needs to sit "above" the link it's for.
+
+            > .aui-icon {
+                display: block;
+                margin: 0 auto;
+            }
+
+            + .aui-nav-item {
+                padding-left: @aui-nav-subtree-toggle-icon-size + @aui-nav-link-spacing-horizontal;
+            }
+        }
+
+        li {
+            position: relative;
+        }
+
+        &[aria-expanded="false"] {
+            > * {
+                display: none;
+            }
+
+            > .aui-nav-subtree-toggle,
+            > .aui-nav-item {
+                display: inherit;
+            }
+        }
+    }
+}
+
+/* RHS actions dropdown
+------------------------ */
+
+.aui-navgroup-vertical .aui-nav .aui-nav-item-actions {
+    @actions-glyph-size: unit(@aui-icon-size-small * 0.75, px);
+    @actions-button-size: @aui-icon-size-small;
+    @aui-nav-item-actions-top-offset: ((@aui-nav-link-effective-height - @actions-button-size) / 2);
+    @aui-nav-item-actions-left-offset: 4px;
+    @aui-nav-item-actions-border-radius: 2px; // because it's a tiny button. 3px would probably work, though.
+
+    #aui-buttons.aui-subtle-button-style(normal);
+    border-radius: @aui-nav-item-actions-border-radius;
+    display: block;
+    height: @actions-button-size;
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    right: (@aui-grid / 2);
+    text-indent: -999em;
+    top: @aui-nav-item-actions-top-offset;
+    width: @actions-button-size;
+
+    &::after {
+        #aui.aui-dropdown2-trigger-chevron-icon(@actions-glyph-size, @actions-button-size);
+        content: @aui-glyph-more-actions;
+    }
+
+    &:hover,
+    &:focus {
+        #aui-buttons.aui-button-style(hover);
+    }
+
+    &:active {
+        #aui-buttons.aui-button-style(active);
+
+        &:after {
+            border-top-color: @aui-text-color;
+        }
+    }
+
+    &.active {
+        #aui-buttons.aui-button-style(selected);
+    }
+
+    ~ .aui-nav-item-label {
+        margin-right: (@aui-grid * 1.5);
+    }
+}
+
+
+/* Horizontal Navigation
+-------------------- */
+.aui-nav-horizontal,
+.aui-navgroup-horizontal .aui-nav {
+    display: flex;
+    flex-direction: row;
+
+    > li a {
+        padding-right: @aui-grid;
+    }
+}
+
+/* Horizontal Navgroup
+-------------------- */
+.aui-navgroup-horizontal {
+    #aui.horizontal-tab-indicator(@aui-tabs-tab-border-color, auto, 0);
+
+    // The base styles
+    margin: 0;
+    padding: 0 @aui-grid;
+
+    // Use flexbox to arrange all the innards of horizontal nav.
+    // The wrapping is a bit different to floated items, but hopefully in a good way.
+    .aui-navgroup-inner,
+    .aui-navgroup-primary,
+    .aui-navgroup-secondary,
+    .aui-nav {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .aui-navgroup-inner {
+        justify-content: space-between;
+    }
+
+    .aui-navgroup-primary {
+        flex-grow: 1;
+        order: 0;
+    }
+
+    .aui-navgroup-secondary {
+        order: 1;
+    }
+
+    /* Nav in a Navbar */
+    .aui-nav {
+        > li a {
+            display: block;
+            margin: 0;
+            padding: (@aui-grid - 1) @aui-grid;
+            position: relative;
+
+            &,
+            &:link,
+            &:visited {
+                color: @aui-tabs-tab-text-color;
+                text-decoration: none;
+            }
+
+            &:focus,
+            &:hover {
+                color: @aui-tabs-tab-hover-text-color;
+            }
+
+            &:focus {
+                z-index: 1;
+            }
+        }
+
+        > .aui-nav-selected a {
+            #aui.horizontal-tab-indicator(@aui-tabs-tab-active-border-color, 1);
+            font-weight: @aui-font-weight-medium;
+
+            &,
+            &:link,
+            &:visited,
+            &.active {
+                color: @aui-tabs-tab-active-text-color;
+            }
+        }
+    }
+
+    /* Horizontal navgroup + Dropdown2 integration. Note: ADG prohibits dropdowns in vertical nav. */
+    .aui-dropdown2-trigger {
+        .aui-icon-dropdown {
+            display: none;
+        }
+
+        &::after {
+            #aui.aui-dropdown2-trigger-chevron-icon();
+        }
+    }
+
+    /* Breadcrumbs in navbar */
+    .aui-nav-breadcrumbs > li,
+    .aui-nav-breadcrumbs > li:before {
+        padding: 0;
+    }
+
+    .aui-nav-breadcrumbs > li a {
+        display: inline-block;
+    }
+
+    /* Bulletproofing - headings shouldn't be here but will at least not look heinously broken. */
+    .aui-nav-heading {
+        padding: @aui-grid @aui-grid 0 @aui-grid; /* 0 bottom required to unfuck IE9 */
+    }
+}
+
+.aui-nav-actions-list {
+    font-size: 0;
+    list-style: none;
+    margin: @aui-nav-actions-list-margin-top 0 0 0;
+    padding: 0;
+
+    &:first-child {
+        margin-top: 0;
+    }
+
+    > li {
+        display: inline-block;
+        font-size: @aui-nav-actions-list-item-font-size;
+        margin-bottom: @aui-nav-actions-list-item-margin-bottom;
+
+        + li::before {
+            content: "";
+            border-radius: @aui-nav-actions-list-divider-size;
+            width: @aui-nav-actions-list-divider-size;
+            height: @aui-nav-actions-list-divider-size;
+            background-color: @aui-nav-actions-list-divider-color;
+            display: inline-block;
+            vertical-align: middle;
+            margin-left: @aui-nav-actions-list-divider-spacing;
+            margin-right: @aui-nav-actions-list-divider-spacing;
+        }
+    }
+}

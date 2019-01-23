@@ -1,0 +1,1 @@
+define("confluence-collaborative-editor-plugin/util/location-provider",["window"],function(a){return{getLocation:function(){return a.location}}});

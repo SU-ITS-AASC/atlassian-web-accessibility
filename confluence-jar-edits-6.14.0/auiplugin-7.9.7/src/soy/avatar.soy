@@ -1,0 +1,34 @@
+{namespace aui.avatar}
+
+/**
+ * @param size either 'xsmall', 'small', 'medium', 'large', 'xlarge', 'xxlarge' or 'xxxlarge'
+ * @param avatarImageUrl
+ * @param? id
+ * @param? tagName default is 'div'
+ * @param? accessibilityText alt text for the avatar (eg Full name for users, Project name for projects)
+ * @param? title
+ * @param? isProject true if it is a Project Avatar (cropped to a circle)
+ * @param? badgeContent extra HTML for badge
+ * @param? imageClasses extra classes on the image element.
+ * @param? extraClasses Standard option.
+ * @param? extraAttributes Standard option.
+ */
+{template .avatar}
+<{$tagName ? $tagName : 'span'}
+    {if $id} id="{$id}"{/if}
+    {sp}class="aui-avatar aui-avatar-{$size}
+    {$isProject ? ' aui-avatar-project' : ''}
+    {$badgeContent ? ' aui-avatar-badged' : ''}
+    {call aui.renderExtraClasses data="all" /}"
+    {call aui.renderExtraAttributes data="all" /}>
+    <span class="aui-avatar-inner">
+        <img src="{$avatarImageUrl}"
+            {if $accessibilityText} alt="{$accessibilityText}"{/if}
+            {if $title} title="{$title}"{/if}
+            {if $imageClasses} class="{$imageClasses}"{/if} />
+    </span>
+    {if $badgeContent}
+        {$badgeContent|noAutoescape}
+    {/if}
+</{$tagName ? $tagName : 'span'}>
+{/template}

@@ -1,0 +1,68 @@
+/* Styles for draggable decoration */
+table.draggable {
+    margin-left: -10px;
+    margin-top: -10px;
+}
+
+table.draggable:hover > tbody > tr > td.draggable-table,
+table.draggable:hover > tbody > tr > td.draggable-column,
+table.draggable:hover > tbody > tr > td.draggable-row {
+    background-color: #777;
+    border-top: 1px solid #777;
+    border-left: 1px solid #777;
+}
+
+table.draggable:hover > tbody > tr > td.draggable-table,
+table.draggable:hover > tbody > tr > td.draggable-column {
+    border-right: 1px solid #aaa;
+}
+
+table.draggable:hover > tbody > tr > td.draggable-table,
+table.draggable:hover > tbody > tr > td.draggable-row {
+    border-bottom: 1px solid #aaa;
+}
+
+td.draggable-table,
+td.draggable-column,
+td.draggable-row {
+    background-color: transparent;
+    border-top: 1px solid transparent;
+    border-left: 1px solid transparent;
+    cursor: move;
+}
+
+td.draggable-table,
+td.draggable-column {
+    border-right: 1px solid transparent;
+}
+
+td.draggable-table,
+td.draggable-row {
+    border-bottom: 1px solid transparent;
+}
+
+td.draggable-column {
+    height: 10px;
+}
+
+td.draggable-row {
+    width: 10px;
+}
+
+/*.detached {*/
+    /*position: absolute;*/
+/*}*/
+
+.wiki-content img.confluence-embedded-image,
+.wiki-content img.editor-inline-macro,
+.wiki-content table.wysiwyg-macro {
+    cursor: move;
+}
+
+.wiki-content table.wysiwyg-macro > tbody > tr > td.wysiwyg-macro-body {
+    cursor: text;
+}
+
+#move-indicator {
+    font-weight: normal !important;
+}

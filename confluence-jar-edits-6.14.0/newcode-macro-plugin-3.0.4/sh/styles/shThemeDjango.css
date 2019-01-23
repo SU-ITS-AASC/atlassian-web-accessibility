@@ -1,0 +1,123 @@
+/**
+ * SyntaxHighlighter
+ * http://alexgorbatchev.com/SyntaxHighlighter
+ *
+ * SyntaxHighlighter is donationware. If you are using it, please donate.
+ * http://alexgorbatchev.com/SyntaxHighlighter/donate.html
+ *
+ * @version
+ * 3.0.83 (July 02 2010)
+ * 
+ * @copyright
+ * Copyright (C) 2004-2010 Alex Gorbatchev.
+ *
+ * @license
+ * Dual licensed under the MIT and GPL licenses.
+ */
+.syntaxhighlighter.sh-django {
+  background-color: #0a2b1d !important;
+}
+.syntaxhighlighter.sh-django .line.alt1 {
+  background-color: #0a2b1d !important;
+}
+.syntaxhighlighter.sh-django .line.alt2 {
+  background-color: #0a2b1d !important;
+}
+.syntaxhighlighter.sh-django .line.highlighted.alt1, .syntaxhighlighter.sh-django .line.highlighted.alt2 {
+  background-color: #233729 !important;
+}
+.syntaxhighlighter.sh-django .line.highlighted.number {
+  color: white !important;
+}
+.syntaxhighlighter.sh-django table caption {
+  color: #f8f8f8 !important;
+}
+.syntaxhighlighter.sh-django .gutter {
+  color: #497958 !important;
+}
+.syntaxhighlighter.sh-django .gutter .line.highlighted {
+  background-color: #41a83e !important;
+  color: #0a2b1d !important;
+}
+.syntaxhighlighter.sh-django.printing .line .content {
+  border: none !important;
+}
+.syntaxhighlighter.sh-django.collapsed {
+  overflow: visible !important;
+}
+.syntaxhighlighter.sh-django.collapsed .toolbar {
+  color: #96dd3b !important;
+  background: black !important;
+  border: 1px solid #41a83e !important;
+}
+.syntaxhighlighter.sh-django.collapsed .toolbar a {
+  color: #96dd3b !important;
+}
+.syntaxhighlighter.sh-django.collapsed .toolbar a:hover {
+  color: white !important;
+}
+.syntaxhighlighter.sh-django .toolbar {
+  color: white !important;
+  background: #41a83e !important;
+  border: none !important;
+}
+.syntaxhighlighter.sh-django .toolbar a {
+  color: white !important;
+}
+.syntaxhighlighter.sh-django .toolbar a:hover {
+  color: #ffe862 !important;
+}
+.syntaxhighlighter.sh-django .plain, .syntaxhighlighter.sh-django .plain a {
+  color: #f8f8f8 !important;
+}
+.syntaxhighlighter.sh-django .comments, .syntaxhighlighter.sh-django .comments a {
+  color: #336442 !important;
+}
+.syntaxhighlighter.sh-django .string, .syntaxhighlighter.sh-django .string a {
+  color: #9df39f !important;
+}
+.syntaxhighlighter.sh-django .keyword {
+  color: #96dd3b !important;
+}
+.syntaxhighlighter.sh-django .preprocessor {
+  color: #91bb9e !important;
+}
+.syntaxhighlighter.sh-django .variable {
+  color: #ffaa3e !important;
+}
+.syntaxhighlighter.sh-django .value {
+  color: #f7e741 !important;
+}
+.syntaxhighlighter.sh-django .functions {
+  color: #ffaa3e !important;
+}
+.syntaxhighlighter.sh-django .constants {
+  color: #e0e8ff !important;
+}
+.syntaxhighlighter.sh-django .script {
+  font-weight: bold !important;
+  color: #96dd3b !important;
+  background-color: none !important;
+}
+.syntaxhighlighter.sh-django .color1, .syntaxhighlighter.sh-django .color1 a {
+  color: #eb939a !important;
+}
+.syntaxhighlighter.sh-django .color2, .syntaxhighlighter.sh-django .color2 a {
+  color: #91bb9e !important;
+}
+.syntaxhighlighter.sh-django .color3, .syntaxhighlighter.sh-django .color3 a {
+  color: #edef7d !important;
+}
+
+.syntaxhighlighter.sh-django .comments {
+  font-style: italic !important;
+}
+.syntaxhighlighter.sh-django .keyword {
+  font-weight: bold !important;
+}
+
+
+/* with PDL enabled in Confluence */
+.pdl .codeContent .gutter {
+    background: #0a2b1d !important;
+}

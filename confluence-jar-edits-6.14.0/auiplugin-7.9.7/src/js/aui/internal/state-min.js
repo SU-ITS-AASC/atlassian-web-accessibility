@@ -1,0 +1,1 @@
+("undefined"===typeof window?global:window).__3f2c7809aecfe899611b77461a9218ac=function(){var a={};"use strict";Object.defineProperty(a,"__esModule",{value:!0});a.default=function(b){return{set:function(a,c){void 0===b._state&&(b._state={});b._state[a]=c},get:function(a){if(b._state)return b._state[a]}}};return a=a["default"]}.call(this);

@@ -1,0 +1,120 @@
+{namespace aui.buttons}
+
+/**
+ * Creates a single button
+ * @param text Visible text of the button.
+ * @param? type Type of button. Null/empty for default; other options are primary, link, subtle.
+ * @param? tagName Defaults to BUTTON. A and INPUT can also be used. INPUT not recommended.
+ * @param? inputType Defaults to BUTTON. Only required where tagName is set to INPUT.
+ * @param? href URL to link to. Usually for link button types. Creates an A element.
+ * @param? id ID attribute of the button.
+ * @param? extraClasses
+ * @param? extraAttributes
+ * @param? isDisabled Boolean. Sets ARIA disabled attribute. Default: false.
+ * @param? isPressed Boolean. Sets ARIA pressed attribute. Default: false.
+ * @param? hasLabel Boolean. Wraps the button text with a span. Use this when creating buttons that have both icons and text.
+ * @param? iconType Options: "aui" or "custom". Adds a SPAN (type:custom) or a SPAN.aui-icon (type:aui) to A and BUTTON elements. Not supported for INPUT.
+ * @param? iconText Required if icon is used. String for assistive/hidden/alternative text for icons.
+ * @param? iconClass String added to the class attribute of the icon span. Used to set extra icon class.
+ * @param? dropdown2Target ID of a Dropdown2 dropdown. By implication, sets all required attributes to make the button into a dropdown2 trigger.
+ * @param? splitButtonType Set via .splitButton template. "main" (single action button) or "more" (little dropdown button that gives user access to more options). When set to "more" and dropdown2target provided, hides the text to create the button which just has the dropdown arrow visible.
+ **/
+{template .button}
+    {if $href or $href == ''}
+        <a href="{$href}"{call .buttonAttributes data="all"}{param tagName: 'a' /}{/call}>
+            {call .buttonIcon data="all" /}{if $hasLabel}<span class="aui-button-label">{/if}{$text}{if $hasLabel}</span>{/if}
+        </a>
+    {elseif $tagName == 'input'}
+        <input
+            {sp}type="{$inputType ? $inputType : 'button'}" {call .buttonAttributes data="all" /} value="{$text}" />
+    {else}
+        {let $theTagName: $tagName ? $tagName : 'button'/}
+        <{$theTagName}{call .buttonAttributes data="all"}{param tagName: $theTagName /}{/call}>
+            {call .buttonIcon data="all" /}{if $hasLabel}<span class="aui-button-label">{/if}{$text}{if $hasLabel}</span>{/if}
+        </{$theTagName}>
+    {/if}
+{/template}
+
+/**
+ * Button wrapper to create grouped buttons
+ * @param content One or more aui-button elements. Must not contain anything else.
+ * @param? id
+ * @param? extraClasses
+ * @param? extraAttributes
+ **/
+{template .buttons}
+    <div 
+        {if $id} id="{$id}"{/if} 
+        {sp}class="aui-buttons{call aui.renderExtraClasses data="all" /}" 
+        {call aui.renderExtraAttributes data="all" /}>{$content|noAutoescape}</div>
+{/template}
+
+/**
+ * Private template for rendering the button attributes
+ * @param? type Passed in.
+ * @param? tagName Passed in.
+ * @param? id Passed in.
+ * @param? extraClasses Passed in.
+ * @param? extraAttributes Passed in.
+ * @param? isDisabled Passed in.
+ * @param? isPressed Passed in.
+ * @param? dropdown2Target Passed in.
+ * @param? splitButtonType Passed in.
+ */
+{template .buttonAttributes private="true"}
+    {if $id} id="{$id}"{/if} 
+    {sp}class="aui-button
+    {if $splitButtonType == 'main'} aui-button-split-main{/if}
+    {if $dropdown2Target} aui-dropdown2-trigger{if $splitButtonType == 'more'} aui-button-split-more{/if}{/if}
+    {switch $type}
+        {case 'primary'}
+            {sp}aui-button-primary
+        {case 'link'}
+            {sp}aui-button-link
+        {case 'subtle'}
+            {sp}aui-button-subtle
+        {case 'text'}
+            {sp}aui-button-text
+    {/switch}
+    {call aui.renderExtraClasses data="all" /}
+    " 
+    {call aui.renderExtraAttributes data="all" /}
+    {if $isPressed} aria-pressed="{$isPressed}"{/if}
+    {if $isDisabled} aria-disabled="{$isDisabled}"
+        {if ($isDisabled == true)} 
+            {if ($tagName == 'button') or ($tagName == 'input')} disabled="disabled" {/if}
+        {/if}
+    {/if}
+    {if $dropdown2Target} aria-owns="{$dropdown2Target}" aria-haspopup="true"{/if}
+    {if $tagName == 'a'} tabindex="0"{/if} // This is so that 'A' buttons with no 'href' can be tabbed to. Can be overridden with $extraAttributes as the first tabindex the browser sees has precedence
+{/template}
+
+/**
+ * Private template for rendering the button icon.
+ * @param? iconType Passed in.
+ * @param? iconText Passed in.
+ * @param? iconClass Passed in.
+ **/
+{template .buttonIcon private="true"}
+{if $iconType}
+    <span class="
+        {if ($iconType == 'aui')}aui-icon{/if}    
+        {if $iconClass}{sp}{$iconClass}{/if}
+    ">{if $iconText}{$iconText} {/if}</span>    
+{/if}
+{/template}
+
+
+/**
+ * Template for rendering a pair of buttons to make a split button within a .buttons container.
+ * @param splitButtonMain The large default- or single-action button in a split button pair. An object with all usual button params.
+ * @param splitButtonMore The small more-actions button in a split pair (currently uses a dropdown to load related options). An object with button params including dropdown2target (required).
+ **/
+{template .splitButton}
+    {call .button data="$splitButtonMain"}
+        {param splitButtonType: 'main' /}
+    {/call}
+    {call .button data="$splitButtonMore"}
+        {param splitButtonType: 'more' /}
+    {/call}
+{/template}

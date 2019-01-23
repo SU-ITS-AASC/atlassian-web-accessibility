@@ -1,0 +1,81 @@
+<html>
+	<head>
+		<title>$action.getText("usage.space.title")</title>
+	</head>
+
+    #applyDecorator("root")
+        #decoratorParam("helper" $action.helper)
+        #decoratorParam("context" "space-activity")
+        #decoratorParam("mode" "view-space-operations")
+
+        #applyDecorator ("root")
+            #decoratorParam("context" "spacecontentpanel")
+            #decoratorParam("helper" $action.helper)
+            #decoratorParam("selection" "space-activity")
+            #decoratorParam("selectedSpaceToolsWebItem" "default-space-activity")
+
+	<content tag="spacekey">$spaceKey</content>
+
+	<body>
+
+		<div style="margin: 0 1em 0 1em">
+
+			<h1>$generalUtil.htmlEncode($periodName)</h1>
+
+			#parse ("/templates/usage/report-controls.vm")
+
+			<div style="margin: 1em 0 0 1em; margin: auto">
+
+            #set ($commonUsageParams = "timespan=$usageTimespan|forchart=true|period=$chartTimeInterval")
+            #set ($commonChartParams = "dataOrientation=vertical|timePeriod=$chartTimeInterval|width=700")
+
+				<div style="margin-top: 1em; margin-bottom: 1em; float:left">
+					$action.renderUsageMacro("{usage:events=view|types=pages,blogposts|columns=events|$commonUsageParams}", "colors=#CC0000|title=$action.getText('usage.chart.viewing.title')|legend=false|type=area|$commonChartParams")
+
+					<div style="margin: auto; width: 90%">
+					<p style="padding-left: 20px;">$action.getText("usage.chart.viewing.description")</p>
+					</div>
+				</div>
+
+				<div style="margin-top: 1em; margin-bottom: 1em; float:left">
+					$action.renderUsageMacro("{usage:events=create,edit|columns=type|types=pages,blogposts,comments|$commonUsageParams}", "colors=#CC0000,#0000CC,#00CC00|title=$action.getText('usage.chart.editing.title')|type=line|$commonChartParams")
+
+					<div style="margin: auto; width: 90%">
+					<p style="padding-left: 20px;">$action.getText("usage.chart.editing.description")</p>
+					</div>
+				</div>
+			</div>
+
+			<div style="border-top: solid 2px rgb(245,245,245); clear: both;">
+
+			#set ($commonParams = "max=$topItems|style=list|display=icon,count|timespan=$usageTimespan")
+
+			<table style="margin-top: 1em">
+				<tr>
+					<th>$action.getText("usage.popular.content") ($action.getText("usage.views.name"))</th>
+					<th>$action.getText("usage.active.content") ($action.getText("usage.edits.name"))</th>
+					<th>$action.getText("usage.active.users") ($action.getText("usage.edits.name"))</th>
+				</tr>
+				<tr style="vertical-align: top">
+					<td width="34%">
+					$helper.renderConfluenceMacro("{popular:display=icon,count|types=blogposts,pages|$commonParams}")
+					</td>
+					<td width="33%">
+					$helper.renderConfluenceMacro("{popular:events=edit,create|types=blogposts,pages|$commonParams}")
+					</td>
+					<td width="33%">
+					$helper.renderConfluenceMacro("{topusers:events=edit,create|types=@all|$commonParams}")
+					</td>
+				</tr>
+			</table>
+
+			</div>
+
+		</div>
+
+		#parse ("/pages/page-breadcrumbs.vm")
+
+		</body>
+        #end
+    #end
+</html>

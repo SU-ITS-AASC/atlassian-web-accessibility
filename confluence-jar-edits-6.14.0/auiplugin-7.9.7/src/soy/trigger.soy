@@ -1,0 +1,47 @@
+{namespace aui.trigger}
+
+/**
+ * Dropdown2 Trigger
+ * If the tagName is an <a> element then tabindex="0" is added to the trigger to pull it into the tabbing order, unless
+ * a href/tabindex attribute is found in the extraAttributes map (we don't check for this if extraAttributes is a string).
+ * Adding tabindex="0" doesn't have any negative effects, unless you're explicitly pulling the trigger out of the tabbing order,
+ * in which case the extraAttributes parameter should be specified as a map, not as a string, with your custom tabindex.
+ * @param menu Object containing options to be used when building the menu
+ * @param? id
+ * @param? tagName element to use as the trigger. Supported values are "a" or "button". Default is "a".
+ * @param? extraClasses
+ * @param? extraAttributes
+ * @param? content
+ * @param? text Visible text of trigger.
+ * @param? container Sets data-container attribute.
+ * @param? title Title attribute.
+ * @param? showIcon default is true
+ * @param? iconText Icon text
+ * @param? iconClasses optional classes to use for the icon. Default is "aui-icon-dropdown".
+ **/
+{template .trigger private="true"}
+<{$tagName ? $tagName : 'a'}
+    {if $id} id="{$id}" {/if}{sp}
+    class="{call aui.renderExtraClasses data="all" /}"{sp}
+    aria-controls="{$menu.id}"{sp}
+    aria-haspopup="true"{sp}
+    role="button"
+    {if $title} title="{$title}"{/if}
+    {if $container} data-container="{$container}"{/if}
+    {if (not $tagName or $tagName == 'a') and
+        (not $extraAttributes or (isMap($extraAttributes) and not $extraAttributes.href and not $extraAttributes.tabindex) or (not $extraAttributes.href or not $extraAttributes.tabindex))}
+        {sp}tabindex="0"
+    {/if}
+    {sp}data-aui-trigger
+    {call aui.renderExtraAttributes data="all" /}>
+    {if $content}
+        {$content|noAutoescape}
+    {/if}
+    {if $text}
+        {$text}
+    {/if}
+    {if not ($showIcon == false)}
+        <span class="icon {$iconClasses ? $iconClasses : 'aui-icon-dropdown'}">{if $iconText}{$iconText}{/if}</span>
+    {/if}
+</{$tagName ? $tagName : 'a'}>
+{/template}

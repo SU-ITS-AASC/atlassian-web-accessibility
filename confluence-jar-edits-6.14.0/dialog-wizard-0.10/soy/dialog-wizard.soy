@@ -1,0 +1,30 @@
+{namespace Confluence.Templates.DialogWizard}
+
+/**
+ * Used when dialog-wizard for a Blueprint specifies a description for a wizard page.
+
+ * @param? descriptionHeaderLink to show above the description content, or blank.
+ * @param? descriptionHeader to show above the description content, or blank.
+ * @param  descriptionContent the main description content - should be plain text, not HTML.
+ */
+{template .pageContainer}
+    <div class="dialog-wizard-page-wrapper">
+        <div class="dialog-wizard-page-main"></div>
+        <div class="dialog-wizard-page-description">
+            {if $descriptionHeaderLink and $descriptionHeader}
+                <h3><a href='{$descriptionHeaderLink}' target='_blank'>{$descriptionHeader}</a></h3>
+            {elseif $descriptionHeader}
+                <h3>{$descriptionHeader}</h3>
+            {/if}
+            <p>{$descriptionContent}</p>
+        </div>
+    </div>
+{/template}
+
+
+/**
+ * Wait spinner icon.
+ */
+{template .waitIcon}
+    <img class="wait-icon" src="{contextPath()}/images/icons/wait.gif">
+{/template}

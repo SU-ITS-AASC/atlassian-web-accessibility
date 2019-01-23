@@ -1,0 +1,195 @@
+{namespace aui.dropdown2}
+
+/**
+ * Main Dropdown2 template that creates the trigger and the dropdown all at once
+ * @param menu Object containing options used when building the menu
+ * @param? trigger Object containing options used when building the trigger
+ **/
+{template .dropdown2}
+    {call .trigger data="$trigger"}
+        {param menu: $menu /}
+    {/call}
+    {call .contents data="$menu" /}
+{/template}
+
+/**
+ * Dropdown2 Trigger
+ * If the tagName is an <a> element then tabindex="0" is added to the trigger to pull it into the tabbing order, unless
+ * a href/tabindex attribute is found in the extraAttributes map (we don't check for this if extraAttributes is a string).
+ * Adding tabindex="0" doesn't have any negative effects, unless you're explicitly pulling the trigger out of the tabbing order,
+ * in which case the extraAttributes parameter should be specified as a map, not as a string, with your custom tabindex.
+ * @param menu Object containing options to be used when building the menu
+ * @param? id
+ * @param? tagName element to use as the trigger. Supported values are "a" or "button". Default is "a".
+ * @param? extraClasses
+ * @param? extraAttributes
+ * @param? content
+ * @param? text Visible text of trigger.
+ * @param? container Sets data-container attribute.
+ * @param? title Title attribute.
+ * @param? showIcon default is true
+ * @param? iconText Icon text
+ * @param? iconClasses optional classes to use for the icon. Default is "aui-icon-dropdown".
+ **/
+{template .trigger}
+    {call aui.trigger.trigger data="all"}
+        {param extraClasses}aui-dropdown2-trigger{call aui.renderExtraClasses data="all"/}{/param}
+    {/call}
+{/template}
+
+/**
+ * Dropdown2 Menu
+ * @param id
+ * @param? content Content for the menu. Usually an unordered list or a series of menu sections.
+ * @param? extraClasses
+ * @param? extraAttributes
+ **/
+{template .contents}
+<div
+    {sp}id="{$id}"
+    {sp}class="aui-dropdown2{call aui.renderExtraClasses data="all" /}"
+    {sp}role="menu"
+    {sp}aria-hidden="true"
+    {call aui.renderExtraAttributes data="all" /}>
+    <div role="application">
+        {if $content}
+            {$content|noAutoescape}
+        {/if}
+    </div>
+</div>
+{/template}
+
+/**
+ * Dropdown2 Menu Section
+ * @param? id
+ * @param content Content for the section. Usually an unordered list.
+ * @param? extraClasses
+ * @param? extraAttributes
+ * @param? label Label for the section
+ **/
+{template .section}
+<div{if $id} id="{$id}"{/if} class="aui-dropdown2-section{call aui.renderExtraClasses data="all" /}"{call aui.renderExtraAttributes data="all" /}>
+    {if $label}<strong role="presentation" class="aui-dropdown2-heading">{$label}</strong>{/if}
+    {$content|noAutoescape}
+</div>
+{/template}
+
+/**
+ * Dropdown2 Item Group
+ * @param? id
+ * @param? isTruncated Boolean. Prevents the text in the links from wrapping to two lines
+ * @param? extraClasses
+ * @param? extraAttributes
+ * @param? label Label for the group
+ **/
+{template .itemGroup}
+<div
+    {sp}{if $id} id="{$id}"{/if}
+    {sp}role="presentation"
+    {sp}class="aui-dropdown2-section{call aui.renderExtraClasses data="all" /}
+    "{call aui.renderExtraAttributes data="all" /}>
+    {if $label}
+        <strong role="presentation" class="aui-dropdown2-heading">{$label}</strong>
+    {/if}
+    <div role="group"{if $label} aria-label="{$label}"{/if}>
+        {call .itemList data="all" /}
+    </div>
+</div>
+{/template}
+
+/**
+ * Dropdown2 Item List
+ * @param items
+ * @param? isTruncated Boolean. Prevents the text in the links from wrapping to two lines
+ **/
+{template .itemList private="true"}
+    <ul{if $isTruncated} class="aui-list-truncate"{/if} role="presentation">
+        {foreach $item in $items}
+            <li {if $item.isHidden}class="aui-dropdown2-hidden" aria-hidden="true"{/if} role="presentation">
+                {switch $item.itemType}
+                    {case 'checkbox'}
+                        {call .menuCheckbox data="$item" /}
+                    {case 'radio'}
+                        {call .menuRadio data="$item" /}
+                    {default}
+                        {call .menuLink data="$item" /}
+                {/switch}
+            </li>
+        {/foreach}
+    </ul>
+{/template}
+
+/**
+ * Dropdown2 Menu Link
+ * @param text
+ * @param? href
+ * @param? id
+ * @param? isDisabled Boolean. Sets ARIA disabled attribute. Default: false.
+ * @param? submenuTarget ID of a Dropdown2 dropdown.
+ * @param? extraClasses
+ * @param? extraAttributes
+ **/
+{template .menuLink}
+    <a
+        {sp}role="menuitem"
+        {sp}tabindex="-1"
+        {sp}class="{call aui.renderExtraClasses data="all" /}{if $submenuTarget} aui-dropdown2-sub-trigger{/if}{if $isDisabled} aui-dropdown2-disabled{/if}"
+        {if $href} href="{$href}"{/if}
+        {if $id} id="{$id}"{/if}
+        {if $isDisabled} aria-disabled="{$isDisabled}"{/if}
+        {if $submenuTarget} aria-controls="{$submenuTarget}"{/if}
+        {call aui.renderExtraAttributes data="all" /}
+    >
+        {$text}
+    </a>
+{/template}
+
+
+/**
+ * Dropdown2 Menu Checkbox
+ * @param text
+ * @param? id
+ * @param? isInteractive Boolean. Leaves the dropdown open when activated.
+ * @param? isChecked Boolean. Sets ARIA checked to true. Default false.
+ * @param? isDisabled Boolean. Sets ARIA disabled attribute. Default: false.
+ * @param? extraClasses
+ * @param? extraAttributes
+ **/
+{template .menuCheckbox}
+    <span
+        {sp}role="menuitemcheckbox"
+        {sp}tabindex="-1"
+        {sp}class="aui-dropdown2-checkbox{if $isInteractive} aui-dropdown2-interactive{/if}{if $isDisabled} aui-dropdown2-disabled{/if}{if $isChecked} aui-dropdown2-checked{/if}{call aui.renderExtraClasses data="all" /}"
+        {if $id} id="{$id}"{/if}
+        {if $isChecked} aria-checked="{$isChecked}"{else} aria-checked="false"{/if}
+        {if $isDisabled} aria-disabled="{$isDisabled}"{/if}
+        {call aui.renderExtraAttributes data="all" /}
+    >
+        {$text}
+    </span>
+{/template}
+
+
+/**
+ * Dropdown2 Menu Radio
+ * @param text
+ * @param? id
+ * @param? isInteractive Boolean. Leaves the dropdown open when activated.
+ * @param? isChecked Boolean. Sets ARIA checked to true. Default false.
+ * @param? isDisabled Boolean. Sets ARIA disabled attribute. Default: false.
+ * @param? extraClasses
+ * @param? extraAttributes
+ **/
+{template .menuRadio}
+    <span
+        {sp}role="menuitemradio"
+        {sp}tabindex="-1"
+        {sp}class="aui-dropdown2-radio{if $isInteractive} aui-dropdown2-interactive{/if}{if $isDisabled} aui-dropdown2-disabled{/if}{if $isChecked} aui-dropdown2-checked{/if}{call aui.renderExtraClasses data="all" /}"
+        {if $id} id="{$id}"{/if}
+        {if $isChecked} aria-checked="{$isChecked}"{else} aria-checked="false"{/if}
+        {if $isDisabled} aria-disabled="{$isDisabled}"{/if}
+        {call aui.renderExtraAttributes data="all" /}
+    >
+        {$text}
+    </span>
+{/template}

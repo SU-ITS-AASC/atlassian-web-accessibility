@@ -1,0 +1,27 @@
+#requireResource("com.atlassian.confluence.plugins.confluence-previews:embedded-edit")
+<div
+     class="vf-slide-viewer-macro"
+     data-width="$width"
+     data-height="$height"
+     data-attachment="$attachment"
+     data-attachment-id="$attachmentId"
+     data-attachment-ver="$attachmentVer"
+     data-page-id="$pageId"
+     data-download-path="$downloadPath"
+     data-use-path-auth="$usePathAuth"
+     data-edit-url="$editUrl"
+     data-allow-edit="$allowEdit">
+
+    <div class="vf-slide-viewer">
+        <div class="vf-slide-wrapper">
+            <div class="vf-error"></div>
+            <div class="vf-slide-loading"></div>
+            <div class="vf-slide-outer" style="width: ${width}; height: ${height};"></div>
+            <div class="vf-preview-placeholder"></div>
+            <div class="vf-progress-placeholder"></div>
+        </div>
+        <div class="vf-toolbar">
+            <div class="vf-controls-placeholder"></div>
+        </div>
+    </div>
+</div>

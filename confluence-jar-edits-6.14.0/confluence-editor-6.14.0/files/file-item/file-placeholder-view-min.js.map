@@ -1,0 +1,8 @@
+{
+"version":3,
+"file":"/dummy-file-path",
+"lineCount":2,
+"mappings":"AAGAA,MAAA,2HAMG,QAAA,CACCC,CADD,CAECC,CAFD,CAGCC,CAHD,CAICC,CAJD,CAKCC,CALD,QAY2BJ,EAAAK,KAAAC,OAAAC,sBAEZN,CAAAO,KAAAC,8BAFYF,YAIVG,QAAAA,CAAUC,CAAVD,EACRE,UADQF,CACKC,CAAAC,MACbC,mBAFQH,CAEaC,CAAAE,cAErBA,mBAAAC,GAAA,4BAAkDZ,CAAAa,KAAA,CAAOC,yBAAP,MAAlD,CAJQN,CAJUH,SAYlB,eAZkBA,yBAedU,QAAAA,GACJC,QADID,CACOb,CAAA,CAAEe,aAAA,OAAqBP,UAAAQ,WAArB,EAAF,CACXC;OAFIJ,CAEMC,QAAA,GACVI,oBAAA,EAHIL,aAfcV,sBAsBAS,QAAAA,CAAUO,CAAVP,CAAsBQ,CAAtBR,MACdS,EAAeP,QAAAQ,KAAA,uBAAsCF,CAAtC,KAEdC,EAAAE,OAHaX,OAQdO,CARcP,EASdZ,MAAA,WAAAwB,KAAA,EATcZ,CAYlBS,CAAAI,KAAA,EAZkBb,CAalBb,CAAA2B,aAAAC,OAAA,CAAwBN,CAAxB,CAAsCF,CAAtC,CAbkBP,EAtBAT,eAsCPyB,QAAAA,GACXnB,kBAAAoB,QAAA,2BAAsDrB,UAAAsB,IAAA,UAAtD,CADWF,CAtCOzB,EAZ3B,CANH,CAgEA4B,QAAA,8BAAAC,qBAAA;",
+"sources":["input.js"],
+"names":["define","Backbone","Templates","_","AJS","$","View","extend","FilePlaceHolderView","File","fileDialogListItemPlaceHolder","initialize","options","model","eventListener","on","bind","_setUploadInProgress","render","$el","template","attributes","el","delegateEvents","percentage","fileClientId","$progressBar","find","length","hide","show","progressBars","update","_cancelUpload","trigger","get","require","exportModuleAsGlobal"]
+}

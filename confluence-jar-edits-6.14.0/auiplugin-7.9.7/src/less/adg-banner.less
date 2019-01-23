@@ -1,0 +1,24 @@
+@import 'imports/global';
+
+.aui-banner {
+    &.aui-banner-error {
+        #aui.icon-bar();
+        #aui.icon-glyph("\f15a", @aui-banner-error-text-color);
+        background-color: @aui-banner-error-bg;
+        box-shadow: none;
+        color: @aui-banner-error-text-color;
+
+        a,
+        a:link,
+        a:visited {
+            color: @aui-banner-error-link-color;
+            text-decoration: underline;
+        }
+
+        // Icon
+        &::after {
+            left: 12px;
+            top: 10px;
+        }
+    }
+}

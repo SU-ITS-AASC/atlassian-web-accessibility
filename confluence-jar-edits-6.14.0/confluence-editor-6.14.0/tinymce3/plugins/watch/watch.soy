@@ -1,0 +1,15 @@
+{namespace Confluence.Templates.Editor.SaveBar.Watch}
+
+/**
+ * Renders the watch UI
+ *
+ * @param userWatchingOwnContent
+ */
+{template .render}
+<ul class="toolbar-group toolbar-group-watch-page" id="toolbar-group-watch-page-after-comment">
+    <li class="toolbar-item">
+        <input id="watchPage" name="watchPageAfterComment" value="true" type="checkbox" {if $userWatchingOwnContent}checked="checked"{/if}/>
+        <label for="watchPage">{getText('comment.notification.enable')}</label>
+    </li>
+</ul>
+{/template}

@@ -1,0 +1,45 @@
+#if (!$latestVersionsOfAttachments.empty)
+	
+	<table class="attachments aui">
+	  <thead>	
+		<tr>
+			<th><a class="spaceAttachmentsSortBy" href="#" sortBy="name">$i18n.getText('columnheading.name')</a></th>
+			<th>$i18n.getText('columnheading.size')</th>
+            <th>$i18n.getText('creator.name')</th>
+            <th><a class="spaceAttachmentsSortBy" href="#" sortBy="createddate">$i18n.getText('columnheading.creation.date')</a></th>
+            <th><a class="spaceAttachmentsSortBy" href="#" sortBy="date">$i18n.getText('space-last-mod-date')</a></th>
+            <th class="labels">$action.getText('labels.name')</th>
+            <th class="attachedto">$i18n.getText('attached.to')</th>
+		</tr>
+	  </thead>
+
+	  <tbody>
+		#foreach ($result in $latestVersionsOfAttachments)
+			#set($attachment = $result)
+            #set ($labels = $attachment.labels)
+            #set ($labelable = $attachment)
+            #set ($page = $attachment.container)
+				<tr id="attachment_$!attachment.id">
+					<td><a name="$!generalUtil.urlEncode($!attachment.container.displayTitle)-attachment-$!generalUtil.urlEncode($!attachment.fileName)">#parse ("/pages/includes/attachment_icon.vm")</a> <a href="$req.contextPath$!attachment.downloadPathWithoutVersion">$generalUtil.shortenString($attachment.fileName, 50)</a></td>
+                    <td>$!attachment.niceFileSize</td>
+                    <td>#usernameLink($!attachment.creatorName)</td>
+                    <td>$i18n.getText($friendlyDateFormatter.getFormatMessage($!attachment.creationDate))</td>
+                    <td>$i18n.getText($friendlyDateFormatter.getFormatMessage($!attachment.lastModificationDate))</td>
+                    <td>#parse("/labels/labels-editor-content.vm")</td>
+                    <td class="attachedto">#contentLink2 ($!attachment.container true false)</td>
+                </tr>
+		#end
+	  </tbody>
+     </table>
+		
+#else
+    #if($stringUtils.isNotBlank($fileExtension) && $stringUtils.isNotBlank($labelFilter))
+        $i18n.getText('attachments.no.attachments.with.label.and.ending.with.ext',["$generalUtil.htmlEncode($fileExtension)", "$generalUtil.htmlEncode($labelFilter)"]);
+	#elseif ($stringUtils.isNotBlank($fileExtension))
+		$i18n.getText('currently.no.attachments.in.space.ending.with.ext', ["$generalUtil.htmlEncode($fileExtension)"])
+    #elseif($stringUtils.isNotBlank($labelFilter))
+        $i18n.getText('attachments.no.attachments.with.label', ["generalUtil.htmlEncode($labelFilter"]);
+    #else
+		$i18n.getText('currently.no.attachments.in.space')
+    #end
+#end

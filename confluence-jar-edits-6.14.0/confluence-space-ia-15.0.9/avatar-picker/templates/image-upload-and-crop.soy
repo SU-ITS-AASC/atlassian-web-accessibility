@@ -1,0 +1,36 @@
+{namespace Confluence.Templates.AvatarPicker}
+
+/**
+ * @param spaceName
+ * @param? imageSrc Source of image if it's to be supplied initially
+ */
+{template .imageUploadAndCrop}
+    <div class="image-upload-and-crop-message"></div>
+    <div class="image-upload-and-crop-container disable-attachment-uploader">
+        <div class="input-fields">
+            <form class="aui" onsubmit="return false;">
+                <div class="field-group">
+                    <label for="avatar-picker-space-name">{getText('sidebar.avatar.picker.name')}</label>
+                    <input class="text long-field" type="text" id="avatar-picker-space-name" name="avatar-picker-space-name" title="Name" value="{$spaceName}"/>
+                </div>
+                <div class="field-group">
+                    <label>{getText('sidebar.avatar.picker.space.avatar')}</label>
+                    <div>
+                        {call .imageExplorer}
+                            {param imageSrc: $imageSrc/}
+                        {/call}
+                    </div>
+                </div>
+            </form>
+        </div>
+        <form class="aui">
+            <div class="image-upload-and-crop-field-container buttons-container">
+                <input type="file" id="image-upload-and-crop-upload-field" class="image-upload-field" accept="image/jpeg, image/gif, image/png"/>
+                <label for="image-upload-and-crop-upload-field" class="image-upload-field-replacement aui-button">
+                    {getText('sidebar.avatar.picker.select.image')}
+                </label>
+                <button class="aui-button aui-button-link image-upload-and-crop-default-image" type="button">Restore default</button>
+            </div>
+        </form>
+    </div>
+{/template}

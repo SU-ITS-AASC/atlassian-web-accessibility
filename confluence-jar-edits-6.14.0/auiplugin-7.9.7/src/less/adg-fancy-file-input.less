@@ -1,0 +1,120 @@
+@import 'imports/global';
+
+.ffi {
+    background-color: @aui-ffi-field-bg-color;
+    border-color: @aui-ffi-field-border-color;
+    border-radius: @aui-ffi-field-border-radius;
+    box-shadow: none;
+    color: @aui-ffi-field-text-color;
+    font-size: @aui-ffi-field-font-size;
+    max-width: @aui-ffi-field-default-width;
+
+    form.aui .field-group & {
+        float: none;
+        margin: 0;
+        padding: 0;
+        word-wrap: normal;
+        text-align: left;
+        width: 100%;
+    }
+    form.aui.top-label .field-group & {
+        display: inline-block;
+        margin: 0;
+        width: 100%;
+    }
+    form.aui.long-label .field-group & {
+        margin: 0;
+        width: 100%;
+    }
+
+    /* The actual input - made opaque but styled so the cursor positions well */
+    input[type="file"] {
+        padding: 0 @aui-ffi-field-horizontal-padding;
+    }
+
+    // The field value
+    &[data-ffi-value]:after {
+        color: @aui-ffi-value-text-color;
+        padding: 0 @aui-ffi-field-horizontal-padding;
+    }
+
+    // The "browse" button
+    &:before {
+        background: @aui-ffi-button-bg-color;
+        border-left-color: @aui-ffi-button-border-color;
+        color: @aui-ffi-button-text-color;
+        padding: 0 @aui-ffi-button-horizontal-padding;
+    }
+    &:hover:before {
+        background: @aui-ffi-button-bg-color-hover;
+        color: @aui-ffi-button-text-color-hover;
+    }
+    &:active {
+        &:before,
+        &:hover:before {
+            background-color: @aui-ffi-button-bg-color-active;
+            background-image: none;
+            color: @aui-ffi-button-text-color-active;
+            text-decoration:none;
+            text-shadow: none;
+        }
+    }
+
+    // focusing the field
+    &.is-focused {
+        border-color: @aui-ffi-field-border-color-focused;
+    }
+
+    // disabled field
+    &.is-disabled {
+        background-color: @aui-ffi-field-bg-color-disabled;
+        color: @aui-ffi-field-text-color-disabled;
+
+        // the button
+        &:before,
+        &:hover:before,
+        &:active:before,
+        &:active:hover:before {
+            background-color: @aui-ffi-button-bg-color-disabled;
+            border-color: @aui-ffi-button-border-color-disabled;
+            box-shadow: none;
+            color: @aui-ffi-button-text-color-disabled;
+            text-shadow: none;
+        }
+
+        // the value
+        &:after {
+            color: @aui-ffi-field-text-color-disabled;
+        }
+    }
+}
+
+/* The clear field button */
+.ffi-clear {
+    @icon-box-size: @aui-icon-size-small;
+    background-image: none;
+    opacity: 1;
+    -ms-filter: none;
+
+    &:hover {
+        opacity: 1;
+        -ms-filter: none;
+    }
+
+    &::before {
+        #aui.icon-pseudoelement(@aui-icon-font-family);
+        color: @aui-ffi-clear-icon-color;
+        content: @aui-glyph-remove;
+        font-size: @aui-icon-size-small;
+        left: 0;
+        line-height: 1;
+        margin-top: -(@icon-box-size / 2);
+        position: absolute;
+        text-indent: 0;
+        top: 50%;
+    }
+
+    &:hover::before {
+        color: @aui-ffi-clear-icon-color-hover;
+    }
+}

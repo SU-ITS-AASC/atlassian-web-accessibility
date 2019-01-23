@@ -1,0 +1,158 @@
+.shortcutsmenu {
+    font-size: 13px;
+    position: relative;
+}
+
+#keyboard-shortcuts-dialog .module {
+    clear: none;
+    float: left;
+    margin: 0 7px 8px 8px;
+    width: 47%;
+}
+
+#keyboard-shortcuts-dialog .module span {
+    line-height: 1.8;
+}
+
+#keyboard-shortcuts-dialog .module .item-description {
+    color: #666;
+    float: left;
+    font-weight: normal;
+    margin: 0 10px 0 0;
+    padding: 6px 0 0 0;
+    text-align: left;
+    width: 40%;
+    clear: left;
+}
+
+#general-shortcuts-panel .module .item-description {
+    width: 49%;
+}
+
+#keyboard-shortcuts-dialog .module:nth-child(odd) {
+    clear: left;
+    margin-right: 15px;
+}
+
+#keyboard-shortcuts-dialog .module .mod-item {
+    margin: 7px 0;
+    padding: 0;
+}
+
+#keyboard-shortcuts-dialog .module ul.mod-item li.item-details {
+    list-style-type: none;
+    margin: 0 0 9px 0;
+    clear: left;
+}
+
+#keyboard-shortcuts-dialog .module .mod-header {
+    background-position: 0 12px;
+}
+
+#keyboard-shortcuts-dialog .module .mod-content {
+    padding: 0 2px 0 0;
+}
+
+#keyboard-shortcuts-dialog .module h3 {
+    border-bottom: thin solid #BBB;
+    color: #000;
+    font-weight: normal;
+    margin: 0 0 1px 0;
+    padding: 2px 2px 2px 0;
+}
+
+#keyboard-shortcuts-dialog .module kbd {
+    background: #fff url(images/key_bg.png) repeat-x scroll 0 100%;
+    border: 1px solid #ddd;
+    -moz-border-radius: 0.166em;
+    -webkit-border-radius: 0.166em;
+    border-radius: 0.166em;
+    display: inline-block;
+    font-family: Arial, FreeSans, Helvetica, sans-serif;
+    padding: 0 6px;
+    text-align: center;
+}
+
+#keyboard-shortcuts-dialog .module kbd.regular-key {
+    min-width: 16px;
+    padding: 0 4px;
+}
+
+#keyboard-shortcuts-dialog .module kbd.modifier-key {
+    min-width: 26px;
+}
+
+#keyboard-shortcuts-dialog .module .key-separator {
+    padding: 0 7px;
+}
+
+.keyboard-shortcut-dialog-panel-header {
+    font-size: 13px;
+    margin: 0 8px 15px 7px;
+}
+
+#keyboard-shortcut-enabled-checkbox {
+    margin: 3px 3px 3px 0;
+}
+
+.keyboard-shortcut-dialog-panel-footer {
+    font-size: 13px;
+    margin: 0 8px 10px;
+    clear: both;
+}
+
+/*Styles for the Editor Autoformatting panel in the Keyboard Shortcuts dialog*/
+
+#autoformat-shortcuts-panel .mod-item h1 {
+    margin:  0;
+    width: 147px;
+}
+
+#autoformat-shortcuts-panel .mod-item h3 {
+    border-bottom: none;
+}
+
+#autoformat-shortcuts-panel .mod-item blockquote {
+    margin:  0 20px;
+}
+
+#autoformat-shortcuts-panel .mod-item ol {
+    margin:  0;
+    padding-left: 18px;
+}
+
+#autoformat-shortcuts-panel .mod-item img {
+    padding-top:  5px;
+}
+
+#autoformat-shortcuts-panel .mod-item .item-description ul {
+    margin:  0;
+    padding-left: 14px;
+}
+
+#autoformat-shortcuts-panel .mod-item .item-description li {
+    padding-top:  3px;
+}
+
+#autoformat-shortcuts-panel .module .item-description {
+    padding:  0;
+}
+
+#autoformat-shortcuts-panel .module .item-description {
+    width: 43%;
+}
+
+#autoformat-shortcuts-panel .table-action {
+    display: inline-block;
+    margin-top: 3px;
+}
+
+#autoformat-shortcuts-panel .style-action {
+    display: inline-block;
+    margin-top: 1px;
+}
+
+/*This is really only needed for IE8*/
+#autoformat-shortcuts-panel .styles-module {
+    height: 135px;
+}

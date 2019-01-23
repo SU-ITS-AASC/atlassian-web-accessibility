@@ -1,0 +1,13 @@
+{namespace Confluence.UI.Components.CQL.FilterSelect.Templates}
+
+/**
+ * Renders a CQL "Add filter" control, which is hidden until an "Add Filter" link is clicked.
+ */
+{template .container}
+    <div class="cql-add-filter-container">
+        <button type="button" class="aui-button aui-button-link">{getText('confluence-ui-components.cql-filter-select.link')}</button>
+        <div class="input-wrapper hidden">
+            <input class="select2-input" type="text" />
+        </div>
+    </div>
+{/template}

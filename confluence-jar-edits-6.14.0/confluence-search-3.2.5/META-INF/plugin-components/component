@@ -1,0 +1,15 @@
+com.atlassian.confluence.plugins.search.CQLSearcher#cqlSearcher
+com.atlassian.confluence.plugins.search.DefaultSearcher#searcherv3
+com.atlassian.confluence.plugins.search.boosting.BoostQueryFactoryImpl#boostingQueryFactory
+com.atlassian.confluence.plugins.search.boosting.ModuleDescriptorCacheFactory#moduleDescriptorCacheFactory
+com.atlassian.confluence.plugins.search.boosting.PluggableBoostingStrategy#pluggableBoostingStrategy
+com.atlassian.confluence.plugins.search.model.LastModificationFormatter#lastModificationFormatter
+com.atlassian.confluence.plugins.search.model.SearchResultBuilderFactory#searchResultBuilderFactory
+com.atlassian.confluence.plugins.search.pagerank.ContentLinkDao#contentLinkDao
+com.atlassian.confluence.plugins.search.pagerank.PageRankEnable
+com.atlassian.confluence.plugins.search.pagerank.PageRankService
+com.atlassian.confluence.plugins.search.pagerank.PageRankStore#pageRankStore
+com.atlassian.confluence.plugins.search.query.DisabledContentTypeFilterFactory#disabledContentTypeFilterFactory
+com.atlassian.confluence.plugins.search.query.LuceneQueryFactory#queryFactory
+com.atlassian.confluence.plugins.search.query.LuceneSpanQueryBuilder#spanQueryBuilder
+com.atlassian.confluence.plugins.search.query.NonViewableContentTypeFilterFactory#nonViewableContentTypeFilterFactory

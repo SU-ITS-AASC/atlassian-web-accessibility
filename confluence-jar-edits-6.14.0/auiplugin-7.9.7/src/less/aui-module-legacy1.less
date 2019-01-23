@@ -1,0 +1,106 @@
+/**
+ * AUI Module and Header
+ */
+
+.aui-module,
+.aui-page-header {
+    margin-top: 16px;
+}
+
+.aui-module:first-child,
+.aui-page-header:first-child {
+    margin-top: 0;
+}
+
+/* do NOT set aui-page-header to table-layout: fixed */
+.aui-page-header,
+.aui-module-header,
+.aui-module-footer {
+    box-sizing: border-box;
+    border-spacing: 0;
+    width: 100%;
+}
+
+/* do NOT set aui-page-header to display: table. */
+.aui-module-header,
+.aui-module-footer {
+    display:table;
+}
+
+.aui-page-header .aui-page-header-main,
+.aui-page-header .aui-page-header-image,
+.aui-module-header .aui-page-header-main {
+    box-sizing: border-box;
+    display: table-cell;
+    margin: 0;
+    vertical-align: top;
+    text-align: left;
+}
+
+.aui-page-header .aui-page-header-image {
+    white-space: nowrap;
+}
+.aui-page-header .aui-page-header-image img {
+    margin: 0 8px 0 0;
+}
+.aui-page-header .aui-page-header-main {
+    /* this does actually work becase we don't set display:table on the parent. */
+    width: 100%;
+}
+
+.aui-page-header .aui-page-header-image + .aui-page-header-main {
+    margin: 0;
+    padding: 0;
+}
+
+.aui-page-header .aui-page-header-main .aui-breadcrumbs + h1,
+.aui-page-header .aui-page-header-main .aui-breadcrumbs + h2,
+.aui-page-header .aui-page-header-main .aui-breadcrumbs + h3,
+.aui-page-header .aui-page-header-main .aui-breadcrumbs + h4,
+.aui-page-header .aui-page-header-main .aui-breadcrumbs + h5,
+.aui-page-header .aui-page-header-main .aui-breadcrumbs + h6 {
+    margin-top: 0;
+}
+
+.aui-page-header ul.aui-page-header-actions,
+.aui-module ul.aui-page-header-actions {
+    display: table-cell;
+    list-style-type: none;
+    text-align: right;
+    vertical-align: top;
+    white-space: nowrap;
+    margin: 0;
+    padding: 0 0 0 8px;
+}
+.aui-page-header ul.aui-page-header-actions li,
+.aui-module ul.aui-page-header-actions li {
+    display: inline;
+}
+
+.aui-module-header > .aui-page-header-main,
+.aui-module-footer > .aui-page-header-main,
+.aui-module-header > .aui-page-header-actions,
+.aui-module-footer > .aui-page-header-actions {
+    margin: 0;
+}
+
+/**
+ * AUI Breadcrumbs prototype pattern
+ */
+
+.aui-breadcrumbs,
+.aui-breadcrumbs li {
+    margin: 0;
+    padding: 0;
+}
+.aui-breadcrumbs li {
+    display: inline-block;
+}
+.aui-breadcrumbs li:before {
+    content: ">";
+    padding-right: 4px;
+}
+.aui-breadcrumbs li:first-child:before {
+    content: "";
+    padding-right: 0;
+}

@@ -1,0 +1,68 @@
+{namespace Confluence.ViewFileMacro.Templates}
+
+/**
+ * @param fileSrc URL of file content
+ * @param niceType content type in nice format, i.e "PDF Document"
+ * @param mimeType mime type of file, e.g "application/pdf"
+ * @param attachmentId ID of attachment
+ * @param attachmentVersion Version of attachment
+ * @param containerId ID of attachment container
+ * @param fileName attachment file name
+ * @param placeholderSrc URL of placeholder image
+ * @param height Height of the placeholder
+ * @param unresolvedCommentCount Unresolved comment count
+ * @param hasThumbnail if the file has thumbnail
+ */
+{template .embeddedFile}
+    <span class="confluence-embedded-file-wrapper">
+        <a class="confluence-embedded-file" href="{$fileSrc}" data-nice-type="{$niceType}" data-file-src="{$fileSrc}"
+            data-linked-resource-id="{$attachmentId}" data-linked-resource-type="attachment" data-linked-resource-container-id="{$containerId}"
+            data-linked-resource-default-alias="{$fileName}" data-mime-type="{$mimeType}" data-has-thumbnail="{if $hasThumbnail}true{else}false{/if}"
+            data-linked-resource-version="{$attachmentVersion}"
+            {if $unresolvedCommentCount and $unresolvedCommentCount >= 0}
+                data-unresolved-comment-count={$unresolvedCommentCount}
+            {/if}
+        >
+                <img src="{$placeholderSrc}" height="{$height}" />
+                {if not $hasThumbnail}
+                    <span class="title">{$fileName}</span>
+                {/if}
+        </a>
+    </span>
+{/template}
+
+/**
+ * @param placeholderSrc URL of placeholder image of unknown attachment
+ */
+{template .embeddedUnknownFile}
+    <span class="confluence-embedded-file-wrapper">
+        <img class="confluence-embedded-file unknown-attachment" src="{$placeholderSrc}" />
+    </span>
+{/template}
+
+/**
+ *
+ */
+{template .overlayEmbeddedFile}
+    <span class="overlay"></span>
+{/template}
+
+/**
+ * @param commentCountRep
+ */
+{template .overlayEmbeddedFileCommentCount}
+    <span class="comment-count-overlay">
+        <span class="content">{$commentCountRep}</span>
+    </span>
+{/template}
+
+/**
+ * @param fileType type of file
+ * @param iconClass
+ */
+{template .overlayEmbeddedFileFileTypeDesc}
+    <span class="file-type-desc-overlay">
+        <i class="aui-icon aui-icon-small {$iconClass}"></i>
+        <span class="content"> {$fileType}</span>
+    </span>
+{/template}

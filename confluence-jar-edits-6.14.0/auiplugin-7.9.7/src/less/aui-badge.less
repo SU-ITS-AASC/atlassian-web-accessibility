@@ -1,0 +1,57 @@
+@import './imports/global';
+
+/*! AUI Badge */
+aui-badge,
+.aui-badge {
+    background: @aui-badge-bg-color; // RGBA
+    border-radius: 2em; // needs to be at least 1em + border-top + border-bottom + padding-top + padding-bottom to get perfectly rounded
+    color: @aui-badge-text-color;
+    font-size: 12px;
+    font-weight: @aui-font-weight-normal;
+    line-height: 1;
+    margin: 0;
+    min-height: 1em;
+    min-width: 1em; /* want a capsule style even when single digit */
+    padding: 2px 6px;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    justify-items: center;
+    align-content: center;
+    text-decoration: none;
+    text-shadow: none;
+    text-transform: uppercase;
+
+    // Semantic variations
+
+    &.aui-badge-primary {
+        background-color: @ak-color-B75;
+        color: @ak-color-B400;
+        font-weight: @aui-font-weight-semibold;
+    }
+
+    // Integrations:
+    // Light versions for contexts we know about
+
+    .aui-header a > &,
+    .aui-button-primary > &,
+    .aui-dropdown2.aui-style-default .active > & {
+        background: @aui-badge-on-blue-bg-color;
+        color: @aui-badge-on-blue-text-color;
+    }
+
+    .aui-button[disabled] > & {
+        background: @aui-badge-bg-color; // RGBA
+        color: inherit;
+    }
+
+    .aui-button-primary[disabled] > & {
+        background: @aui-badge-on-blue-bg-color; // RGBA
+    }
+
+    .aui-button > &,
+    .aui-tabs .menu-item & {
+        top: -1px; /* slight tweak to position them in specific contexts */
+    }
+}

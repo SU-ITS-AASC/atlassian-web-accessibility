@@ -1,0 +1,3 @@
+com.atlassian.confluence.plugins.synchrony.config.DefaultSynchronyConfigurationManager#com.atlassian.confluence.plugins.synchrony.config.SynchronyConfigurationManager
+com.atlassian.confluence.plugins.synchrony.importexport.SynchronyCredentialsPostImportTaskImpl#com.atlassian.confluence.plugins.synchrony.importexport.SynchronyCredentialsPostImportTask
+com.atlassian.confluence.plugins.synchrony.upgradetask.SynchronyAppIdUpgradeTask

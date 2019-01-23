@@ -1,0 +1,2 @@
+com.atlassian.confluence.plugins.search.DefaultSearcher#com.atlassian.confluence.plugins.search.api.Searcher
+com.atlassian.confluence.plugins.search.boosting.BoostQueryFactoryImpl#com.atlassian.confluence.search.v2.lucene.boosting.BoostingQueryFactory

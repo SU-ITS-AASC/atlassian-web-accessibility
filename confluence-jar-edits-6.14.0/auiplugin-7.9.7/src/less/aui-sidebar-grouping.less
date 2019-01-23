@@ -1,0 +1,178 @@
+@import 'aui-sidebar-config.less';
+@import (reference) 'imports/mixins.less';
+
+//
+// Imported by aui-sidebar.
+//
+// Implements grouping strategies for sidebar items. The various group
+// types are wrappers around the base aui-nav pattern. Different groups
+// behave and are styled differently depending on whether the sidebar
+// is expanded or collapsed.
+//
+
+//
+// Sidebar navigation grouping
+//
+.aui-sidebar {
+
+    .aui-sidebar-group {
+        // Note: these margins should collapse with those of aui-nav itself.
+        margin-top: (@aui-sidebar-grid * 2);
+        margin-bottom: @aui-sidebar-grid;
+        padding: 0 @aui-sidebar-gutter;
+
+        .aui-nav-heading {
+            padding: 0 (@aui-sidebar-spacing - @aui-sidebar-gutter);
+        }
+    }
+
+
+    //-----------------------
+    // Sidebar narrow state - add collapsed styles.
+    //-----------------------
+    &[aria-expanded="false"] {
+        @aui-sidebar-nav-group-divider-width: 2px;
+
+        // Replaces aui-nav with a default image to reflect nested content
+        .aui-sidebar-group {
+            // by default, groups collapse and are meant to look like clickable buttons.
+            #aui-nav.item-base(@aui-sidebar-nav-link-expected-height);
+            #aui-nav.item-style(normal);
+            background: url(images/icons/sidebar/icon-group.svg) 50% center no-repeat;
+            cursor: pointer;
+            height: @aui-sidebar-icon-size;
+            margin-left: @aui-sidebar-grid;
+            margin-right: @aui-sidebar-grid;
+            position: relative;
+
+            &:focus,
+            &:hover {
+                #aui-nav.item-style(hover);
+            }
+
+            &.active {
+                #aui-nav.item-style(selected);
+            }
+
+            > .aui-nav {
+                display: none;
+            }
+
+            // remove the faux button effect; these things are still groups.
+            &.aui-sidebar-group-actions,
+            &.aui-sidebar-group-tier-one {
+                background: none;
+                border-radius: 0;
+                cursor: auto;
+                padding: 0;
+            }
+        }
+
+        // make the group actions look like a special kind of rounded button.
+        .aui-sidebar-group-actions {
+            margin: @aui-sidebar-grid 0 @aui-sidebar-spacing 0;
+            height: @aui-icon-size-large;
+
+            &::after {
+                @aui-sidebar-group-actions-border-width: 1px;
+
+                background: url(images/icons/sidebar/icon-group-actions.svg) no-repeat center center;
+                background-size: @aui-sidebar-icon-size;
+                border: @aui-sidebar-group-actions-border-width solid @aui-sidebar-background-color;
+                border-radius: 50%;
+                content: "";
+                display: block;
+                height: @aui-icon-size-large;
+                left: 0;
+                margin-left: ((@aui-sidebar-collapsed-width - @aui-sidebar-header-avatar-collapsed - (@aui-sidebar-group-actions-border-width * 2)) / 2);
+                margin-right: ((@aui-sidebar-collapsed-width - @aui-sidebar-header-avatar-collapsed - (@aui-sidebar-group-actions-border-width * 2)) / 2);
+                position: absolute;
+                top: 0;
+                width: @aui-icon-size-large;
+            }
+
+            &:hover,
+            &:focus,
+            &.active {
+                &::after {
+                    background-color: @ak-color-N0;
+                    border-color: @aui-nav-group-divider-color;
+                }
+            }
+
+            ~ .aui-sidebar-group-tier-one {
+                border-top: @aui-sidebar-nav-group-divider-width solid @aui-nav-group-divider-color;
+                margin-top: @aui-sidebar-spacing;
+                padding-top: @aui-sidebar-grid;
+            }
+        }
+
+        // use when the nav items have icons - shows the icon in the collapsed state
+        .aui-sidebar-group-tier-one {
+            background: none;
+            height: auto;
+
+            &:after {
+                display: none;
+            }
+
+            &:focus,
+            &:hover {
+                background-color: transparent;
+            }
+
+            .aui-nav {
+                display: block;
+                height: auto;
+
+                > li {
+                    display: block;
+
+                    > .aui-nav-item {
+                        padding-left: 0;
+                        padding-right: 0;
+                        text-align: center;
+
+                        // Adjust the position of the icon
+                        > .aui-icon {
+                            float: none;
+                            margin: 0 auto;
+                        }
+
+                        &.active {
+                            #aui-nav.item-style(selected);
+                        }
+                    }
+
+                    // visually hide the labels while allowing screen readers to still see them
+                    .aui-nav-item-label {
+                        #aui.visually-hidden();
+                    }
+
+                    // remove any top level twixy expand/collapse triggers
+                    > .aui-nav-subtree-toggle {
+                        display: none;
+                    }
+
+                    .aui-nav-item-actions {
+                        display: none;
+                    }
+                }
+
+                // remove nested navs - contents to be sucked into fly-out menus
+                .aui-nav {
+                    display: none;
+                }
+            }
+
+            ~ .aui-sidebar-group-tier-one {
+                border-top: @aui-sidebar-nav-group-divider-width solid @aui-nav-group-divider-color;
+                margin-top: @aui-sidebar-grid;
+                padding-top: @aui-sidebar-grid;
+            }
+        }
+    }
+    // END Collapsed state
+}
+// END Sidebar
+//-----------------------

@@ -1,0 +1,70 @@
+{namespace OC.Templates autoescape="contextual"}
+
+/**
+* Single slide
+*
+*/
+{template .slide}
+    <span class="vf-vertical-center"></span>
+    <img class="vf-slide-image" />
+{/template}
+
+
+/**
+* Preview view
+
+*/
+{template .preview}
+    <div class="vf-preview-image-wrapper">
+        <div class="vf-preview-image"></div>
+        <div class="vf-slide-loading"></div>
+    </div>
+    <p class="vf-preview-text"></p>
+{/template}
+
+/**
+* @param downloadPath
+* @param allowEdit
+* @param pageId
+* @param attachmentId
+* Toolbar controls
+*/
+{template .controls}
+    <div class="left">
+        <a class="aui-button aui-button-subtle download" href="{$downloadPath}" title="{getText('com.atlassian.confluence.extra.officeconnector.slideviewer.download')|noAutoescape}">
+            <span class="aui-icon vf-icon-download">{getText('com.atlassian.confluence.extra.officeconnector.slideviewer.download')|noAutoescape}</span>
+        </a>
+
+        {{if $allowEdit }}
+        <span
+            class="companion-edit-button-placeholder"
+            data-template-name="companionEditIcon"
+            data-linked-resource-id="{$attachmentId}"
+            data-linked-resource-container-id="{$pageId}">
+        </span>
+        {{/if}}
+    </div>
+    <div class="center">
+        <button class="aui-button aui-button-subtle prev" title="{getText('com.atlassian.confluence.extra.officeconnector.slideviewer.previous')|noAutoescape}">
+            <span class="aui-icon vf-icon-prev">{getText('com.atlassian.confluence.extra.officeconnector.slideviewer.previous')|noAutoescape}</span>
+        </button>
+        <button class="aui-button aui-button-subtle next" title="{getText('com.atlassian.confluence.extra.officeconnector.slideviewer.next')|noAutoescape}">
+            <span class="aui-icon vf-icon-next">{getText('com.atlassian.confluence.extra.officeconnector.slideviewer.next')|noAutoescape}</span>
+        </button>
+    </div>
+    <div class="right">
+        <button class="aui-button aui-button-subtle enter fs" title="{getText('com.atlassian.confluence.extra.officeconnector.slideviewer.fullscreen')|noAutoescape}">
+            <span class="aui-icon vf-icon-enter-fullscreen">{getText('com.atlassian.confluence.extra.officeconnector.slideviewer.fullscreen')|noAutoescape}</span>
+        </button>
+    </div>
+
+{/template}
+
+/**
+* Slide progress
+*/
+{template .progress}
+    <div class="vf-progress-wrapper">
+        <div class="vf-progress-indicator"></div>
+    </div>
+{/template}

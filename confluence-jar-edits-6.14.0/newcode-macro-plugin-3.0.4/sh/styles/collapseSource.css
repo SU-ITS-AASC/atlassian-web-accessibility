@@ -1,0 +1,40 @@
+.collapse-source .expand-control-text {
+    vertical-align: top;
+    color: #3b73af;
+}
+
+.collapse-source .expand-control-text:hover {
+    text-decoration: underline;
+}
+
+.panelHeader .collapse-source {
+    right: 15px;
+    position: absolute;
+    top: 5px;
+    float: right;
+    cursor: pointer;
+}
+
+.panelHeader .collapse-spinner-wrapper {
+    position: absolute;
+    float: right;
+    top: 15px;
+    right: 15px;
+}
+
+.panelHeader .code-title {
+    display: inline-block;
+    padding-right: 130px;
+}
+
+.hide-toolbar .syntaxhighlighter.collapsed .toolbar, .hide-toolbar .syntaxhighlighter.expanded .toolbar {
+    display: none !important;
+}
+
+.codeContent.show-border-top {
+    border-top: 1px solid #cccccc;
+}
+
+.panelHeader.hide-border-bottom {
+    border-bottom: none;
+}

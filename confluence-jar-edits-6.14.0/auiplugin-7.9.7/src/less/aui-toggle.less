@@ -1,0 +1,188 @@
+@import './imports/global';
+
+/**
+ * Toggle button
+ */
+
+aui-toggle {
+    box-sizing: border-box;
+    cursor: pointer;
+    display: inline-block;
+    font-size: @aui-toggle-font-size;
+    height: @aui-toggle-height;
+    padding: @aui-toggle-vertical-padding @aui-toggle-horizontal-padding;
+    position: relative;
+    vertical-align: baseline;
+    width: @aui-toggle-width;
+
+    // because all content inside this control is absolute position, we need some text so that
+    // the vertical alignment works
+    &::before {
+        content: "\00a0"; // non-breaking space char
+    }
+
+    // invisible "overlay" which intercepts mouse clicks and provides the tint for the disabled/busy states
+    &::after {
+        background-color: transparent;
+        border-radius: @aui-toggle-border-radius;
+        bottom: 0;
+        content: '';
+        left: 0;
+        pointer-events: none;
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+
+    // hover and focus state
+    &:not([disabled]):not([busy]) {
+        // Off
+        &:hover .aui-toggle-input + .aui-toggle-view {
+            background-color: @aui-toggle-default-bg-hover-color;
+        }
+
+        // On
+        &:hover .aui-toggle-input:checked + .aui-toggle-view {
+            background-color: @aui-toggle-on-hover-color;
+        }
+    }
+
+    // disabled/busy state
+    &[disabled],
+    &[busy] {
+        cursor: auto;
+
+        .aui-toggle-input {
+            cursor: auto;
+            pointer-events: none;
+        }
+    }
+
+    // busy state
+    &[busy] {
+        .aui-toggle-tick::before,
+        .aui-toggle-cross::before {
+            opacity: 0;
+            transition: auto;
+        }
+
+        // tint the "overlay" to fade it out like a disabled control
+        &::after {
+            background-color: @aui-toggle-disabled-overlay-color;
+        }
+
+        // integration with spinner element
+        aui-spinner[size="small"] {
+            color: inherit;
+            position: relative;
+            top: (@aui-toggle-icon-size - @aui-spinner-size-small) / 2; // because it is inside the icon.
+        }
+    }
+
+    &[disabled] {
+        .aui-toggle-view {
+            background-color: @ak-color-N20;
+        }
+
+        .aui-toggle-tick,
+        .aui-toggle-cross {
+            color: @ak-color-N70;
+        }
+    }
+}
+
+// the actual native checkbox to determine on/off/disabled state
+.aui-toggle {
+    &-input {
+        -webkit-appearance: button;
+        -moz-appearance: radio-container; // CSS appearance: none is broken on Firefox. We use this to hide the input. Works as if setting appearance: none;
+        border-radius: @aui-toggle-border-radius;
+        bottom: 0;
+        cursor: pointer;
+        height: 100%;
+        left: 0;
+        margin: 0;
+        padding: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 100%;
+    }
+
+    // this is what provides the visual styles for the component
+    &-view {
+        background-color: @aui-toggle-default-bg-color;
+        border-radius: @aui-toggle-border-radius;
+        bottom: 0;
+        box-sizing: border-box;
+        display: block;
+        left: 0;
+        pointer-events: none;
+        position: absolute;
+        right: 0;
+        transition: background-color @aui-toggle-animation-background-color-delay linear;
+        top: 0;
+    }
+
+    // the "handle" which moves from side-to-side
+    &-view::after {
+        background-color: @aui-toggle-button-color;
+        border-radius: @aui-toggle-border-radius;
+        bottom: @aui-toggle-border-width;
+        content: '';
+        display: block;
+        left: @aui-toggle-border-width;
+        position: absolute;
+        top: @aui-toggle-border-width;
+        -webkit-transition: -webkit-transform @aui-toggle-animation-slide-delay ease-in-out; // for Safari, but causes flickering for all subsequent elements on the same layer. Browser bug.
+        transition: transform @aui-toggle-animation-slide-delay ease-in-out;
+        width: @aui-toggle-handle-width;
+    }
+
+    // tick and cross icon
+    &-tick,
+    &-cross {
+        position: absolute;
+        top: @aui-toggle-icon-top;
+
+        &::before {
+            // center the glyph in the absolute middle
+            left: 50%;
+            -ms-transform: translateX(-50%);
+            -webkit-transform: translateX(-50%);
+            transform: translateX(-50%);
+            transition: opacity @aui-toggle-animation-visible-delay ease-in-out;
+        }
+    }
+
+    &-tick {
+        color: @aui-toggle-tick-color;
+        left: @aui-toggle-horizontal-padding;
+    }
+
+    &-cross {
+        color: @aui-toggle-cross-color;
+        right: @aui-toggle-horizontal-padding;
+    }
+
+    // checked state (on/off)
+    &-input:checked:enabled + &-view,
+    &-input.indeterminate-checked + &-view {
+        // .indeterminate-checked is to workaround Chrome and Safari no longer
+        // matching :checked when .indeterminate is set to true.
+        background-color: @aui-toggle-on-color;
+    }
+
+    // checked state (on/off)
+    &-input:checked + &-view,
+    &-input.indeterminate-checked + &-view {
+        // .indeterminate-checked is to workaround Chrome and Safari no longer
+        // matching :checked when .indeterminate is set to true.
+
+        &::after {
+            -ms-transform: translateX(@aui-toggle-slide-width);
+            -webkit-transform: translateX(@aui-toggle-slide-width);
+            transform: translateX(@aui-toggle-slide-width);
+        }
+    }
+}

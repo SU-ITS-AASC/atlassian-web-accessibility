@@ -1,0 +1,73 @@
+{namespace atlassian.dropdown2}
+
+/**
+ * Main Dropdown2 template that creates the trigger and the dropdown all at once
+ * @param menu Object containing options used when building the menu
+ * @param? trigger Object containing options used when building the trigger
+ **/
+{template .dropdown2}
+    {call .trigger data="$trigger"}
+        {param menu: $menu /}
+    {/call}
+    {call .contents data="$menu" /}
+{/template}
+
+/**
+ * Dropdown2 Trigger
+ * @param menu Object containing options to be used when building the menu
+ * @param? id
+ * @param? tagName element to use as the trigger. Supported values are "a" or "button". Default is "a".
+ * @param? extraClasses
+ * @param? extraAttributes
+ * @param? content
+ * @param? text
+ * @param? container
+ * @param? title
+ * @param? showIcon default is true
+ **/
+{template .trigger}
+<{$tagName ? $tagName : 'a'}{if $id} id="{$id}"{/if} class="aui-dropdown2-trigger{call atlassian.renderExtraClasses data="all" /}" aria-owns="{$menu.id}" aria-haspopup="true"
+    {if $title} title="{$title}"{/if}
+    {if $container} data-container="{$container}"{/if}
+    {call atlassian.renderExtraAttributes data="all" /}>
+    {if $content}
+        {$content|noAutoescape}
+    {/if}
+    {if $text}
+        {$text}
+    {/if}
+    {if not ($showIcon == false)}
+        <span class="icon aui-icon-dropdown"></span>
+    {/if}
+</{$tagName ? $tagName : 'a'}>
+{/template}
+
+/**
+ * Dropdown2 Menu
+ * @param id
+ * @param? content Content for the menu. Usually an unordered list or a series of menu sections.
+ * @param? extraClasses
+ * @param? extraAttributes
+ **/
+{template .contents}
+<div id="{$id}" class="aui-dropdown2{call atlassian.renderExtraClasses data="all" /}"{call atlassian.renderExtraAttributes data="all" /}>
+    {if $content}
+        {$content|noAutoescape}
+    {/if}
+</div>
+{/template}
+
+/**
+ * Dropdown2 Menu Section
+ * @param? id
+ * @param content Content for the section. Usually an unordered list.
+ * @param? extraClasses
+ * @param? extraAttributes
+ * @param? label Label for the section
+ **/
+{template .section}
+<div{if $id} id="{$id}"{/if} class="aui-dropdown2-section{call atlassian.renderExtraClasses data="all" /}"{call atlassian.renderExtraAttributes data="all" /}>
+    {if $label}<strong>{$label}</strong>{/if}
+    {$content|noAutoescape}
+</div>
+{/template}

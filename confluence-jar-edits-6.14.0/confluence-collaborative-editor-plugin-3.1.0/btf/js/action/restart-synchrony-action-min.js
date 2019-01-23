@@ -1,0 +1,1 @@
+define("confluence-collaborative-editor-plugin/btf/action/restart-synchrony-action",["ajs","confluence-collaborative-editor-plugin/btf/ajax/ajax"],function(a,c){var d=a.contextPath()+"/rest/synchrony-interop/restart";return function b(){return c.ajax({type:"POST",url:d,data:JSON.stringify({atl_token:a.Meta.get("atl-token")}),contentType:"application/json",dataType:"json"})}});

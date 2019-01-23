@@ -1,0 +1,164 @@
+#* @vtlvariable name="showActions" type="boolean" *#
+#* @vtlvariable name="old" type="boolean" *#
+#* @vtlvariable name="preview" type="boolean" *#
+#* @vtlvariable name="latestVersionsOfAttachments" type="java.util.ArrayList<com.atlassian.confluence.pages.Attachment>" *#
+#* @vtlvariable name="attachmentHelper" type="com.atlassian.confluence.extra.attachments.AttachmentsMacro" *#
+
+## Common template for building the attachments table
+## When changing this file, check the attachment macro as well.
+## Required Parameters:
+## * $attachmentHelper - object used to obtain context and previous versions
+## * $sortPathPrefixHtml - the url to goto when sorting
+## * $showActions - 'true' if actions column is to be displayed
+## * $old - 'true' if older versions are to be displayed
+
+#requireResource("confluence.extra.attachments:attachments-css")
+
+
+#macro (properSortLink $sortByLink $destination $label)
+    #if ($renderedInPreview)
+    <span>$label</span>
+    #else
+    #if ($sortBy == $sortByLink)
+    <span class="propersortedby $sortOrder"><a href="$destination&sortOrder=$newSortOrder">$label</a></span>
+    #else
+    <a href="$destination&sortOrder=ascending">$label</a>
+    #end
+    #end
+#end
+
+<table class="attachments aui">
+    <thead>
+    <tr>
+        <th class="expand-column attachment-summary-toggle">&nbsp;</th>
+        <th class="filename-column">#properSortLink("name", "${sortPathPrefixHtml}name" $i18n.getText('attachment.file'))</th>
+        <th class="modified-column">#properSortLink("date" "${sortPathPrefixHtml}date" $i18n.getText('modified.word'))</th>
+    </tr>
+    </thead>
+## Create a dummy Attachment ID, for when there aren't attachment IDs set (e.g. WebDAV)
+    #set ($dummyAttachmentId = 1)
+
+    <tbody>
+        #if ($latestVersionsOfAttachments.size() > 0)
+            #foreach( $attachment in $latestVersionsOfAttachments )
+                #set ($currentAttachmentId = $attachment.id)
+                #set ($container = $attachment.container.id)
+
+            ## When the attachment ID isn't set (e.g. when we're using WebDAV), assign it an arbitrary number and increment
+                #if ($currentAttachmentId.intValue() == 0)
+                    #set ($currentAttachmentId = $dummyAttachmentId)
+                    #set ($dummyAttachmentId = $dummyAttachmentId + 1)
+                #end
+
+            <tr id="attachment-$currentAttachmentId"
+                class="attachment-row"
+                data-attachment-id="$currentAttachmentId"
+                data-attachment-idx="$velocityCount">
+
+                <td class="attachment-summary-toggle">
+                    <span class="icon icon-section-closed" title="$i18n.getText('attachments.show.more')"></span>
+                </td>
+
+                <td class="filename-column">
+                    #parse ("/pages/includes/attachment_icon.vm")
+                    <a class="filename" href="${req.contextPath}${attachment.downloadPathWithoutVersion}"
+                       title="$i18n.getText('attachments.download')"
+                       data-filename="$attachment.fileName"
+                       data-type="$attachment.mediaType"
+                       data-linked-resource-container-id="$container">
+                        $attachment.fileName
+                    </a>
+                    #if ($attachment.versionCommentAvailable)
+                        <span class="attachment-comment">$attachment.versionComment</span>
+                    #end
+                </td>
+                <td class="attachment-created modified-column">
+                    <span>$i18n.getText($friendlyDateFormatter.getFormatMessage($attachment.lastModificationDate))</span>
+                    <span>by</span>
+                    #usernameLink($attachment.lastModifierName)
+                </td>
+            </tr>
+            <tr class="attachment-summary attachment-summary-$currentAttachmentId hidden"
+                data-attachment-id="$currentAttachmentId"
+                data-attachment-filename="$attachment.fileName">
+
+                <td class="attachment-summary-toggle"/>
+                <td class="attachment-details-wrapper" colspan="2">
+
+                    #if ($preview == true && $attachmentHelper.willBeRendered($attachment))
+                    <div class="attachment-image-preview"></div>
+                    #end
+
+                    #set ($labels = $attachment.labels)
+                    #set ($labelable = $attachment)
+                    <p class="attachment-labels">$i18n.getText('attachment.labels')</p>
+                    #parse("/labels/labels-editor-content.vm")
+
+                    #if ($old == true)
+                        <div class="attachment-history-wrapper"></div>
+                    #end
+
+                    #if ($showActions == true)
+                        #set($webInterfaceContext = $attachmentHelper.getWebInterfaceContext($action.webInterfaceContext, $attachment))
+                        #set($webItems = $action.webInterfaceManager.getDisplayableItems("system.attachment", $webInterfaceContext))
+                        <div class="attachment-buttons">
+                            #if($previewsEnabled)
+                                <a class="aui-button previewAttachmentLink"
+                                       data-filename="$attachment.fileName"
+                                       data-file-src="${req.contextPath}${attachment.downloadPathWithoutVersion}"
+                                       data-linked-resource-default-alias="$attachment.fileName"
+                                       data-mime-type="$attachment.mediaType"
+                                       data-linked-resource-container-id="$container"
+                                       data-linked-resource-id="$currentAttachmentId">Preview</a>
+                            #end
+
+                            #foreach ($item in $webItems)
+                                #set ($itemRenderedUrl = $item.link.getDisplayableUrl($req, $webInterfaceContext))
+                                #set ($hasCustomAttributes = "")
+                                #set ($editWithPlaceholder = "")
+                                #if($item.webParams)
+                                    #if ($item.webParams.get("has-custom-attributes"))
+                                        #set ($hasCustomAttributes = $item.webParams.get("has-custom-attributes"))
+                                    #end
+                                    #if ($item.webParams.get("edit-with-placeholder"))
+                                        #set ($editWithPlaceholder = $item.webParams.get("edit-with-placeholder"))
+                                    #end
+                                #end
+                                #if ($itemRenderedUrl == "")
+                                    #set ($itemRenderedUrl = "#")
+                                #elseif ($item.key == "edit")
+                                    #set ($itemRenderedUrl = $itemRenderedUrl + "&isFromPageView=true")
+                                #end
+                                #set ($itemLabel = $item.label.getDisplayableLabel($req, $webInterfaceContext))
+                                #set ($itemClass = $item.styleClass)
+
+                                #if ($editWithPlaceholder != "")
+                                    <span $editWithPlaceholder class="#if($itemClass)$itemClass#end attachments-macro" #if ($hasCustomAttributes) #renderCustomAttributes($item.webParams $webInterfaceContext)#end data-template-name="companionEditButon">
+                                    </span>
+                                #else
+                                    <a class="aui-button $itemClass" href="$itemRenderedUrl" #if ($hasCustomAttributes == "true") #renderCustomAttributes($item.webParams, $webInterfaceContext) #end>$itemLabel</a>
+                                #end
+                            #end
+                        </div>
+                    #end
+                </td>
+            </tr>
+            #end
+        #end
+    </tbody>
+</table>
+
+#*
+ Render HTML attributes for itemLink if provided
+   Method Parameters:
+   * webParams              - parameters of the itemLink
+   * webInterfaceContext    - context
+*#
+#macro (renderCustomAttributes $webParams $webInterfaceContext)
+    #set ($map = $webInterfaceContext.toMap())
+    #foreach($paramKey in $webParams.params.keySet())
+        #if($paramKey.startsWith("attribute."))
+            $paramKey.substring(10)="$generalUtil.htmlEncode($webParams.getRenderedParam($paramKey, $map))"
+        #end
+    #end
+#end

@@ -1,0 +1,91 @@
+{namespace Confluence.Templates.PageBanner}
+
+/**
+ * Renders a banner displaying metadata for a page or blog post
+ * @param systemContentItems       Items to render in the system.content.metadata section
+ * @param pageBannerItems          Items to render in the page.metadata.banner section
+ */
+{template .banner}
+    <div id="page-metadata-banner">
+        <ul class="banner">
+            {call .renderSystemContentItems}
+                {param systemContentItems: $systemContentItems/}
+            {/call}
+            {foreach $item in $pageBannerItems}
+                {call .renderPageBannerItem data="$item" /}
+            {/foreach}
+        </ul>
+    </div>
+{/template}
+
+/**
+ * @param systemContentItems
+ */
+{template .renderSystemContentItems}
+   <li id="system-content-items" class="noprint">
+      {foreach $item in $systemContentItems}
+          {call .itemAnchor data="$item"}
+              {param isSystemContentItem: true/}
+          {/call}
+      {/foreach}
+   </li>
+{/template}
+
+/**
+ * Renders a link in the page.metadata.banner section
+ * @param label                 Label to show for the link
+ * @param href                  Href value for the link
+ * @param tooltip               Tooltip text for the link
+ * @param linkId                Id value for the link (optional)
+ * @param styleClasses          Class value for the link (optional)
+ * @param isAuiButton           Bool to indicate if the web-item is styled as an aui button
+ * @param suppressDefaultStyle  Bool to indicate if the default page-metadata-banner class styles should be applied to the web-item
+ */
+{template .renderPageBannerItem}
+    <li class="{if not $suppressDefaultStyle}page-metadata-item noprint{/if}{if $isAuiButton}has-button{/if}" {if $linkId} id="{$linkId}-wrapper"{/if}>
+        {call .itemAnchor data="all" }
+            {param isSystemContentItem: false/}
+        {/call}
+    </li>
+{/template}
+
+/**
+ * @param label               Label to show for the link
+ * @param href                Href value for the link
+ * @param tooltip             Tooltip text for the link
+ * @param linkId              Id value for the link (optional)
+ * @param styleClasses        Class value for the link (optional)
+ * @param icon                Object containing icon dimensions and image location
+ * @param isSystemContentItem True if item being rendered belongs in the system-content-item section
+ */
+{template .itemAnchor}
+   <a href="{$href}" title="{$tooltip}" {if $linkId}id="{$linkId}"{/if} {if $styleClasses}class="{$styleClasses}"{/if}>
+       {call .itemIcon}
+           {param icon: $icon/}
+       {/call}
+       {if not($isSystemContentItem)}
+           <span>{$label}</span>
+       {/if}
+   </a>
+{/template}
+
+/**
+ * @param icon                  Object containing icon dimensions and image location
+ */
+{template .itemIcon}
+    {if $icon}
+        <img class="page-banner-item-icon" src="{$icon.url}" style="height: {$icon.height}px; width: {$icon.width}px;"/>
+    {/if}
+{/template}
+
+/**
+ * @param elementId             Id of the inlineDialog. Supplied as a parameter so it is consistent with the targets aria-controls
+ * @param linkToMyWork          Link to recently worked on page
+ */
+{template .draftStatusDiscovery}
+    <aui-inline-dialog id="{$elementId}" alignment="bottom left" open>
+        <p><strong>{getText('pagebanner.draft.status.discovery.title')}</strong></p>
+        <p>{getText('pagebanner.draft.status.discovery.body', $linkToMyWork)|noAutoescape}</p>
+        <p><a class="aui-button">{getText('pagebanner.draft.status.discovery.close')}</a></p>
+    </aui-inline-dialog>
+{/template}

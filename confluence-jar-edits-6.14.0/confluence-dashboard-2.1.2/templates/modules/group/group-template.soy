@@ -1,0 +1,11 @@
+{namespace DashboardTemplates.Groups}
+
+
+/**
+* @param title
+* @param periodKey
+*/
+{template .group}
+	<h6 class="sticky-header period-{$periodKey}">{ $title }</h6>
+	<ul class="group-container period-{$periodKey}"></ul>
+{/template}

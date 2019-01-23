@@ -1,0 +1,71 @@
+{namespace aui.progressTracker}
+
+/**
+ * Progress Tracker
+ * @param steps list of the steps to display
+ * @param? isInverted boolean - set to true if using on a grey background
+ * @param? id
+ * @param? extraClasses
+ * @param? extraAttributes
+ */
+{template .progressTracker}
+    <ol{if $id} id="{$id}"{/if}
+        {sp}class="aui-progress-tracker{if $isInverted} aui-progress-tracker-inverted{/if}{call aui.renderExtraClasses data="all" /}"
+        {call aui.renderExtraAttributes data="all" /}>
+        {call .content}
+            {param steps: $steps /}
+            {param content}
+                {foreach $currentStep in $steps}
+                    {if $currentStep['isCurrent']}
+                        {foreach $step in $steps}
+                            {call .step data="$step"}
+                                {param width: round(100 / length($steps), 4) /}
+                                {param href: (index($step) < index($currentStep) ? $step['href'] : null) /}
+                            {/call}
+                        {/foreach}
+                    {/if}
+                {/foreach}
+            {/param}
+        {/call}
+    </ol>
+{/template}
+
+/**
+ * Progress Tracker Content Renderer (if no step was flagged "isCurrent", will display all steps with the first one marked as current)
+ * @param steps
+ * @param content
+ */
+{template .content private="true"}
+    {if $content != ''}
+        {$content|noAutoescape}
+    {else}
+        {foreach $step in $steps}
+            {call .step data="$step"}
+                {param isCurrent: isFirst($step) /}
+                {param width: round(100 / length($steps), 4) /}
+                {param href: null /}
+            {/call}
+        {/foreach}
+    {/if}
+{/template}
+
+/**
+ * Step in the Progress Tracker
+ * @param? isCurrent boolean - set to true if step is the current step
+ * @param width number - should be the exact same width as all the other steps to maintain correct visual formatting (can't do this in CSS due to CSS not knowing the number of steps)
+ * @param text
+ * @param? href
+ * @param? id
+ * @param? extraClasses
+ * @param? extraAttributes
+ */
+{template .step private="true"}
+    <li{if $id} id="{$id}"{/if}
+        {sp}class="aui-progress-tracker-step{if $isCurrent} aui-progress-tracker-step-current{/if}{call aui.renderExtraClasses data="all" /}"
+        {sp}style="width: {$width}%;"
+        {call aui.renderExtraAttributes data="all" /}>
+        <{$href ? 'a' : 'span'}{if $href} href="{$href}"{/if}>
+            {$text}
+        </{$href ? 'a' : 'span'}>
+    </li>
+{/template}

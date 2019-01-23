@@ -1,0 +1,15 @@
+#if( $rankedResults.size() == 0 )
+    <p class="smalltext">$action.getText("no.labels.defined")</p>
+#else
+    <div class="heatmap">
+        <ul class="tag-cloud label-list">
+        #foreach($result in $action.results)
+            #set ($size = 12 + $result.rank * 2)
+            #set ($label = $result.label)
+            <li class="aui-label" style="font-size:${size}px;" aria-level="$result.rank">
+                <a href="#labelLinkUrl($label)">$htmlUtil.htmlEncode($label.realTitle)</a>
+            </li>
+        #end
+        </ul>
+    </div>
+#end

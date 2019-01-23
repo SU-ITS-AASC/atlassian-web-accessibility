@@ -1,0 +1,74 @@
+@media only screen and (max-width: 1024px) {
+    .contenteditor #draft-status {
+        display: none !important;
+    }
+}
+
+#toolbar { // This is a list of specific overrides we used for compact styles that were never defined outside of AUI.
+    li.toolbar-item,
+    #rte-button-color,
+    #rte-button-more,
+    #rte-button-link,
+    #rte-button-insert-table,
+    #rte-button-insert,
+    #rte-button-pagelayout,
+    #rte-button-pagelayout-2,
+    #rte-button-insert-template {
+        padding: 0 6px;
+    }
+
+    #rte-button-more .icon-dropdown {
+        margin-left: 3px;
+    }
+
+    #insert-menu-options {
+        left: -6px;
+    }
+
+
+    #rte-button-link .trigger-text,
+    #confluence-insert-files > .trigger-text,
+    #insert-table-dropdown .dropdown-text,
+    #insert-menu .dropdown-text,
+    #rte-button-insert-template .dropdown-text {
+        display: none;
+    }
+
+    #rte-button-link .icon-dropdown,
+    #insert-table-dropdown .icon-dropdown,
+    #insert-menu .icon-dropdown,
+    #rte-button-pagelayout .icon-dropdown,
+    #rte-button-insert-template .icon-dropdown {
+        width: 22px;
+        margin-left: 0;
+        padding-right: 0;
+    }
+
+    #rte-button-pagelayout .icon-layout {
+        margin-top: 2px;
+    }
+
+    /* 'insert' section of the toolbar should group its buttons closer together,
+        two IDs required so that styles are preserved on hover */
+    #rte-button-insert,
+    #rte-button-link {
+        margin: 0 -6px;
+    }
+
+    li#insert-table-dropdown,
+    #pagelayout-menu,
+    #page-layout-2,
+    #table-highlight-colour,
+    #format-dropdown,
+        /* template editor */
+    #template-menu {
+        padding: 0;
+    }
+
+    #rte-toolbar-row-default .aui-button,
+    #rte-button-cancel.shared-drafts {
+        /* button.aui-button height is 28px with default styles */
+        height: 26px;
+        padding: 0 6px;
+    }
+}

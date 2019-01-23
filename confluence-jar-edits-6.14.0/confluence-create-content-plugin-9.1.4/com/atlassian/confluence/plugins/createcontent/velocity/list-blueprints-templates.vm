@@ -1,0 +1,103 @@
+#* @vtlvariable name="canEnableDisableModules" type="java.lang.Boolean" *#
+#* @vtlvariable name="space" type="com.atlassian.confluence.spaces.Space" *#
+#* @vtlvariable name="enabledBlueprints" type="java.util.Collection<com.atlassian.confluence.plugins.createcontent.impl.ContentBlueprint>" *#
+#* @vtlvariable name="promotedBlueprints" type="java.util.Collection<com.atlassian.confluence.plugins.createcontent.impl.ContentBlueprint>" *#
+#* @vtlvariable name="contentBlueprints" type="java.util.Collection<com.atlassian.confluence.plugins.createcontent.impl.ContentBlueprint>" *#
+#* @vtlvariable name="templateRefs" type="java.util.List<com.atlassian.confluence.plugins.createcontent.impl.ContentTemplateRef>" *#
+#* @vtlvariable name="templateRef" type="com.atlassian.confluence.plugins.createcontent.impl.ContentTemplateRef" *#
+#* @vtlvariable name="template" type="com.atlassian.confluence.plugins.createcontent.impl.I18nPageTemplate" *#
+#requireResource("com.atlassian.confluence.plugins.confluence-create-content-plugin:list-templates-resources")
+
+#if ($space)
+    #requireResource("com.atlassian.confluence.plugins.confluence-create-content-plugin:user-templates-resources")
+#end
+
+#macro (addBlueprintTemplateRows $templateRefs)
+    #foreach ($templateRef in $templateRefs)
+        #addTemplateRow($templateRef)
+    #end
+#end
+
+#macro (addTemplateRow $templateRef)
+    <tr data-template-module-complete-key="$templateRef.moduleCompleteKey">
+        #set ($templateEdited = $templateRef.templateId != 0 && ($!space.key == $templateRef.parent.spaceKey))
+        <td>$i18nResolver.getText($templateRef.i18nNameKey)
+            #if ($templateEdited)
+                <span class="smalltext">$i18nResolver.getText('create.content.plugin.list.templates.edited')</span>
+            #end
+        </td>
+        <td class="template-operations">
+            #if ($templateEdited)
+                ## Template has been edited before
+                ## Assumes we're using templates2 - see common-listpagetemplates.vm in Confluence core.
+                <a class="operation-edit" href="$contextPath/pages/templates2/editpagetemplate.action?entityId=$templateRef.templateId&key=$!space.key">$i18nResolver.getText("edit.name")</a> &middot;
+                <a class="operation-revert" href="$contextPath/plugins/createcontent/revert-template.action?entityId=$templateRef.templateId&key=$!space.key">$i18nResolver.getText("create.content.plugin.plugin.list.templates.reset-to-default")</a>
+            #else
+                ## Template has never been edited before
+                <a class="operation-edit" href="$contextPath/plugins/createcontent/edit-template.action?key=$!space.key&contentTemplateRefId=$templateRef.id">$i18nResolver.getText("edit.name")</a>
+            #end
+        </td>
+    </tr>
+#end
+
+<div id="content-blueprint-templates" class="templates-section">
+    #if (!$contentBlueprints.isEmpty())
+        #if($space)
+        <h2>$i18nResolver.getText("create.content.plugin.plugin.templates")</h2>
+        #else
+        <h2>$i18nResolver.getText("create.content.plugin.plugin.global.templates")</h2>
+        #end
+        #doc("create.content.blueprint.help", $i18nResolver.getText("create.content.plugin.plugin.templates.blueprints-more-info"))
+        #foreach ($blueprint in $contentBlueprints)
+
+            #set ($blueprintEnabled = $enabledBlueprints.contains($blueprint))
+            #set ($blueprintPromoted = $promotedBlueprints.contains($blueprint))
+
+                <table class="aui web-item-module plugin-pagetemplates-table#if(!$blueprintEnabled) disabled#end" data-blueprint-key="$blueprint.moduleCompleteKey" data-content-blueprint-id="$blueprint.id">
+                    <thead>
+                        <tr>
+                            <th>$i18nResolver.getText($blueprint.i18nNameKey)</th>
+                            <th class="web-item-operations">
+                            #if ($space)
+                                <button class="promoted-state-toggle-trigger aui-button-link aui-button" #if (!$blueprintEnabled) disabled #end
+                                   data-promoted="$blueprintPromoted" title="$i18nResolver.getText('create.content.plugin.templates.promoted.tooltip')">
+                                    #if ($blueprintPromoted)
+                                        $i18nResolver.getText("create.content.plugin.templates.non.promoted.name")
+                                    #else
+                                        $i18nResolver.getText("create.content.plugin.templates.promoted.name")
+                                    #end
+                                </button>
+                            #end
+                            #if ($canEnableDisableModules)
+                                #if ($space)
+                                    <span class="web-item-operations-divider">&middot;</span>
+                                #end
+                                <a href="" class="module-state-toggle-trigger"
+                                   data-enabled="$blueprintEnabled">
+                                    #if ($blueprintEnabled)
+                                        $i18nResolver.getText("disable.name")
+                                    #else
+                                        $i18nResolver.getText("enable.name")
+                                    #end
+                                </a>
+                            #end
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        #addBlueprintTemplateRows($blueprint.contentTemplateRefs)
+                        #if(!$blueprint.indexDisabled)
+                            #addTemplateRow($blueprint.indexPageTemplateRef)
+                        #end
+                    </tbody>
+                </table>
+
+        #end
+        #if (!$isOnDemand)
+            <div class="additional-blueprints-links">
+                <a class="find-blueprints-link"
+                    href="$contextPath/plugins/servlet/upm/marketplace/featured?category=Blueprints">$i18nResolver.getText("create.content.plugin.plugin.templates.find-blueprints")</a>
+            </div>
+        #end
+    #end
+</div> ## end content-blueprint-templates

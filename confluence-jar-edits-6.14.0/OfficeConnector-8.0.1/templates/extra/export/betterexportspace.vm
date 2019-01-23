@@ -1,0 +1,254 @@
+<html>
+	<head>
+		<title>$action.getText("office.connector.export.to.space") - $!key</title>
+		
+    </head>
+	#macro(displayPageHierarchy $contentTree)	
+	<script type="text/javascript">
+    
+    var selected;
+    var count = 5;
+    var index = 0;
+    
+    function selectItem(e)
+    {
+        var targ;
+        if (!e) var e = window.event
+        if (e.target) targ = e.target;
+	    else if (e.srcElement) targ = e.srcElement;
+	    if (targ.nodeType == 3) // defeat Safari bug
+		    targ = targ.parentNode;
+		
+		
+		if (selected)
+		    selected.style.backgroundColor = 'white';
+		
+		if (targ != selected)
+		{
+		    targ.style.backgroundColor= '#D3D3D3';
+			selected = targ;
+		}
+		else
+		{
+		    selected = null;
+		}        
+    }
+    
+   function getParentLi()
+    {
+        var parLi = selected.parentNode;
+        while (parLi.tagName.toLowerCase() != 'li')
+        {
+            parLi = parLi.parentNode;
+        }
+        return parLi;
+    }
+    
+    function moveUp()
+    {    
+        if (!selected) return;
+        
+        var parLi = getParentLi();
+        if (parLi.previousSibling)
+        {
+            var parent = parLi.parentNode;
+            parent.insertBefore(parLi, parLi.previousSibling);
+        }        
+    }
+    
+    function moveDown()
+    {
+        if (!selected) return;
+        
+        var parLi = getParentLi();
+        if (parLi.nextSibling)
+        {
+            var parent = parLi.parentNode;
+            var next = parLi.nextSibling;
+            if (next.nextSibling)
+            {
+                parent.insertBefore(parLi, next.nextSibling);
+            }
+            else
+            {
+                parent.appendChild(parLi);
+            }
+        }
+    }
+    function moveLeft()
+    {
+        if (!selected) return;
+        
+        var parLi = getParentLi();
+        
+        var parUl = parLi.parentNode;
+        if (parUl.parentNode.tagName.toLowerCase() == "li")
+        {
+            var newParLi = parUl.parentNode;
+            var newParUl = newParLi.parentNode;
+                        
+            if (newParLi.nextSibling)
+            {
+                newParUl.insertBefore(parLi, newParLi.nextSibling);
+            }
+            else
+            {
+                newParUl.appendChild(parLi);
+            }
+            
+            if (!parUl.firstChild)
+            {
+                newParLi.removeChild(parUl);
+            }
+        }
+    }
+    function moveRight()
+    {
+        if (!selected) return;
+        
+        var parLi = getParentLi();
+        if (parLi.previousSibling)
+        {
+            var previous = parLi.previousSibling;
+            
+            var parUl;
+            for(var i = 0; i < previous.children.length; i++)
+            {
+                if (previous.children[i].tagName.toLowerCase() == "ul")
+                {
+                    parUl = previous.children[i];
+                    break;
+                }
+            }
+            if (!parUl)
+            {
+                parUl = document.createElement("UL");
+                previous.appendChild(parUl);
+            }            
+            parUl.appendChild(parLi);
+            
+        }
+    }
+    function remove()
+    {
+        if (!selected) return;
+        
+        var parLi = getParentLi();
+        var listNode = document.getElementById("removed");
+        
+        if (listNode.firstChild)
+        {
+            listNode.insertBefore(parLi, listNode.firstChild);
+        }
+        else
+        {
+            listNode.appendChild(parLi);
+        }
+        
+    }
+    function add()
+    {
+        if (!selected) return;
+        
+        var parLi = getParentLi();
+        
+        var listNode = document.getElementById("added");
+        var removedList = document.getElementById("removed");
+        
+        if (parLi.parentNode != removedList)
+        {
+            return;
+        }
+        
+        listNode.appendChild(parLi);
+    }
+    
+    function processValues()
+    {           
+        var listNode = document.getElementById("added");
+        numberList(listNode, 0);
+        listNode = document.getElementById("removed");
+        listNode.parentNode.removeChild(listNode);        
+    }    
+    
+    function numberList(listNode, level)
+    {
+        for (var i = 0; i < listNode.children.length; i++)
+        {
+            itemNode = listNode.children[i];
+            inputNode = itemNode.firstChild.firstChild;
+            inputNode.value = inputNode.value + '-' + index + '-' + level;
+            index++;
+            
+            for (var c = 1; c < itemNode.children.length; c++)
+            {
+                if (itemNode.children[c].tagName == 'UL')
+                {
+                    numberList(itemNode.children[c], level + 1);
+                }
+            }
+        }
+    }
+    
+    </script>    
+	    <input type="button" value="up" onclick="moveUp()" />
+	    <input type="button" value="down" onclick="moveDown()" />
+	    <input type="button" value="left" onclick="moveLeft()" />
+	    <input type="button" value="right" onclick="moveRight()" />
+	    <input type="button" value="remove" onclick="remove()" />	    
+	    <ul id="added">
+	    #listNode($contentTree.rootNodes)
+	    </ul>	
+    	 <input type="button" value="return" onclick="add()" />
+    <ul id="removed"></ul>
+    #end
+    
+    #macro (listNode $rootNodes)
+	    #foreach ($rootNode in $rootNodes)		    		
+	    	<li>
+	        	<div onclick="selectItem()"><input type="hidden" name="contentNodes" value="$rootNode.page.id"/>
+	        	<label class="label">$rootNode.page.title</label></div>
+	    		#if ($rootNode.children.size() > 0)
+	    		<ul>
+	    			#listNode($rootNode.children)
+	    		</ul>
+	    		#end
+	    	</li>
+	    #end
+    #end
+    #applyDecorator("root")
+        #decoratorParam("helper" $action.helper)
+        #decoratorParam("context" "space-operations")
+        #decoratorParam("mode"  "view-space-operations")
+        <body>
+            #applyDecorator ("root")
+                #decoratorParam ("context" "spacecontentpanel")
+                #decoratorParam ("selection" "betterexportspace")
+                #decoratorParam ("title" $action.getText("action.name"))
+                #decoratorParam ("selectedTab" "content")
+                #decoratorParam("helper" $action.helper)
+                <div align="center">
+                <table width="100%" class="grid">
+                	<form method="POST" action="dobetterexportspace.action">
+                	<input type="hidden" name="key" value="$helper.space.key"/>
+	                <tr align="left">
+	                    <td align="right" valign="top"><b>$action.getText("pages.to.be.exported")</b></td>
+	                    <td>
+	                        <table width="100%" border="0">
+	                            #displayPageHierarchy($contentTree)
+	                        </table>
+	                    </td>
+	                </tr>
+	                <tr>
+                        <td colspan="2" align="center">
+                            <input type="submit" onclick="processValues();return true;" name="submit" value="Export"/>
+                        </td>
+                    </tr>
+	                </form>
+                </table>
+                 </div>
+            #end
+        </body>
+      #end
+    </html>
+      

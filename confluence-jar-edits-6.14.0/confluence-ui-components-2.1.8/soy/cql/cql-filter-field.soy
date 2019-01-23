@@ -1,0 +1,25 @@
+{namespace Confluence.UI.Components.CQLFilters.Templates}
+
+/**
+ * Render a CQL filter field.
+ *
+ * @param field the model object representing the field
+ * @param label the i18n'd label of the field
+ * @param counter an int used to make the element ids unique
+ */
+{template .baseFilterField}
+    <div class="cql-filter cql-field-{$field.fieldName} cql-type-{$field.uiSupport.valueType}">
+        {let $id}cql-field-{$field.fieldName}-{$counter}{/let}
+        <div class='cql-field-heading'>
+            <label for="{$id}">
+                {$label}
+                {if not $field.fixed}
+                    <span class="aui-icon aui-icon-small aui-iconfont-remove" title="{getText('confluence-ui-components.cql-filter-field.remove')}"></span>
+                {/if}
+            </label>
+        </div>
+        <div class='cql-filter-field-input-container'>
+            <input type="text" class="cql-field-input text" id="{$id}">
+        </div>
+    </div>
+{/template}

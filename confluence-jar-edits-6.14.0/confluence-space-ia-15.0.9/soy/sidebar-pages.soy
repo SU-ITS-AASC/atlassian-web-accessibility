@@ -1,0 +1,111 @@
+{namespace Confluence.Templates.Sidebar.Pages}
+
+/**
+ * @param pageContextualNav
+ * @param hasCreatePermission
+ */
+{template .renderPageContextualNav}
+    <div class="ia-secondary-header">
+        <h5 class="ia-secondary-header-title pages">
+            <span class="label">
+                {getText('sidebar.pages.children')}
+            </span>
+        </h5>
+    </div>
+    <div class="ia-secondary-parent-content">
+        {call Confluence.Templates.Sidebar.Pages.parentPage}
+            {param parentPage: $pageContextualNav.parentPage /}
+        {/call}
+    </div>
+    <div class="ia-secondary-current-content">
+        {call Confluence.Templates.Sidebar.Pages.currentPage}
+            {param currentPage: $pageContextualNav.currentPage /}
+        {/call}
+    </div>
+    <div class="ia-secondary-content">
+        {call Confluence.Templates.Sidebar.Pages.childPages}
+            {param children: $pageContextualNav /}
+            {param createPermission: $hasCreatePermission /}
+        {/call}
+    </div>
+{/template}
+
+/**
+ * Renders a list of child pages, showing an initial list and a link to show the remaining children.
+ * @param children
+ * @param createPermission
+ */
+{template .childPages}
+    <div class="contextual-nav-child-pages">
+        {if length($children.initialChildPages)}
+            <ul class="children">
+                {call .renderChildren}
+                    {param children: $children.initialChildPages /}
+                {/call}
+            </ul>
+            {if length($children.remainingChildPages)}
+                <ul class="more-children">
+                    {call .renderChildren}
+                        {param children: $children.remainingChildPages /}
+                    {/call}
+                </ul>
+                /* Empty href required to convince browsers that this should look like a link */
+                <a class="more-children-link" href="">
+                    <span class="icon"></span>
+                    <span class="label">{getText('sidebar.pages.more.children', length($children.remainingChildPages))}</span>
+                </a>
+            {/if}
+        {/if}
+        {if $createPermission and $children.createLink}
+            <a class="create-child-page-link" href="{$children.createLink}">
+                <span class="aui-icon aui-icon-small aui-iconfont-add-small"></span>
+                <span class="label">{getText('sidebar.pages.create.child')}</span>
+            </a>
+        {/if}
+    </div>
+{/template}
+
+/**
+ * @param currentPage
+ */
+{template .currentPage}
+    {if $currentPage}
+        <ul class="ia-secondary-currentPage-title wiki{if $currentPage.active} current-item{/if}">
+            <li>
+                <span class="icon"></span>
+                <span class="label">{$currentPage.title}</span>
+            </li>
+        </ul>
+    {/if}
+{/template}
+
+/**
+ * @param parentPage
+ */
+{template .parentPage}
+    {if $parentPage}
+        <ul class="parent ia-secondary-header-title wiki{if $parentPage.active} current-item{/if}">
+            <li class="parent-item">
+                <a class="parent-item-link" href="{$parentPage.url}" title="{$parentPage.title}">
+                    <span class="icon"></span>
+                    <span class="label">{$parentPage.title}</span>
+                </a>
+            </li>
+        </ul>
+    {/if}
+{/template}
+
+/**
+ * @param children list of child pages to render in the sidebar
+ */
+{template .renderChildren}
+    {foreach $child in $children}
+        <li class="child-item" data-page-id="{$child.pageId}">
+            /* Icon sits outside of the link because (a) it makes sense, (b) it allows using 'overflow: hidden' to show an ellipsis on the link */
+            <span class="icon"></span>
+            <a href="{$child.url}" title="{$child.title}">
+                <span class="label">{$child.title}</span>
+            </a>
+        </li>
+    {/foreach}
+{/template}

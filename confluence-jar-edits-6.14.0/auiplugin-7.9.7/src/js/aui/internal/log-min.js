@@ -1,0 +1,2 @@
+("undefined"===typeof window?global:window).__c1e961001275c079e48525ad3a48c8c2=function(){function c(a){return function(){"undefined"!==typeof console&&console[a]&&Function.prototype.apply.call(console[a],console,arguments)}}var a={};"use strict";Object.defineProperty(a,"__esModule",{value:!0});a.error=a.warn=a.log=void 0;var b=__28c84e7bb75f6c3b0ba124d57bd69571,b=b&&b.__esModule?b:{"default":b},d=c("log"),e=c("warn"),f=c("error");(0,b.default)("error",f);(0,b.default)("log",d);(0,b.default)("warn",
+e);a.log=d;a.warn=e;a.error=f;return a}.call(this);

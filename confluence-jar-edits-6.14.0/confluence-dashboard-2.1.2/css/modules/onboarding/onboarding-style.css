@@ -1,0 +1,115 @@
+.onboarding-tooltips.aui-help.onboarding-inline-dialog {
+  margin-top: -9px; }
+  .onboarding-tooltips.aui-help.onboarding-inline-dialog:before {
+    border-bottom-color: #f79232; }
+  .onboarding-tooltips.aui-help.onboarding-inline-dialog.aui-alignment-side-left.aui-alignment-element-attached-left::after {
+    margin-left: 1px;
+    left: -1px; }
+  .onboarding-tooltips.aui-help.onboarding-inline-dialog .aui-inline-dialog-contents {
+    margin-top: -15px;
+    width: 300px; }
+
+.onboarding-tooltips .tip-footer {
+  margin-top: 20px; }
+
+.onboarding-tooltips .onboarding-page-info {
+  color: #707070;
+  float: right;
+  font-size: 12px;
+  margin-top: 10px; }
+
+.onboarding-hotspot {
+  width: 10px;
+  height: 10px;
+  padding: 0;
+  margin: 10px;
+  display: block;
+  border: 0;
+  border-radius: 50%;
+  background-color: #f79232;
+  position: relative;
+  cursor: pointer; }
+  .onboarding-hotspot:focus {
+    outline: none; }
+  .onboarding-hotspot:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    margin: -2px;
+    width: 10px;
+    height: 10px;
+    border: 2px solid #f79232;
+    background: transparent;
+    border-radius: 50%;
+    animation: expand-and-fade 1s 5 ease-out; }
+
+@keyframes expand-and-fade {
+  0% {
+    opacity: 0; }
+  1% {
+    opacity: 1; }
+  100% {
+    transform: scale(1.5);
+    opacity: 0; } }
+
+.onboarding-tooltip-wrapper {
+  overflow: hidden; }
+  .onboarding-tooltip-wrapper .onboarding-inline-dialog {
+    position: absolute; }
+
+.sidebar-discover .onboarding-tooltip-wrapper {
+  position: absolute;
+  top: 15px;
+  right: 0; }
+
+.sidebar-spaces .onboarding-tooltip-wrapper {
+  position: absolute;
+  top: 20px;
+  right: 0; }
+
+[aria-expanded=false] .onboarding-tooltip-wrapper {
+  display: none; }
+
+.onboarding-image {
+  height: 210px;
+  width: 300px;
+  margin: auto;
+  background-image: url("assets/images/3.0/onboarding-dialog-illustration.svg");
+  background-repeat: no-repeat; }
+
+#dashboard-onboarding-dialog.simple-onboarding .aui-dialog2-content {
+  padding: 0px; }
+
+#dashboard-onboarding-dialog.simple-onboarding .onboarding-image {
+  position: relative;
+  top: 0px; }
+
+#dashboard-onboarding-dialog.simple-onboarding .aui-dialog2-content {
+  padding: 0px; }
+
+#dashboard-onboarding-dialog.simple-onboarding .aui-dialog2-content h3 {
+  font-weight: 500;
+  font-style: inherit;
+  font-size: 24px;
+  line-height: 28px;
+  margin-top: 28px;
+  margin-bottom: 0px;
+  letter-spacing: -0.01em; }
+
+#dashboard-onboarding-dialog.simple-onboarding .aui-dialog2-content .dialog-image-container {
+  background: #f4f5f7;
+  padding: 15px;
+  max-height: 115px; }
+
+#dashboard-onboarding-dialog.simple-onboarding .aui-dialog2-content .dialog-content-container {
+  padding: 30px 40px 20px 40px; }
+
+#dashboard-onboarding-dialog.simple-onboarding .aui-dialog2-footer {
+  border: 0px;
+  padding-top: 0px; }
+
+#dashboard-onboarding-dialog.simple-onboarding .aui-dialog2-footer-actions {
+  text-align: center;
+  float: none; }

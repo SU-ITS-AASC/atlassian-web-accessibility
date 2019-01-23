@@ -1,0 +1,120 @@
+#* @vtlvariable name="action" type="com.benryan.webwork.WordImportAction" *#
+#* @vtlvariable name="node" type="com.atlassian.plugins.conversion.confluence.dom.doc2wiki.splitter.DocumentTreeNode *#
+
+<html>
+    <head>
+        <title>$generalUtil.htmlEncode($!action.page.title)</title>
+    </head>
+
+    #applyDecorator("root")
+        #decoratorParam("helper" $action.helper)
+        #decoratorParam("mode" "importworditem")
+        #decoratorParam("context" "page")
+
+        <content tag="spacekey">$action.page.space.key</content>
+
+        #requireResource("com.atlassian.confluence.extra.officeconnector:office-connector-css")
+        #requireResource("com.atlassian.confluence.extra.officeconnector:wordimportresource")
+        #requireResource("com.atlassian.confluence.extra.officeconnector:officeconnector-analytics-resources")
+
+    #set($root = $action.treeRoot)
+
+    #macro(displayDocumentTree $node)
+
+        #set($level = $node.lvl + 1)
+    	<li>
+            <div class="outline-icon-container"><span class="icon icon-page"></span></div><div class="outline-text-container">$generalUtil.htmlEncode($node.text)</div>
+        </li>
+    	#if($node.size > 0)
+        <li>
+            <ul class="no-bullets level$level hidden">
+    		#foreach($child in $node.children)
+    			#displayDocumentTree($child)
+    		#end
+    	    </ul>
+        </li>
+    	#end
+
+    #end
+
+    #if($page.title)
+        #set($pageTitle = $generalUtil.htmlEncode($page.title))
+    #else
+        #set($pageTitle = 'current page')
+    #end
+
+    <form id="importwordform" action="doimportword.action" method="post" class="aui office-connector">
+        #form_xsrfToken()
+        <fieldset>
+            <legend>$action.getText('office.import.step.two.legend')</legend>
+            <h2>$action.getText('office.import.step.two.heading')</h2>
+            <input class="text hidden" name="pageId" value="$helper.page.id"/>
+            <input class="text hidden" name="treeDepth" value="$action.treeDepth"/>
+            <input class="text hidden" name="advanced" value="true"/>
+
+            <div class="field-group">
+                <label for="docTitle">$action.getText("office.connector.docimport.title"):</label>
+                <input type="text" size="75" id="docTitle" name="docTitle" value="$generalUtil.htmlEncode($action.docTitle)" />
+                #fielderror("docTitle")
+            </div>
+
+        </fieldset>
+        <fieldset class="group">
+            <legend><span>$action.getText("office.connector.docimport.whereto"):</span></legend>
+            <div class="radio">
+                <input type="radio" id="newpage" class="radio flip-delete" name="importSpace" value="true" checked>
+                <label for="newpage">$action.getText("office.connector.docimport.whereto.space", [$pageTitle])</label>
+            </div>
+            <div class="radio">
+                <input type="radio" id="overwritepage" class="radio flip-delete" name="importSpace" value="false">
+                <label for="overwritepage">$action.getText("office.connector.docimport.whereto.page", [$pageTitle])</label>
+            </div>
+            <div class="checkbox" id="deletealldiv">
+                <input class="delete-all checkbox" type="checkbox" id="deleteall" name="overwriteAll" value="true" disabled>
+                <label for="deleteall" id="deletealllabel" class="cannot-execute">$action.getText("office.connector.docimport.whereto.delete", [$pageTitle])<label>
+            </div>
+        </fieldset>
+        <fieldset class="group">
+            <legend><span>$action.getText("office.connector.docimport.conflicts"):</span></legend>
+            <div class="radio">
+                <input type="radio" id="rename" class='radio' name="conflict" value="1" checked>
+                <label for="rename">$action.getText("office.connector.docimport.conflicts.rename")</label>
+            </div>
+            <div class="radio">
+                <input type="radio" class='radio' id="newversion" name="conflict" value="0">
+                <label for="newversion">$action.getText("office.connector.docimport.conflicts.version")</label>
+            </div>
+            <div class="radio">
+                <input type="radio" class='radio' name="conflict" id="deletepages" value="2">
+                <label for="deletepages">$action.getText("office.connector.docimport.conflicts.delete")</label>
+            </div>
+        </fieldset>
+        <div class="field-group">
+            <label for="lvl-select">$action.getText("office.connector.docimport.split.label"):</label>
+            #if($root.size > 0)
+            <select id="lvl-select" name="lvl">
+                <option class="optionLevels" value="0">$action.getText("office.connector.docimport.split.no.split")</option>
+                #foreach ($i in [1..$treeDepth])
+                <option class="optionLevels" value="$i">$action.getText("office.connector.docimport.split.level", [$i])</option>
+                #end
+            </select>
+        </div>
+        <div class="field-group">
+            <label for="pagetree">$action.getText("office.connector.docimport.split.outline"):</label>
+            <span id="pagetree">
+                <ul id="outline" class="outline no-bullets level0">
+                    #displayDocumentTree($root)
+                </ul>
+            #else
+            <span id="no-split-span" class="values no-split">$action.getText("office.connector.docimport.split.none")</span>
+            #end
+        </div>
+        <div class="buttons-container">
+            <div class="buttons">
+  	            <input name="submit" type="submit" value="$action.getText("office.connector.docimport.import")" class="button"/>
+    	    </div>
+        </div>
+    </form>
+    #end
+
+</html>

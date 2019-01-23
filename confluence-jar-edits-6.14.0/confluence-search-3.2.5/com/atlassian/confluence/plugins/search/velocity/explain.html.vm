@@ -1,0 +1,12 @@
+<strong>query:</strong>
+<pre style="width: 800px; margin-top: 0">
+$searchResults.searchQuery
+</pre>
+<pre>
+#foreach ($explanation in $explanationsForSpecifiedContentIds)<strong>(specified) $explanation.content.title</strong>:
+$action.fixExplanation($explanation.toString())#end
+</pre>
+<pre>
+#foreach ($searchResult in $searchResults.results)<strong>($velocityCount) $searchResult.title</strong>:
+$action.fixExplanation($searchResult.explanation.toString())#end
+</pre>

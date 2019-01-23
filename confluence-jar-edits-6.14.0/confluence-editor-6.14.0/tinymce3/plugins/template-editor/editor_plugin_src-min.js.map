@@ -1,0 +1,8 @@
+{
+"version":3,
+"file":"/dummy-file-path",
+"lineCount":2,
+"mappings":"AAKAA,MAAA,6FAGG,QAAA,CACCC,CADD,CAECC,CAFD,cAOYC,QAAAA,CAASC,CAATD,EACHC,CAAAC,OAAAC,IAAA,CAAc,QAAA,GACVL,CAAA,CAAEG,CAAAG,QAAA,EAAF,CAAAC,SAAA,mBADU,CAAd,CADGL,CAPZ,SAaeM,QAAAA,gHAKQP,CAAAQ,aALRD,KAKqCP,CAAAS,aALrCF,EAbf,EAHH,CA2BAG;OAAA,8BAAAC,YAAA,wEAC6F,QAAA,CAASC,CAAT,MAC7EZ,EAAUU,OAAA,WAEdV,EAAAa,OAAA,4CAA2DD,CAA3D,CAEAZ,EAAAc,cAAAV,IAAA,4BAAsDJ,CAAAe,QAAAC,yBAAtD,CALiF,CAD7F;",
+"sources":["input.js"],
+"names":["define","$","tinymce","init","ed","onInit","add","getBody","addClass","getInfo","majorVersion","minorVersion","require","safeRequire","ConfluenceTemplateEditorPlugin","create","PluginManager","plugins","ConfluenceTemplateEditor"]
+}

@@ -1,0 +1,27 @@
+/*CONFDEV-25367: Insert files*/
+// always hide title of this button in comment
+.quick-comment-form {
+    #rte-toolbar .insert-files {
+        &.toolbar-item {
+            padding: 0 6px;
+        }
+
+        .toolbar-trigger {
+            margin: 0 -6px;
+        }
+    }
+}
+
+#rte-toolbar .insert-files {
+    &.toolbar-item {
+        padding: 0;
+    }
+
+    .trigger-text{
+        display: none;
+    }
+
+    .aui-button {
+        padding: 0 6px;
+    }
+}

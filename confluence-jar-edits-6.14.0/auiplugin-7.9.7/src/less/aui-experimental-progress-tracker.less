@@ -1,0 +1,94 @@
+@import './imports/global';
+
+/* Layout */
+.aui-progress-tracker {
+    display: table;
+    font-size: 12px;
+    margin: 10px 0 0;
+    padding: 0;
+    table-layout: fixed;
+    word-wrap: break-word; /* doesn't work in IE */
+}
+.aui-progress-tracker:first-child {
+    margin-top: 0;
+}
+.aui-progress-tracker-step {
+    box-sizing: border-box;
+    display: table-cell;
+    padding: 0 10px;
+    max-width: 140px;
+    min-width: 80px;
+    text-align: center;
+}
+
+/* Progress Bar */
+span, a {
+    .aui-progress-tracker-step > & {
+        #aui.typography.h400();
+        font-weight: @aui-font-weight-normal;
+        color: @aui-progress-tracker-visited-step-text-color;
+        display: block;
+        outline: none;
+        padding-top: 25px;
+        position: relative;
+
+        &:before {
+            background: @aui-progress-tracker-current-step-color;
+            border-radius: 100%;
+            content: "";
+            height: 8px;
+            left: 50%;
+            margin-left: -5px;
+            position: absolute;
+            top: 4px;
+            width: 8px;
+        }
+    }
+    .aui-progress-tracker-step + .aui-progress-tracker-step > &:after {
+        background: @aui-progress-tracker-current-step-color;
+        box-shadow: -5px 0 0 -2px @aui-progress-tracker-current-step-color, 5px 0 0 -2px @aui-progress-tracker-current-step-color;
+        content: "";
+        height: 8px;
+        left: -50%;
+        margin-left: -20px; /* touches right edge of previous dot */
+        margin-right: 1px; /* touches left edge of this dot */
+        position: absolute;
+        right: 50%;
+        top: 4px;
+    }
+    .aui-progress-tracker-step-current>& {
+        font-weight: @aui-font-weight-semibold;
+    }
+    .aui-progress-tracker-step-current ~ .aui-progress-tracker-step>& {
+        color: @aui-progress-tracker-step-text-color;
+        font-weight: @aui-font-weight-normal;
+
+        &:hover {
+            color: @aui-progress-tracker-step-text-color;
+        }
+
+        &:before {
+            background-color: @aui-progress-tracker-step-color;
+        }
+
+        &:after {
+            background-color: transparent;
+            border: none;
+            box-shadow: none;
+        }
+    }
+}
+.aui-progress-tracker-step > a {
+    &:hover {
+        color: @aui-progress-tracker-visited-step-hover-text-color;
+    }
+
+    &:active {
+        color: @aui-progress-tracker-visited-step-active-text-color;
+    }
+}
+
+/* Interaction wih page layout */
+.aui-page-header-actions .aui-progress-tracker {
+    float: right;
+}

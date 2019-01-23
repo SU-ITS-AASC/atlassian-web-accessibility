@@ -1,0 +1,22 @@
+{namespace Confluence.Templates.Labels}
+
+/**
+ * Just the list of labels. In a proper and just world this would be the same template for client and server.
+ *
+ * @param labels
+ * @param? spaceKey
+ * @param? editable
+ */
+{template .labels}
+    {foreach $label in $labels}
+        <li class="aui-label {if $editable}aui-label-closeable aui-label-split{/if}" data-label-id="{$label.id}">
+            <a class="aui-label-split-main" href="{contextPath()}{labelLink($spaceKey, $label)}" rel="tag">{if (not $label.namespace) or strContains($label.namespace.prefix, 'global') or strContains($label.namespace.prefix, 'team')}{$label.name}{else}{$label.namespace.prefix}:{$label.name}{/if}</a>
+            {if $editable}
+            <span class="aui-label-split-close">
+                <span tabindex="0" class="aui-icon aui-icon-close"  title="{getText('remove.label')}" original-title="{getText('remove.label')}">{getText('remove.label')}
+                </span>
+            </span>
+            {/if}
+        </li>
+    {/foreach}
+{/template}

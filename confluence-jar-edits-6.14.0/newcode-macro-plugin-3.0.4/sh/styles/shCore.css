@@ -1,0 +1,290 @@
+/**
+ * SyntaxHighlighter
+ * http://alexgorbatchev.com/SyntaxHighlighter
+ *
+ * SyntaxHighlighter is donationware. If you are using it, please donate.
+ * http://alexgorbatchev.com/SyntaxHighlighter/donate.html
+ *
+ * @version
+ * 3.0.83 (July 02 2010)
+ * 
+ * @copyright
+ * Copyright (C) 2004-2010 Alex Gorbatchev.
+ *
+ * @license
+ * Dual licensed under the MIT and GPL licenses.
+ */
+.syntaxhighlighter a,
+.syntaxhighlighter div,
+.syntaxhighlighter code,
+.syntaxhighlighter table,
+.syntaxhighlighter table td,
+.syntaxhighlighter table tr,
+.syntaxhighlighter table tbody,
+.syntaxhighlighter table thead,
+.syntaxhighlighter table caption,
+.syntaxhighlighter textarea {
+  -moz-border-radius: 0 0 0 0;
+  -webkit-border-radius: 0 0 0 0;
+  background: none;
+  border: 0;
+  bottom: auto;
+  float: none;
+  height: auto;
+  left: auto;
+  /* 
+  	changing line-height from 1.1em to 1.2em to fit Chrome & Safari
+  */
+  line-height: 1.2em;
+  margin: 0;
+  outline: 0;
+  overflow: visible;
+  padding: 0;
+  position: static;
+  right: auto;
+  text-align: left;
+  top: auto;
+  vertical-align: baseline;
+  width: auto;
+  box-sizing: content-box;
+  font-family: "Consolas", "Bitstream Vera Sans Mono", "Courier New", Courier, monospace;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 1em;
+  min-height: inherit;
+}
+
+.syntaxhighlighter {
+  width: 100%;
+  margin: 1em 0 1em 0;
+  position: relative;
+  overflow: auto;
+  font-size: 1em;
+}
+.syntaxhighlighter.source {
+  overflow: hidden;
+}
+.syntaxhighlighter .bold {
+  font-weight: bold;
+}
+.syntaxhighlighter .italic {
+  font-style: italic;
+}
+.syntaxhighlighter .line {
+  white-space: pre;
+}
+.syntaxhighlighter table {
+  width: 100%;
+}
+.syntaxhighlighter table caption {
+  text-align: left;
+  padding: .5em 0 0.5em 1em;
+}
+.syntaxhighlighter table td.code {
+  width: 100%;
+}
+.syntaxhighlighter table td.code .container {
+  position: relative;
+}
+.syntaxhighlighter table td.code .container textarea {
+  box-sizing: border-box;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: white;
+  padding-left: 1em;
+  overflow: hidden;
+}
+.syntaxhighlighter table td.gutter .line {
+  text-align: right;
+  padding: 0 0.5em 0 1em;
+}
+.syntaxhighlighter table td.code .line {
+  padding: 0 1em;
+}
+.syntaxhighlighter table td.code .container .line {
+  white-space: pre-wrap;
+}
+.syntaxhighlighter.nogutter td.code .container, .syntaxhighlighter.nogutter td.code .line {
+  padding-left: 0em;
+  white-space: pre-wrap;
+}
+.syntaxhighlighter.show {
+  display: block;
+}
+.syntaxhighlighter.collapsed table {
+  display: none;
+}
+.syntaxhighlighter.collapsed .toolbar {
+  padding: 0.1em 0.8em 0em 0.8em;
+  font-size: 1em;
+  position: static;
+  width: auto;
+  height: auto;
+}
+.syntaxhighlighter.collapsed .toolbar span {
+  display: inline;
+  margin-right: 1em;
+}
+.syntaxhighlighter.collapsed .toolbar span a {
+  padding: 0;
+  display: none;
+}
+.syntaxhighlighter.collapsed .toolbar span a.expandSource {
+  display: inline;
+}
+.syntaxhighlighter .toolbar {
+  position: absolute;
+  right: 1px;
+  top: 1px;
+  width: 11px;
+  height: 11px;
+  font-size: 10px;
+  z-index: 10;
+}
+.syntaxhighlighter .toolbar span.title {
+  display: inline;
+}
+.syntaxhighlighter .toolbar a {
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  padding-top: 1px;
+}
+.syntaxhighlighter .toolbar a.expandSource {
+  display: none;
+}
+ 
+.syntaxhighlighter.ie {
+  font-size: .9em;
+  padding: 1px 0 1px 0;
+}
+.syntaxhighlighter.ie .toolbar {
+  line-height: 8px;
+}
+.syntaxhighlighter.ie .toolbar a {
+  padding-top: 0px;
+}
+/* 
+hide the help link
+*/
+.syntaxhighlighter.collapsed.nogutter .toolbar {
+  display: block;
+}
+.syntaxhighlighter.nogutter .toolbar {
+  display: none;
+}
+/* 
+hide the help link if linenumbers=true
+*/
+.syntaxhighlighter.collapsed .toolbar {
+  display: block;
+}
+.syntaxhighlighter .toolbar {
+  display: none;
+}
+.grid td .noBorder {
+    border-width: 0px ;
+}
+
+pre, .panel .panelContent pre
+{
+    font-family: ConfluenceInstalledFont,monospace;
+}
+
+
+/* adding extra tag to override markup position in css */
+div.panel.pdl {
+    border: 1px solid #ccc;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+}
+div.panelHeader.pdl {
+    border-bottom-color: #ccc;
+    text-align: left;
+    padding: 5px 15px;
+    background: #f5f5f5;
+    overflow: hidden;
+    position: relative;
+}
+.panelHeader.pdl > b {
+    color: #333;
+}
+.codeHeader.pdl, .panelHeader.pdl, .pdl .panelContent {
+    background: #f5f5f5;
+}
+.pdl .panelContent {
+    color: #333;
+    margin: 0;
+    padding: 10px 15px;
+    text-align: left;
+    font-size: 14px;
+    line-height: 20px;
+    background: #fff;
+    overflow: hidden;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    -moz-border-radius-bottomleft: 3px;
+    -moz-border-radius-bottomright: 3px;
+    -webkit-border-bottom-left-radius: 3px;
+    -webkit-border-bottom-right-radius: 3px;
+}
+.pdl .codeContent {
+    padding: 0;
+}
+.pdl .codeContent .syntaxhighlighter {
+    margin: 0;
+}
+
+.pdl .codeContent .syntaxhighlighter > table td:first-child {
+    padding-left: 15px;
+}
+.pdl .codeContent .gutter {
+    background: #f5f5f5;
+    color: #707070;
+    border-right: 1px solid #ccc;
+}
+.pdl .codeContent .syntaxhighlighter .gutter div.line {
+    background: none;
+    border-right: none;
+}
+.pdl .syntaxhighlighter a, .pdl .syntaxhighlighter div, .pdl .syntaxhighlighter code, .pdl .syntaxhighlighter table, .pdl .syntaxhighlighter table td, .pdl .syntaxhighlighter table tr, .pdl .syntaxhighlighter table tbody, .pdl .syntaxhighlighter table thead, .pdl .syntaxhighlighter table caption, .pdl .syntaxhighlighter textarea {
+    line-height: 20px;
+    font-size: 14px;
+}
+.pdl div.syntaxhighlighter.collapsed .toolbar {
+    padding: 5px 15px;
+    font-size: 1em;
+    background: #f5f5f5;
+    color: #707070;
+    border: none;
+}
+.pdl .syntaxhighlighter.collapsed .toolbar a, .pdl .syntaxhighlighter.collapsed .toolbar a:hover {
+    color: #3b73af;
+}
+
+.pdl .syntaxhighlighter table td.code .container {
+    margin-top: 15px;
+    padding-bottom: 15px;
+}
+.codeContent .syntaxhighlighter table td.code .container .line {
+    /* NCODE-183 */
+    white-space: nowrap;
+}
+.codeContent.panelContent.hide-toolbar {
+    display: none;
+}
+.codeContent.panelContent.hide-toolbar.show-border-top {
+    display: inline;
+}
+pre.syntaxhighlighter-pre {
+    line-height: 20px;
+    padding-left: 15px;
+    padding-top: 15px;
+    font-size: 14px;
+    overflow-x: scroll;
+    font-family: "Consolas", "Bitstream Vera Sans Mono", "Courier New", Courier, monospace !important;
+}

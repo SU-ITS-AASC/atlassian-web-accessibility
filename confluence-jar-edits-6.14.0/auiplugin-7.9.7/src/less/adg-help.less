@@ -1,0 +1,148 @@
+@import 'imports/global';
+
+// Help block
+@aui-help-header-color: @ak-color-N200;
+@aui-help-border-color: @ak-color-P400;
+@aui-help-illustration-width: 128px;
+@aui-help-content-padding-left: 20px;
+
+// Inline Dialog Theme
+@aui-inline-dialog-help-border-color: @aui-help-border-color;
+@aui-inline-dialog-help-headline-color: @ak-color-N100;
+@aui-inline-dialog-help-border-width: 2px;
+@aui-inline-dialog2-help-arrow-margin-offset: 1px;
+
+.aui-help {
+    &.aui-help-text,
+    &.aui-help-empty-state {
+        margin: 10px 0 0 0;
+        overflow: hidden;
+        padding: 0;
+        width: 720px;
+    }
+
+    .aui-help-content {
+        border-left: 4px solid @aui-help-border-color;
+        font-size: @aui-font-size-large;
+        line-height: 1.5;
+        padding-left: @aui-help-content-padding-left;
+
+        > h1,
+        > h2,
+        > h3,
+        > h4,
+        > h5,
+        > h6 {
+            #aui.typography.h100(@aui-help-header-color);
+        }
+    }
+
+    .aui-help-illustration + .aui-help-content {
+        border-left: none;
+        margin-left: @aui-help-illustration-width;
+    }
+
+    .aui-help-illustration {
+        float: left;
+    }
+
+    .aui-help-content > p {
+        margin: 5px 0 0 0;
+    }
+
+    // Inline Dialog2 help
+    aui-inline-dialog&, .aui-inline-dialog& {
+        .aui-inline-dialog-contents {
+            border: @aui-inline-dialog-help-border-width solid @aui-inline-dialog-help-border-color;
+
+            h2:first-child {
+                #aui.typography.h100(@aui-inline-dialog-help-headline-color);
+            }
+        }
+
+        &::before {
+            border-bottom-color: @aui-inline-dialog-help-border-color;
+        }
+
+        &.aui-alignment-side-top {
+            &::after {
+                margin-top: -@aui-inline-dialog2-help-arrow-margin-offset;
+            }
+
+            // The flipped case
+            &.aui-alignment-element-attached-top {
+                &::after {
+                    margin-top: @aui-inline-dialog2-help-arrow-margin-offset;
+                }
+            }
+        }
+
+        // 'bottom _' alignment
+        &.aui-alignment-side-bottom {
+            &::after {
+                margin-top: @aui-inline-dialog2-help-arrow-margin-offset;
+            }
+
+            // The flipped case
+            &.aui-alignment-element-attached-bottom {
+                &::after {
+                    margin-top: -@aui-inline-dialog2-help-arrow-margin-offset;
+                }
+            }
+        }
+
+        // 'left _' alignment
+        &.aui-alignment-side-left {
+            &::after {
+                margin-left: -@aui-inline-dialog2-help-arrow-margin-offset;
+            }
+
+            // The flipped case
+            &.aui-alignment-element-attached-left {
+                &::after {
+                    margin-left: @aui-inline-dialog2-help-arrow-margin-offset;
+                }
+            }
+        }
+
+        // 'right _' alignment
+        &.aui-alignment-side-right {
+            &::after {
+                margin-left: @aui-inline-dialog2-help-arrow-margin-offset;
+            }
+
+            // The flipped case
+            &.aui-alignment-element-attached-right {
+                &::after {
+                    margin-left: -@aui-inline-dialog2-help-arrow-margin-offset;
+                }
+            }
+        }
+    }
+
+    // Inline dialog help
+    .aui-inline-dialog-arrow.aui-css-arrow {
+        &::after,
+        &::before {
+            border-color: @aui-inline-dialog-help-border-color transparent;
+        }
+        &::after {
+            border-bottom-color: @aui-inline-dialog-bg-color;
+            top: @aui-inline-dialog-help-border-width;
+        }
+
+        &.aui-bottom-arrow::after {
+            border-top-color: @aui-inline-dialog-bg-color;
+            top: -@aui-inline-dialog-help-border-width;
+        }
+
+        &.aui-left-arrow::before {
+            border-color: transparent @aui-inline-dialog-help-border-color;
+        }
+
+        &.aui-left-arrow::after {
+            border-right-color: @aui-inline-dialog-bg-color;
+            right: -@aui-inline-dialog-help-border-width;
+        }
+    }
+}

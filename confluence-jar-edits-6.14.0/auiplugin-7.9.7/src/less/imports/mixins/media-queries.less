@@ -1,0 +1,17 @@
+.responsive-max-width(@maxWidth; @rules) {
+    @media all and (max-width: @maxWidth) {
+        @rules();
+    }
+}
+
+.responsive-max-height(@maxHeight; @rules) {
+    @media all and (max-height: @maxHeight) {
+        @rules();
+    }
+}
+
+.ie11(@rules) {
+    @media screen and (-ms-high-contrast: active), screen and (-ms-high-contrast: none) {
+        @rules();
+    }
+}

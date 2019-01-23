@@ -1,0 +1,177 @@
+@import 'aui-theme/components/messages';
+@import 'aui-theme/core/colors';
+
+@import './mixins/dropdown2-trigger-chevron-icon';
+@import './mixins/icon-pseudoelement';
+@import './mixins/media-queries';
+@import './mixins/shadows';
+@import './mixins/tab-indicator';
+@import './mixins/typography';
+
+#aui {
+    .visually-hidden() {
+        border: 0;
+        clip: rect(0 0 0 0);
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        width: 1px;
+    }
+
+    .animation(@animation) {
+        -webkit-animation: @animation;
+        animation: @animation;
+    }
+
+    .border-radius(@radius) {
+        border-radius: @radius;
+    }
+
+    .box-sizing(@sizing: border-box) {
+        box-sizing: @sizing;
+    }
+
+    .prevent-text-selection() {
+        -ms-user-select: none; // IE10+
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        user-select: none;
+    }
+
+    .gradient {
+        .vertical(@start-color: #fff, @end-color: #f2f2f2, @start-percent: 0%, @end-percent: 100%) {
+            background: @end-color;
+            background: linear-gradient(to bottom, @start-color @start-percent, @end-color @end-percent);
+        }
+    }
+
+    .rotate(@angle) {
+        -webkit-transform: rotate(@angle);
+        -ms-transform: rotate(@angle);
+        transform: rotate(@angle);
+    }
+
+    .text-truncate() {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+
+    .transition(@transition) {
+        // Using + is deliberate; it will comma-append the value to whatever value already exists.
+        // See http://lesscss.org/features/#merge-feature-comma
+        transition+: @transition;
+    }
+
+    .transition {
+        .fadeIn(@length: 0.2s, @delay: 0s, @max-opacity: 1) {
+            opacity: @max-opacity;
+            transition: opacity @length;
+            transition-delay: @delay;
+            visibility: visible;
+        }
+
+        .fadeOut(@length: 0.2s, @delay: 0s) {
+            opacity: 0;
+            transition: opacity @length, visibility @length;
+            transition-delay: @delay;
+            visibility: hidden;
+        }
+    }
+
+    .transform-rotate(@angle) {
+        -ms-transform: rotate(@angle);
+        -webkit-transform: rotate(@angle);
+        transform: rotate(@angle);
+    }
+
+    .height-calc(@calc) {
+        height: ~"calc(@{calc})";
+    }
+
+    .placeholder(@color) {
+        // each rule for each browser must be in a different selector, as browsers will
+        // ignore the whole line if it doesn't recognise something.
+        // see https://css-tricks.com/almanac/selectors/p/placeholder/ for more details.
+
+        // Affect Safari and Chrome.
+        &::-webkit-input-placeholder {
+            color: @color;
+            opacity: 1;
+        }
+        // Affect Firefox 18+. The opacity is necessary to override browser defaults.
+        &::-moz-placeholder {
+            color: @color;
+            opacity: 1;
+        }
+        // IE 10 implements placeholder text via a pseudo-class, not a pseudo-element;
+        // that's why there's a single colon here instead of two.
+        &:-ms-input-placeholder {
+            color: @color;
+        }
+        // This is the likely official CSS spec way of achieving placeholder text.
+        &::placeholder {
+            color: @color;
+        }
+        // Target AUI's JS equivalent of the CSS proposal for the `:placeholder-shown` pseudo-class.
+        &.aui-placeholder-shown, &.placeholder-shown {
+            color: @color;
+        }
+    }
+
+    //
+    // Responsive mixins
+    //
+    .responsive-small(@rules) {
+        html.aui-responsive {
+            @media screen and (max-width: 767px) {
+                @rules();
+            }
+        }
+    }
+    .responsive-medium(@rules) {
+        html.aui-responsive {
+            @media screen and (max-width: 800px) {
+                @rules();
+            }
+        }
+    }
+
+    .responsive-large(@rules) {
+        html.aui-responsive {
+            @media screen and (max-width: 1023px) {
+                @rules();
+            }
+        }
+    }
+
+    // messages / flags
+
+    .icon-bar() {
+        //The actual icon
+        &::after {
+            #aui.icon-pseudoelement(@aui-icon-font-family);
+            color: @aui-color-white;
+            font-size: @aui-message-icon-size;
+            left: @aui-message-padding-left;
+            line-height: @aui-message-line-height;
+            position: absolute;
+            top: @aui-message-vertical-padding;
+        }
+
+        // For the backward compatible changes
+        &::before {
+            display: none;
+        }
+    }
+
+    .icon-glyph(@content, @color) {
+        //The actual icon
+        &::after {
+            content: @content;
+            color: @color;
+        }
+    }
+}

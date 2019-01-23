@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.atlassian.confluence.plugins</groupId>
+        <artifactId>confluence-ui-components-parent</artifactId>
+        <version>2.1.8</version>
+    </parent>
+
+    <artifactId>confluence-ui-components</artifactId>
+    <packaging>atlassian-plugin</packaging>
+
+    <name>Confluence UI Components</name>
+    <description>Common user-interface components shared across Confluence modules</description>
+
+    <properties>
+        <npm.command>npm</npm.command>
+        <karma.command>${basedir}/node_modules/.bin/karma</karma.command>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.atlassian.maven.plugins</groupId>
+                <artifactId>maven-confluence-plugin</artifactId>
+                <version>${amps.version}</version>
+                <extensions>true</extensions>
+            </plugin>
+            <plugin>
+                <groupId>com.atlassian.lesscss</groupId>
+                <artifactId>lesscss-maven-plugin</artifactId>
+                <version>3.2.1</version>
+                <executions>
+                    <execution>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>windows</id>
+            <activation>
+                <os>
+                    <family>windows</family>
+                </os>
+            </activation>
+            <properties>
+                <npm.command>npm.cmd</npm.command>
+                <karma.command>${basedir}/node_modules/.bin/karma.cmd</karma.command>
+            </properties>
+        </profile>
+        <profile>
+            <!-- Profile for Karma unit testing. Skips all other tests -->
+            <id>karma</id>
+            <dependencies>
+                <!-- Only exists for qunit -->
+                <dependency>
+                    <groupId>com.atlassian.aui</groupId>
+                    <artifactId>auiplugin</artifactId>
+                    <version>${aui.version}</version>
+                    <scope>test</scope>
+                </dependency>
+                <dependency>
+                    <groupId>com.atlassian.aui</groupId>
+                    <artifactId>aui-flat-pack</artifactId>
+                    <version>${aui.version}</version>
+                    <type>zip</type>
+                    <scope>test</scope>
+                </dependency>
+                <dependency>
+                    <groupId>com.atlassian.plugins</groupId>
+                    <artifactId>jquery</artifactId>
+                    <version>${jquery.version}</version>
+                    <scope>test</scope>
+                </dependency>
+                <dependency>
+                    <groupId>com.atlassian.soy</groupId>
+                    <artifactId>soy-template-plugin</artifactId>
+                    <scope>test</scope>
+                </dependency>
+                <dependency>
+                    <groupId>com.atlassian.aui</groupId>
+                    <artifactId>aui-soy</artifactId>
+                    <version>${aui.version}</version>
+                    <scope>test</scope>
+                </dependency>
+            </dependencies>
+            <build>
+                <plugins>
+                    <plugin><!-- Install npm modules first -->
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <version>1.2.1</version>
+                        <executions>
+                            <execution>
+                                <id>install-npm-modules</id>
+                                <phase>generate-test-sources</phase>
+                                <goals>
+                                    <goal>exec</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <executable>${npm.command}</executable>
+                            <arguments>
+                                <argument>install</argument>
+                            </arguments>
+                        </configuration>
+                    </plugin>
+                    <plugin><!-- Extract AUI for use in tests -->
+                        <artifactId>maven-dependency-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>extract-qunit-dependencies</id>
+                                <phase>generate-test-resources</phase>
+                                <goals>
+                                    <goal>unpack-dependencies</goal>
+                                </goals>
+                                <configuration>
+                                    <outputDirectory>${project.build.directory}/qunit/dependencies</outputDirectory>
+                                    <includeGroupIds>
+                                        com.atlassian.aui,
+                                        com.atlassian.soy,
+                                        com.atlassian.plugins
+                                    </includeGroupIds>
+                                    <includeArtifactIds>
+                                        jquery,
+                                        auiplugin,
+                                        soy-template-plugin,
+                                        aui-flat-pack
+                                    </includeArtifactIds>
+                                    <includes>i18n/aui.properties</includes>
+                                    <includes>**/*.js,**/*.soy,**/*.properties</includes>
+                                </configuration>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <useJvmChmod>true</useJvmChmod>
+                        </configuration>
+                    </plugin>
+                    <plugin><!-- Run the karma tests during test phase -->
+                        <groupId>com.kelveden</groupId>
+                        <artifactId>maven-karma-plugin</artifactId>
+                        <version>1.8</version>
+                        <executions>
+                            <execution>
+                                <id>run-karma-tests</id>
+                                <goals>
+                                    <goal>start</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <!-- Use Phantom for the automated build because I couldn't get Chrome to work on a Bamboo agent -->
+                            <browsers>PhantomJS</browsers>
+                            <karmaExecutable>${karma.command}</karmaExecutable>
+                            <singleRun>true</singleRun>
+                        </configuration>
+                    </plugin>
+
+                    <plugin>
+                        <groupId>com.atlassian.maven.plugins</groupId>
+                        <artifactId>soy-to-js-maven-plugin</artifactId>
+                        <version>1.8</version>
+                        <dependencies>
+                            <dependency>
+                                <groupId>com.atlassian.confluence</groupId>
+                                <artifactId>confluence-karma-testrunner-support</artifactId>
+                                <version>0.0.6</version>
+                            </dependency>
+                        </dependencies>
+                        <executions>
+                            <execution>
+                                <id>generate-aui-js-from-soy</id>
+                                <phase>generate-test-resources</phase>
+                                <goals>
+                                    <goal>compile</goal>
+                                </goals>
+                                <configuration>
+                                    <outputDirectory>${project.build.directory}/qunit/soy</outputDirectory>
+                                    <resources>
+                                        <directory>${project.build.directory}/qunit/dependencies/soy-legacy1/</directory>
+                                        <includes>
+                                            <include>**/*.soy</include>
+                                        </includes>
+                                    </resources>
+                                    <propertiesFile>${project.build.directory}/qunit/dependencies/i18n/aui.properties</propertiesFile>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>generate-js-from-soy</id>
+                                <phase>generate-test-resources</phase>
+                                <goals>
+                                    <goal>compile</goal>
+                                </goals>
+                                <configuration>
+                                    <module>com.atlassian.confluence.test.support.karma.CustomFunctionTransformModule</module>
+                                    <outputDirectory>${project.build.directory}/qunit/soy</outputDirectory>
+                                    <resources>
+                                        <directory>${project.basedir}/src/main/resources/</directory>
+                                        <includes>
+                                            <include>**/*.soy</include>
+                                        </includes>
+                                    </resources>
+                                    <propertiesFile>${project.basedir}/src/main/resources/confluence-ui-components.properties</propertiesFile>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                    <!-- skip ITs -->
+                    <plugin>
+                        <groupId>com.atlassian.maven.plugins</groupId>
+                        <artifactId>maven-confluence-plugin</artifactId>
+                        <version>${amps.version}</version>
+                        <configuration>
+                            <skipITs>true</skipITs>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+            <properties>
+                <!-- Skips unit tests -->
+                <maven.test.unit.skip>true</maven.test.unit.skip>
+            </properties>
+        </profile>
+    </profiles>
+</project>

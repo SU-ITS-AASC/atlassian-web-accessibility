@@ -1,0 +1,28 @@
+@import '../theme';
+
+@aui-dialog-bg-color: @ak-color-N0;
+@aui-dialog-button-hover-border-color: @aui-color-gray;
+@aui-dialog-border-color: @ak-color-N30;
+@aui-dialog-divider-width: 2px;
+@aui-dialog-padding: 20px;
+
+// Because we size the header & footer with border-box,
+// these need to account for the border size.
+@aui-dialog-header-height: 60px + @aui-dialog-divider-width; // NOTE: This value is hard-coded in dialog.js as HEADER_HEIGHT
+@aui-dialog-footer-height: 50px + @aui-dialog-divider-width; // NOTE: This value is hard-coded in dialog.js as BUTTONS_HEIGHT
+
+#aui-dialog {
+    .aui-dialog-header-base() {
+        border-bottom: @aui-dialog-divider-width solid @aui-dialog-border-color;
+        box-sizing: border-box;
+        height: @aui-dialog-header-height;
+        padding: 15px @aui-dialog-padding;
+    }
+
+    .aui-dialog-footer-base() {
+        border-top: @aui-dialog-divider-width solid @aui-dialog-border-color;
+        box-sizing: border-box;
+        height: @aui-dialog-footer-height;
+        padding: 10px;
+    }
+}

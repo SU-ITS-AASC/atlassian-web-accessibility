@@ -1,0 +1,44 @@
+#* @vtlvariable name="action" type="com.benryan.webwork.WordAction" *#
+<html>
+    <head>
+        <title>$!action.page.title</title>
+    </head>
+    #set ($pageType = $action.page.getType())
+
+    #applyDecorator("root")
+        #decoratorParam("helper" $action.helper)
+        #decoratorParam("mode" "importworditem")
+        #decoratorParam("context" "page")
+
+        <content tag="spacekey">$action.page.space.key</content>
+		
+        <body>
+
+            #requireResource("com.atlassian.confluence.extra.officeconnector:office-connector-css")
+            #requireResource("com.atlassian.confluence.extra.officeconnector:wordimportresource")
+
+           ## HACK use pageId query param to work around XWork not setting Action properties from multipart/form-data
+           ## when the form data is too large
+           <form method="post" action="importword.action?pageId=$helper.page.id" enctype="multipart/form-data" class="aui office-connector" id="uploadimportform">
+               <fieldset>
+                   #form_xsrfToken()
+                   <legend>$action.getText('office.import.step.one.legend')</legend>
+                   <h2>$action.getText('office.import.step.one.heading')</h2>
+                   <div class="field-group">
+                       <div class="checkbox/radio">
+                           <label for="filename">$action.getText("office.connector.docimport.upload"):</label>
+                           <input type="file" id="filename" name="filename" size="50"" />
+                       </div>
+                   </div>
+                   <div class="buttons-container">
+                       <div class="buttons">
+                           <span class="word-file-loading hidden" id="loading">$action.getText("loading.name")</span>
+                           <input id="next" name="submit" type="submit" value="$action.getText("office.connector.docimport.next")" class="button" />
+                       </div>
+                   </div>
+                </fieldset>
+            </form>
+        
+        </body>
+    #end
+</html>

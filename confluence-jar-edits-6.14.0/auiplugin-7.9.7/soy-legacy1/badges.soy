@@ -1,0 +1,17 @@
+{namespace atlassian.badges}
+
+/**
+ * Creates a single badge
+ * @param text Visible text of the badge (usually a number).
+ * @param? tagName Defaults to SPAN. Supports inline elements only!
+ * @param? id ID attribute.
+ * @param? extraClasses
+ * @param? extraAttributes
+ **/
+{template .badge}
+<{$tagName ? $tagName : 'span'}
+    {if $id} id="{$id}"{/if}
+    {sp}class="aui-badge{call atlassian.renderExtraClasses data="all" /}"
+    {call atlassian.renderExtraAttributes data="all" /}
+>{$text}</{$tagName ? $tagName : 'span'}>
+{/template}

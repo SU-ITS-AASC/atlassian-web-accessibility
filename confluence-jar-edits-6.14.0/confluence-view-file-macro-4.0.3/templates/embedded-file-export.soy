@@ -1,0 +1,14 @@
+{namespace Confluence.ViewFileMacro.Templates}
+
+/**
+ * @param placeholderSrc URL of placeholder image
+ * @param height height of placeholder image
+ */
+{template .embeddedFileForExport}
+    <img height="{$height}" style="margin: 2px;
+        border: 1px solid #ddd;
+        box-sizing: border-box;
+        vertical-align: text-bottom;"
+            src="{$placeholderSrc}">
+{/template}
+

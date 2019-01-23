@@ -1,0 +1,121 @@
+.blank-slate {
+  text-align: center;
+  height: 100%; }
+
+.blank-slate-image {
+  margin: 30px auto;
+  background-repeat: no-repeat; }
+
+.blank-slate-image-container {
+  display: block;
+  margin: 100px auto 0 auto;
+  text-align: center;
+  float: none; }
+
+.blank-slate-text {
+  max-width: 400px;
+  display: block;
+  margin: 0 auto 20px;
+  text-align: center; }
+  .blank-slate-text p {
+    margin-bottom: 15px; }
+
+.blank-slate-title-text {
+  text-transform: uppercase; }
+
+.blank-slate-content {
+  min-height: 100%; }
+
+.popular-stream .blank-slate-image {
+  width: 130px;
+  height: 110px;
+  background-image: url("assets/images/3.0/icon-stream-empty.svg"); }
+
+.list-container-popular-stream {
+  list-style-type: none;
+  padding: 0;
+  display: inline-block;
+  width: 100%; }
+  .list-container-popular-stream .stream-item-layout {
+    background-image: none;
+    display: inline-block;
+    width: 100%; }
+  .list-container-popular-stream .stream-item-layout .stream-item-body-container {
+    display: inline-block;
+    vertical-align: top;
+    width: calc(100% - 105px);
+    padding: 10px 10px 10px 0; }
+  .list-container-popular-stream .stream-item-layout .avatar-container {
+    width: 78px;
+    height: 48px;
+    padding: 10px 7px 10px 10px;
+    display: inline-block; }
+  .list-container-popular-stream .compact-stream-item-layout {
+    width: 100%;
+    display: table;
+    table-layout: fixed;
+    line-height: normal; }
+    .list-container-popular-stream .compact-stream-item-layout .stream-heading-container {
+      display: table-cell;
+      width: 80%;
+      vertical-align: top;
+      padding: 0; }
+  .list-container-popular-stream .count-container {
+    color: #7A869A;
+    float: right;
+    text-align: right;
+    padding-left: 10px;
+    white-space: nowrap;
+    display: table-cell;
+    vertical-align: top; }
+    .list-container-popular-stream .count-container .count {
+      margin-left: 5px;
+      vertical-align: top; }
+  .list-container-popular-stream .flush-with-heading-container {
+    line-height: 1; }
+  .list-container-popular-stream .stream-heading-container {
+    padding-bottom: 4px; }
+  .list-container-popular-stream .stream-icon-container {
+    display: inline-block;
+    vertical-align: top;
+    margin: 3px 0 0 14px; }
+  .list-container-popular-stream .stream-item-meta {
+    padding: 0; }
+  .list-container-popular-stream .stream-item-heading-link {
+    max-width: 100%;
+    display: inline-block;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap; }
+  .list-container-popular-stream .stream-item {
+    margin-left: -5px;
+    padding: 2px 2px 2px 5px;
+    border-radius: 3px;
+    text-decoration: none; }
+    .list-container-popular-stream .stream-item:hover {
+      background: #F4F5F7; }
+      .list-container-popular-stream .stream-item:hover a:hover {
+        text-decoration: none; }
+      .list-container-popular-stream .stream-item:hover .item-actions {
+        opacity: 1; }
+    .list-container-popular-stream .stream-item .stream-item-date {
+      color: #7A869A;
+      font-size: 12px;
+      display: inline-block; }
+  .list-container-popular-stream .middot-list {
+    margin: 0;
+    padding: 5px 0 5px 0;
+    font-size: 0; }
+  .list-container-popular-stream .middot-list li {
+    display: inline-block;
+    font-size: 14px;
+    margin-right: 5px; }
+  .list-container-popular-stream .avatar-container {
+    font-size: 0; }
+  .list-container-popular-stream .stream-item-date:first-letter {
+    text-transform: uppercase; }
+  .list-container-popular-stream .stream-item-heading {
+    font-weight: 500;
+    vertical-align: top; }
+
+/** 135 lines */

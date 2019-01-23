@@ -1,0 +1,64 @@
+@import './imports/global';
+
+.aui-avatar-size(@type, @size) {
+    &.aui-avatar-@{type},
+    &.aui-avatar-@{type} .aui-avatar-inner {
+        height: @size;
+        max-width: @size;
+        max-height: @size;
+        width: @size;
+    }
+}
+
+.aui-avatar-border-size(@type, @size, @border-radius: (@size * @aui-avatar-border-radius-ratio)) {
+    &.aui-avatar-@{type} {
+        border-radius: @border-radius;
+
+        .aui-avatar-inner {
+            border-radius: @border-radius;
+        }
+    }
+}
+
+// AUI avatar component
+.aui-avatar {
+    box-sizing: border-box;
+    display: inline-block;
+    position: relative;
+    vertical-align: text-bottom;
+
+    &-inner {
+        display: flex;
+        justify-content: center;
+        align-content: center;
+
+        border-radius: 100%;
+        overflow: hidden;
+    }
+
+    & img {
+        display: block;
+        height: 100%;
+        margin: auto;
+        width: 100%;
+    }
+
+    .aui-avatar-size(xsmall, @aui-avatar-size-xsmall);
+    .aui-avatar-size(small, @aui-avatar-size-small);
+    .aui-avatar-size(medium, @aui-avatar-size-medium);
+    .aui-avatar-size(large, @aui-avatar-size-large);
+    .aui-avatar-size(xlarge, @aui-avatar-size-xlarge);
+    .aui-avatar-size(xxlarge, @aui-avatar-size-xxlarge);
+    .aui-avatar-size(xxxlarge, @aui-avatar-size-xxxlarge);
+
+    // Project avatars - circular and different sizes
+    &-project {
+        .aui-avatar-border-size(xxxlarge, @aui-avatar-size-xxxlarge, 12px);
+        .aui-avatar-border-size(xxlarge, @aui-avatar-size-xxlarge, 6px);
+        .aui-avatar-border-size(xlarge, @aui-avatar-size-xlarge, 6px);
+        .aui-avatar-border-size(large, @aui-avatar-size-large, 3px);
+        .aui-avatar-border-size(medium, @aui-avatar-size-medium, 3px);
+        .aui-avatar-border-size(small, @aui-avatar-size-small, 2px);
+        .aui-avatar-border-size(xsmall, @aui-avatar-size-xsmall, 2px);
+    }
+}

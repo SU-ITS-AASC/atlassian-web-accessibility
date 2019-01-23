@@ -1,0 +1,422 @@
+@import 'aui-sidebar-config.less';
+
+//
+// Imported by aui-sidebar.
+//
+// Implements the base container styles for the sidebar, so it works
+// on various screen widths and devices. The sidebar has an expanded
+// and contracted mode, whose skeleton structure is styled here.
+//
+
+//
+// Page-level markers
+// these are added to <body> to indicate a sidebar is rendered on the page
+//
+.aui-page-sidebar {
+    #footer {
+        #aui.box-sizing();
+        padding-left: @aui-sidebar-width;
+    }
+
+    &.aui-sidebar-collapsed {
+        #footer {
+            padding-left: @aui-sidebar-collapsed-width;
+        }
+    }
+}
+
+.aui-page-sidebar-touch {
+    #footer {
+        margin-left: 0;
+        padding-left: inherit;
+        border-top: 1px solid @aui-sidebar-border-color;
+    }
+
+    &.aui-sidebar-collapsed #footer {
+        padding-left: inherit;
+    }
+}
+
+//
+// The sidebar skeleton
+//
+.aui-sidebar {
+    #aui.box-sizing();
+    min-width: @aui-sidebar-collapsed-width;
+    position: absolute;
+    width: @aui-sidebar-width;
+    // TODO: Remove this when sidebar is managed by Layer Manager (AUI-3665).
+    z-index: 1;
+
+    // handle page layouts that have an AUI Page Header in addition to a sidebar
+    + .aui-page-header {
+        #content & { // increase the selector strength to trump AUI page layout
+            padding-left: @aui-sidebar-width + (@aui-grid * 2);
+            background: @aui-sidebar-layout-page-header-background-color;
+        }
+
+        // handle horizontal nav below page header
+        + .aui-navgroup {
+            padding-left: @aui-sidebar-width + (@aui-grid);
+        }
+    }
+
+    + .aui-page-panel {
+        border-top: none;
+    }
+
+    ~ .aui-page-panel {
+        margin-top: 0;
+        padding-left: @aui-sidebar-width;
+
+        .aui-page-sidebar-touch & {
+            border-bottom: none;
+            border-left: 1px solid @aui-sidebar-border-color;
+            clear: none;
+            margin-left: @aui-sidebar-width;
+            padding-left: inherit;
+            width: inherit;
+        }
+
+    }
+
+    // when the sidebar sits over the content
+    &.aui-sidebar-fly-out {
+
+        .aui-page-sidebar-touch & {
+            border-right: 1px solid @aui-sidebar-border-color;
+            height: 100%;
+            position: absolute;
+        }
+
+        ~ .aui-page-panel {
+            padding-left: @aui-sidebar-collapsed-width;
+            .aui-page-sidebar-touch & {
+                margin-left: @aui-sidebar-collapsed-width;
+                padding-left: inherit;
+            }
+            z-index: 0;
+        }
+
+        + .aui-page-header {
+            #content & {
+                padding-left: @aui-sidebar-collapsed-width + (@aui-grid * 2);
+            }
+        }
+
+    }
+
+    //
+    // The content container inside the sidebar.
+    //
+    .aui-sidebar-wrapper {
+        #aui.box-sizing();
+        border-right: 0;
+        border-color: @aui-sidebar-border-color;
+        background-color: @aui-sidebar-background-color;
+        display: flex;
+        flex-direction: column;
+        width: @aui-sidebar-width;
+
+        // The sidebar sits within its container in fun ways.
+        position: absolute;
+        top: 0;
+        bottom: auto;
+
+        &.aui-is-docked {
+            position: fixed;
+            top: 0;
+            bottom: auto;
+        }
+
+        .aui-page-sidebar-touch & {
+            position: static;
+        }
+    }
+
+    .aui-page-sidebar-touch & {
+        background-color: @aui-background-color;
+        float: left;
+        position: static;
+
+        .aui-sidebar-wrapper {
+            border-right: none;
+        }
+    }
+
+    // Tweak existing page-header when shown inside the sidebar
+    .aui-page-header {
+        margin: (@aui-sidebar-spacing) (@aui-sidebar-spacing) 0 (@aui-sidebar-spacing);
+        padding-bottom: 0;
+        position: relative;
+
+        .aui-page-header-image {
+            position: absolute;
+        }
+
+        .aui-avatar {
+            display: block;
+        }
+    }
+
+    .aui-page-header-inner,
+    .aui-page-header-image,
+    .aui-page-header-main {
+        display: block;
+    }
+
+    .aui-page-header-image {
+        + .aui-page-header-main {
+            padding-left: (@aui-sidebar-grid + @aui-avatar-size-large);
+        }
+    }
+
+    .aui-sidebar-header-large {
+        .aui-page-header-image {
+            width: @aui-avatar-size-xxxlarge;
+            margin: 0 auto;
+            position: inherit;
+
+            + .aui-page-header-main {
+                padding-top: @aui-sidebar-grid;
+                padding-left: 0;
+            }
+        }
+
+        .aui-page-header-main {
+            text-align: center;
+
+            > h1,
+            > h2 {
+                #aui.typography.h700();
+                padding-top: @aui-sidebar-grid;
+
+                &:only-child {
+                    padding-top: 0;
+                }
+            }
+        }
+    }
+
+    .aui-page-header-main {
+        padding-top: (@aui-avatar-size-large - (@aui-sidebar-base-line-height * 2)) / 2; // avatar - 2 lines of heading text divided by 2 for top and bottom padding to center it vertically
+
+        > h1,
+        > h2 {
+            #aui.typography.h500();
+            #aui.text-truncate();
+            line-height: @aui-sidebar-base-line-height;
+
+            &:only-child {
+                line-height: @aui-avatar-size-large;
+            }
+        }
+    }
+
+    .aui-page-header-actions {
+        display: none; // page header actions should be rendered as a list under the main <nav class="aui-navgroup-vertical">
+    }
+
+    .aui-nav-breadcrumbs > li {
+        width: 100%;
+    }
+    // END page header tweaks
+
+    // optional handle to adjust the width of the sidebar
+    .aui-sidebar-handle {
+        @sidebar-handle-width: @aui-sidebar-grid;
+        background: @aui-panel-bg-color url(images/icons/sidebar/icon-handle.png) center center no-repeat;
+        cursor: col-resize;
+        height: 100%;
+        position: absolute;
+        right: -@sidebar-handle-width;
+        top: 0;
+        width: @sidebar-handle-width;
+    }
+
+    //
+    // Sidebar body and footer content containers.
+    //
+
+    .aui-sidebar-body {
+        #aui.box-sizing(content-box);
+        flex-grow: 1; // so the footer is pushed to the bottom of the sidebar container.
+        overflow-y: auto;
+    }
+
+    .aui-sidebar-footer {
+        #aui.box-sizing();
+        border-top: 1px solid @aui-sidebar-border-color;
+        display: flex;
+        flex-direction: row-reverse;
+        flex-shrink: 0; // so the items don't get smaller as the browser height shrinks.
+        justify-content: space-between;
+        min-height: @aui-sidebar-footer-height;
+        padding: (@aui-sidebar-spacing - @aui-sidebar-gutter) @aui-sidebar-gutter;
+
+        .aui-page-sidebar-touch & {
+            border-bottom: 1px solid @aui-sidebar-border-color;
+            margin-top: @aui-sidebar-grid;
+        }
+
+        // AUI-4527 - The icon alignment seems wrong based on feedback in
+        // https://bitbucket.org/atlassian/aui/pull-requests/2052/aui-4605-aui-4606-aui-4607-sidebar-tweaks/diff#comment-53220218
+        // so until we can change the base iconography styles, this targeted hack will have to suffice
+        .aui-icon.aui-icon-small {
+            // undo a change made in `.aui-icon-small, .aui-icon-large`
+            // against AUI-1854 to use text-top for icons. maybe it made sense for FontAwesome..?
+            vertical-align: text-bottom;
+        }
+        // END AUI-4527 targeted hacks
+
+        .aui-button {
+            #aui.text-truncate();
+            max-width: 100%;
+
+            ~ .aui-button {
+                margin-left: 0;
+            }
+        }
+
+        > .aui-sidebar-toggle {
+            order: -1;
+            > .aui-icon {
+                background: url(images/icons/sidebar/icon-toggle.svg) center center no-repeat;
+                background-size: @aui-sidebar-icon-size;
+            }
+        }
+    }
+
+    //-----------------------
+    // Sidebar narrow state - add collapsed styles.
+    //-----------------------
+    &[aria-expanded="false"] {
+        @aui-sidebar-nav-group-divider-width: 2px;
+        width: @aui-sidebar-collapsed-width;
+
+        .aui-sidebar-body {
+            overflow-x: hidden; // don't show horizontal scrollbar in collapsed state.
+        }
+
+        // handle page layouts that have an AUI Page Header in addition to a sidebar
+        + .aui-page-header {
+            #content & { // increase the selector strength to trump AUI page layout
+                padding-left: @aui-sidebar-collapsed-width + (@aui-grid * 2);
+            }
+
+            // handle horizontal nav below page header
+            + .aui-navgroup {
+                padding-left: @aui-sidebar-collapsed-width + @aui-grid;
+            }
+        }
+
+        ~ .aui-page-panel {
+            padding-left: @aui-sidebar-collapsed-width;
+            .aui-page-sidebar-touch & {
+                border-left: 1px solid @aui-border-color;
+                margin-left: @aui-sidebar-collapsed-width;
+                padding-left: inherit;
+            }
+        }
+
+        .aui-sidebar-wrapper {
+            width: @aui-sidebar-collapsed-width;
+        }
+
+        .aui-page-header-inner .aui-page-header-image {
+            align-content: center;
+            display: flex;
+            justify-content: center;
+            position: relative;
+            width: auto;
+        }
+
+        .aui-page-header {
+            margin-left: 0;
+            margin-right: 0;
+
+            .aui-avatar,
+            .aui-avatar .aui-avatar-inner {
+                height: @aui-sidebar-header-avatar-collapsed;
+                width: @aui-sidebar-header-avatar-collapsed;
+            }
+
+            .aui-avatar .aui-avatar-inner > img {
+                max-height: @aui-sidebar-header-avatar-collapsed;
+                max-width: @aui-sidebar-header-avatar-collapsed;
+            }
+        }
+
+        .aui-page-header-main {
+            display: none;
+        }
+
+        .aui-sidebar-body {
+            #aui.box-sizing();
+            bottom: @aui-sidebar-footer-height * 2;
+            padding: 0;
+            width: 100%;
+        }
+
+        // Adjust the sidebar footer for the collapsed state
+        .aui-sidebar-footer {
+            overflow: hidden;
+            flex-direction: column-reverse;
+
+            > .aui-sidebar-toggle {
+                > .aui-icon {
+                    #aui.rotate(180deg);
+                }
+            }
+
+            > .aui-button {
+                padding-left: 0;
+                padding-right: 0;
+                text-align: center;
+                // override the text-overflow truncation on aui-button when sidebar is collapsed
+                text-overflow: clip;
+                white-space: normal;
+
+                > .aui-button-label {
+                    display: none;
+                }
+            }
+        }
+    }
+    // END Collapsed state
+
+    &.aui-is-animated {
+        + .aui-page-panel {
+            #aui.transition(padding-left @aui-sidebar-default-transition-timing ease-in-out);
+        }
+
+        .aui-sidebar-wrapper {
+            #aui.transition(width @aui-sidebar-default-transition-timing ease-in-out);
+        }
+
+        .aui-sidebar-body {
+            #aui.transition(padding-top @aui-sidebar-default-transition-timing ease-in-out);
+        }
+    }
+}
+// END Sidebar
+//-----------------------
+
+
+// Adding animations to tipsy
+.aui-sidebar-section-tooltip {
+    #aui.transition(opacity @aui-sidebar-default-transition-timing ease-in-out);
+    opacity: 0;
+
+    .tipsy-inner {
+        background: @aui-sidebar-tooltip-background-color;
+    }
+
+    .tipsy-arrow {
+        border-right-color: @aui-sidebar-tooltip-background-color;
+    }
+
+    &.tooltip-shown {
+        opacity: 1;
+    }
+}

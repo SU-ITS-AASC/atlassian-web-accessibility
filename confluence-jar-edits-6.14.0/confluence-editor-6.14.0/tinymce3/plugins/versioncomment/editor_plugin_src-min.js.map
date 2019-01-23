@@ -1,0 +1,8 @@
+{
+"version":3,
+"file":"/dummy-file-path",
+"lineCount":2,
+"mappings":"AAGAA,MAAA,yHAKG,QAAA,CACCC,CADD,CAECC,CAFD,CAGCC,CAHD,CAICC,CAJD,cAUYC,QAAAA,CAASC,CAATD,EAEHC,CAAAC,OAAAC,IAAA,CAAc,QAAA,OACNC,kBACiBP,CAAAO,OAAAC,eADjBD,CAGJR,EAAA,qCAAAU,OAAA,CAA8CP,CAAAQ,OAAAC,QAAAC,eAAAC,OAAA,CAA+CN,CAA/C,CAA9C,CAJU,CAAd,CAFGJ,CAVZ,SAqBeW,QAAAA,gHAKQb,CAAAc,aALRD,KAKqCb,CAAAe,aALrCF,EArBf,EALH,CAqCAG;OAAA,8BAAAC,YAAA,uEAC4F,QAAA,CAASC,CAAT,MAC5ElB,EAAUgB,OAAA,WAEdhB,EAAAmB,OAAA,4CAA2DD,CAA3D,CAGAlB,EAAAoB,cAAAf,IAAA,4BAAsDL,CAAAqB,QAAAC,yBAAtD,CANgF,CAD5F;",
+"sources":["input.js"],
+"names":["define","$","AJS","tinymce","Templates","init","ed","onInit","add","params","versionComment","append","Editor","SaveBar","VersionComment","render","getInfo","majorVersion","minorVersion","require","safeRequire","ConfluenceVersionCommentPlugin","create","PluginManager","plugins","ConfluenceVersionComment"]
+}

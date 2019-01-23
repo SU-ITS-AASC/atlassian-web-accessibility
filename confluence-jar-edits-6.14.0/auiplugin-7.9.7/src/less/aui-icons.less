@@ -1,0 +1,199 @@
+@import 'imports/global';
+
+/**
+* Basic icon styles. Allows you to easily render sprite icons.
+*
+* .aui-icon must be present on all iconified elements
+* All iconified elements must include class names prefixed with 'aui-icon-'
+* Icons assume light backgrounds. Icon classnames for dark backgrounds must be suffixed with '-d'
+* For elements whose background changes in app, we advise maintaining light/dark state in the app.
+*
+*/
+
+.aui-icon {
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    border: none;
+    display: inline-block;
+    height: @aui-icon-size-small;
+    margin: 0;
+    padding: 0;
+    text-align: left;
+    text-indent: -999em;
+    vertical-align: text-bottom;
+    width: @aui-icon-size-small;
+}
+
+.aui-icon-small,
+.aui-icon-large {
+    line-height: 0;
+    position: relative;
+    vertical-align: text-top;
+
+    &::before {
+        #aui.icon-pseudoelement(@aui-icon-font-family);
+        color: inherit;
+        left: 0;
+        line-height: 1;
+        position: absolute;
+        text-indent: 0;
+        top: 50%;
+    }
+}
+
+.aui-icon-small {
+    height: @aui-icon-size-small;
+    width: @aui-icon-size-small;
+}
+
+.aui-icon-large {
+    height: @aui-icon-size-large;
+    width: @aui-icon-size-large;
+}
+
+.aui-icon-small:before {
+    font-size: @aui-icon-size-small;
+    margin-top: (@aui-icon-size-small / -2)
+}
+
+.aui-icon-large:before {
+    font-size: @aui-icon-size-large;
+    margin-top: (@aui-icon-size-large / -2)
+}
+
+.icon-move,
+.icon-move-d,
+.icon-dropdown,
+.icon-dropdown-d,
+.icon-dropdown-active,
+.icon-dropdown-active-d,
+.icon-minimize,
+.icon-minimize-d,
+.icon-maximize,
+.icon-maximize-d {
+    background-repeat: no-repeat;
+}
+
+.aui-icon.icon-move,
+.aui-icon.icon-move-d,
+.aui-icon.icon-dropdown,
+.aui-icon.icon-dropdown-d,
+.aui-icon.icon-dropdown-active,
+.aui-icon.icon-dropdown-active-d,
+.aui-icon.icon-minimize,
+.aui-icon.icon-minimize-d,
+.aui-icon.icon-maximize,
+.aui-icon.icon-maximize-d {
+    background-position: 0 0 !important; /* This is for legacy support */
+    height: 13px;
+    vertical-align: baseline;
+    width: 13px;
+}
+
+
+/* Core icons - deprecated */
+.icon-move {
+    /* icon-move.png */
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAANAQAAAABakNnRAAAAAnRSTlMAAHaTzTgAAAAlSURBVHgBY2BiYGBnYOBvADGUFBiSDBj+/wCSIDYTSBwoC2QAAF4LBNQUu22rAAAAAElFTkSuQmCC');
+    cursor: move;
+}
+.icon-move-d {
+    /* icon-move-d.png */
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAANCAAAAABXgLugAAAAAnRSTlMAAHaTzTgAAAAtSURBVHgBY4CAXDAJ4+TmInOgXAyVuXAMIuC8XCBGBqhyMBaaSTjtg3DQVQIAa64U3lyaxpQAAAAASUVORK5CYII=');
+    cursor: move;
+}
+.icon-dropdown {
+    /* icon-dropdown.png */
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAANCAQAAADY4iz3AAAAKUlEQVQY02NgwAf+YwFQCezKKZRCtwdFF4oD0A1ESFDBGVil8IQGbgAAiaBjnU8tP0kAAAAASUVORK5CYII=');
+}
+.icon-dropdown-d {
+    /* icon-dropdown-d.png */
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAANCAQAAADY4iz3AAAAKklEQVQY02NgwAdy/2NCqAR25RRKoduDogvFAegGIiSo4AysUnhCAzcAAJOYRxkKj+5hAAAAAElFTkSuQmCC');
+}
+.icon-dropdown-active {
+    /* icon-dropdown-active.png */
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAANCAQAAADY4iz3AAAAKElEQVQY02NgwAf+YwE4JaCSlEhh2o2kC91RKAYyoPOo7kI8oYEbAACHhecZSiXhsAAAAABJRU5ErkJggg==');
+}
+.icon-dropdown-active-d {
+    /* icon-dropdown-active-d.png */
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAANCAQAAADY4iz3AAAAKElEQVQY02NgwAdy/2NCnBJQSUqkMO1G0oXuKBQDGdB5VHchntDADQAE0qTxqu2HqgAAAABJRU5ErkJggg==');
+}
+.icon-minimize {
+    /* icon-minimize.png */
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAANCAQAAADY4iz3AAAAHklEQVQY02NgwAf+YwE4JaCS5Epht3/wSOEJDdwAAFcvh3lwBRT4AAAAAElFTkSuQmCC');
+}
+.icon-minimize-d {
+    /* icon-minimize-d.png */
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAANCAQAAADY4iz3AAAAH0lEQVQY02NgwAdy/2NCnBJQSXKlsNs/eKTwhAZuAAAbK2Cx/Io00wAAAABJRU5ErkJggg==');
+}
+.icon-maximize {
+    /* icon-maximize.png */
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAANCAQAAADY4iz3AAAAJUlEQVQY02NgIAT+YwDipNBNwS+F3SjCUtjdSoYDiJDC6VncAAAKY3uF7U/mdQAAAABJRU5ErkJggg==');
+}
+.icon-maximize-d {
+    /* icon-maximize-d.png */
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAANCAQAAADY4iz3AAAAJklEQVQY02NgIARy/6ND4qTQTcEvhd0owlLY3UqGA4iQwulZ3AAAn8BYKXiL6OYAAAAASUVORK5CYII=');
+}
+
+
+/* Form icons - deprecated */
+form.aui .icon-date,
+.aui-icon-date {
+    /* icon-date.png */
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAAARElEQVR4AWMoIBGANFgXr8dE927fw0TkaCDLSf/B4O7duwQZ5Gq4iwNccDGHI4gIARuA6tAYJGig1En0DyVMQFcnkQgA7103vYurRvEAAAAASUVORK5CYII=');
+}
+form.aui .icon-range,
+.aui-icon-range {
+    /* icon-range.png */
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAAARklEQVR4AWMoIBGANFgXr8dEd7EBcjSQ5aT/YAA0gCCDXA0Q911wMSeIUGwA8gkyyNWAsJRyJ6F5mmQNhJ2EFtN0ijgSAQD0WQfB7IGD0QAAAABJRU5ErkJggg==');
+}
+
+.aui-icon-required {
+    /* icon-required.png */
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAARUlEQVR4AWOAgQsu5v8ZSAIIjaVAbA4yAEqXkmpAMxDfABkApZtJNYARiHtABkBpRlIN0AbiK0AcBMQrQHyGkQdGwSgAAPtCJnBUV/TSAAAAAElFTkSuQmCC');
+}
+
+form.aui .icon-users,
+.aui-icon-users {
+    /* icon-users.png */
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAArElEQVR4AWOgCbAuXi8HxLuA+DOUliPVgN1A/B8J78epuKCgwBOIn0GxJ9SAz2gG/MSllgHK+Q/Fz/C5AFMtpuBzWBhADfkCpeWxqoUKeoE4QPwExMbhU9LUAm2UAuK9IL8D8R4glmQgYLIGCCMZsBYtDNZiqkUIlCH5qxxqwCc0Az5jVQsVfI4k+A5qwH90jEstA4SDwLgNwFQ7jAy4gSR4F2rAaTQDjuFSCwBFeGK4drVwMAAAAABJRU5ErkJggg==');
+}
+form.aui .icon-help,
+.aui-icon-help,
+form.aui .icon-inline-help,
+.aui-icon-inline-help {
+    /* icon-help.png */
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAQAAAC1+jfqAAABG0lEQVR4AU2RNVYtQRiE+7m7IxHRlRxnHWwAty9lDbg7K4AUh7kJ7vDwEGLcvU6f6cP8NVJVXe3GFWGqWedSWBcLm2DxjmZuuSFGgxATu9X/tWt+zTAPdBNnnBNHl5whP0KDRJm1ezjimn6SpArlNhqRCLd02eA0h+SSzS47PJfuUEvEUMMN/yR/8UC5DVaKJej/T6PVGNbxjC1SeKtvBgfMawQVHhuGS9oC+8ninGW3XNq4MlwRDAyzx1enFDgxbOAFAhP0BpTHf7dIZyW64f1F1hqi3NLhW584Ej77StskKkIjD5Ra6y0bwlvLC7inyR31iCJd2MF5Zs+0U84wr58uq5U7bvBoEDxupBrVHCwi1LLJNaf8F4s4/xGiuqDPs2tUOAAAAABJRU5ErkJggg==');
+}
+
+
+/* Message icons */
+.aui-message .icon-close,
+.aui-icon-close {
+    /* icon-close.png */
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAQAAAC1+jfqAAAAOUlEQVR4AWOgGogCQjQ+KrcfCKMw+MgCECEMHqYSdGlMJZjSCCWo0oQVELaCsCMJe5NwQBEOasoBAGP2Kx0Yi3q/AAAAAElFTkSuQmCC');
+}
+.aui-message .icon-close-inverted,
+.aui-message.error .icon-close,
+.aui-icon-close-inverted {
+    /* icon-close-inverted.png */
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAQAAAC1+jfqAAAAOklEQVR4AWOgFvi/4P8CdD4qFwQWYPCRBSBCGDxMJejSmEowpRFKUKUJKyBsBWFHEvYm4YAiHNSUAwDHH6hxrraMqwAAAABJRU5ErkJggg==');
+}
+
+
+/* Dropdown icon (downwards arrow)
+* - achieved via pseudo element
+*/
+.aui-icon-dropdown {
+    border: 4px solid transparent;
+    border-top-color: @aui-text-color;
+    content: "";
+    display: inline-block;
+    height: 0;
+    overflow: hidden;
+    text-align: left;
+    text-indent: -999em;
+    position: relative;
+    vertical-align: baseline;
+    width: 0;
+}

@@ -1,0 +1,1 @@
+("undefined"===typeof window?global:window).__65ca28a9d6b0f244027266ff8e6a6d1c=function(){var a={};"use strict";Object.defineProperty(a,"__esModule",{value:!0});a.default=function(a,b){if(window.define){var c=window.define;c(a,[],function(){return b})}return b};return a=a["default"]}.call(this);

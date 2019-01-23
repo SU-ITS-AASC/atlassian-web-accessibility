@@ -1,0 +1,45 @@
+<html>
+    <head>
+        <title>$action.getText("collector.pages.title")</title>
+        #requireResource("com.atlassian.confluence.plugins.confluence-space-ia:collector-resources")
+    </head>
+
+    <content tag="content-navigation">
+        <div id="navigation" class="content-navigation pages-collector">
+            <ul class="ajs-menu-bar">
+                #menuMacros_renderButton("system.content.collector.pages", "aui-button-subtle")
+            </ul>
+        </div>
+    </content>
+
+    #applyDecorator("root")
+        #decoratorParam("context" "space")
+        #decoratorParam("mode" "pages-collector")
+        #decoratorParam("collector-key" "spacebar-pages")
+
+        <body>
+            #if ($showBlankExperience)
+                #blankExperience("page", $hasCreatePermission, "blank.experience.pages", "blank.experience.pages.no.create.permission", "page.create", $createPageLink)
+            #else
+                <div class="recently-updated-section">
+                    $action.helper.renderConfluenceMacro("{recently-updated:spaces=%s|type=page|theme=concise}", ${spaceKey})
+                </div>
+                <div class="tree-browser-section">
+                    <div class="collector-section-header">
+                        <div>
+                            <div class="collector-section-header-title">
+                                <h2>$action.getText("collector.pages.tree-browser.title")</h2>
+                            </div>
+                            <div class="collector-section-header-browse-link">
+                                <a class="reorder-pages-link" href="$req.contextPath/pages/reorderpages.action?key=$generalUtil.urlEncode($key)">
+                                    $action.getText("collector.pages.reorder.link")
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    $action.helper.renderConfluenceMacro("{pagetree:root=$action.root}", ${spaceKey})
+                </div>
+            #end
+        </body>
+    #end
+</html>

@@ -1,0 +1,114 @@
+{namespace Confluence.Templates.Blueprints}
+
+/**
+ * space option element
+ *
+ * @param space
+ */
+{template .spaceOption}
+    <option value="{$space.key}">{$space.title}</option>
+{/template}
+
+/**
+ * List of templates
+ *
+ * @param webItems a list of WebItem instances
+ * @param spaceKey the key of the space the templates are being listed for
+ */
+{template .templates}
+<ol class="templates" data-space-key="{$spaceKey}" tabindex="100">
+{foreach $webItem in $webItems}
+<li class="template"
+    {if $webItem.itemModuleCompleteKey}data-item-module-complete-key="{$webItem.itemModuleCompleteKey}"{/if}
+    {if $webItem.blueprintModuleCompleteKey}data-blueprint-module-complete-key="{$webItem.blueprintModuleCompleteKey}"{/if}
+    {if $webItem.contentBlueprintId}data-content-blueprint-id="{$webItem.contentBlueprintId}"{/if}
+    {if $webItem.templateId}data-template-id="{$webItem.templateId}"{/if}
+    {if $webItem.createResult}data-create-result="{$webItem.createResult}"{/if}
+    {if $webItem.howToUseTemplate}data-how-to-use-template="{$webItem.howToUseTemplate}"{/if}
+    {if $webItem.directLink}data-direct-link="{$webItem.directLink}"{/if}
+    >
+    {if $webItem.styleClass}
+        <span class="template-preview {$webItem.styleClass}"></span>
+    {else}
+        <img class="template-preview" src="{$webItem.iconURL}">
+    {/if}
+    <div class="template-meta">
+        <div class="template-name">{$webItem.name}
+            {if $webItem.isNew}<span class="aui-lozenge aui-lozenge-complete new-flag">{getText('create.content.plugin.discover.new.banner.new')}</span>{/if}
+        </div>
+        <div class="template-description">{$webItem.description ? $webItem.description : ''}</div>
+    </div>
+</li>
+{/foreach}
+</ol>
+{/template}
+
+/**
+ * Discover new items banner
+ * @param newItemsNo number of new items
+ * @param showLinkToNew true for displaying a link to show new items, otherwise link to show all
+ */
+{template .discoverNewBanner}
+<header id="header" role="banner">
+    <div id="discover-new-banner" class="aui-message aui-message-hint shadowed closeable">
+        <p class="title">{if $showLinkToNew}
+            {if $newItemsNo == 1}
+                {getText('create.content.plugin.discover.new.banner.new.item',$newItemsNo)|noAutoescape}
+            {else}
+                {getText('create.content.plugin.discover.new.banner.new.items',$newItemsNo)|noAutoescape}
+            {/if}
+        {else}
+            {if $newItemsNo == 1}
+                {getText('create.content.plugin.discover.new.banner.showing.new.item',$newItemsNo)}
+            {else}
+                {getText('create.content.plugin.discover.new.banner.showing.new.items',$newItemsNo)}
+            {/if}&nbsp;<button class="aui-button aui-button-link" data-is-filtered="true">{getText('create.content.plugin.discover.new.banner.show.all')}</button>
+        {/if}</p>
+        <span class="aui-icon icon-close" role="button" tabindex="0"></span>
+    </div>
+</header>
+{/template}
+
+/**
+ * Renders add / remove / customise templates link
+ * @param linkUrl
+ * @param linkText
+ */
+{template .customiseTemplatesLink}
+    <a class="add-remove-customise-templates-trigger button-panel-link" href="{$linkUrl}" tabindex="-1">{$linkText}</a>
+{/template}
+
+/**
+ * The "Don't show this again" checkbox for the How-to-Use page.
+ */
+{template .howToUseSkipCheckbox}
+<div class="dialog-tip">
+    <input id="dont-show-how-to-use" type="checkbox" name="skipHowToUse">
+    <label for="dont-show-how-to-use" type="checkbox">
+        <span class="checkbox-label">{getText('create.content.plugin.create-dialog.how-to.skip.label')}</span>
+    </label>
+</div>
+{/template}
+
+/**
+ * A hidden field.
+ * @param name field name
+ * @param value field value
+ */
+{template .createHiddenField}
+    <input name="{$name}" value="{$value}" type="hidden"/>
+{/template}
+
+/**
+ * A hidden div to pass initial parameters to the create dialog from the InitCreateDialogAction.
+ * @param? params the parameters to store in this hidden div
+ */
+{template .createDialogInitParams}
+    {if $params and length($params)}
+        <div id="create-dialog-init-params" class="hidden">
+            {foreach $param in $params}
+                <div data-key="{$param.key}" data-value="{$param.value}"></div>
+            {/foreach}
+        </div>
+    {/if}
+{/template}

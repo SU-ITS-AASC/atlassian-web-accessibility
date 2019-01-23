@@ -1,0 +1,15 @@
+{namespace DashboardTemplates.RecentViewed}
+
+/**
+*
+*/
+{template .blank}
+    {call DashboardTemplates.Default.blank}
+        {param cssClass: 'recently-viewed' /}
+        {param title: getText('recently.viewed.mainBanner') /}
+        {param content}
+            <p>{getText('recently.viewed.subBanner')|noAutoescape}</p>
+            <p>{getText('recently.viewed.subBanner2')|noAutoescape}</p>
+        {/param}
+    {/call}
+{/template}

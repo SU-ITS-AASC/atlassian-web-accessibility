@@ -1,0 +1,8 @@
+{
+"version":3,
+"file":"/dummy-file-path",
+"lineCount":2,
+"mappings":"AAKAA,MAAA,gFAEG,QAAA,CACCC,CADD,cAMYC,QAAAA,CAASC,CAATD,EAEHC,CAAAC,WAAA,eAA6B,QAAA,GAEzBD,CAAAE,cAAAC,KAAA,8BAEUL,CAAAM,SAAAC,+BAFV,6BAGkBC,QAAA,CAASN,CAAAO,QAAA,kCAAT,CAHlB,YAImBD,QAAA,CAASN,CAAAO,QAAA,mCAAT,CAJnB,yCAFyB,CAA7B,CAFGR,CANZ,SAsBeS,QAAAA;gEAKQV,CAAAW,aALRD,KAKqCV,CAAAY,aALrCF,EAtBf,EAFH,CAmCAG,QAAA,8BAAAC,YAAA,oEAAsH,QAAA,CAASC,CAAT,MAC9Gf,EAAUa,OAAA,WAEdb,EAAAgB,OAAA,qCAAoDD,CAApD,CAGAf,EAAAiB,cAAAC,IAAA,eAAyClB,CAAAmB,QAAAJ,kBAAzC,CANkH,CAAtH;",
+"sources":["input.js"],
+"names":["define","tinymce","init","ed","addCommand","windowManager","open","settings","editor_plugin_action_base_path","parseInt","getLang","getInfo","majorVersion","minorVersion","require","safeRequire","ConfCharmapPlugin","create","PluginManager","add","plugins"]
+}

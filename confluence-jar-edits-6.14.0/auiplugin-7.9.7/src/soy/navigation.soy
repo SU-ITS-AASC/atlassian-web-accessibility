@@ -1,0 +1,80 @@
+{namespace aui.navigation}
+
+/**
+ * An item in the sidebar navigation.
+ *
+ * @param label the label of the item
+ * @param href the item's href attribute.
+ * @param? count the number that appears in the aui-badge
+ * @param? key the key of the item
+ * @param? iconClass the item's icon class (excluding aui-icon).
+ * @param? selectedItemKey the key of the selected item
+ * @param? isSelected alternative to using key and selectedItemKey - this one is just a boolean
+ * @param? isChild Whether we are currently rendering beneath a parent item.
+ * @param? isCollapsible Whether this item is collapsible
+ * @param? isCollapsed Whether this item is collapsed (only applies if isCollapsible == true)
+ * @param? children The children of the current item
+ * @param? extraClasses String or Object. CSS classes to add to the outermost element
+ * @param? extraAttributes String or Object. Additional attributes to add to the outermost element
+ */
+{template .item}
+    <li class="
+        {if $isSelected or $key and $selectedItemKey == $key}aui-nav-selected{/if}
+        {call aui.renderExtraClasses data="all" /}"
+        {if $isCollapsible and $children and length($children) > 0}aria-expanded="{if $isCollapsed}false{else}true{/if}"{/if}
+        {call aui.renderExtraAttributes data="all" /}>
+
+        {if $children and length($children) > 0 and $isCollapsible}
+            <a href="#" class="aui-nav-subtree-toggle">
+                {call aui.icons.icon}
+                    {param icon: $isCollapsed ? 'collapsed' : 'expanded' /}
+                    {param size: 'small' /}
+                    {param useIconFont: true /}
+                {/call}
+            </a>
+        {/if}
+
+        <a class="aui-nav-item" href="{$href}">
+            {if $iconClass and not $isChild}
+                {call aui.icons.icon}
+                    {param icon: $iconClass /}
+                    {param size: 'small' /}
+                    {param useIconFont: true /}
+                {/call}
+            {/if}
+            {if $count == 0 or $count}
+                <aui-badge>{$count}</aui-badge>
+            {/if}
+            <span class="aui-nav-item-label">{$label}</span>
+        </a>
+
+        {if $children and length($children) > 0}
+            {call .nav}
+                {param items: $children /}
+                {param selectedItemKey: $selectedItemKey /}
+                {param isChild: true/}
+            {/call}
+        {/if}
+    </li>
+{/template}
+
+/**
+ * @param items
+ * @param? selectedItemKey
+ * @param? isChild Whether we are currently rendering beneath a parent item.
+ * @param? extraClasses String or Object. CSS classes to add to the outermost element
+ * @param? extraAttributes String or Object. Additional attributes to add to the outermost element
+*/
+{template .nav}
+    <ul class="aui-nav
+        {call aui.renderExtraClasses data="all" /}"
+        {call aui.renderExtraAttributes data="all" /}>
+
+        {foreach $item in $items}
+            {call .item data="$item"}
+                {param isChild: $isChild/}
+                {param selectedItemKey: $selectedItemKey/}
+            {/call}
+        {/foreach}
+    </ul>
+{/template}

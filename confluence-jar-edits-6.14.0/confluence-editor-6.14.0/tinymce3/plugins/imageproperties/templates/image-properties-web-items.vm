@@ -1,0 +1,6 @@
+<div id="image-properties-tab-items" class="hidden">
+    #set ($tabItems = $webInterfaceManager.getDisplayableItems("system.editor.image.properties.tabs", $webInterfaceContext))
+    #foreach ($item in $tabItems)
+        <div title="$item.label.getDisplayableLabel($req, $webInterfaceContext)" data-weight="$item.weight">$item.link.id</div>
+    #end
+</div>

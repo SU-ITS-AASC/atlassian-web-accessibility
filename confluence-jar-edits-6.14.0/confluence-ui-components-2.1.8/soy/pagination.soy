@@ -1,0 +1,29 @@
+{namespace Confluence.UI.Components.Pagination.Templates}
+
+/**
+* @param currentPage
+* @param totalPages
+* @param pageSize
+* @param startPage
+* @param itemsToRender
+* @param url
+*/
+{template .paginationFooter}
+<ol class="aui-nav aui-nav-pagination macro-auto-pagination" data-page-size="{$pageSize}" data-initial-page-index="{$currentPage}">
+    <li class="aui-nav-previous"><a {if $currentPage == 0}aria-disabled="true"{else}href="#"{/if}>{getText('confluence-ui-components.pagination.previous')}</a></li>
+    {let $startIdx: $startPage + 1/}
+    {let $currentIdx: $currentPage + 1/}
+    {let $endIdx: $startIdx + $itemsToRender/}
+    {let $totalRange: $totalPages + 1/}
+    {for $index in range($startIdx, $endIdx < $totalRange ? $endIdx : $totalRange)}
+    {if $index == $currentIdx}
+    <li class="aui-nav-selected" data-index="{$index - 1}">{$index}</li>
+    {else}
+    <li data-index="{$index - 1}">
+        <a href="#">{$index}</a>
+    </li>
+    {/if}
+    {/for}
+    <li class="aui-nav-next"><a {if $currentIdx == $totalPages}aria-disabled="true"{else}href="{$url}"{/if}>{getText('confluence-ui-components.pagination.next')}</a></li>
+</ol>
+{/template}

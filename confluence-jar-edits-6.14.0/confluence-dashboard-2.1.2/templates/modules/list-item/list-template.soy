@@ -1,0 +1,118 @@
+{namespace DashboardTemplates.Lists}
+
+
+/**
+* @param groupTitle
+*/
+{template .group}
+	<h2>{$groupTitle}</h2>
+	<div class="group-container"></div>
+{/template}
+
+
+/**
+* @param url
+* @param title
+* @param icon
+* @param removable
+* @param virtuallyDeleted
+* @param pageStatus
+* @param contentType
+* @param isCollabEditingEnabled
+* @param draftDiscovery
+*/
+{template .item}
+    <div class="item-block"
+        {if $virtuallyDeleted } class="removed" {/if}
+        {if ($pageStatus == 'draft' or $pageStatus == 'unpublished') and $isCollabEditingEnabled} data-contains-lozenge="true" {/if}>
+        {let $itemTitle}
+            {if not $title or $title == ''}
+                {getText('untitled.content.item')|noAutoescape}
+            {else}
+                {$title|noAutoescape}
+            {/if}
+        {/let}
+        <a href="{$url}" class="item-clickable">
+            <div class="item-icon" href="{$url}">
+                <span class="aui-icon content-type-{$icon}">
+                    {if $icon == 'page'}
+                        {getText('page.word')}
+                    {else}
+                        {getText('news.word')}
+                    {/if}
+                </span>
+            </div>
+            <div class="item-content" {if $draftDiscovery == true} aria-controls="draft-discovery-dialog" {/if}>
+                {if ($pageStatus == 'draft' or $pageStatus == 'unpublished') and $isCollabEditingEnabled}
+                    <div class="item-status {$pageStatus}">
+                        <span class="aui-lozenge {$pageStatus} tooltip" data-type="{$pageStatus}"
+                            // Setting the tooltip for lozenge
+                            {if $pageStatus == 'draft' and $contentType == 'page' }
+                                title="{getText('status.lozenge.tooltip.draft.page')}"
+                            {elseif $pageStatus == 'draft' and $contentType == 'blogpost' }
+                                title="{getText('status.lozenge.tooltip.draft.blog')}"
+                            {elseif $contentType == 'page' }
+                                title="{getText('status.lozenge.tooltip.unpublished.page')}"
+                            {else}
+                                title="{getText('status.lozenge.tooltip.unpublished.blog')}"
+                            {/if}
+                            >
+                            // Setting the lozenge text
+                            {if $pageStatus == 'draft'}
+                                {getText('status.lozenge.draft')}
+                            {else}
+                                {getText('status.lozenge.unpublished')}
+                            {/if}
+                        </span>
+                    </div>
+                    {if $draftDiscovery == true}
+                        {call .draftDiscoveryDialog /}
+                    {/if}
+                {/if}
+                <div class="item-text">
+                    <span class="item-title">{$itemTitle}</span>
+                </div>
+            </div>
+        </a>
+        {if $removable }
+            {call .actionRemove data="all" /}
+        {/if}
+    </div>
+{/template}
+
+/**
+* @param virtuallyDeleted
+*/
+{template .actionRemove}
+	<div class="item-actions">
+		{if $virtuallyDeleted }
+			{call .undo /}
+		{else}
+			{call .remove /}
+		{/if}
+	</div>
+{/template}
+
+/**
+*
+*/
+{template .remove}
+	<button title="Remove" class="top-tooltip remove aui-icon aui-icon-small aui-iconfont-remove-label"></button>
+{/template}
+
+/**
+*
+*/
+{template .undo}
+	<button title="Undo" class="top-tooltip undo-remove aui-icon aui-icon-small aui-iconfont-undo"></button>
+{/template}
+
+/**
+ */
+{template .draftDiscoveryDialog}
+    <aui-inline-dialog id="draft-discovery-dialog" alignment="right top" open>
+        <h6>{getText('status.lozenge.draft.discovery.title')}</h6>
+        <p>{getText('status.lozenge.draft.discovery.summary')}</p>
+        <p><button id="draft-discovery-button" class="aui-button">{getText('status.lozenge.draft.discovery.done')}</button></p>
+    </aui-inline-dialog>
+{/template}

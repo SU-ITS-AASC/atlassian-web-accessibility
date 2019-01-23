@@ -1,0 +1,32 @@
+@import '../aui-theme/core/icons';
+@import '../aui-theme/components/icons';
+
+#aui {
+    .icon-pseudoelement(@fontface: @aui-icon-font-family) {
+        -moz-osx-font-smoothing: grayscale; // Improves the rendering of icons in OSX + Firefox
+        -webkit-font-smoothing: antialiased; // Improves the rendering of icons in OSX + (Safari, Google Chrome)
+        -webkit-text-stroke-width: 0; // Prevents drawing a thicker edge on icons
+        font-family: @fontface;
+        font-weight: normal;
+        font-style: normal;
+        speak: none; // This prevents screen readers from pronouncing the pseudo element text content used to trigger the icon font
+    }
+
+    .icon(@icon-glyph-code; @rules) {
+        &::before {
+            #aui.icon-pseudoelement(@aui-icon-font-family);
+            color: inherit;
+            content: @icon-glyph-code;
+            font-size: @aui-icon-size-small;
+            height: @aui-icon-size-small;
+            left: 0;
+            line-height: 1;
+            margin-top: -(@aui-icon-size-small / 2);
+            position: absolute;
+            text-indent: 0;
+            top: 50%;
+            width: @aui-icon-size-small;
+            @rules();
+        }
+    }
+}

@@ -1,0 +1,19 @@
+{
+  "blueprint.template.promote": [],
+  "blueprint.template.unpromote": [],
+  "blueprint.template.enable": [],
+  "blueprint.template.disable": [],
+  "blueprint.user.template.promote": [],
+  "blueprint.user.template.unpromote": [],
+  "confluence.quick.create.blank.click": [],
+  "confluence.quick.create.blank.save": [],
+  "confluence.quick.create.blank.close": [],
+  "confluence.quick.create.blank.change.location": [],
+  "confluence.quick.create.dialog.open": [],
+  "confluence.quick.create.discovery.open": [],
+  "confluence.quick.create.discovery.close": [],
+  "confluence.quick.create.create-dialog.blue-print.save": [],
+  "confluence.quick.create.create-dialog.blue-print.close": [],
+  "confluence.quick.create.create-dialog.blank.save": [],
+  "confluence.quick.create.create-dialog.blank.close": []
+}

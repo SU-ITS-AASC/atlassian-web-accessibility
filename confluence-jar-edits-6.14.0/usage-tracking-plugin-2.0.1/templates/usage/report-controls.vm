@@ -1,0 +1,45 @@
+
+<div class="greyLinks">
+
+    <div>
+
+     #if ($action.space)
+        #set ($spaceParamsHtml = "key=$action.spaceKey&amp;")
+     #end
+
+    <span style="margin-right: 2em">
+    $action.getText('usage.period.name'):
+    #foreach ($period in ["month", "week", "day"])
+        #if ($velocityCount != 1) | #end
+        #if ($action.period == $period)
+            <span style="padding: 5px; background-color: #f0f0f0;"><b>$action.getText("usage.period.$period")</b></span>
+        #else
+            <a href="?$!{spaceParamsHtml}period=$period">$action.getText("usage.period.$period")</a>
+        #end
+    #end
+    </span>
+
+    #set ($period = $generalUtil.htmlEncode($action.period))
+
+    <span>
+        $action.getText("usage.${period}.name"):
+        #set( $ampersandHtml = "&amp;")
+        <a href="?$!{spaceParamsHtml}period=${period}${ampersandHtml}date=$action.previousReportDateParam">
+        $generalUtil.htmlEncode($action.getText("previous.name"))</a> |
+        <a href="?$!{spaceParamsHtml}period=${period}">$action.getText("usage.now.name")</a> |
+        <a href="?$!{spaceParamsHtml}period=${period}${ampersandHtml}date=$action.nextReportDateParam">$generalUtil.htmlEncode($action.getText("next.name"))</a>
+    </span>
+
+    </div>
+
+    #if ($action.space)
+
+    <div style="margin-top: 0.5em">
+        #if ($permissionHelper.isConfluenceAdministrator($action.authenticatedUser))
+        <strong>See also: </strong><a href="$req.contextPath/admin/globalusage.action">$action.getText("usage.global.activity.link")</a>
+        #end
+    </div>
+
+    #end
+
+</div>

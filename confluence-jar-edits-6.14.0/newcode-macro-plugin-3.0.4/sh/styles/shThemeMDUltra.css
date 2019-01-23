@@ -1,0 +1,119 @@
+/**
+ * SyntaxHighlighter
+ * http://alexgorbatchev.com/SyntaxHighlighter
+ *
+ * SyntaxHighlighter is donationware. If you are using it, please donate.
+ * http://alexgorbatchev.com/SyntaxHighlighter/donate.html
+ *
+ * @version
+ * 3.0.83 (July 02 2010)
+ * 
+ * @copyright
+ * Copyright (C) 2004-2010 Alex Gorbatchev.
+ *
+ * @license
+ * Dual licensed under the MIT and GPL licenses.
+ */
+.syntaxhighlighter.sh-mdultra {
+  background-color: #222222 !important;
+}
+.syntaxhighlighter.sh-mdultra .line.alt1 {
+  background-color: #222222 !important;
+}
+.syntaxhighlighter.sh-mdultra .line.alt2 {
+  background-color: #222222 !important;
+}
+.syntaxhighlighter.sh-mdultra .line.highlighted.alt1, .syntaxhighlighter.sh-mdultra .line.highlighted.alt2 {
+  background-color: #253e5a !important;
+}
+.syntaxhighlighter.sh-mdultra .line.highlighted.number {
+  color: white !important;
+}
+.syntaxhighlighter.sh-mdultra table caption {
+  color: lime !important;
+}
+.syntaxhighlighter.sh-mdultra .gutter {
+  color: #38566f !important;
+}
+.syntaxhighlighter.sh-mdultra .gutter .line {
+  border-right: 3px solid #435a5f !important;
+}
+.syntaxhighlighter.sh-mdultra .gutter .line.highlighted {
+  background-color: #435a5f !important;
+  color: #222222 !important;
+}
+.syntaxhighlighter.sh-mdultra.printing .line .content {
+  border: none !important;
+}
+.syntaxhighlighter.sh-mdultra.collapsed {
+  overflow: visible !important;
+}
+.syntaxhighlighter.sh-mdultra.collapsed .toolbar {
+  color: #428bdd !important;
+  background: black !important;
+  border: 1px solid #435a5f !important;
+}
+.syntaxhighlighter.sh-mdultra.collapsed .toolbar a {
+  color: #428bdd !important;
+}
+.syntaxhighlighter.sh-mdultra.collapsed .toolbar a:hover {
+  color: lime !important;
+}
+.syntaxhighlighter.sh-mdultra .toolbar {
+  color: #aaaaff !important;
+  background: #435a5f !important;
+  border: none !important;
+}
+.syntaxhighlighter.sh-mdultra .toolbar a {
+  color: #aaaaff !important;
+}
+.syntaxhighlighter.sh-mdultra .toolbar a:hover {
+  color: #9ccff4 !important;
+}
+.syntaxhighlighter.sh-mdultra .plain, .syntaxhighlighter.sh-mdultra .plain a {
+  color: lime !important;
+}
+.syntaxhighlighter.sh-mdultra .comments, .syntaxhighlighter.sh-mdultra .comments a {
+  color: #428bdd !important;
+}
+.syntaxhighlighter.sh-mdultra .string, .syntaxhighlighter.sh-mdultra .string a {
+  color: lime !important;
+}
+.syntaxhighlighter.sh-mdultra .keyword {
+  color: #aaaaff !important;
+}
+.syntaxhighlighter.sh-mdultra .preprocessor {
+  color: #8aa6c1 !important;
+}
+.syntaxhighlighter.sh-mdultra .variable {
+  color: aqua !important;
+}
+.syntaxhighlighter.sh-mdultra .value {
+  color: #f7e741 !important;
+}
+.syntaxhighlighter.sh-mdultra .functions {
+  color: #ff8000 !important;
+}
+.syntaxhighlighter.sh-mdultra .constants {
+  color: yellow !important;
+}
+.syntaxhighlighter.sh-mdultra .script {
+  font-weight: bold !important;
+  color: #aaaaff !important;
+  background-color: none !important;
+}
+.syntaxhighlighter.sh-mdultra .color1, .syntaxhighlighter.sh-mdultra .color1 a {
+  color: red !important;
+}
+.syntaxhighlighter.sh-mdultra .color2, .syntaxhighlighter.sh-mdultra .color2 a {
+  color: yellow !important;
+}
+.syntaxhighlighter.sh-mdultra .color3, .syntaxhighlighter.sh-mdultra .color3 a {
+  color: #ffaa3e !important;
+}
+
+
+/* with PDL enabled in Confluence */
+.pdl .codeContent .gutter {
+    background: #222222 !important;
+}

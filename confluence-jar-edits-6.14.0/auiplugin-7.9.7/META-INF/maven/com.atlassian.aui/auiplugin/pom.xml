@@ -1,0 +1,257 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <artifactId>auiplugin-parent</artifactId>
+        <groupId>com.atlassian.aui</groupId>
+        <version>7.9.7</version>
+    </parent>
+
+    <artifactId>auiplugin</artifactId>
+    <packaging>atlassian-plugin</packaging>
+
+    <name>Atlassian UI Plugin</name>
+    <description>An Atlassian plugin that contains the core javascript files used in Atlassian products.</description>
+    <url>https://bitbucket.org/atlassian/aui</url>
+
+    <properties>
+        <atlassian.plugin.key>com.atlassian.auiplugin</atlassian.plugin.key>
+        <maven.build.timestamp.format>yyyy.MM.dd HH:mm:ss Z</maven.build.timestamp.format>
+        <!-- Workaround from http://jira.codehaus.org/browse/MRESOURCES-99
+             Used for ${timestamp} replacements later -->
+        <timestamp>${maven.build.timestamp}</timestamp>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>dom4j</groupId>
+            <artifactId>dom4j</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.atlassian.plugins</groupId>
+            <artifactId>atlassian-plugins-osgi</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.atlassian.plugins</groupId>
+            <artifactId>atlassian-plugins-webresource</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.atlassian.soy</groupId>
+            <artifactId>soy-template-renderer-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.atlassian.sal</groupId>
+            <artifactId>sal-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.atlassian.plugin</groupId>
+            <artifactId>atlassian-spring-scanner-annotation</artifactId>
+            <version>${atlassian.spring.scanner.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Test dependencies -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.atlassian.core</groupId>
+            <artifactId>atlassian-core</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Required by transformer tests -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Only exists to unpack soy deps for testing -->
+        <dependency>
+            <groupId>com.atlassian.soy</groupId>
+            <artifactId>soy-template-plugin</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Only exists to unpack jquery deps for testing -->
+        <dependency>
+            <groupId>com.atlassian.plugins</groupId>
+            <artifactId>jquery</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <resources>
+            <!-- Built JS and copied LESS -->
+            <resource>
+              <directory>../../.tmp/plugin</directory>
+            </resource>
+
+            <!-- Javascript resources from AUI that are not in the transformed path -->
+            <resource>
+                <directory>../../</directory>
+                <includes>
+                    <include>src/js-vendor/</include>
+                    <include>src/js/jquery/</include>
+                </includes>
+            </resource>
+
+            <!-- Soy from AUI -->
+            <resource>
+                <directory>../../</directory>
+                <includes>
+                    <include>src/**/*.soy</include>
+                </includes>
+            </resource>
+
+            <!-- === I18n === -->
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+                <includes>
+                    <include>META-INF/plugin-descriptor/</include>
+                    <include>soy-legacy1/</include>
+                    <include>atlassian-plugin.xml</include>
+                    <include>version</include>
+                    <include>${basedir}/../../.tmp/plugin/i18n/aui.properties</include>
+                </includes>
+            </resource>
+        </resources>
+
+        <plugins>
+            <plugin>
+                <groupId>com.atlassian.maven.plugins</groupId>
+                <artifactId>maven-amps-plugin</artifactId>
+                <configuration>
+                    <productVersion>${refapp.version}</productVersion>
+                    <extractDependencies>true</extractDependencies>
+                    <systemPropertyVariables>
+                        <plugin.resource.directories>${basedir}/src/main/resources,${aui.location}/src</plugin.resource.directories>
+                    </systemPropertyVariables>
+                    <instructions>
+                        <Atlassian-Plugin-Key>${atlassian.plugin.key}</Atlassian-Plugin-Key>
+                        <Atlassian-Scan-Folders>META-INF/plugin-descriptor</Atlassian-Scan-Folders>
+                        <Spring-Context>*</Spring-Context>
+                        <Import-Package>*</Import-Package>
+                        <Export-Package>
+                            com.atlassian.aui.obr.install
+                        </Export-Package>
+                    </instructions>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>com.atlassian.plugin</groupId>
+                <artifactId>atlassian-spring-scanner-maven-plugin</artifactId>
+                <version>${atlassian.spring.scanner.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>atlassian-spring-scanner</goal>
+                        </goals>
+                        <phase>process-classes</phase>
+                    </execution>
+                </executions>
+                <configuration>
+                    <!-- Enable this to get build-time logging of annotations atlassian-spring-scanner-maven-plugin has noticed -->
+                    <verbose>false</verbose>
+                </configuration>
+            </plugin>
+
+            <!-- unpack lib dependencies to make available to qunit -->
+            <plugin>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>extract-lib-dependencies</id>
+                        <phase>generate-test-resources</phase>
+                        <goals>
+                            <goal>unpack-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/qunit/dependencies</outputDirectory>
+                            <includeGroupIds>com.atlassian.plugins</includeGroupIds>
+                            <includeArtifactIds>jquery</includeArtifactIds>
+                            <includes>**/*.js</includes>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>extract-soyutils-dependency-for-demos</id>
+                        <!--run during generate-resources phase so that demos.json generation can use it too-->
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>unpack-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/soyutils</outputDirectory>
+                            <includeGroupIds>com.atlassian.soy</includeGroupIds>
+                            <includeArtifactIds>soy-template-plugin</includeArtifactIds>
+                            <includes>**/soyutils.js</includes>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>com.atlassian.lesscss</groupId>
+                <artifactId>lesscss-maven-plugin</artifactId>
+                <version>3.2.0</version>
+                <executions>
+                    <execution>
+                        <id>compile-adg-less</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                        <configuration>
+                            <sourceDirectory>${basedir}/../../.tmp/plugin</sourceDirectory>
+                            <includes>
+                                <include>src/less/**/*.less</include>
+                            </includes>
+                        </configuration>
+                    </execution>
+                </executions>
+                <configuration>
+                    <excludes>
+                        <exclude>src/less/api/*</exclude>
+                        <exclude>src/less/batch/*</exclude>
+                        <exclude>src/less/imports/*</exclude>
+                    </excludes>
+                    <outputDirectory>target/classes</outputDirectory>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-source-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals><goal>jar-no-fork</goal></goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals><goal>jar</goal></goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>

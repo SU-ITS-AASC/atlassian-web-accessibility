@@ -1,0 +1,146 @@
+<atlassian-plugin key="com.atlassian.confluence.plugins.confluence-labels" name="Confluence Labels UI" plugins-version="2">
+    <plugin-info>
+        <param name="atlassian-data-center-compatible">true</param>
+        <description>This provides the user interface for labels in Confluence.</description>
+        <version>6.14.0</version>
+        <vendor name="Atlassian" url="https://www.atlassian.com/" />
+    </plugin-info>
+
+    <soy-function key="soy-label-link-server-function" name="Label Link Function" class="com.atlassian.confluence.plugins.labels.soy.LabelLinkServerFunction"/>
+
+    <resource type="i18n" name="i18n" location="com/atlassian/confluence/plugins/labels/i18n" />
+
+    <!-- Labels menu options -->
+    <web-item key="view-all-content-with-label" name="View content with label in all spaces" section="system.labels" weight="5">
+   		<label key="content.with.label.in.all.spaces" />
+   		<link>/label/$label.name</link>
+           <condition class="com.atlassian.confluence.plugin.descriptor.web.conditions.HasSpaceCondition" />
+           <condition class="com.atlassian.confluence.plugin.descriptor.web.conditions.HasLabelCondition" />
+   	</web-item>
+
+   	<web-item key="view-labels-popular" name="Popular Labels Heatmap" section="system.labels" weight="10">
+   		<label key="popular.labels" />
+   		<link>/labels/listlabels-heatmap.action#if($space)?key=$space.key#end</link>
+   	</web-item>
+
+   	<web-item key="view-labels-all" name="View Labels Alphabetically" section="system.labels" weight="20">
+           <label key="all.labels" />
+           <link>/labels/listlabels-alphaview.action#if($space)?key=$space.key#end</link>
+    </web-item>
+
+    <web-item key="view-labels-popular-system" name="Popular Labels Heatmap" section="system.space.labels" weight="10">
+   		<label key="popular.labels" />
+   		<link>/labels/listlabels-heatmap.action?key=$htmlUtil.urlEncode($helper.spaceKey)</link>
+           <condition class="com.atlassian.confluence.plugin.descriptor.web.conditions.HasSpaceCondition"/>
+   	</web-item>
+
+   	<web-item key="view-labels-all-system" name="View Labels Alphabetically" section="system.space.labels" weight="20">
+           <label key="all.labels" />
+           <link>/labels/listlabels-alphaview.action?key=$htmlUtil.urlEncode($helper.spaceKey)</link>
+           <condition class="com.atlassian.confluence.plugin.descriptor.web.conditions.HasSpaceCondition"/>
+    </web-item>
+
+    <!-- Common labels resources -->
+    <web-resource key="labels-resources" name="Confluence Labels Resources">
+        <transformation extension="js">
+            <transformer key="jsI18n"/>
+        </transformation>
+
+        <resource type="download" name="labels.js" location="com/atlassian/confluence/plugins/labels/labels.js" />
+        <resource type="download" name="labels.css" location="com/atlassian/confluence/plugins/labels/labels.css" />
+        <dependency>confluence.web.resources:ajs</dependency>
+    </web-resource>
+
+    <!-- Resources for the labels editor -->
+    <web-resource key="labels-editor" name="Confluence Labels Editor">
+        <transformation extension="js">
+            <transformer key="jsI18n"/>
+        </transformation>
+        <transformation extension="soy">
+            <transformer key="soyTransformer"/>
+        </transformation>
+
+        <resource type="download" name="labels-dialog-soy.js" location="com/atlassian/confluence/plugins/labels/dialog/labels-dialog.soy"/>
+        <resource type="download" name="labels-dialog.js" location="com/atlassian/confluence/plugins/labels/dialog/labels-dialog.js" />
+
+        <context>viewcontent</context>
+
+        <dependency>confluence.web.resources:ajs</dependency>
+        <dependency>confluence.web.resources:quicksearchdropdown</dependency>
+        <dependency>com.atlassian.confluence.plugins.confluence-labels:labels-resources</dependency>
+        <context>editor-v4</context>
+    </web-resource>
+
+    <!-- Resources for viewing labels -->
+    <web-resource key="view-label-resources" name="Confluence View Labels Resources">
+        <transformation extension="js">
+            <transformer key="jsI18n"/>
+        </transformation>
+        <resource type="download" name="view-label.css" location="com/atlassian/confluence/plugins/labels/pages/view-label.css" />
+        <resource type="download" name="view-label.js" location="com/atlassian/confluence/plugins/labels/pages/view-label.js" />
+        <dependency>confluence.web.resources:ajs</dependency>
+    </web-resource>
+
+    <!-- Server side soy templates -->
+    <web-resource key="labels-resources-server" name="Confluence Sever Side Labels Resources">
+        <resource type="soy" name="labels-server" location="com/atlassian/confluence/plugins/labels/labels-server.soy" />
+    </web-resource>
+
+    <!-- Labels actions -->
+    <xwork name="labels-actions" key="labels-actions">
+        <description key="labels-actions.desc">Actions used by labels</description>
+
+        <package name="labels-users" extends="default" namespace="/users">
+            <default-interceptor-ref name="validatingStack"/>
+            <action name="viewmylabels" class="com.atlassian.confluence.user.actions.ViewMyLabelsAction">
+                <result name="input" type="velocity">/com/atlassian/confluence/plugins/labels/pages/mylabels.vm</result>
+                <result name="error" type="velocity">/com/atlassian/confluence/plugins/labels/pages/mylabels.vm</result>
+                <result name="success" type="velocity">/com/atlassian/confluence/plugins/labels/pages/mylabels.vm</result>
+            </action>
+        </package>
+
+        <!-- These don't seem to be used anymore because of CONFDEV-15047. Can we delete them? -->
+        <package name="labels-json" extends="admin" namespace="/json">
+            <action name="addlabel" class="com.atlassian.confluence.plugins.labels.actions.AddLabelAction">
+                <param name="RequireSecurityToken">true</param>
+                <result name="success" type="json"/>
+                <result name="error" type="json"/>
+                <result name="input" type="json"/>
+            </action>
+
+            <action name="removelabel" class="com.atlassian.confluence.plugins.labels.actions.RemoveLabelAction">
+                <param name="RequireSecurityToken">true</param>
+                <result name="success" type="json"/>
+                <result name="error" type="json"/>
+                <result name="input" type="json"/>
+            </action>
+        </package>
+
+        <package name="labels-actions" extends="default" namespace="/labels">
+            <default-interceptor-ref name="validatingStack"/>
+
+            <action name="autocompletelabel" class="com.atlassian.confluence.plugins.labels.actions.AutocompleteLabelsAction">
+                <result name="error" type="json"/>
+                <result name="success" type="json"/>
+            </action>
+
+            <action name="viewlabel" class="com.atlassian.confluence.plugins.labels.actions.ViewLabelAction">
+                <result name="success" type="velocity">/com/atlassian/confluence/plugins/labels/pages/viewlabel.vm</result>
+                <result name="input" type="velocity">/com/atlassian/confluence/plugins/labels/pages/viewlabel.vm</result>
+                <result name="error" type="velocity">/com/atlassian/confluence/plugins/labels/pages/viewlabel.vm</result>
+            </action>
+
+            <action name="listlabels-alphaview" class="com.atlassian.confluence.plugins.labels.actions.AlphabeticalListLabelsAction">
+                <result name="error" type="velocity">/com/atlassian/confluence/plugins/labels/pages/listlabels-alphaview.vm</result>
+                <result name="input" type="velocity">/com/atlassian/confluence/plugins/labels/pages/listlabels-alphaview.vm</result>
+                <result name="success" type="velocity">/com/atlassian/confluence/plugins/labels/pages/listlabels-alphaview.vm</result>
+            </action>
+
+            <action name="listlabels-heatmap" class="com.atlassian.confluence.plugins.labels.actions.RankListLabelsAction">
+                <result name="error" type="velocity">/com/atlassian/confluence/plugins/labels/pages/listlabels-heatmap.vm</result>
+                <result name="input" type="velocity">/com/atlassian/confluence/plugins/labels/pages/listlabels-heatmap.vm</result>
+                <result name="success" type="velocity">/com/atlassian/confluence/plugins/labels/pages/listlabels-heatmap.vm</result>
+            </action>
+        </package>
+    </xwork>
+</atlassian-plugin>

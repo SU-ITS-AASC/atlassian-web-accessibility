@@ -1,0 +1,14 @@
+{namespace atlassian}
+
+/**
+ * @param content
+ * @param? id
+ * @param? extraClasses
+ * @param? extraAttributes
+ * @param? tagName
+ */
+{template .panel}
+    <{$tagName ? $tagName : 'div'}{if $id} id="{$id}"{/if} class="aui-panel{call atlassian.renderExtraClasses data="all" /}"{call atlassian.renderExtraAttributes data="all" /}>
+        {$content |noAutoescape}
+    </{$tagName ? $tagName : 'div'}>
+{/template}

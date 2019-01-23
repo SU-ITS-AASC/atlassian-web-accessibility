@@ -1,0 +1,8 @@
+{
+"version":3,
+"file":"/dummy-file-path",
+"lineCount":2,
+"mappings":"AAGAA,MAAA,iGAIG,QAAA,CACCC,CADD,CAECC,CAFD,CAGCC,CAHD,cAgBYC,QAAAA,CAAUC,CAAVD,EACHC,CAAAC,WAAA,aAA2B,QAAA,CAAUC,CAAV,CAAcC,CAAd,EAOvBC,SAAAA,MACQN,CAAAO,SADRD,MAEYE,EAAQN,CAAAO,UAAAC,OAAA,GAFpBJ,IAIYE,CAAAG,UAJZL,cAQYM,EAAuBd,CAAA,CAAEU,CAAAK,eAAF,CAAAC,QAAA,uBAAuDZ,CAAAa,QAAA,EAAvD,CAAA,GARnCT,IAUYM,CAVZN,EAUoCP,CAAAiB,YAAAC,iBAAA,CAAiCL,CAAjC,CAAuDJ,CAAvD,CAVpCF,EAUqGP,CAAAiB,YAAAE,eAAA,CAA+BN,CAA/B,CAAqDJ,CAArD,CAVrGF,OAYgBa,EAZhBb,CAW4BR,CAAA,CAAEc,CAAAQ,WAAF,CAAAC,GAAAC,OAX5BhB,WAagBiB,CAbhBjB,CAayBR,CAAA,KAAQqB,CAAR,8BAAkDA,CAAlD,KAAA,GAbzBb;AAeYR,CAAA,CAAEc,CAAF,CAAAY,KAAA,CAA6BD,CAA7B,CAfZjB,CAgBYJ,CAAAO,UAAAgB,OAAA,CAAoBF,CAApB,GAhBZjB,cAyBK,EAhCkB,EAiCnBJ,CAAAwB,OAAA,EAAAC,YAAA,UAAkCvB,CAAlC,CAAsCC,CAAtC,CAjCmB,CAA3B,CADGJ,CAhBZ,SAuDe2B,QAAAA,2GAKQ5B,CAAA6B,aALRD,KAKqC5B,CAAA8B,aALrCF,EAvDf,EAJH,CAsEAG,QAAA,8BAAAC,YAAA,sEAC2F,QAAA,CAASC,CAAT,MAC3EjC,EAAU+B,OAAA,WAEd/B,EAAAkC,OAAA,uCAAsDD,CAAtD,CAEAjC,EAAAmC,cAAAC,IAAA,iBAA2CpC,CAAAqC,QAAAJ,oBAA3C,CAL+E,CAD3F;",
+"sources":["input.js"],
+"names":["define","$","AJS","tinymce","init","ed","addCommand","ui","value","customDelete","isWebKit","range","selection","getRng","collapsed","macroPlaceholderBody","startContainer","closest","getBody","EditorUtils","isRangeAtStartOf","isRangeAtEndOf","nodeName","firstChild","is","plainText","filler","html","select","getDoc","execCommand","getInfo","majorVersion","minorVersion","require","safeRequire","DeleteCommandPlugin","create","PluginManager","add","plugins"]
+}

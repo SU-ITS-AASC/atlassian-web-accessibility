@@ -1,0 +1,105 @@
+/* -tpi- classes are randomly assigned to telepointers, and may be used
+   by multiple telepointers at the same time. */
+.synchrony-tpi-0 { background-color: #3572B0; }
+.synchrony-tpi-1 { background-color: #78A100; }
+.synchrony-tpi-2 { background-color: #D37295; }
+.synchrony-tpi-3 { background-color: #205081; }
+.synchrony-tpi-4 { background-color: #ED7118; }
+.synchrony-tpi-5 { background-color: #00A6A6; }
+.synchrony-tpi-6 { background-color: #6E4EA8; }
+.synchrony-tpi-7 { background-color: #CE453C; }
+.synchrony-tpi-8 { background-color: #BD8E00; }
+.synchrony-tpi-9 { background-color: #1D8831; }
+
+.synchrony-tpi-0.synchrony-tps:before { border-left-color:  #3572B0; }
+.synchrony-tpi-0.synchrony-tpe:before { border-right-color: #3572B0; }
+.synchrony-tpi-1.synchrony-tps:before { border-left-color:  #78A100; }
+.synchrony-tpi-1.synchrony-tpe:before { border-right-color: #78A100; }
+.synchrony-tpi-2.synchrony-tps:before { border-left-color:  #D37295; }
+.synchrony-tpi-2.synchrony-tpe:before { border-right-color: #D37295; }
+.synchrony-tpi-3.synchrony-tps:before { border-left-color:  #205081; }
+.synchrony-tpi-3.synchrony-tpe:before { border-right-color: #205081; }
+.synchrony-tpi-4.synchrony-tps:before { border-left-color:  #ED7118; }
+.synchrony-tpi-4.synchrony-tpe:before { border-right-color: #ED7118; }
+.synchrony-tpi-5.synchrony-tps:before { border-left-color:  #00A6A6; }
+.synchrony-tpi-5.synchrony-tpe:before { border-right-color: #00A6A6; }
+.synchrony-tpi-6.synchrony-tps:before { border-left-color:  #6E4EA8; }
+.synchrony-tpi-6.synchrony-tpe:before { border-right-color: #6E4EA8; }
+.synchrony-tpi-7.synchrony-tps:before { border-left-color:  #CE453C; }
+.synchrony-tpi-7.synchrony-tpe:before { border-right-color: #CE453C; }
+.synchrony-tpi-8.synchrony-tps:before { border-left-color:  #BD8E00; }
+.synchrony-tpi-8.synchrony-tpe:before { border-right-color: #BD8E00; }
+.synchrony-tpi-9.synchrony-tps:before { border-left-color:  #1D8831; }
+.synchrony-tpi-9.synchrony-tpe:before { border-right-color: #1D8831; }
+
+.synchrony-tp {
+    position: absolute;
+    z-index: 1;
+    margin: -9px 0 0 -5px;
+    padding: 2px 0;
+    display: none;
+    cursor: default;
+    border: 4px solid transparent;
+    background-clip: padding-box;
+    font-family: Arial,sans-serif;
+}
+
+/* CSS for editor's name near telepointer */
+.synchrony-tp-show-sub.synchrony-tps:after,
+.synchrony-tp-show-sub.synchrony-tpe:after {
+    content: attr(data-synchrony-sub);
+    position: absolute;
+    white-space: nowrap;
+    font-size: 9px;
+    color: #fff;
+    background-color: inherit;
+    top: -8px;
+    padding: 2px;
+    font-weight: bold;
+    width: 11px;
+    text-align: center;
+    right: 0;
+    border-radius: 2px 2px 0 2px;
+}
+
+.synchrony-tp-show-sub.synchrony-tpe:after {
+    left: 0;
+    right: auto;
+    border-radius: 2px 2px 2px 0;
+}
+
+/* because the sub should be never display out of screen */
+.synchrony-show-sub-on-left:after {
+    left: auto !important;
+    right: 0 !important;
+}
+.synchrony-show-sub-on-right:after {
+    left: 0 !important;
+    right: auto !important;
+}
+
+/* IMPORTANT: This style hack is required for aloha.ranges.box() to work
+ * properly (https://github.com/alohaeditor/Aloha-Editor/issues/1138) */
+/* DISABLED because of https://jira.atlassian.com/browse/CONFDEV-29639
+br, br:after { content: "\A"; white-space: pre-line; }
+*/
+
+/* because the caret has an inline display style */
+.synchrony-tps {
+    display: none !important;
+}
+
+/* only needed, if sub show disaper
+.synchrony-tp-show-sub.synchrony-tps:after,
+.synchrony-tp-show-sub.synchrony-tpe:after {
+    opacity: 0;
+    visibility: hidden;
+    transition: all .1s ease-in-out;
+}
+.synchrony-tp-show-sub.synchrony-tp-show-sub-on-hover.synchrony-tp:hover:after,
+.synchrony-tp-show-sub.synchrony-tp-show-sub-on-movement.synchrony-tp.synchrony-tp-sub-visible:after {
+    opacity: 1;
+    top: -4px;
+    visibility: visible;
+}
+*/

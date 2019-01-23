@@ -1,0 +1,262 @@
+{namespace aui.page}
+
+/**
+ * AUI Document
+ */
+{template .document}
+<!DOCTYPE html>
+<html lang="{($ij.language ? $ij.language : 'en')}">
+    {call .documentHTMLContent data="all" /}
+</html>
+{/template}
+
+/**
+ * @param windowTitle Text for the TITLE element.
+ * @param? headContent Content inserted inside HEAD after TITLE.
+ * @param content Content inserted inside BODY.
+ * @param? pageType Default: default (full width). Options: default, focused, fixed, hybrid, sidebar, generic (no class applied).
+ * @param? pageSize Default: xlarge. Options: small, medium, large, xlarge.
+ * @param? focusedPageSize DEPRECATED. Default: xlarge. Options: small, medium, large, xlarge.
+ * @param? sidebarState String. Used by AUI Sidebar to render the sidebar's initial state. Options: expanded, collapsed
+ * @param? extraClasses Extra classes to apply to BODY.
+ * @param? extraAttributes Extra attributes to apply to BODY.
+ */
+{template .documentHTMLContent}
+    {let $thePageSize: $pageSize ? $pageSize : ($focusedPageSize ? $focusedPageSize : 'xlarge') /}
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>{$windowTitle}</title>
+        {if $headContent}
+            {$headContent|noAutoescape}
+        {/if}
+    </head>
+    <body{if $pageType}
+            {if $pageType == 'generic'}
+                {if $extraClasses}{sp}class="{call aui.renderExtraClasses data="all"/}"{/if}
+            {elseif $pageType == 'focused'}
+                {sp}class="aui-page-focused aui-page-focused-{$thePageSize} aui-page-size-{$thePageSize}
+                {call aui.renderExtraClasses data="all"/}"
+            {elseif $pageType == 'notification'}
+                {sp}class="aui-page-notification aui-page-size-{$thePageSize}
+                {call aui.renderExtraClasses data="all"/}"
+            {elseif $pageType == 'sidebar'}
+                {sp}class="aui-page-sidebar{$sidebarState ? ' aui-sidebar-' + $sidebarState : ''}{call aui.renderExtraClasses data="all"/}"
+            {else}
+                {sp}class="aui-page-{$pageType}{call aui.renderExtraClasses data="all"/}"
+            {/if}
+        {else}
+            {sp}class="{call aui.renderExtraClasses data="all"/}"
+        {/if}
+        {call aui.renderExtraAttributes data="all" /}>
+        {$content|noAutoescape}
+    </body>
+{/template}
+
+
+
+/**
+ * AUI Page
+ * @param headerContent Header content - commonly an AUI Header.
+ * @param contentContent Main page content.
+ * @param footerContent Footer content.
+ */
+{template .page}
+<div id="page">
+    <header id="header" role="banner">
+        {$headerContent|noAutoescape}
+    </header><!-- #header -->
+    <section id="content" role="main">
+        {$contentContent|noAutoescape}
+    </section><!-- #content -->
+    <footer id="footer" role="contentinfo">
+        {$footerContent|noAutoescape}
+    </footer><!-- #footer -->
+</div><!-- #page -->
+{/template}
+
+/**
+ * AUI Header
+ * @param headerLogoText String containing the alternative text for the logo (required, can be instance name)
+ * @param? headerLogoImageUrl String containing the path and filename to generate an IMG tag with a custom logo
+ * @param? headerText String containing the instance name (optional, displayed IN ADDITION to logo)
+ * @param? headerLink String containing a URL to the home of the instance
+ * @param? logo String containing product name (e.g. 'aui', 'bamboo', 'stash') to render a logo or 'textonly' for a text-only logo
+ * @param? primaryNavContent Contents of the primary navigation. Usually an unordered list of items.
+ * @param? secondaryNavContent Contents of the secondary navigation. Usually an unordered list of items.
+ * @param? headerBeforeContent Content of the "before" header extension point (e.g. to insert an icon & dropdown)
+ * @param? headerAfterContent Content of the "after" header extension point
+ * @param? bannerContent The HTML content for a site-wide banner message
+ * @param? extraClasses
+ * @param? extraAttributes
+ * @param? id
+ */
+{template .header}
+{if $bannerContent}
+    // This should be the only way implementors render a banner. They should not implement the markup themselves. That is why there is no banner soy template.
+    <div class="aui-banner aui-banner-error" role="banner">
+        {$bannerContent|noAutoescape}
+    </div>
+{/if}
+<nav{if $id} id="{$id}"{/if} class="aui-header aui-dropdown2-trigger-group{call aui.renderExtraClasses data="all" /}"{call aui.renderExtraAttributes data="all" /} role="navigation">
+    <div class="aui-header-inner">
+        {if $headerBeforeContent}
+            <div class="aui-header-before">
+                {$headerBeforeContent|noAutoescape}
+            </div>
+        {/if}
+        <div class="aui-header-primary">
+            <h1 id="logo" class="aui-header-logo{if $headerLogoImageUrl} aui-header-logo-custom{elseif $logo} aui-header-logo-{$logo}{/if}">
+                <a href="{($headerLink ? $headerLink : '/')}">
+                    {if $headerLogoImageUrl}
+                        <img src="{$headerLogoImageUrl}" alt="{$headerLogoText}" />
+                    {else}
+                        <span class="aui-header-logo-device">{($headerLogoText? $headerLogoText : '')}</span>
+                    {/if}
+                    {if $headerText}<span class="aui-header-logo-text">{$headerText}</span>{/if}
+                </a>
+            </h1>
+            {if $primaryNavContent}
+                {$primaryNavContent|noAutoescape}
+            {/if}
+        </div>
+        {if $secondaryNavContent}
+            <div class="aui-header-secondary">
+                {$secondaryNavContent|noAutoescape}
+            </div>
+        {/if}
+        {if $headerAfterContent}
+            <div class="aui-header-after">
+                {$headerAfterContent|noAutoescape}
+            </div>
+        {/if}
+    </div><!-- .aui-header-inner-->
+</nav><!-- .aui-header -->
+{/template}
+
+/**
+ * AUI Page Panel
+ * @param content Contents can be a combination of aui.page.nav, aui.page.content, aui.page.sidebar or aui.page.item
+ * @param? id
+ * @param? tagName String containing the HTML element to use (default is div)
+ * @param? extraClasses
+ * @param? extraAttributes
+ */
+{template .pagePanel}
+<{$tagName ? $tagName : 'div'} class="aui-page-panel{call aui.renderExtraClasses data="all" /}"{if $id} id="{$id}"{/if}{call aui.renderExtraAttributes data="all" /}>
+    <div class="aui-page-panel-inner">
+        {$content|noAutoescape}
+    </div><!-- .aui-page-panel-inner -->
+</{$tagName ? $tagName : 'div'}><!-- .aui-page-panel -->
+{/template}
+
+/**
+ * AUI Page Panel Nav
+ * @param content Contents should be navigation-related, generally a vertical navgroup would go in here
+ * @param? id
+ * @param? tagName String containing the HTML element to use (default is div)
+ * @param? extraClasses
+ * @param? extraAttributes
+ */
+{template .pagePanelNav}
+<{$tagName ? $tagName : 'div'} class="aui-page-panel-nav{call aui.renderExtraClasses data="all" /}"{if $id} id="{$id}"{/if}{call aui.renderExtraAttributes data="all" /}>
+    {$content|noAutoescape}
+</{$tagName ? $tagName : 'div'}><!-- .aui-page-panel-nav -->
+{/template}
+
+/**
+ * AUI Page Panel Content
+ * @param content
+ * @param? id
+ * @param? tagName String containing the HTML element to use (default is section)
+ * @param? extraClasses
+ * @param? extraAttributes
+ */
+{template .pagePanelContent}
+<{$tagName ? $tagName : 'section'} class="aui-page-panel-content{call aui.renderExtraClasses data="all" /}"{if $id} id="{$id}"{/if}{call aui.renderExtraAttributes data="all" /}>
+    {$content|noAutoescape}
+</{$tagName ? $tagName : 'section'}><!-- .aui-page-panel-content -->
+{/template}
+
+/**
+ * AUI Page Panel Sidebar
+ * @param content
+ * @param? id
+ * @param? tagName String containing the HTML element to use (default is aside)
+ * @param? extraClasses
+ * @param? extraAttributes
+ */
+{template .pagePanelSidebar}
+<{$tagName ? $tagName : 'aside'} class="aui-page-panel-sidebar{call aui.renderExtraClasses data="all" /}"{if $id} id="{$id}"{/if}{call aui.renderExtraAttributes data="all" /}>
+    {$content|noAutoescape}
+</{$tagName ? $tagName : 'aside'}><!-- .aui-page-panel-sidebar -->
+{/template}
+
+/**
+ * AUI Page Panel Item - use this one when doing custom columns (collapsing areas, "sticky" columns, etc)
+ * @param content
+ * @param? id
+ * @param? tagName String containing the HTML element to use (default is section)
+ * @param? extraClasses
+ * @param? extraAttributes
+ */
+{template .pagePanelItem}
+<{$tagName ? $tagName : 'section'} class="aui-page-panel-item{call aui.renderExtraClasses data="all" /}"{if $id} id="{$id}"{/if}{call aui.renderExtraAttributes data="all" /}>
+    {$content|noAutoescape}
+</{$tagName ? $tagName : 'section'}><!-- .aui-page-panel-item -->
+{/template}
+
+/**
+ * AUI Page Header
+ * @param content
+ * @param? id
+ * @param? extraClasses
+ * @param? extraAttributes
+ */
+{template .pageHeader}
+<header class="aui-page-header{call aui.renderExtraClasses data="all" /}"{if $id} id="{$id}"{/if}{call aui.renderExtraAttributes data="all" /}>
+    <div class="aui-page-header-inner">
+        {$content|noAutoescape}
+    </div><!-- .aui-page-header-inner -->
+</header><!-- .aui-page-header -->
+{/template}
+
+/**
+ * AUI Page Header Image
+ * @param content
+ * @param? id
+ * @param? extraClasses
+ * @param? extraAttributes
+ */
+{template .pageHeaderImage}
+<div class="aui-page-header-image{call aui.renderExtraClasses data="all" /}"{if $id} id="{$id}"{/if}{call aui.renderExtraAttributes data="all" /}>
+    {$content|noAutoescape}
+</div><!-- .aui-page-header-image -->
+{/template}
+
+/**
+ * AUI Page Header Main
+ * @param content
+ * @param? id
+ * @param? extraClasses
+ * @param? extraAttributes
+ */
+{template .pageHeaderMain}
+<div class="aui-page-header-main{call aui.renderExtraClasses data="all" /}"{if $id} id="{$id}"{/if}{call aui.renderExtraAttributes data="all" /}>
+    {$content|noAutoescape}
+</div><!-- .aui-page-header-main -->
+{/template}
+
+/**
+ * AUI Page Header Actions
+ * @param content
+ * @param? id
+ * @param? extraClasses
+ * @param? extraAttributes
+ */
+{template .pageHeaderActions}
+<div class="aui-page-header-actions{call aui.renderExtraClasses data="all" /}"{if $id} id="{$id}"{/if}{call aui.renderExtraAttributes data="all" /}>
+    {$content|noAutoescape}
+</div><!-- .aui-page-header-actions -->
+{/template}
+

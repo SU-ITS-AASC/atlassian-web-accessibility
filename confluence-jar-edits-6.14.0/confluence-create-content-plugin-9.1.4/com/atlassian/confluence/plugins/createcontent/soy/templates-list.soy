@@ -1,0 +1,28 @@
+{namespace Confluence.Templates.Blueprints.Promoted}
+
+/**
+ * Link for promoting or demoting templates
+ * @param templatePromoted
+ */
+{template .promoteTemplateLink}
+    {call aui.buttons.button}
+        {param text}
+            {if $templatePromoted}
+                {getText('create.content.plugin.templates.non.promoted.name')}
+            {else}
+                {getText('create.content.plugin.templates.promoted.name')}
+            {/if}
+        {/param}
+
+        {param extraAttributes: ['data-promoted': $templatePromoted, 'title': getText('create.content.plugin.templates.promoted.template.tooltip')] /}
+        {param type: 'link' /}
+        {param extraClasses: 'promoted-template-link' /}
+    {/call}
+{/template}
+
+/**
+ * Middot!
+ */
+{template .middot}
+    <span class='web-item-operations-divider'>&nbsp;&middot;</span>
+{/template}

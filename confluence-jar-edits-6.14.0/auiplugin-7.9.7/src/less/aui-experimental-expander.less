@@ -1,0 +1,49 @@
+@import './imports/global';
+
+.aui-expander-short-content[aria-hidden="true"],
+.aui-expander-content[aria-hidden="true"],
+.aui-expander-content[aria-expanded="true"] .aui-expander-ellipsis /* reveal-text pattern */ {
+    display: none;
+}
+
+.aui-expander-content,
+.aui-expander-content[aria-expanded="false"] {
+    height: 0;  /* Collapsed by default */
+    overflow: hidden;
+    position: relative;
+}
+
+.aui-expander-content[aria-expanded="true"] {
+    height: auto;   /* Expanded by default */
+}
+
+.aui-expander-trigger {
+    cursor: pointer;
+}
+
+/* ADG REVEAL TEXT PATTERN */
+a.aui-expander-trigger.aui-expander-reveal-text {
+    background: @aui-panel-bg-color;
+    bottom: 0;
+    position: absolute;
+    right: 0;
+    text-decoration: none;
+    padding-left: 10px;
+}
+
+.aui-expander-trigger.aui-expander-reveal-text:hover > span {
+    text-decoration: underline;
+}
+
+.aui-expander-trigger.aui-expander-reveal-text:before {
+    color: @aui-text-color;
+    content: "\2026\00a0"; /* ellipsis */
+}
+
+.aui-expander-content[aria-expanded="true"] .aui-expander-trigger.aui-expander-reveal-text:before {
+    display: none;  /* Hide the ellipsis when expanded */
+}
+
+.aui-expander-content[aria-expanded="true"] .aui-expander-trigger.aui-expander-reveal-text {
+    position: relative;
+}

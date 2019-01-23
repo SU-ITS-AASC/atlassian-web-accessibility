@@ -1,0 +1,38 @@
+#set ($aui-form = "aui")
+#set ($aui-medium-text = "text medium-field")
+#set ($aui-button = "aui-button")
+
+#if($errors.size() > 0)
+<div id="pagetreesearch-error" class="error">
+	<span class="errorMessage">
+		#foreach($error in $errors)
+			$action.getText($error) <br>
+		#end
+	<span>
+</div>
+#end
+
+#if(!$mobile)
+    <div id="pagetreesearch">
+
+        #if($errors.size() > 0 || ($outputType != 'display' && $outputType != 'page_gadget'))
+            #set($disabled = 'disabled="yes"')
+        #end
+
+        <form method="POST" action="$baseUrl/plugins/pagetreesearch/pagetreesearch.action" class="$!aui-form" name="pagetreesearchform"
+            #if ($outputType == 'page_gadget') target="_blank" #end >
+            <input type="hidden" name="ancestorId" value="$!rootPage.getId()">
+            <input type="hidden" name="spaceKey" value="$generalUtil.htmlEncode( $spaceKey )">
+            <input type="text"  class="$!aui-medium-text" size="20" name="queryString">
+            <input type="submit" class="$!aui-button" value="$action.getText('pagetreesearch.button.text')" $!disabled>
+        </form>
+
+    </div>
+#else
+   <div class="open-flyout-button">
+      <button type="button" class="open-flyout-to-search">$i18n.getText('pagetreesearch.open.flyout.to.search')</button>
+   </div>
+
+
+#end
+

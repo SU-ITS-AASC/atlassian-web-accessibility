@@ -1,0 +1,190 @@
+@import './imports/global';
+
+/*
+    Tipsy's
+*/
+.tipsy {
+    &.aui-form-notification-tooltip-error {
+        .tipsy-arrow-n {
+            border-bottom-color: @aui-notification-error-color;
+        }
+
+        .tipsy-arrow-s {
+            border-top-color: @aui-notification-error-color;
+        }
+
+        .tipsy-arrow-w {
+            border-right-color: @aui-notification-error-color;
+        }
+
+        .tipsy-inner {
+            background-color: @aui-notification-error-color;
+            color: @aui-notification-error-text-color;
+        }
+    }
+
+    &.aui-form-notification-tooltip-info {
+        .tipsy-arrow-n {
+            border-bottom-color: @aui-notification-info-color;
+        }
+
+        .tipsy-arrow-s {
+            border-top-color: @aui-notification-info-color;
+        }
+
+        .tipsy-arrow-w {
+            border-right-color: @aui-notification-info-color;
+        }
+
+        .tipsy-inner {
+            background-color: @aui-notification-info-color;
+            border: 1px solid @aui-notification-info-border-color;
+            color: @aui-notification-info-text-color;
+
+            a {
+                color: @aui-notification-info-link-color;
+                text-decoration: none;
+            }
+        }
+
+        //Give the arrow a border colour with pseudo elements
+        &:before {
+            content: '';
+            height: 0;
+            position: absolute;
+            width: 0;
+        }
+
+        &.tipsy-ne:before {
+            border-bottom: @aui-notification-arrow-and-border-size @aui-notification-info-border-color solid;
+            border-left: @aui-notification-arrow-and-border-size transparent dashed;
+            border-right: @aui-notification-arrow-and-border-size transparent dashed;
+            border-top: none;
+            margin-top: 0;
+            right: @aui-notification-arrow-bottom-right-position - @aui-notification-arrow-border;
+            top: -1px;
+        }
+
+        &.tipsy-se:before {
+            border-bottom: none;
+            border-left: @aui-notification-arrow-and-border-size transparent dashed;
+            border-right: @aui-notification-arrow-and-border-size transparent dashed;
+            border-top: @aui-notification-arrow-and-border-size @aui-notification-info-border-color solid;
+            margin-top: -(@aui-notification-tipsy-padding + @aui-notification-arrow-border);
+            right: @aui-notification-arrow-bottom-right-position - @aui-notification-arrow-border;
+            top: 100%;
+        }
+
+        &.tipsy-w:before {
+            border-bottom: @aui-notification-arrow-and-border-size transparent dashed;
+            border-left: none;
+            border-right: @aui-notification-arrow-and-border-size @aui-notification-info-border-color solid;
+            border-top: @aui-notification-arrow-and-border-size transparent dashed;
+            left: -@aui-notification-arrow-and-border-size + @aui-notification-tipsy-padding;
+            margin-top: -@aui-notification-arrow-and-border-size;
+            top: 50%;
+        }
+    }
+
+    //Resize all notification tipsy arrows slightly
+    &.aui-form-notification-tooltip {
+        line-height: @aui-notification-line-height;
+        padding: @aui-notification-tipsy-padding;
+
+        .tipsy-arrow-n {
+            border-width: @aui-notification-arrow-size;
+            margin-top: 0;
+            right: @aui-notification-arrow-bottom-right-position;
+            top: 0;
+        }
+
+        .tipsy-arrow-s {
+            border-width: @aui-notification-arrow-size;
+            margin-top: -@aui-notification-arrow-size;
+            right: @aui-notification-arrow-bottom-right-position;
+        }
+
+        .tipsy-arrow-w {
+            border-width: @aui-notification-arrow-size;
+            margin-top: -@aui-notification-arrow-size;
+            left: -@aui-notification-arrow-border;
+        }
+
+        //Stacked messages
+        ul {
+            padding-left: @aui-notification-list-padding;
+        }
+        .tipsy-inner {
+            padding: @aui-notification-tipsy-inner-padding;
+            text-align: left;
+        }
+    }
+}
+
+/*
+    Icons.
+*/
+//Order is important for display preference
+[data-aui-notification-info]+.aui-icon.aui-icon-notification {
+    &:before {
+        content: @aui-notification-info-icon;
+    }
+    color: @aui-notification-info-icon-color;
+}
+
+[data-aui-notification-success]+.aui-icon.aui-icon-notification {
+    &:before {
+        content: @aui-notification-success-icon;
+    }
+    color: @aui-notification-success-color;
+}
+
+[data-aui-notification-error]+.aui-icon.aui-icon-notification {
+    &:before {
+        content: @aui-notification-error-icon;
+    }
+    color: @aui-notification-error-color;
+}
+
+[data-aui-notification-field].aui-form-notification-field-no-icon+.aui-icon.aui-icon-notification {
+    visibility: hidden;
+}
+
+//By default icons are outside of fields
+.aui-icon-notification {
+    margin-left: @aui-notification-icon-outside-field-offset-right;
+    margin-top: @aui-notification-icon-outside-field-offset-top;
+    vertical-align: top;
+}
+
+//Icons: Should display icons in fields if text, password or textarea.
+form.aui .text,
+form.aui .password {
+    &[data-aui-notification-field] {
+        &:not(.aui-form-notification-field-no-icon) {
+            padding-right: (@aui-notification-icon-outside-field-width + @aui-notification-icon-outside-field-padding-right + @aui-notification-icon-outside-field-padding-left);
+        }
+        + .aui-icon-notification {
+            margin-left: 0;
+            margin-top: 0;
+            position: relative;
+            right: (@aui-notification-icon-outside-field-width + @aui-notification-icon-outside-field-padding-right);
+            top: @aui-notification-icon-outside-field-padding-top;
+            vertical-align: top;
+        }
+    }
+}
+
+//Borders: Components that should have coloured borders
+form.aui {
+    .password,
+    .text,
+    .textarea {
+        &[data-aui-notification-error] {
+            border-color: @aui-notification-error-color;
+        }
+        &[data-aui-notification-success] {
+            border-color: @aui-notification-success-color;
+        }
+    }
+}

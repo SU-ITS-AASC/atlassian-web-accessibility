@@ -1,0 +1,18 @@
+<content tag="content-navigation">
+
+    <div id="navigation" class="content-navigation">
+
+        <button href="#label-settings" aria-owns="label-settings" aria-haspopup="true" class="labels-settings-trigger aui-button aui-dropdown2-trigger aui-style-default">
+            <span class="aui-icon aui-icon-small aui-iconfont-configure">Settings</span>
+        </button>
+
+        <div id="label-settings" class="aui-dropdown2 aui-style-default" aria-hidden="true">
+            <ul class="aui-list-truncate">
+                #foreach ($item in $webInterfaceManager.getDisplayableItems("system.labels", $action.webInterfaceContext))
+                    <li><a href="$item.link.getDisplayableUrl($req, $action.webInterfaceContext)">$item.label.getDisplayableLabel($req, $action.webInterfaceContext)</a></li>
+                #end
+            </ul>
+        </div>
+    </div>
+
+</content>

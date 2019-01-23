@@ -1,0 +1,46 @@
+{namespace DashboardTemplates.Content}
+
+/**
+ * @param groupTitle
+ */
+{template .groupHeader}
+	<h6 data-spy="affix" data-offset-top="20">{ $groupTitle }</h6>
+{/template}
+
+
+/**
+* @param title the title describing the list to display
+* @param contentType a unique key for the type of list
+*/
+{template .groupedListWithFilter}
+	<header class="content-header content-header-{$contentType}">
+		<h1 class="list-title">{$title}</h1>
+		<form action="" class="aui aui-group aui-group-split content-filter">
+            <div class="aui-item">
+                <input type="text" class="text" name="filter" placeholder="{getText('filter.name')}" maxlength="40" />
+            </div>
+        </form>
+	</header>
+
+	<ul class="list-container list-container-{$contentType}" data-filter-string="">
+
+	</ul>
+
+	<div class="spinner-container"></div>
+{/template}
+
+/**
+* @param title the title describing the list to display
+* @param contentType a unique key for the type of list
+*/
+{template .streamList}
+    <header class="content-header content-header-{$contentType}">
+        <h1 class="list-title">{$title}</h1>
+    </header>
+
+    <ul class="list-container list-container-{$contentType}">
+
+    </ul>
+
+    <div class="spinner-container"></div>
+{/template}

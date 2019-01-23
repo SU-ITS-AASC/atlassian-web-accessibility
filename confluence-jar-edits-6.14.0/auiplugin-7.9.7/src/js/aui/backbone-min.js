@@ -1,0 +1,1 @@
+("undefined"===typeof window?global:window).__320e4ec293ac29d49b959aa9d46df68f=function(){var b={};"use strict";Object.defineProperty(b,"__esModule",{value:!0});var a=__b6ce661a78f7af3f026ea6e982ba4efe,a=a&&a.__esModule?a:{"default":a};window.Backbone||(window.Backbone=a.default);b.default=window.Backbone;return b=b["default"]}.call(this);

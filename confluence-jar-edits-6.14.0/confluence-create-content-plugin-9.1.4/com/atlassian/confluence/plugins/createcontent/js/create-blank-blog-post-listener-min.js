@@ -1,0 +1,1 @@
+Confluence.Blueprint.setDirectCallback("com.atlassian.confluence.plugins.confluence-create-content-plugin:create-blog-post",function(c,b){var d=Confluence.getContextPath()+"/pages/createblogpost.action?spaceKey="+encodeURIComponent(b.spaceKey);if(b.initContext){for(var a in b.initContext){d+="&"+encodeURIComponent(a)+"="+encodeURIComponent(b.initContext[a])}}b.finalUrl=d});

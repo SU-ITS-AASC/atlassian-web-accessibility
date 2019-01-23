@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<applicationDocs targetNamespace="http://wadl.dev.java.net/2009/02">
+
+    <doc xml:lang="en" title="REST Resources Provided By: Confluence Collaborative Editor Plugin">
+        Provides the integration of concurrent editing inside confluence.
+    </doc>
+
+</applicationDocs>

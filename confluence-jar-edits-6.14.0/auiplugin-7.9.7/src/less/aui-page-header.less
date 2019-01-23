@@ -1,0 +1,59 @@
+@import './imports/global';
+
+/**
+ * AUI Page Header
+ */
+
+.aui-page-header-inner {
+    border-spacing: 0;
+    box-sizing: border-box;
+    display: table;
+    table-layout: auto;
+    width: 100%;
+}
+
+.aui-page-header-image,
+.aui-page-header-main,
+.aui-page-header-actions {
+    box-sizing: border-box;
+    display: table-cell;
+    margin: 0;
+    padding: 0;
+    text-align: left;
+    vertical-align: top;
+}
+/* collapse the cell to fit its content */
+.aui-page-header-image {
+    width: 1px;
+    white-space: nowrap;
+}
+.aui-page-header-main {
+    vertical-align: middle;
+}
+.aui-page-header-image + .aui-page-header-main {
+    padding-left: @aui-grid;
+}
+.aui-page-header-actions {
+    padding-left: (@aui-grid * 2);
+    text-align: right;
+    vertical-align: middle;
+}
+.aui-page-header-main > h1,
+.aui-page-header-main > h2,
+.aui-page-header-main > h3,
+.aui-page-header-main > h4,
+.aui-page-header-main > h5,
+.aui-page-header-main > h6 {
+    margin: 0;
+}
+.aui-page-header-actions > .aui-buttons {
+    /* spaces out button groups when they wrap to 2 lines */
+    margin-bottom: (@aui-grid / 2);
+    margin-top: (@aui-grid / 2);
+    vertical-align: top;
+    white-space: nowrap;
+}
+/* Avatar overrides */
+.aui-page-header-image .aui-avatar {
+    vertical-align: top;
+}

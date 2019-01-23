@@ -1,0 +1,1 @@
+("undefined"===typeof window?global:window).__40ea873dae0b909ba7e1b6d5b37fd259=function(){var a={};"use strict";Object.defineProperty(a,"__esModule",{value:!0});a.default={ENABLED_SUBMIT:"enabledSubmit",ROW_VIEW:"RestfulTable_Row_View"};return a=a["default"]}.call(this);

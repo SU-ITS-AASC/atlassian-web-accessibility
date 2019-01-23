@@ -1,0 +1,22 @@
+<html>
+<title>$action.getText('usage.queue.title')</title>
+<body>
+
+#if ($action.queue.isEmpty())
+
+    <p><em>$action.getText('usage.queue.empty')</em></p>
+
+#else
+    <ul>
+    #foreach ($item in $action.queue)
+        <li>$item</li>
+    #end
+    </ul>
+
+    <p><a href="flushusagequeue.action">$action.getText('usage.queue.flush')</a></p>
+#end
+
+#parse ("/admin/admin-breadcrumbs.vm")
+
+</body>
+</html>

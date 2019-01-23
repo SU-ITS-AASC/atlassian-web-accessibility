@@ -1,0 +1,56 @@
+@import './imports/global';
+
+.tipsy {
+    font-size: 12px;
+    line-height: 20px;
+    font-family: @aui-font-family;
+    padding: 4px;
+    text-align: left;
+}
+
+.tipsy-inner {
+    background: @aui-tooltip-bg-color;
+    padding: 5px 10px;
+}
+
+.tipsy-arrow {
+    border-color: @aui-tooltip-bg-color;
+    border-width: 4px;
+}
+
+.tipsy-arrow-n {
+    border-bottom-color: @aui-tooltip-border-color;
+    margin-left: -4px;
+}
+
+.tipsy-arrow-s {
+    border-top-color: @aui-tooltip-border-color;
+    margin-left: -4px;
+}
+
+.tipsy-arrow-e {
+    border-left-color: @aui-tooltip-border-color;
+    margin-top: -4px;
+}
+
+.tipsy-arrow-w {
+    border-right-color: @aui-tooltip-border-color;
+    margin-top: -4px;
+}
+
+.tipsy a,
+.tipsy a:visited {
+    color: white;
+    text-decoration: underline;
+}
+
+.tipsy p {
+    color: @aui-tooltip-content-text-color;
+    margin: 0;
+}
+
+.aui-tooltip-title {
+    color: @aui-tooltip-title-text-color;
+    font-weight: bold;
+    margin: 0;
+}

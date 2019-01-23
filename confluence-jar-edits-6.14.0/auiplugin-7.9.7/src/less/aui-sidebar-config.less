@@ -1,0 +1,15 @@
+@import './imports/global';
+
+// variables
+@aui-sidebar-grid: @aui-grid; // default AUI grid width
+@aui-sidebar-spacing: @aui-sidebar-grid * 1.5; // the amount of space between the edges of the sidebar and content
+@aui-sidebar-gutter: @aui-grid; // the effective space between the edges and where boxes have to start in order for stuff to lay out according to the spec
+
+@aui-sidebar-nav-link-expected-height: 34px; // 34px makes room for 20px icon box sizes.
+@aui-sidebar-nav-link-inner-spacing: unit((@aui-sidebar-nav-link-expected-height - @aui-sidebar-icon-size) / 2, px);
+@aui-sidebar-nav-link-icon-spacing: @aui-sidebar-grid; // distance between the right edge of an icon and the left edge of text content
+
+@aui-sidebar-header-avatar-collapsed: @aui-avatar-size-medium; // resize header avatar to a smaller size
+@aui-sidebar-base-line-height: 20px; // pixel value of AUI line height
+@aui-sidebar-footer-height: (@aui-sidebar-base-line-height + (2 * @aui-sidebar-grid)); // footer height
+// end variables

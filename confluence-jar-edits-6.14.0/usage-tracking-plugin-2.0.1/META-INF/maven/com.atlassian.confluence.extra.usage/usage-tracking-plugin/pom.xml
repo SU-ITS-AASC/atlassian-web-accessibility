@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.atlassian.pom</groupId>
+        <artifactId>public-pom</artifactId>
+        <version>5.0.8</version>
+    </parent>
+
+    <groupId>com.atlassian.confluence.extra.usage</groupId>
+    <artifactId>usage-tracking-plugin</artifactId>
+    <version>2.0.1</version>
+    <packaging>atlassian-plugin</packaging>
+
+    <name>Confluence Usage Stats</name>
+    <description>Tracks usage events in Confluence.</description>
+    <url>https://ecosystem.atlassian.net/wiki/display/USGTRK</url>
+
+    <scm>
+        <connection>scm:git:ssh://git@stash.atlassian.com:7997/confserver/confluence-usage-tracking-plugin.git</connection>
+        <developerConnection>scm:git:ssh://git@stash.atlassian.com:7997/confserver/confluence-usage-tracking-plugin.git</developerConnection>
+        <url>https://stash.atlassian.com/projects/CONFSERVER/repos/confluence-usage-tracking-plugin</url>
+        <tag>usage-tracking-plugin-2.0.1</tag>
+    </scm>
+    <issueManagement>
+        <system>JIRA</system>
+        <url>http://jira.atlassian.com/browse/CONF</url>
+    </issueManagement>
+    <ciManagement>
+        <system>Bamboo</system>
+        <url>https://server-syd-bamboo.internal.atlassian.com/browse/CBP-USGTRKTRUNK</url>
+    </ciManagement>
+
+    <properties>
+        <atlassian.plugin.key>com.atlassian.confluence.ext.usage</atlassian.plugin.key>
+
+        <atlassian.product.version>6.7.1</atlassian.product.version>
+        <atlassian.product.data.version>${atlassian.product.version}</atlassian.product.data.version>
+        <atlassian.product.test-lib.version>2.13.3</atlassian.product.test-lib.version>
+
+        <amps.version>6.1.7</amps.version>
+
+        <jvm.args.custom />
+        <jvm.args.xmx>1024m</jvm.args.xmx>
+        <jvm.args>-Xmx${jvm.args.xmx} ${jvm.args.custom}</jvm.args>
+
+        <confluence.auth.admin.username>admin</confluence.auth.admin.username>
+        <confluence.auth.admin.password>admin</confluence.auth.admin.password>
+        <failOnMilestoneOrReleaseCandidateDeps>false</failOnMilestoneOrReleaseCandidateDeps>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.atlassian.confluence</groupId>
+                <artifactId>confluence-plugins-platform-pom</artifactId>
+                <version>${atlassian.product.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+    <dependencies>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-library</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.atlassian.confluence</groupId>
+            <artifactId>confluence</artifactId>
+            <scope>provided</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>jfree</groupId>
+                    <artifactId>jfreechart</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>jfree</groupId>
+                    <artifactId>jcommon</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>com.atlassian.confluence.plugin</groupId>
+            <artifactId>func-test-package</artifactId>
+            <version>${atlassian.product.test-lib.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.atlassian.confluence.plugin</groupId>
+            <artifactId>func-test</artifactId>
+            <version>${atlassian.product.test-lib.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jfree</groupId>
+            <artifactId>jfreechart</artifactId>
+            <version>1.0.19</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jfree</groupId>
+            <artifactId>jcommon</artifactId>
+            <version>1.0.23</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <testResources>
+            <testResource>
+                <directory>src/test/resources</directory>
+                <filtering>true</filtering>
+                <includes>
+                    <include>webtester.properties</include>
+                </includes>
+            </testResource>
+            <testResource>
+                <directory>src/test/resources</directory>
+                <filtering>false</filtering>
+                <excludes>
+                    <exclude>webtester.properties</exclude>
+                </excludes>
+            </testResource>
+        </testResources>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.0.2</version>
+                <executions>
+                    <execution>
+                        <id>copy-checkstyle-suppressions</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.basedir}/target/codestyle</outputDirectory>
+                            <overwrite>true</overwrite>
+                            <resources>
+                                <resource>
+                                    <directory>src/codestyle</directory>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>com.atlassian.maven.plugins</groupId>
+                <artifactId>maven-confluence-plugin</artifactId>
+                <version>${amps.version}</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <jvmArgs>${jvm.args}</jvmArgs>
+                    <productVersion>${atlassian.product.version}</productVersion>
+                    <productDataVersion>${atlassian.product.data.version}</productDataVersion>
+                    <server>localhost</server>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

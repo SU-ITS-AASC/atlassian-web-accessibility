@@ -1,0 +1,38 @@
+@aui-medium-gray: #4C5871;
+@aui-link-hover: #0052CC;
+@adg3-status-indicator-icon: #505F79;
+@adg3-status-indicator-message: #4C5871;
+
+#pluggable-status.synchrony {
+    color: @aui-medium-gray;
+    display: block;
+    font-size: 14px;
+    line-height: 12px;
+    min-width: 124px;
+    overflow: hidden;
+    padding: 7px 0 0 10px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    .synchrony-status-indicator {
+        .status-indicator-icon {
+            float: left;
+            color: @adg3-status-indicator-icon;
+        }
+
+        .status-indicator-message {
+            cursor: default;
+            color: @adg3-status-indicator-message;
+            float: left;
+            padding-left: 5px;
+            padding-top: 2px;
+        }
+    }
+
+    a {
+        color: @aui-medium-gray;
+        &:hover {
+            color: @aui-link-hover;
+        }
+    }
+}

@@ -1,0 +1,82 @@
+@import 'imports/aui-theme/components/spinner';
+
+@keyframes spinnerRotateAnimation {
+    to {
+        -webkit-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+@-webkit-keyframes spinnerRotateAnimation {
+    to {
+        -webkit-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+.spinner-size(@size) {
+    & {
+        width: @size;
+        height: @size;
+
+        > .aui-spinner > svg {
+            #aui.spinner-stroke(@size);
+        }
+    }
+
+    // deprecated; do not use.
+    &[filled] {
+        > .aui-spinner > svg {
+            left: -(@size / 2);
+        }
+    }
+}
+
+aui-spinner {
+    display: block;
+    position: relative;
+    z-index: 2000000000;
+    color: #42526E;
+
+    .spinner-size(@aui-spinner-size-medium);
+
+    &[size="small"] {
+        .spinner-size(@aui-spinner-size-small);
+    }
+
+    &[size="large"] {
+        .spinner-size(@aui-spinner-size-large);
+    }
+
+    .aui-spinner {
+        box-sizing: border-box;
+        position: relative;
+        width: 100%;
+        height: 100%;
+
+        & > svg {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            -webkit-animation: 0.86s cubic-bezier(0.4, 0.15, 0.6, 0.85) infinite spinnerRotateAnimation;
+            animation: 0.86s cubic-bezier(0.4, 0.15, 0.6, 0.85) infinite spinnerRotateAnimation;
+            fill: none;
+            stroke: currentColor;
+            stroke-linecap: round;
+            -webkit-transform-origin: center;
+            -ms-transform-origin: center;
+            transform-origin: center;
+        }
+    }
+
+    // deprecated; do not use.
+    &[filled] {
+        // The "filled" variant of the spinner should always take up no space in the DOM
+        height: 0 !important;
+        width: 0 !important;
+        margin: auto;
+    }
+}

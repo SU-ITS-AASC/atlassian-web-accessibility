@@ -1,0 +1,7 @@
+com.atlassian.confluence.core.ContentEntityManager
+com.atlassian.confluence.pages.DraftsTransitionHelper
+com.atlassian.confluence.security.SpacePermissionManager
+com.atlassian.confluence.themes.ThemeManager
+com.atlassian.plugin.web.WebInterfaceManager
+com.atlassian.plugin.webresource.WebResourceUrlProvider
+com.atlassian.sal.api.features.DarkFeatureManager

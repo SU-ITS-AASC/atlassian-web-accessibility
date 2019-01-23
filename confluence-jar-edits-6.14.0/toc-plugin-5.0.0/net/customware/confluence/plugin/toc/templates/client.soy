@@ -1,0 +1,50 @@
+{namespace Confluence.Plugins.TableOfContents.Client}
+
+/**
+ * Renders a single toc-item-body element
+ * @param outline
+ * @param linkHref
+ * @param linkText
+ */
+{template .tocItemBody}
+<span class="toc-item-body" data-outline="{$outline}">
+    <span class="toc-outline">{$outline}</span>
+    <a href="{$linkHref}" class="toc-link">{$linkText}</a>
+</span>
+{/template}
+
+/**
+ * Renders an empty container for a single level of a list-style TOC
+ * @param cssliststyle
+ * @param csslistindent
+ */
+{template .listStyleTocLevelContainer}
+<ul style="
+    {if $cssliststyle} list-style: {$cssliststyle};{/if}
+    {if $csslistindent} padding-left: {$csslistindent};{/if}
+">
+</ul>
+{/template}
+
+/**
+ * Renders an empty container for a single list-style TOC entry
+ */
+{template .listStyleTocItemContainer}
+<li></li>
+{/template}
+
+/**
+ * Renders an empty container for a single level of a flat-style TOC
+ * @param cssClass
+ */
+{template .flatStyleTocItemContainer}
+<span class="{$cssClass}"></span>
+{/template}
+
+/**
+ * Renders a separator for a flat-style TOC
+ * @param separator
+ */
+{template .flatStyleTocSeparator}
+<span class="toc-separator">{$separator}</span>
+{/template}

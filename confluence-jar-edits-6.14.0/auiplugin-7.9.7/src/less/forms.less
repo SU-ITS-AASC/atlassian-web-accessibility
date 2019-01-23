@@ -1,0 +1,496 @@
+@import './imports/global';
+
+form.aui {
+    margin: 20px 0 0 0;
+    position: relative;
+}
+form.aui:first-child {
+    margin-top: 0;
+}
+
+/* Field styles */
+form.aui .text,
+form.aui .password,
+form.aui .upfile,
+form.aui .textarea,
+form.aui .select,
+form.aui .multi-select,
+form.aui .aui-select2-container {
+    background: @aui-form-input-text-bg-color;
+    color: @aui-text-color;
+    font-family: inherit;
+    font-size: 14px;
+}
+form.aui .text,
+form.aui .password,
+form.aui .textarea,
+form.aui .select,
+form.aui .multi-select,
+form.aui .aui-select2-container .select2-choices {
+    border: 1px solid @aui-form-field-border-color;
+    border-radius: @aui-form-field-border-radius;
+    box-sizing: border-box;
+    font-size: inherit;
+    margin: 0;
+    max-width: @aui-form-field-width-default;
+    vertical-align: baseline;
+    width: 100%;
+}
+form.aui .text,
+form.aui .password,
+form.aui .select,
+form.aui .aui-select2-container .select2-choices {
+    height: @aui-form-field-height;
+    line-height: 1.4285714285714;
+    padding: 4px 5px;
+}
+form.aui .select {
+    padding: 6px 5px 5px 5px; /* Firefox doesn't allow line-height to be adjusted and selects break horribly when the font-family is changed. Using padding instead */
+    vertical-align: top;
+}
+form.aui .textarea,
+form.aui .select[size],
+form.aui .multi-select {
+    height: auto;
+    line-height: 1.4285714285714;
+    margin: 0;
+    padding: 4px 5px;
+}
+form.aui .textarea {
+    overflow-y: auto;
+}
+/* Ensure AUI Select2's do not show as regular text fields */
+form.aui .aui-select2-container {
+    border: 0;
+    height: auto;
+    max-width: @aui-form-field-width-default;
+    padding: 0;
+    vertical-align: baseline;
+    width: 100%;
+}
+form.aui .aui-select2-container .select2-choices {
+    height: auto;
+    max-width: none;
+}
+/* Do not give file inputs a height or width because they break horribly in certain browsers. */
+form.aui .upfile {
+    box-sizing: border-box;
+    font-family: inherit;
+    font-size: inherit;
+    margin: 5px 0;
+    padding: 0;
+}
+form.aui optgroup {
+    background-color: @aui-form-optgroup-bg-color;
+    color: @aui-form-optgroup-text-color;
+    font-style: normal;
+    font-weight: normal;
+}
+form.aui option,
+form.aui optgroup option {
+    background-color: @aui-form-option-bg-color;
+    color: @aui-text-color;
+}
+
+/* Disabled form element styles */
+form.aui .text[disabled],
+form.aui .password[disabled],
+form.aui .textarea[disabled],
+form.aui .select[disabled],
+form.aui .multi-select[disabled],
+form.aui .select[disabled] option,
+form.aui .select[disabled] optgroup,
+form.aui .multi-select[disabled] option,
+form.aui .multi-select[disabled] optgroup {
+    background-color: @aui-form-disabled-field-bg-color;
+    color: @aui-form-disabled-field-text-color;
+}
+form.aui .text[disabled],
+form.aui .password[disabled],
+form.aui .textarea[disabled],
+form.aui .select[disabled],
+form.aui .multi-select[disabled] {
+    color: @aui-form-disabled-field-text-color;
+}
+form.aui .text[disabled],
+form.aui .password[disabled],
+form.aui .textarea[disabled],
+form.aui .select[disabled],
+form.aui .multi-select[disabled],
+form.aui .radio[disabled],
+form.aui .checkbox[disabled] {
+    cursor: not-allowed;
+}
+
+form.aui {
+    .text, .password, .textarea {
+        #aui.placeholder(@aui-form-placeholder-text-color);
+    }
+}
+
+// Fixing Safari search fields (https://ecosystem.atlassian.net/browse/AUI-4062)
+form.aui .text[type=search] {
+    -webkit-appearance: textfield;
+    outline-width: 5px;
+    outline-offset: -2px;
+
+    &::-webkit-search-decoration {
+        -webkit-appearance: none;
+    }
+}
+
+/* Field widths
+ * - don't add widths to file inputs - they break horribly
+ */
+form.aui .short-field {
+    max-width: @aui-form-field-width-short;
+}
+
+form.aui .medium-field {
+    max-width: @aui-form-field-width-medium;
+}
+
+form.aui .medium-long-field {
+    max-width: @aui-form-field-width-medium-long;
+}
+
+form.aui .long-field {
+    max-width: @aui-form-field-width-long;
+}
+
+form.aui .full-width-field {
+    max-width: @aui-form-field-width-full;
+}
+
+/* Structural elements */
+form.aui fieldset {
+    border: 0;
+    clear: both;
+    display: block;
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+form.aui legend,
+form.aui label {
+    color: @aui-form-label-text-color;
+}
+
+form.aui .icon-required {
+    left: 100%;
+    position: absolute;
+    top: 5px;
+
+    &::before {
+        content: "*";
+        position: absolute;
+        left: 0;
+        top: 0;
+        text-indent: initial;
+        color: @aui-form-error-text-color;
+        line-height: 1;
+        font-size: @aui-font-size-small;
+    }
+}
+
+form.aui div.description {
+    color: @aui-form-description-text-color;
+    font-size: 12px;
+    line-height: 1.66666666666667;
+    margin: 5px 0 0 0;
+}
+form.aui div.description:first-child {
+    margin-top: 0;
+}
+form.aui .field-value {
+    display: inline-block;
+    font-weight: bold;
+    padding-top: 5px;
+}
+/* TODO: don't support this in AUI Forms 2 */
+form.aui legend {
+    display: none;
+}
+form.aui .field-group,
+form.aui .group,
+form.aui .date-select {
+    box-sizing: border-box;
+    clear: both;
+    padding: 4px 0 4px 145px;
+    position: relative;
+    margin: 1px 0;
+    width: 100%;
+}
+form.aui .group {
+    padding-top: 0;
+}
+form.aui .field-group:before,
+form.aui .field-group:after,
+form.aui .group:before,
+form.aui .group:after,
+form.aui .date-select:before,
+form.aui .date-select:after {
+    content: " ";
+    display: table;
+}
+form.aui .field-group:after,
+form.aui .group:after,
+form.aui .date-select:after {
+    clear: both;
+}
+form.aui legend,
+form.aui .field-group > label,
+form.aui .field-group > aui-label {
+    float: left;
+    margin-left: -145px;
+    padding: 5px 0 0 0;
+    position: relative;
+    text-align: right;
+    width: 130px;
+    word-wrap: break-word;
+}
+
+form.aui .checkbox > label,
+form.aui .radio > label {
+    color: @aui-text-color;
+}
+form.aui div.checkbox > .checkbox[disabled] + label,
+form.aui div.radio > .radio[disabled] + label {
+    color: @aui-form-disabled-field-label-color;
+    cursor: not-allowed;
+}
+form.aui .field-group .error,
+form.aui .group .error,
+form.aui .checkbox .error,
+form.aui .radio .error {
+    clear: both;
+    color: @aui-form-error-text-color;
+    display: block;
+    margin: 5px 0 0 0;
+}
+form.aui .field-group .error:first-child,
+form.aui .checkbox .error:first-child,
+form.aui .radio .error:first-child {
+    margin-top: 0;
+}
+form.aui .group legend,
+form.aui .date-select legend {
+    display: block;
+}
+form.aui .group .field-group,
+form.aui .date-select .field-group {
+    clear: none;
+    padding-left: 0;
+    padding-top: 0;
+}
+form.aui .date-select .field-group label {
+    display: none;
+}
+form.aui div.checkbox,
+form.aui div.radio {
+    margin: 5px 0 0 0;
+    padding: 0 0 0 20px;
+    position: relative;
+}
+form.aui legend + .field-group,
+form.aui legend + .checkbox,
+form.aui legend + .radio {
+    margin-top: 0;
+    padding-top: 5px;
+}
+form.aui div.checkbox:first-child,
+form.aui div.radio:first-child {
+    margin-top: 0;
+}
+form.aui .matrix {
+    padding-top: 5px;
+}
+form.aui div.radio input.radio,
+form.aui div.checkbox input.checkbox {
+    box-sizing: border-box;
+    font-size: 14px;
+    height: 1.4285714285714em;
+    left: 0;
+    margin: 0;
+    padding: 2px;
+    position: absolute;
+    vertical-align: baseline;
+}
+/* Buttons */
+form.aui .buttons-container {
+    box-sizing: border-box;
+    clear: both;
+    margin: 1px 0 0 0;
+    padding: 4px 0 4px 145px;
+    position: relative;
+    width: 100%;
+}
+
+/* Long Labels
+ * add long-label class to form eg: <form class="aui long-label">
+ */
+form.aui.long-label .field-group,
+form.aui.long-label .group,
+form.aui.long-label .date-select,
+form.aui.long-label .buttons-container {
+    padding-left: 250px;
+}
+form.aui.long-label .field-group > label,
+form.aui.long-label .field-group > aui-label,
+form.aui.long-label .group > legend {
+    margin-left: -250px;
+    width: 235px;
+}
+form.aui.long-label .group .field-group,
+form.aui.long-label .date-select .field-group {
+    padding-left: 0;
+}
+/* End Long Labels */
+
+
+/* Top Labels
+ * add top-label class to form eg: <form class="aui top-label">
+ * display all forms with top-labels for screen sizes < 768px
+ */
+.top-labels() {
+    .field-group {
+        padding-left: 0;
+    }
+
+    .field-group > label,
+    .field-group > aui-label {
+        display: block;
+        float: none;
+        margin: 0 0 @aui-grid / 2 0;
+        padding: 0;
+        text-align: left;
+        width: auto;
+    }
+
+    .icon-required {
+        left: 0;
+        position: relative;
+        top: 0;
+    }
+
+    .group,
+    .date-select {
+        padding-left: 0;
+    }
+
+    .group legend,
+    .date-select legend {
+        float: none;
+        margin: 0;
+        text-align: left;
+        width: auto;
+    }
+
+    .date-select label {
+        display: none;
+    }
+
+    .buttons-container {
+        padding-left: 0;
+    }
+
+}
+
+form.aui.top-label {
+    .top-labels();
+}
+
+/* End Top Labels */
+
+/* Deprecated button styling - use the new aui-button component */
+
+/* Basic Button Style */
+form.aui .button {
+    #aui.box-sizing();
+    #aui-buttons.aui-button-base();
+    #aui-buttons.aui-button-style(normal);
+    height: @aui-form-field-height;
+    line-height: 1.4285714285714;
+    margin: 0;
+    padding: @aui-button-padding-y @aui-button-padding-x;
+    text-decoration: none;
+    vertical-align: baseline;
+    white-space: nowrap;
+
+    &:focus,
+    &:hover {
+        #aui-buttons.aui-button-style(hover);
+    }
+
+    &:active,
+    &.active {
+        #aui-buttons.aui-button-style(active);
+    }
+
+    &[disabled],
+    &[disabled]:hover,
+    &[disabled]:focus,
+    &[disabled]:active {
+        #aui-buttons.aui-button-style(disabled);
+    }
+}
+
+form.aui .cancel  {
+    cursor: pointer;
+    font-size: @aui-button-font-size;
+    display: inline-block;
+    padding: 5px 10px;
+    vertical-align: baseline;
+}
+
+/* Create 10px effective gap; backwards compat for old and new buttons */
+/* zero font size hack to stop 4px magic number problems. */
+form.aui .buttons-container > .buttons {
+    font-size: 0;
+}
+/* ensure zero font size hack doesn't kill other elements. */
+form.aui .buttons-container > .buttons > * {
+    font-size: @aui-button-font-size;
+}
+form.aui .buttons-container .button + .button,
+form.aui .buttons-container .button + .aui-button,
+form.aui .buttons-container .aui-button + .button,
+form.aui .buttons-container .aui-button + .aui-button {
+    margin-left: 10px;
+}
+form.aui .buttons-container .aui-button + .aui-button-link {
+    margin-left: 9px; /* 1px diff due to border */
+}
+
+/* Message Interops */
+form.aui .aui-message + .field-group,
+form.aui .aui-message + .group,
+form.aui .aui-message + .date-select {
+    margin-top: 10px;
+}
+
+/* Deprecated */
+form.aui span.content {
+    left: -9999px;
+    position: absolute;
+    top: -9999px;
+}
+form.aui pre.aui-form {
+    @size: 12px;
+    background-color: @aui-form-pre-bg-color;
+    border: 1px solid @aui-border-color;
+    font-family: @aui-code-font-family;
+    font-size: @size;
+    line-height: unit(20 / @size);
+    overflow-x: auto;
+    overflow-y: visible;
+    padding: @aui-grid * 1.5;
+}
+
+// Responsive Styles
+
+#aui.responsive-small({
+    form.aui, form.aui.long-label {
+        .top-labels();
+    }
+});

@@ -1,0 +1,45 @@
+<html>
+<head>
+    <title>$action.getText("title.labels.popular")</title>
+</head>
+
+<content tag="key">$action.space.key</content>
+
+<body>
+
+#set ($mode = "view-labels-popular")
+#if ($action.space)
+    #set ($decoratorContext = "space-labels")
+#else
+    #set ($decoratorContext = "labels")
+#end
+
+#requireResource("com.atlassian.confluence.plugins.confluence-labels:view-label-resources")
+
+#parse ("/com/atlassian/confluence/plugins/labels/components/labels-nav.vm")
+
+#applyDecorator("root")
+    #decoratorParam("helper" $action.helper)
+    #decoratorParam("context" $decoratorContext)
+    #decoratorParam("mode" $mode)
+    #decoratorParam("collector-key" "view-label-heatmap")
+    #decoratorParam("suppress-default-navigation" "true")
+
+    #set($pageContext = "$req.contextPath/labels/listlabels-heatmap.action")
+
+    #if ($results.size() > 0)
+        #if ($helper.space)
+            <p>
+                $action.getText("see.also.global.popular.labels", ["$pageContext"])
+            </p>
+        #end
+
+        #parse( "/com/atlassian/confluence/plugins/labels/components/heatmap.vm" )
+
+    #else
+        <p>$action.getText("no.labels.defined")</p>
+        <p>$action.getText("see.also.global.popular.labels", ["$req.contextPath/labels/listlabels-heatmap.action"])</p>
+    #end
+#end
+</body>
+</html>

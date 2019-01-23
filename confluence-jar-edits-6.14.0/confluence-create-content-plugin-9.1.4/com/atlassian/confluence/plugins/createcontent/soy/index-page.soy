@@ -1,0 +1,50 @@
+{namespace Confluence.Templates.Blueprints.IndexPage}
+
+/**
+ * Renders a create-from-template macro
+ * @Deprecated since 5.3.1. Use com.atlassian.confluence.plugins.createcontent.api.contextproviders.AbstractBlueprintContextProvider#renderCreateFromTemplateMacro
+ *
+ * @param contentBlueprintId
+ * @param blueprintModuleCompleteKey
+ * @param createButtonLabel
+ * @param spaceKey
+ * @param createResult
+ */
+{template .createFromTemplateMacro}
+    <ac:macro ac:name="create-from-template">
+        <ac:parameter ac:name="contentBlueprintId">{$contentBlueprintId}</ac:parameter>
+        <ac:parameter ac:name="blueprintModuleCompleteKey">{$blueprintModuleCompleteKey}</ac:parameter>;
+        <ac:parameter ac:name="buttonLabel">{$createButtonLabel}</ac:parameter>
+        <ac:parameter ac:name="spaceKey">{$spaceKey}</ac:parameter>
+        <ac:parameter ac:name="templateName">{$blueprintModuleCompleteKey}</ac:parameter>
+        <ac:parameter ac:name="createResult">{$createResult}</ac:parameter>
+    </ac:macro>
+{/template}
+
+/**
+ * Renders a content report macro
+ * @Deprecated since 5.3.1. Use com.atlassian.confluence.plugins.createcontent.api.contextproviders.AbstractBlueprintContextProvider#renderContentReportTableMacro
+ *
+ * @param templateLabel
+ * @param analyticsKey
+ * @param spaceKey
+ * @param blankTitle
+ * @param blankDescription
+ * @param createButtonLabel
+ * @param blueprintModuleCompleteKey
+ * @param contentBlueprintId
+ */
+{template .contentReportTableMacro}
+    <ac:macro ac:name="content-report-table">
+        <ac:parameter ac:name="labels">{$templateLabel}</ac:parameter>
+        <ac:parameter ac:name="analytics-key">{$analyticsKey}</ac:parameter>
+        <ac:parameter ac:name="spaces">{$spaceKey}</ac:parameter>
+        <ac:parameter ac:name="blankTitle">{$blankTitle}</ac:parameter>
+        <ac:parameter ac:name="blankDescription">{$blankDescription}</ac:parameter>
+        <ac:parameter ac:name="createButtonLabel">{$createButtonLabel}</ac:parameter>
+        <ac:parameter ac:name="blueprintModuleCompleteKey">{$blueprintModuleCompleteKey}</ac:parameter>
+        <ac:parameter ac:name="contentBlueprintId">{$contentBlueprintId}</ac:parameter>
+    </ac:macro>
+{/template}
+
+

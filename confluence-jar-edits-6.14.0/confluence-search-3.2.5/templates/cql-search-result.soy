@@ -1,0 +1,184 @@
+{namespace Confluence.Templates.CQLSearch}
+
+
+/**
+ * @param searchResults
+ * @param startIndex
+ * @param pageSize
+ * @param totalSize
+ * @param timeSpent
+ * @param queryString
+ */
+{template .searchResults}
+        <p id="search-results-meta" class="search-results-count" data-totalsize="{$totalSize}">
+            {getText('confluence-search.results.meta', ($startIndex / $pageSize) + 1, ceiling($totalSize / $pageSize), $totalSize, $timeSpent/1000)|noAutoescape}
+        </p>
+        <ol class="search-results cql" data-query="{$queryString}">
+        {foreach $searchResult in $searchResults}
+            <li>
+                {call .searchResult data="$searchResult" /}
+            </li>
+        {/foreach}
+        </ol>
+{/template}
+
+/**
+ * @param title
+ * @param url
+ * @param? content
+ * @param excerpt
+ * @param? breadcrumbs
+ * @param? resultGlobalContainer
+ * @param? resultParentContainer
+ * @param friendlyLastModified
+ * @param entityType
+ * @param iconCssClass
+ * @param pageScore
+ */
+{template .searchResult}
+    <h3>
+        // We need to useIconFont to get the required aui-icon-small class, but the icon Soy template assumes that
+        // this incoming 'icon' string can be appended to "aui-iconfont-" to get a class that is expected by the CSS.
+        // We're nowhere close to that, so for now pass the icon class through separately and ignore the extraneous
+        // "aui-iconfont-" class in the rendered span.
+        {call aui.icons.icon}
+            {param icon: ''/}
+            {param useIconFont: true/}
+            {param extraClasses: $iconCssClass/}
+        {/call}
+        {if $content}
+        <a class="search-result-link visitable" href="{contextPath() + $url}" data-type="{$content.type}">{$title|noAutoescape}</a>
+        {if $pageScore} [{$pageScore}] {/if}
+        {else}
+        <a class="search-result-link visitable" href="{contextPath() + $url}" data-type="{$entityType}">{$title|noAutoescape}</a>
+        {if $pageScore} [{$pageScore}] {/if}
+        {/if}
+    </h3>
+    <div class="highlights">
+        {$excerpt|noAutoescape}
+    </div>
+    <div class="search-result-meta">
+        {if $breadcrumbs and length($breadcrumbs) > 0}
+            {foreach $breadcrumb in $breadcrumbs}
+                <a class="container" href="{contextPath() + $breadcrumb.url}" title="{$breadcrumb.label}">{$breadcrumb.label}</a>
+                {if not isLast($breadcrumb)}
+                <span>{$breadcrumb.separator}</span>
+                {/if}
+            {/foreach}
+        {else}
+            {if $resultGlobalContainer}
+                <a class="container" href="{contextPath() + $resultGlobalContainer.displayUrl}" title="{getText('confluence-search.results.location')}">{$resultGlobalContainer.title}</a>
+                {if $resultParentContainer}
+                    <span> / &#8230; / </span>
+                    <a class="container" href="{contextPath() + $resultParentContainer.displayUrl}" title="{getText('confluence-search.results.page.location')}">{$resultParentContainer.title}</a>
+                {/if}
+            {/if}
+        {/if}
+        {if $resultGlobalContainer and $friendlyLastModified} &bull; {/if}
+        {if $friendlyLastModified and $entityType != 'user'}
+        <span class="date" title="{getText('confluence-search.results.lastmodified')}">{$friendlyLastModified}</span>
+        {/if}
+    </div>
+{/template}
+
+/**
+ * @param queryString
+ * @param archivedResultsCount
+ */
+{template .noSearchResults}
+
+    {if $queryString == null}
+        {getText('confluence-search.results.noresults')}
+    {else}
+        {let $sanitizedSearchParam}{$queryString|escapeHtml}{/let}
+        {getText('confluence-search.results.noresults.for', $sanitizedSearchParam)|noAutoescape}
+    {/if}
+
+    <ul>
+        {if $archivedResultsCount}
+            {if $archivedResultsCount > 0}
+            <li>{getText('confluence-search.results.tip.archived', $archivedResultsCount)|noAutoescape}</li>
+            {/if}
+        {/if}
+        <li>{getText('confluence-search.tip.general', 'https://confluence.atlassian.com/display/DOC/Confluence+Search+Syntax')|noAutoescape}</li>
+        <li>{getText('confluence-search.tip.restrictions')}</li>
+    </ul>
+
+    <ul class="search-results" data-query="{$queryString}"></ul>
+
+{/template}
+
+/**
+ * @param errorMessage
+ * Error message.
+ */
+{template .searchError}
+    {call .searchErrorMessage}
+        {param errorMessage}
+            {getText('confluence-search.results.cql-error')} {$errorMessage}
+        {/param}
+    {/call}
+{/template}
+
+/**
+ * Missing search query error message
+ */
+{template .searchMissingQuery}
+    <h2 class="search-missing-query-header">
+        {getText('confluence-search.results.missing.query')}
+    </h2>
+    <p class="search-missing-query-body">
+        <span class="search-missing-query-body-label">
+            {getText('confluence-search.results.cql-missing.query')}
+        </span>
+        <br/>
+        <a class="search-missing-query-body-link" href="{docLink('confluence-search.results.cql-missing.help.link.href')}" target="_blank">
+            {getText('confluence-search.results.cql-missing.help.link.title')}
+        </a>
+    </p>
+{/template}
+
+/**
+ * Timeout error message
+ */
+{template .searchTimeout}
+    {call .searchErrorMessage}
+        {param errorMessage}
+            {getText('confluence-search.results.timeout')|noAutoescape}
+        {/param}
+        {param errorTitle}
+            {getText('confluence-search.results.timeout.title')|noAutoescape}
+        {/param}
+    {/call}
+{/template}
+
+/**
+ * Unauthorized message.
+ */
+{template .searchUnauthorized}
+    {call .searchErrorMessage}
+        {param errorMessage}
+            {getText('confluence-search.results.unauthorized')|noAutoescape}
+        {/param}
+    {/call}
+{/template}
+
+/**
+ * Generic error message template.
+ * @param errorMessage
+ */
+{template .searchErrorMessage}
+    {call aui.message.warning}
+        {param titleContent}
+            {getText('confluence-search.results.cql-error.title')}
+        {/param}
+        {param content: $errorMessage /}
+    {/call}
+{/template}
+
+/**
+ * @param iconCssClass
+ */
+{template .searchResultIcon}
+    <span class="{$iconCssClass}"></span>
+{/template}

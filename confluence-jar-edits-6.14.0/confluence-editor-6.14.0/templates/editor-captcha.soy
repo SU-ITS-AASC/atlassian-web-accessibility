@@ -1,0 +1,22 @@
+{namespace Confluence.Templates.Editor.Sections.Savebar.Captcha}
+
+/**
+ * @param shouldShow
+ * @param? fieldErrors
+ * @param? captchaId
+ */
+{template .render}
+    {if $shouldShow and $captchaId}
+        {let $captchaErrors: $fieldErrors ? $fieldErrors : [] /}
+        <div class="toolbar-split toolbar-split-row toolbar-split-captcha">
+            <div class="toolbar-group">
+                <div class="toolbar-item">
+                    {call Confluence.Templates.Captcha.form}
+                        {param captchaId: $captchaId /}
+                        {param captchaErrors: $captchaErrors /}
+                    {/call}
+                </div>
+            </div>
+        </div>
+    {/if}
+{/template}

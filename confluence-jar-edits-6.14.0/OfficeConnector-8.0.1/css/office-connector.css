@@ -1,0 +1,80 @@
+form.office-connector div.outline-icon-container {
+    display: table-cell;
+    padding-right: 5px;
+}
+
+form.office-connector div.outline-text-container {
+    display: table-cell;
+    width: 100%;
+    vertical-align: top;
+}
+
+form.office-connector ul.no-bullets {
+    list-style: none;
+    padding-left: 23px;
+}
+
+form.office-connector ul#outline {
+    margin-top: 5px;
+}
+
+form.office-connector ul.outline {
+    margin-top: 0;
+    padding-left: 0;
+}
+
+form.office-connector ul.outline li {
+    display:table;
+}
+
+form.office-connector span.no-split {
+    color: #333;
+    font-style: italic;
+}
+
+form.office-connector .delete-all {
+    margin-left: 20px;
+}
+
+form.office-connector .word-file-loading {
+    background: url(../../../images/icons/wait.gif) no-repeat left 50%;
+    height: 40px;
+    line-height: 40px;
+    padding-left: 24px;
+}
+
+form.office-connector .error {
+    background-color: #FFF;
+}
+
+#com-atlassian-confluence form.office-connector div.radio label,
+#com-atlassian-confluence form.office-connector div.checkbox label {
+    color: #000;
+}
+
+#com-atlassian-confluence form.office-connector div.checkbox label.cannot-execute {
+    color: #666;
+}
+
+#uploadimportform .submit-placement {
+    margin-left: 48px;
+}
+
+.office-container {
+    line-height:normal;
+    border: 1px solid rgb(204, 204, 204);
+    padding: 10px;
+}
+
+.office-container div.container-menu-butttons {
+    padding-bottom: 5px;
+    display: inline-block;
+}
+
+.confluence-button.office-editable {
+    float:left;
+}
+
+.companion-edit-button {
+    margin-bottom: 2px;
+}

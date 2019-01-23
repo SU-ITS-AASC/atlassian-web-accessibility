@@ -1,0 +1,8 @@
+{
+"version":3,
+"file":"/dummy-file-path",
+"lineCount":1,
+"mappings":"AAGAA,MAAA,gFAGG,QAAA,CAAUC,CAAV,CACUC,CADV,qBAKkBC,QAAAA,OACLC,EAAiBF,CAAAG,IAAA,oBADZF,gBAEFC,CAFED,OAE2BC,CAF3BD,CALlB,4BASiCG,QAAAA,OACpBC,EAAcL,CAAAG,IAAA,gBADMC,OAEjBJ,EAAAG,IAAA,yBAFiBC,YAEqBC,CAFrBD,eAE+CC,CAF/CD,EATjC,EAHH,CAmBAE,QAAA,8BAAAC,qBAAA;",
+"sources":["input.js"],
+"names":["define","AJS","Meta","inlineTasks","useInlineTasks","get","isCollaborativeContentType","contentType","require","exportModuleAsGlobal"]
+}

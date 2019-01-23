@@ -1,0 +1,76 @@
+{
+  "confluence.synchrony.external-changes.error": [
+    "statusCode",
+    "message",
+    "contentId",
+    "ancestor"
+  ],
+  "confluence.synchrony.syncmanager.failed-to-restart": [
+    "id"
+  ],
+  "confluence.synchrony.syncmanager.consecutive-failed-to-restart": [
+    "id"
+  ],
+  "confluence.synchrony.external-changes.revert": [],
+  "confluence.synchrony.external-changes.publish": [],
+  "confluence.synchrony.external-changes.config.registered.success": [],
+  "confluence.synchrony.external-changes.config.registered.failure": [],
+  "confluence.synchrony.error": [
+    "error",
+    "contentId"
+  ],
+  "confluence.synchrony.connection.error": [],
+  "confluence.synchrony.bind.failure": [
+    "contentId"
+  ],
+  "confluence.synchrony.client.content.reconciliation.failure": [
+    "type",
+    "contentId"
+  ],
+  "confluence.synchrony.client.content.reconciliation.blank-content": [
+    "contentId"
+  ],
+  "confluence.synchrony.recovery.error": [
+    "recoveryState"
+  ],
+  "confluence.synchrony.user.in.session": [
+    "numOtherUsers",
+    "draftId",
+    "contentId"
+  ],
+  "confluence.synchrony.editor.loaded": [
+    "durationMillis",
+    "contentId"
+  ],
+  "confluence.synchrony.editor.load.timeout": [
+    "contentId"
+  ],
+  "confluence.synchrony.banner.close": [
+    "isAdmin"
+  ],
+  "confluence.synchrony.banner.doc-clicked": [
+    "isAdmin"
+  ],
+  "confluence.synchrony.banner.video-clicked": [
+    "isAdmin"
+  ],
+  "confluence.synchrony.banner.seen": [
+    "isAdmin"
+  ],
+  "confluence.synchrony.editor.grammarly.block": [],
+  "confluence.synchrony.editor.grammarly.reload.click": [],
+  "confluence.synchrony.editor.websocket.retry.click": [],
+  "confluence.synchrony.editor.websocket.findmore.click": [],
+  "confluence.collaborative.editing.mode.periodic.on": [],
+  "confluence.collaborative.editing.mode.periodic.off": [],
+  "confluence.collaborative.editing.mode.periodic.limited": [],
+  "confluence.collaborative.editing.synchrony.managed.mode.periodic.on": [],
+  "confluence.collaborative.editing.synchrony.managed.mode.periodic.off": [],
+  "confluence.synchrony.exit.before.connecting":[
+    "afterTimeout",
+    "contentId"
+  ],
+  "collab.edit.format.stale.fix.count": [
+      "count"
+  ]
+}

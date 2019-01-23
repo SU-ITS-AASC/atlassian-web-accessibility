@@ -1,0 +1,1 @@
+("undefined"===typeof window?global:window).__584af8690b0248d0ffcba682ccaa70ba=function(){var a={};"use strict";Object.defineProperty(a,"__esModule",{value:!0});a.INPUT_SUFFIX="-input";return a}.call(this);

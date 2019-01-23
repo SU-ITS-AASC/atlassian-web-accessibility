@@ -1,0 +1,103 @@
+#pagetreesearch form input.text {
+    margin:0 8px 8px 0;
+}
+
+#pagetreesearch form input.aui-button {
+    margin:0;
+}
+
+#splitter-sidebar #pagetreesearch form {
+    white-space:nowrap;
+}
+
+.plugin_pagetree div.error {
+    padding-left:15px;
+}
+
+.plugin_pagetree .plugin_pagetree_children_list_noleftspace {
+    margin-left:0;
+    padding-left:0;
+}
+
+.plugin_pagetree .plugin_pagetree_children_list {
+    list-style-type:none;
+    margin-bottom:0;
+    padding-left:0;
+}
+
+.plugin_pagetree .plugin_pagetree_children_list > li {
+    margin: 5px 0;
+}
+
+.plugin_pagetree .plugin_pagetree_children_list > li:last-child {
+    margin-bottom: 0;
+}
+
+.plugin_pagetree .plugin_pagetree_children_list > li .plugin_pagetree_children_list {
+    padding-left:16px;
+}
+
+.plugin_pagetree .plugin_pagetree_children_list > li > .plugin_pagetree_children_content {
+    float:left;
+    width: 85%;
+    text-decoration: none;
+}
+
+div.plugin_pagetree ul.plugin_pagetree_children_list > li > div.plugin_pagetree_childtoggle_container {
+    position: relative;
+    width:20px;
+    height: 25px;
+    float:left;
+    padding-bottom: 0;
+}
+
+div.plugin_pagetree .plugin_pagetree_childtoggle_container > .aui-icon {
+    color: #42526E;
+}
+
+.plugin_pagetree_childtoggle_container > .no-children.icon {
+    position: absolute;
+    height: 4px;
+    width: 4px;
+    left: 6px;
+    top: 50%;
+    margin-top: -5px;
+    min-width: 0;
+    border-radius: 2px;
+    background-color: #42526E;
+}
+
+.plugin_pagetree_children_span {
+    display: block;
+    float: left;
+}
+
+.plugin_pagetree_children_span > a {
+    padding: 0;
+    display: inline-block;
+}
+
+.plugin_pagetree_children_span.plugin_pagetree_current {
+    font-weight: bold;
+}
+
+.plugin_pagetree ul.plugin_pagetree_children_list li div.plugin_pagetree_children_loading_wrapper {
+    padding-left: 18px;
+}
+
+.plugin_pagetree ul.plugin_pagetree_children_list span.plugin_pagetree_children_loading {
+    vertical-align: middle;
+}
+
+.plugin_pagetree ul.plugin_pagetree_children_list div.plugin_pagetree_children_loading_wrapper div.spinner {
+    padding-right: 10px;
+    display: inline-block;
+    height: 21px;
+    vertical-align: middle;
+}
+
+.plugin_pagetree ul.plugin_pagetree_children_list li, .plugin_pagetree ul.plugin_pagetree_children_list li div.plugin_pagetree_children_container {
+    clear: left;
+    overflow: hidden;
+    width: 100%;
+}

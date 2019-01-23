@@ -1,0 +1,202 @@
+<atlassian-plugin key="com.atlassian.confluence.plugins.drag-and-drop" name="Confluence Drag and Drop Plugin" pluginsVersion="2">
+
+    <plugin-info>
+        <param name="atlassian-data-center-compatible">true</param>
+        <description>Allows multiple attachments to be uploaded to Confluence via drag-and-drop.</description>
+        <version>6.14.0</version>
+        <vendor name="Atlassian" url="http://www.atlassian.com"/>
+    </plugin-info>
+
+    <resource name="i18n" type="i18n" location="com/atlassian/confluence/plugins/dragdrop/i18n" />
+    <resource name="images/" type="download" location="images/" />
+
+    <web-resource key="support" name="Support Resources" i18n-name-key="com.atlassian.confluence.plugins.drag-and-drop.support">
+        <transformation extension="js">
+            <transformer key="jsI18n"/>
+        </transformation>
+        <transformation extension="soy">
+            <transformer key="soyTransformer" />
+        </transformation>
+        <transformation extension="less">
+            <transformer key="less-transformer"/>
+        </transformation>
+        <resource type="download" name="drag-and-drop-utils.js" location="js/drag-and-drop-utils.js"/>
+
+        <resource type="download" name="default-drop-handler.js" location="js/default-drop-handler.js"/>
+        <resource type="download" name="observable-array-list.js" location="js/observable-array-list.js"/>
+
+        <resource type="download" name="upload-progress-dialog.js" location="js/upload-progress-dialog.js"/>
+        <resource type="download" name="drag-and-drop.css" location="css/drag-and-drop.less"/>
+        <resource type="download" name="drop-zone.css" location="css/drop-zone.less"/>
+        <resource type="download" name="drag-and-drop-soy.js" location="templates/drag-and-drop.soy" />
+
+        <resource type="download" name="upload-utils.js" location="js/upload-utils.js"/>
+
+        <dependency>com.atlassian.confluence.plugins.drag-and-drop:plupload</dependency>
+
+        <dependency>confluence.web.resources:logger</dependency>
+        <dependency>com.atlassian.auiplugin:jquery-ui-position</dependency>
+        <dependency>com.atlassian.auiplugin:aui-experimental-progress-indicator</dependency>
+        <dependency>com.atlassian.auiplugin:aui-experimental-soy-templates</dependency>
+        <dependency>com.atlassian.soy.soy-template-plugin:soy-deps</dependency>
+    </web-resource>
+
+    <web-resource key="plupload" name="Plupload" i18n-name-key="com.atlassian.confluence.plugins.drag-and-drop.plupload">
+        <resource type="download" name="plupload.js" location="js/plupload.js"/>
+        <resource type="download" name="plupload.html5.js" location="js/plupload.html5.js"/>
+        <resource type="download" name="plupload-amd.js" location="/includes/js/amd/shim/plupload-amd.js">
+            <param name="source" value="webContextStatic"/>
+        </resource>
+        <dependency>confluence.web.resources:amd</dependency>
+    </web-resource>
+
+    <web-resource key="drag-and-drop-for-view-attachments" name="View Attachments Client" i18n-name-key="com.atlassian.confluence.plugins.drag-and-drop.view.attachments.client.name">
+        <transformation extension="js">
+            <transformer key="jsI18n"/>
+        </transformation>
+        <resource type="download" name="view-content-attachments-client.js" location="js/view-content-attachments-client.js"/>
+        <dependency>confluence.web.resources:ajs</dependency>
+        <dependency>com.atlassian.confluence.plugins.drag-and-drop:support</dependency>
+        <context>viewattachments</context>
+    </web-resource>
+
+    <web-resource key="drop-zone-for-view-attachments" name="View Attachments Drop Zone" i18n-name-key="com.atlassian.confluence.plugins.drag-and-drop.view.attachments.drop.zone">
+        <transformation extension="js">
+            <transformer key="jsI18n"/>
+        </transformation>
+        <description key="com.atlassian.confluence.plugins.drag-and-drop.view.attachments.drop.zone.desc">Disable this module to hide the drop zone on the view attachments page.</description>
+        <resource type="download" name="view-content-attachments-drop-zone.js" location="js/view-content-attachments-drop-zone.js"/>
+        <dependency>com.atlassian.confluence.plugins.drag-and-drop:support</dependency>
+        <context>viewattachments</context>
+    </web-resource>
+
+    <web-resource key="drag-and-drop-for-view-content" name="View Content Client" i18n-name-key="com.atlassian.confluence.plugins.drag-and-drop.view.content.client.name">
+        <transformation extension="js">
+            <transformer key="jsI18n"/>
+        </transformation>
+
+        <dependency>confluence.web.resources:ajs</dependency>
+        <dependency>com.atlassian.confluence.plugins.drag-and-drop:support</dependency>
+
+        <context>viewcontent</context>
+    </web-resource>
+
+    <web-resource key="drag-and-drop-for-editor-common" name="Editor Client" i18n-name-key="com.atlassian.confluence.plugins.drag-and-drop.for.editor.name">
+        <transformation extension="js">
+            <transformer key="jsI18n"/>
+        </transformation>
+        <resource type="download" name="drag-and-drop-for-editor.js" location="js/editor.js"/>
+        <resource type="download" name="link-dialog-drop-zone.js" location="js/link-dialog-drop-zone.js"/>
+
+        <dependency>confluence.web.resources:ajs</dependency>
+        <dependency>com.atlassian.confluence.plugins.drag-and-drop:support</dependency>
+        <dependency>com.atlassian.confluence.plugins.drag-and-drop:image-dialog-client</dependency>
+        <dependency>com.atlassian.confluence.plugins.drag-and-drop:drag-and-drop-tip</dependency>
+        <dependency>com.atlassian.confluence.plugins.drag-and-drop:files-upload-analytics</dependency>
+        <context>editor-v3</context>
+    </web-resource>
+
+    <web-resource key="drag-and-drop-for-editor" name="Editor Client" i18n-name-key="com.atlassian.confluence.plugins.drag-and-drop.for.editor.name">
+        <dependency>com.atlassian.confluence.plugins.drag-and-drop:drag-and-drop-for-editor-common</dependency>
+        <dependency>com.atlassian.confluence.editor:editor-resources</dependency>
+        <context>editor-v3</context>
+    </web-resource>
+
+    <web-resource key="drag-and-drop-for-editor-conf-frontend">
+        <dependency>com.atlassian.confluence.plugins.drag-and-drop:drag-and-drop-for-editor-common</dependency>
+        <dependency>com.atlassian.confluence.plugins.drag-and-drop:drag-and-drop-overlay</dependency>
+        <dependency>com.atlassian.confluence.plugins.drag-and-drop:drop-zone-for-image-dialog</dependency>
+
+        <dependency>confluence.web.resources:document</dependency>
+        <dependency>confluence.web.resources:jquery</dependency>
+        <dependency>confluence.web.resources:plupload</dependency>
+        <dependency>confluence.web.resources:underscore</dependency>
+        <dependency>confluence.web.resources:event</dependency>
+        <context>editor-v4</context>
+    </web-resource>
+
+    <web-resource key="image-dialog-client" name="Image Dialog Client" i18n-name-key="com.atlassian.confluence.plugins.drag-and-drop.image.dialog.client">
+        <transformation extension="js">
+            <transformer key="jsI18n"/>
+        </transformation>
+
+        <resource type="download" name="insert-dialog-upload-controller.js" location="js/insert-dialog-upload-controller.js"/>
+        <resource type="download" name="image-dialog-client.js" location="js/image-dialog-client.js"/>
+
+        <dependency>com.atlassian.confluence.plugins.drag-and-drop:drag-and-drop-overlay</dependency>
+        <dependency>com.atlassian.confluence.plugins.drag-and-drop:files-upload-analytics</dependency>
+    </web-resource>
+
+    <web-resource key="drag-and-drop-tip" name="Drag And Drop Tip" i18n-name-key="com.atlassian.confluence.plugins.drag-and-drop.drag.and.drop.tip">
+        <transformation extension="js">
+            <transformer key="jsI18n"/>
+        </transformation>
+        <resource type="download" name="drag-and-drop-tip.js" location="js/drag-and-drop-tip.js"/>
+    </web-resource>
+
+    <web-resource key="drag-and-drop-overlay" i18n-name-key="com.atlassian.confluence.plugins.drag-and-drop.drag.and.drop.overlay">
+        <transformation extension="less">
+            <transformer key="less-transformer"/>
+        </transformation>
+        <transformation extension="js">
+            <transformer key="jsI18n"/>
+        </transformation>
+
+        <resource name="drag-and-drop-overlay.css" type="download" location="css/drag-and-drop-overlay.less"/>
+        <resource name="drag-and-drop-overlay.js" type="download" location="js/drag-and-drop-overlay.js"/>
+
+        <dependency>confluence.web.resources:amd</dependency>
+        <dependency>confluence.web.resources:ajs</dependency>
+    </web-resource>
+
+    <web-resource key="drop-zone-for-image-dialog" name="Image Dialog Drop Zone" i18n-name-key="com.atlassian.confluence.plugins.drag-and-drop.image.dialog.drop.zone">
+        <transformation extension="js">
+            <transformer key="jsI18n"/>
+        </transformation>
+        <description key="com.atlassian.confluence.plugins.drag-and-drop.image.dialog.drop.zone.desc">Disable this module to hide the drop zone on the image dialog.</description>
+        <resource type="download" name="image-dialog-drop-zone.js" location="js/image-dialog-drop-zone.js"/>
+        <dependency>com.atlassian.confluence.editor:editor-resources</dependency>
+        <dependency>com.atlassian.confluence.plugins.drag-and-drop:support</dependency>
+        <dependency>confluence.web.resources:amd</dependency>
+        <dependency>confluence.web.resources:ajs</dependency>
+        <dependency>confluence.web.resources:jquery</dependency>
+        <dependency>confluence.web.resources:legacy-editor-global-AVOID-IF-POSSIBLE</dependency>
+        <context>editor-v3</context>
+    </web-resource>
+
+    <!-- Files upload analytics-->
+    <web-resource key="files-upload-analytics" name="File Upload Analytics" i18n-name-key="com.atlassian.confluence.plugins.drag-and-drop.files.upload.analytics">
+        <resource type="download" name="files-upload-analytics.js" location="js/analytics/files-upload-analytics.js"/>
+
+        <dependency>com.atlassian.auiplugin:ajs-underscorejs</dependency>
+    </web-resource>
+
+    <xwork name="Drag and Drop Actions" key="actions">
+        <package name="drag-and-drop" extends="default" namespace="/plugins/drag-and-drop">
+            <action name="upload" class="com.atlassian.confluence.plugins.dragdrop.UploadAction">
+                <param name="RequireSecurityToken">true</param>
+                <interceptor-ref name="validatingStack"/>
+                <result name="input" type="json"/>
+                <result name="success" type="json"/>
+                <result name="error" type="json"/>
+                <result name="readonly" type="readonly-json"/>
+            </action>
+        </package>
+    </xwork>
+
+    <!-- drag and drop tip -->
+    <rest name="Drag And Drop Resource" i18n-name-key="drag-and-drop-resource.name" key="drag-and-drop-resource" path="/drag-and-drop" version="1">
+        <description key="drag-and-drop-resource.description">Drag And Drop Resource Plugin</description>
+    </rest>
+
+    <model-metadata-provider key="attachment-editor-render-metadata-provider" class="com.atlassian.confluence.plugins.dragdrop.providers.AttachmentEditorHtmlProvider">
+        <description>Provides editor render metadata for Content entities returned by the Confluence API.</description>
+    </model-metadata-provider>
+
+    <component key="dragAndDropService" name="dragAndDropService" class="com.atlassian.confluence.plugins.dragdrop.service.DragAndDropServiceImpl">
+        <interface>com.atlassian.confluence.plugins.dragdrop.service.DragAndDropService</interface>
+    </component>
+
+    <component-import key="pluginAccessor" interface="com.atlassian.plugin.PluginAccessor"/>
+    <component-import key="capabilityService" interface="com.atlassian.plugins.capabilities.api.CapabilityService"/>
+</atlassian-plugin>

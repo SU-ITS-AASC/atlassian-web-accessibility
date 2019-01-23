@@ -1,0 +1,83 @@
+{namespace DashboardTemplates.PopularStream}
+
+/**
+  * @param author
+  * @param iconCssClass
+  * @param url
+  * @param title
+  * @param counts
+  * @param friendlyDate
+  * @param? imageUris
+  * @param? excerpt
+  */
+{template .compactStreamItem}
+    <a href="{$url}" title="{$title}">
+        <div class="avatar-container">
+            <span class="aui-avatar aui-avatar-large">
+                <span class="aui-avatar-inner">
+                    <img src="{$author.avatarUrl}" alt="{$author.fullName}" />
+                </span>
+            </span>
+            <div class="stream-icon-container">
+                <span class="{$iconCssClass}"></span>
+            </div>
+        </div>
+        <div class="stream-item-body-container">
+            <div class="compact-stream-item-layout">
+                <div class="stream-heading-container">
+                    <span class="stream-item-heading">{$title}</span>
+                </div>
+
+                {foreach $countItem in $counts}
+                    <div class="count-container valign-middle-container">
+                        <span class="count-icon {$countItem.cssClass}"></span>
+                        <span class="count">{$countItem.count}</span>
+                    </div>
+                {/foreach}
+            </div>
+            <div class="flush-with-heading-container">
+                <div class="stream-item-meta">
+                   <ol class="middot-list user-info">
+                       <li>{if $author.anonymous}
+                        <span class="anonymous-user">{$author.fullName}</span>
+                        {elseif $author.unknownUser}
+                        <span class="unknown-user">{$author.fullName}</span>
+                        {else}
+                        <span data-username="{$author.userName}">{$author.fullName}</span>
+                        {/if}</li>
+                   </ol>
+                   <time datetime="" class="stream-item-date">{$friendlyDate}</span>
+                </div>
+                {if $imageUris and $imageUris.length > 0}
+                <div class="thumbnails thumbnail-layout">
+                    <div><img src="{$imageUris[0]}"></div>
+                </div>
+                {/if}
+                {if $excerpt}
+                <div class="excerpt">
+                    {$excerpt |noAutoescape}
+                </div>
+                {/if}
+            </div>
+        </div>
+    </a>
+{/template}
+
+/**
+* @param image
+* @param userCanCreateContent
+*/
+{template .blank}
+    {call DashboardTemplates.Default.blank}
+        {param cssClass: 'popular-stream' /}
+        {param image: $image /}
+        {param title: getText('popular.stream.mainBanner') /}
+        {param content}
+            <p>{getText('popular.stream.subBanner')|noAutoescape}</p>
+            <p>{getText('popular.stream.subBanner2')|noAutoescape}</p>
+            {if $userCanCreateContent}
+                <a class="aui-style aui-button aui-button-primary create-page">{getText('heading.createpage')}</a>
+            {/if}
+        {/param}
+    {/call}
+{/template}

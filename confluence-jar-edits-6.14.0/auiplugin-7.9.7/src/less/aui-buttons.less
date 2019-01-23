@@ -1,0 +1,384 @@
+@import './imports/global';
+
+// AUI BUTTONS
+// Note hover/disabled styles set directly as they are not precisely the same as
+// if we used straight opacity.
+//
+
+// Basic Button Style
+.aui-button,
+a.aui-button,
+.aui-button:visited {
+    #aui.box-sizing();
+    #aui-buttons.aui-button-base();
+    #aui-buttons.aui-button-style(normal);
+
+    display: inline-block;
+    height: @aui-button-height; // 30px - using ems so the fields increase in line with user specified font-sizes
+    line-height: @aui-button-line-height;
+    margin: 0;
+    padding: @aui-button-padding-y @aui-button-padding-x;
+    vertical-align: baseline;
+    white-space: nowrap;
+
+    &.aui-button-light {
+        background-color: @aui-button-light-bg-color;
+    }
+}
+
+.aui-button ~ .aui-button {
+    margin-left: @aui-grid;
+}
+
+// Ensure underlines not added by link styles
+a.aui-button:hover,
+a.aui-button:active,
+a.aui-button:focus {
+    text-decoration: none;
+}
+
+.aui-button:focus,
+.aui-button:hover,
+.aui-button-subtle.aui-button:focus,
+.aui-button-subtle.aui-button:hover {
+    #aui-buttons.aui-button-style(hover);
+}
+
+.aui-button:active,
+.aui-button.aui-button-subtle:active,
+.aui-button.aui-button-subtle.active {
+    #aui-buttons.aui-button-style(active);
+}
+
+.aui-button.active,
+.aui-button-subtle.aui-button.active {
+    #aui-buttons.aui-button-style(selected);
+}
+
+// Split Buttons
+.aui-button.aui-button-split-main {
+    + .aui-button-split-more {
+        margin-left: @aui-grouped-button-spacing;
+    }
+}
+
+// Primary Buttons
+.aui-button.aui-button-primary,
+.aui-button.aui-button-primary:visited {
+    #aui-buttons.aui-primary-button-style(normal);
+}
+
+.aui-button.aui-button-primary:hover,
+.aui-button.aui-button-primary:focus {
+    #aui-buttons.aui-primary-button-style(hover);
+}
+
+.aui-button.aui-button-primary.active {
+    #aui-buttons.aui-button-style(selected);
+}
+
+.aui-button.aui-button-primary:active {
+    #aui-buttons.aui-primary-button-style(active);
+}
+
+// Link style buttons - used for destructive/cancel actions ONLY
+.aui-button.aui-button-link,
+.aui-button.aui-button-link:visited,
+.aui-button.aui-button-text,
+.aui-button.aui-button-text:visited {
+    #aui-buttons.aui-link-button-style(normal);
+    padding: @aui-button-padding-y 0;
+}
+
+.aui-button.aui-button-link:focus,
+.aui-button.aui-button-link:hover,
+.aui-button.aui-button-link:active,
+.aui-buttons .aui-button.aui-button-link:focus,
+.aui-buttons .aui-button.aui-button-link:hover,
+.aui-buttons .aui-button.aui-button-link:active,
+.aui-buttons .aui-button.aui-button-link[aria-pressed="true"],
+.aui-button.aui-button-text:focus,
+.aui-button.aui-button-text:hover,
+.aui-button.aui-button-text:active,
+.aui-buttons .aui-button.aui-button-text:focus,
+.aui-buttons .aui-button.aui-button-text:hover,
+.aui-buttons .aui-button.aui-button-text:active,
+.aui-buttons .aui-button.aui-button-text[aria-pressed="true"] {
+    background-color: transparent;
+    border-color: transparent;
+}
+
+.aui-button.aui-button-link:hover,
+.aui-button.aui-button-text:hover {
+    #aui-buttons.aui-link-button-style(hover);
+}
+
+.aui-button.aui-button-link:active,
+.aui-button.aui-button-text:active {
+    #aui-buttons.aui-link-button-style(active);
+}
+
+.aui-button.aui-button-text,
+.aui-button.aui-button-text:visited {
+    border: none;
+    font-size: inherit;
+    height: inherit;
+    line-height: normal;
+    padding: 0;
+}
+
+// Subtle/hybrid/entity action/mugger buttons
+.aui-button.aui-button-subtle {
+    background-color: transparent;
+    border-color: transparent;
+    color: @aui-button-subtle-text-color;
+}
+
+.aui-buttons .aui-button.aui-button-subtle {
+    border-radius: @aui-button-border-radius;
+}
+
+// when a button label is present next to an aui-icon (eg sidebar config)
+.aui-button {
+    > .aui-icon {
+        + .aui-button-label {
+            margin-left: (@aui-grid / 2)-1;
+        }
+    }
+}
+
+// Compact Buttons
+.aui-button.aui-button-compact {
+    font-size: @aui-font-size-small;
+    height: 2.16666666666667em; // 26px with 12px font-size
+    padding: (@aui-button-padding-y / 2) (@aui-button-padding-x * .8);
+    line-height: 1.66666666666667;
+}
+
+// End Compact Buttons
+
+// aui-buttons groups buttons together into one button lozenge.
+.aui-buttons {
+    display: inline-block;
+    font-size: 0;
+}
+
+.aui-buttons::after {
+    clear: both;
+    content: "";
+    display: table;
+}
+
+.aui-buttons .aui-button {
+    border-radius: 0;
+    margin: 0;
+}
+
+.aui-buttons .aui-button:first-child {
+    border-top-left-radius: @aui-button-border-radius;
+    border-bottom-left-radius: @aui-button-border-radius;
+}
+
+.aui-buttons .aui-button:last-child {
+    border-top-right-radius: @aui-button-border-radius;
+    border-bottom-right-radius: @aui-button-border-radius;
+}
+
+.aui-buttons + .aui-buttons {
+    margin-left: @aui-grid;
+}
+
+// Grouped buttons go into toolbar style
+.aui-buttons .aui-button {
+    &:not(.aui-button-primary):not(.aui-button-link) {
+        &:focus,
+        &:hover,
+        &:active {
+            border-color: @aui-button-border-color;
+        }
+    }
+}
+
+.aui-buttons .aui-button[disabled],
+.aui-buttons .aui-button[disabled]:hover,
+.aui-buttons .aui-button[disabled]:focus,
+.aui-buttons .aui-button[disabled]:active,
+.aui-buttons .aui-button[aria-disabled="true"],
+.aui-buttons .aui-button[aria-disabled="true"]:hover,
+.aui-buttons .aui-button[aria-disabled="true"]:focus,
+.aui-buttons .aui-button[aria-disabled="true"]:active {
+    border-color: @aui-button-border-color;
+}
+
+// Grouped Primary Buttons
+.aui-buttons .aui-button ~ .aui-button {
+    border-left-width: 0;
+    margin-left: @aui-grouped-button-spacing;
+}
+
+.aui-buttons .aui-button {
+    &:hover,
+    &:focus,
+    &:active {
+        position: relative;
+    }
+
+    &:focus {
+        z-index: 1;
+    }
+}
+
+// Selected buttons - NOT supported for free-standing primary buttons
+// ARIA usage from http://www.paciellogroup.com/blog/misc/ARIA/togglebutton.html
+.aui-button[aria-pressed="true"],
+.aui-buttons .aui-button[aria-pressed="true"],
+.aui-buttons .aui-button[aria-pressed="true"].aui-button-primary,
+.aui-buttons .aui-button[aria-pressed="true"].aui-button-subtle {
+    color: @aui-button-default-selected-text-color;
+    background-color: @aui-button-default-selected-bg-color;
+}
+
+.aui-buttons .aui-button[aria-pressed="true"]:active {
+    color: @aui-button-default-text-color;
+    background-color: @aui-button-default-active-bg-color;
+}
+
+// Disabled states (keep last to avoid excessive selector weight)
+// ----------------------------------------------------------------------
+.aui-button[disabled],
+.aui-button[disabled]:hover,
+.aui-button[disabled]:focus,
+.aui-button[disabled]:active,
+.aui-button[aria-disabled="true"],
+.aui-button[aria-disabled="true"]:hover,
+.aui-button[aria-disabled="true"]:focus,
+.aui-button[aria-disabled="true"]:active,
+.aui-button[aria-disabled="true"][aria-pressed] {
+    #aui-buttons.aui-button-style(disabled);
+}
+
+// Subtle buttons have their own disabled state
+.aui-button.aui-button-subtle[disabled],
+.aui-button.aui-button-subtle[aria-disabled="true"] {
+    border: 0;
+    background: none;
+}
+
+.aui-button.aui-button-primary[disabled],
+.aui-button.aui-button-primary[disabled]:hover,
+.aui-button.aui-button-primary[disabled]:focus,
+.aui-button.aui-button-primary[disabled]:active,
+.aui-button.aui-button-primary[aria-disabled="true"],
+.aui-button.aui-button-primary[aria-disabled="true"]:hover,
+.aui-button.aui-button-primary[aria-disabled="true"]:focus,
+.aui-button.aui-button-primary[aria-disabled="true"]:active {
+    #aui-buttons.aui-primary-button-style(disabled);
+}
+
+.aui-button.aui-button-link[disabled],
+.aui-button.aui-button-link[disabled]:hover,
+.aui-button.aui-button-link[disabled]:focus,
+.aui-button.aui-button-link[disabled]:active,
+.aui-button.aui-button-link[aria-disabled="true"],
+.aui-button.aui-button-link[aria-disabled="true"]:hover,
+.aui-button.aui-button-link[aria-disabled="true"]:focus,
+.aui-button.aui-button-link[aria-disabled="true"]:active,
+.aui-button.aui-button-text[disabled],
+.aui-button.aui-button-text[disabled]:hover,
+.aui-button.aui-button-text[disabled]:focus,
+.aui-button.aui-button-text[disabled]:active,
+.aui-button.aui-button-text[aria-disabled="true"],
+.aui-button.aui-button-text[aria-disabled="true"]:hover,
+.aui-button.aui-button-text[aria-disabled="true"]:focus,
+.aui-button.aui-button-text[aria-disabled="true"]:active {
+    #aui-buttons.aui-link-button-style(disabled);
+}
+
+// Cross-component integration
+// ----------------------------------------------------------------------
+// Icons Integration
+// ---------------------
+
+.aui-button.aui-button-compact .aui-icon {
+    margin-top: -1px; // icon is 1px off, adjust it so it is centered
+}
+
+// Icon Colours
+// ----------
+.aui-button {
+    .aui-icon {
+        color: @aui-button-default-icon-color;
+    }
+
+    &:hover .aui-icon {
+        color: @aui-button-default-icon-color;
+    }
+
+    &:active .aui-icon {
+        color: @aui-button-default-active-icon-color;
+    }
+
+    &.active .aui-icon {
+        color: @aui-button-default-selected-icon-color;
+    }
+
+    // Primary
+    &.aui-button-primary {
+        .aui-icon {
+            color: @aui-button-primary-active-icon-color;
+        }
+    }
+
+    // Link button
+    &.aui-button-link {
+        .aui-icon {
+            color: @aui-link-color;
+        }
+
+        &:hover .aui-icon {
+            color: @aui-link-color-hover;
+        }
+
+        &.active .aui-icon,
+        &:active .aui-icon {
+            color: @aui-link-color-active;
+        }
+    }
+}
+
+.aui-button[aria-disabled="true"],
+.aui-button[disabled] {
+    &,
+    &:hover,
+    &:active {
+        .aui-icon {
+            color: @aui-button-default-disabled-icon-color;
+        }
+    }
+}
+
+.aui-button[busy] {
+    position: relative;
+
+    aui-spinner {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+    }
+
+    & {
+        color: transparent !important;
+        aui-spinner {
+            color: @aui-button-default-text-color;
+        }
+    }
+
+    &.aui-button-primary {
+        aui-spinner {
+            color: @aui-button-primary-text-color;
+        }
+    }
+}

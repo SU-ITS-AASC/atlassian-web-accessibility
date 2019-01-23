@@ -1,0 +1,24 @@
+{namespace aui.icons}
+
+/**
+ * @param icon the icon class name
+ * @param? size either 'small' or 'large', default is 'small'
+ * @param? id
+ * @param? tagName
+ * @param? accessibilityText not visible on the page
+ * @param? useIconFont true if you want to use an icon font (either the default AUI icon font or an alternative specified by $iconFontSet), false to use image-based icons
+ * @param? iconFontSet use a different icon set (eg. 'devtools' for 'aui-iconfont-devtools-*') instead of the standard aui icon font set ('aui-iconfont-*')
+ * @param? extraClasses Standard option.
+ * @param? extraAttributes Standard option.
+ */
+{template .icon}
+<{$tagName ? $tagName : 'span'}
+    {if $id} id="{$id}"{/if}
+    {sp}class="aui-icon{if $useIconFont} aui-icon-{$size ? $size : 'small'}{/if}
+    {sp}aui{$useIconFont ? '-iconfont' : '-icon'}{$iconFontSet ? '-' + $iconFontSet : ''}
+        -{$icon} // `<span class="aui-icon aui-icon-help">` for image icons. `<span class="aui-icon aui-icon-small aui-iconfont-help">` for icon font icons
+    {call aui.renderExtraClasses data="all" /}"
+    {call aui.renderExtraAttributes data="all" /}>
+    {if $accessibilityText}{$accessibilityText}{/if}
+</{$tagName ? $tagName : 'span'}>
+{/template}

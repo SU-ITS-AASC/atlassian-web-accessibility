@@ -1,0 +1,177 @@
+@import 'aui-sidebar-config.less';
+
+//
+// Imported by aui-sidebar.
+//
+// Implements the navigation pattern overrides for vertical navigation
+// so that it works both inside the sidebar panel itself as well as in the inline-dialogs
+// shown when the sidebar is contracted.
+//
+
+.aui-sidebar,
+.aui-sidebar-submenu {
+
+    //
+    // Nav pattern integration
+    //
+
+    .aui-navgroup .aui-sidebar-button {
+        margin-bottom: @aui-sidebar-grid;
+        margin-left: 3px;
+
+        > .aui-icon {
+            margin-right: 3px;
+        }
+    }
+
+    .aui-nav-item-label {
+        #aui.text-truncate();
+        display: block;
+        word-wrap: normal;
+    }
+
+    .aui-navgroup-vertical .aui-nav {
+        > li {
+            > .aui-nav-item {
+                #aui-nav.item-base(@aui-sidebar-nav-link-expected-height);
+                padding-left: @aui-sidebar-nav-link-inner-spacing;
+                padding-right: (@aui-icon-size-small + @aui-sidebar-nav-link-inner-spacing ); // room on the right for dropdown action menus
+            }
+        }
+
+        // Actions
+        .aui-nav-item-actions {
+            @actions-button-size: @aui-icon-size-small;
+            top: ((@aui-sidebar-nav-link-expected-height - @actions-button-size) / 2);
+            height: @actions-button-size;
+            width: @actions-button-size;
+        }
+
+        // Nested navigation
+        .aui-nav {
+            &[data-more] {
+                .aui-nav-more ~ li {
+                    height: 0;
+                    overflow: hidden;
+                }
+            }
+
+            .aui-nav-item-actions {
+                margin-right: 0;
+            }
+        }
+    }
+
+    .aui-navgroup-vertical .aui-nav .aui-nav-selected > .aui-nav-item {
+        #aui-nav.item-style(selected);
+    }
+
+    .aui-nav {
+        > li {
+            position: relative;
+
+            > .aui-nav-item {
+                #aui.text-truncate();
+
+                > .aui-icon {
+                    color: @aui-sidebar-icon-color;
+                    height: @aui-sidebar-icon-size;
+                    width: @aui-sidebar-icon-size;
+                    margin-right: @aui-sidebar-nav-link-icon-spacing;
+                    float: left;
+
+                    &::before {
+                        font-size: @aui-sidebar-icon-size;
+                        margin-top: -( @aui-sidebar-icon-size / 2);
+                    }
+
+                    &.aui-icon-small::before {
+                        font-size: @aui-icon-size-small;
+                        // change padding to maintain the 20px box size so that relative positioning still works
+                        padding: ((@aui-sidebar-icon-size - @aui-icon-size-small) / 2);
+                    }
+                }
+            }
+        }
+    }
+
+    // twixi for nested navigation
+    .aui-navgroup-vertical .aui-nav > li[aria-expanded] {
+        > .aui-nav-subtree-toggle {
+            @box-size: @aui-sidebar-nav-link-expected-height; // that assumption in aui-navigation about the .aui-nav-item height? yeeeeah, it's invalid here.
+            @fake-icon-with-spacing: @aui-nav-subtree-toggle-icon-size + @aui-sidebar-nav-link-icon-spacing;
+
+            top: ((@box-size - @aui-nav-subtree-toggle-icon-size) / 2);
+            left: @aui-sidebar-nav-link-inner-spacing; // push it "inside" the .aui-nav-item, though the element actually adjacent to it.
+            color: @aui-sidebar-toggle-icon-color;
+
+            + .aui-nav-item {
+                padding-left: (@aui-sidebar-nav-link-inner-spacing + @fake-icon-with-spacing);
+
+                > .aui-icon {
+                    display: none; // the subtree toggle is shown in place of this icon.
+                }
+            }
+
+            ~ .aui-nav {
+                padding-left: @fake-icon-with-spacing;
+            }
+        }
+    }
+
+    // divider between multiple aui-sidebar-groups or aui-navs inside the sidebar, without a aui-nav-heading.
+    // they used to be displayed, but the design went "borderless", so now they're not.
+    hr {
+        display: none;
+    }
+}
+
+//-----------------------
+// Sidebar narrow state - add collapsed styles.
+//-----------------------
+.aui-sidebar {
+    &[aria-expanded="false"] {
+        @aui-sidebar-nav-group-divider-width: 2px;
+
+        .aui-nav-heading {
+            display: none;
+        }
+
+        // show the icon for an expandable twixi menu (if it has one)
+        .aui-navgroup-vertical .aui-nav > li[aria-expanded] {
+            > .aui-nav-subtree-toggle {
+                + .aui-nav-item {
+                    padding-left: 0;
+
+                    > .aui-icon {
+                        display: block; // the subtree toggle doesn't exist in the reduced width sidebar
+                    }
+                }
+            }
+        }
+
+        .aui-nav-sortable > li > a:after {
+            left: 0;
+            top: (@aui-sidebar-grid * .8);
+        }
+
+        .aui-nav-item-actions {
+            display: none;
+        }
+    }
+}
+// END Sidebar
+//-----------------------
+
+.aui-sidebar-submenu-dialog > .aui-inline-dialog-contents {
+    padding: @aui-sidebar-grid;
+    width: 300px;
+    max-height: 812px;
+}
+
+.aui-sidebar-submenu {
+    position: static;
+    background: transparent;
+    border-right: 0;
+    width: auto;
+}

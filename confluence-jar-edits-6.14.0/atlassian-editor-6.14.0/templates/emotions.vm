@@ -1,0 +1,25 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>$action.getText("tinymce.emotions_dlg.title")</title>
+    #requireResource("com.atlassian.confluence.editor:emotions-resources")
+    #requireResource("com.atlassian.confluence.plugins.confluence-scriptsfinished-plugin:scriptsfinished")
+
+    <base target="_self" />
+</head>
+<body id="emotions" class="popup-window">
+	<div align="center">
+        <table class="emoticon-table" border="0" cellspacing="0" cellpadding="4">
+        #foreach ($emoticon in $action.emoticons)
+            #if ($velocityCount % 5 == 1)<tr>#end
+            #set ($identifier = $action.getEmoticonIdentifier($emoticon))
+            #set ($text = $action.getText("tinymce.emotions_dlg.$identifier"))
+            ## ATLASSIAN - the first parameter to insert is the emoticon identifier and not the file name
+            <td><a href="#"><img id="$identifier" data-type="$emoticon.type" src="$action.getEmoticonUrl($emoticon)" width="18" height="18" border="0" alt="$text" title="$text" /></a></td>
+            #if ($velocityCount % 5 == 0 || $velocityCount == $emoticons.length)</tr>#end
+        #end
+		</table>
+	</div>
+	#javascripts()
+</body>
+</html>

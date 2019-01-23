@@ -1,0 +1,17 @@
+#requireResource("com.atlassian.confluence.extra.officeconnector:editinoffice")
+<html>
+<head>
+ <title>$fileName</title>
+</head>
+<content tag="pageTitle">$fileName</content>
+<content tag="title-text-span">$fileName</content>
+#applyDecorator("root")
+    #decoratorParam("helper" $action.helper)
+    #decoratorParam("mode" "view-attachments")
+    #decoratorParam("context" "$action.helper.page.type")
+
+<body>
+$contentHtml
+</body>
+#end
+</html>

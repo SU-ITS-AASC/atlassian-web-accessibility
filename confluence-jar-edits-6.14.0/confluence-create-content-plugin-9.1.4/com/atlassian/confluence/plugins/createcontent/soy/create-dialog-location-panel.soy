@@ -1,0 +1,23 @@
+{namespace Confluence.Templates.Blueprints}
+
+/**
+ * Create page dialog location panel.
+ */
+{template .createDialogLocationPanel}
+    <div class="create-dialog-location-bar">
+        <div>
+            <label>{getText('create.content.plugin.select.space')}</label>
+            <div class="space-select-control-container">
+                <input type="text" class="space-select" tabindex="100"/>
+                <div class="description hidden">
+                    {getText('create.content.plugin.select.space.limit.notice')}
+                    &nbsp;
+                    <a href="" title="{getText('create.content.plugin.select.space.limit.why.tip')}" tabindex="-1">{getText('create.content.plugin.select.space.limit.why')}</a>
+                </div>
+            </div>
+        </div>
+        <div id="create-dialog-parent-container">
+            {getText('create.content.plugin.parent.page')}:&nbsp;<span></span>
+        </div>
+    </div>
+{/template}

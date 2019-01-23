@@ -1,0 +1,17 @@
+{namespace Confluence.Templates.QuickNav}
+
+/**
+ * Quick nav search panel
+ */
+{template .panel}
+    <form id="quick-search" class="aui-quicksearch dont-default-focus header-quicksearch" action="{contextPath()}/dosearchsite.action" method="get">
+        <fieldset>
+            <label for="quick-search-query" class="assistive">{getText('quick.search.legend')}</label>
+            <input id="quick-search-query" class="text app-search search quick-search-query" type="text"
+                   accessKey="{getText('quick.search.accesskey')}" autocomplete="off" name="queryString" title="{getText('quick.search.legend')}"
+                   placeholder="{getText('quick.search.placeholder')}"/>
+            <input id="quick-search-submit" class="quick-search-submit" type="submit" value="{getText('quick.search.submit')}"/>
+            <div class="aui-dd-parent quick-nav-drop-down"></div>
+        </fieldset>
+    </form>
+{/template}

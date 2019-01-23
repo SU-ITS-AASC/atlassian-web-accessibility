@@ -1,0 +1,310 @@
+@import 'imports/global';
+
+@layer-buffer-x: @aui-grid;
+@layer-buffer-y: 100px;
+
+@footer-height: @aui-dialog-footer-height;
+@header-height: @aui-dialog-header-height;
+
+@header-footer-combined-height: (@header-height + @footer-height);
+
+@dialog-footer-padding-x: @aui-dialog2-padding;
+@dialog-footer-padding-y: 10px;
+@dialog-footer-padding: @dialog-footer-padding-y @dialog-footer-padding-x;
+
+@dialog-height-small: 200px;
+@dialog-height-medium: 300px;
+@dialog-height-large: 500px;
+
+@dialog-content-height-small: (@dialog-height-small - @header-footer-combined-height);
+@dialog-content-height-medium: (@dialog-height-medium - @header-footer-combined-height);
+@dialog-content-height-large: (@dialog-height-large - @header-footer-combined-height);
+
+@dialog-width-small: 400px;
+@dialog-width-medium: 600px;
+@dialog-width-large: 800px;
+@dialog-width-xlarge: 980px;
+
+@dialog-container-border-radius: @aui-border-radius-medium;
+
+@dialog-overflow-with-both-buffers: (@header-footer-combined-height + 2*@layer-buffer-y);
+
+@aui-dialog2-xlarge-width: (@dialog-width-xlarge + 2*@layer-buffer-x);
+@aui-dialog2-large-width: (@dialog-width-large + 2*@layer-buffer-x);
+@aui-dialog2-medium-width: (@dialog-width-medium + 2*@layer-buffer-x);
+@aui-dialog2-small-width: (@dialog-width-small + 2*@layer-buffer-x);
+
+.aui-dialog2 {
+    #aui.shadow.z300();
+    background-color: @aui-dialog2-bg-color;
+    box-sizing: border-box;
+    border-radius: @dialog-container-border-radius;
+    left: 0;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    right: 0;
+
+    &.aui-layer {
+        overflow: visible;
+        position: fixed;
+        top: @layer-buffer-y;
+        // we don't set bottom, because the dialog's height should be fixed as the page grows.
+        // there are responsive media queries that glue the bottom of the dialog to the page height.
+
+        &[aria-hidden="true"] {
+            .aui-dialog2-header,
+            .aui-dialog2-footer,
+            .aui-dialog2-content {
+                #aui.transition.fadeOut();
+            }
+        }
+
+        &[aria-hidden="false"] {
+            .aui-dialog2-header,
+            .aui-dialog2-footer,
+            .aui-dialog2-content {
+                #aui.transition.fadeIn();
+            }
+        }
+    }
+
+    &-small {
+        width: @dialog-width-small;
+        min-height: (@dialog-content-height-small + @footer-height);
+    }
+
+    &-medium {
+        width: @dialog-width-medium;
+        min-height: (@dialog-content-height-medium + @footer-height);
+    }
+
+    &-large {
+        width: @dialog-width-large;
+        min-height: (@dialog-content-height-large + @footer-height);
+    }
+
+    &-xlarge {
+        min-height: (@dialog-content-height-large + @footer-height);
+        width: @dialog-width-xlarge;
+    }
+
+    &-small &-content {
+        min-height: @dialog-content-height-small;
+    }
+
+    &-medium &-content {
+        min-height: @dialog-content-height-medium;
+    }
+
+    &-xlarge &-content,
+    &-large &-content {
+        min-height: @dialog-content-height-large;
+    }
+
+    //
+    // This is not part of the all aui-dialog2-content instances so that connect
+    // dialogs can be full-height inside an iframe
+    //
+
+    &-content {
+        max-height: 100%;
+    }
+
+    &-content {
+        background-color: @aui-panel-bg-color;
+        box-sizing: border-box;
+        overflow: auto;
+        padding: @aui-dialog2-padding;
+        max-height: calc(~"100vh" - @dialog-overflow-with-both-buffers);
+
+        &:last-child {
+            border-radius: 0 0 @dialog-container-border-radius @dialog-container-border-radius;
+        }
+    }
+
+    &-header {
+        #aui-dialog.aui-dialog-header-base();
+        border-radius: @dialog-container-border-radius @dialog-container-border-radius 0 0;
+        color: @aui-text-color;
+        display: table;
+        font-weight: normal;
+        padding: 0 @aui-dialog2-padding;
+        width: 100%;
+
+        > * {
+            display: table-cell;
+            vertical-align: middle;
+        }
+
+        h2, h3 {
+            #aui.typography.h600();
+        }
+    }
+
+    &[data-aui-modal="true"] &-header-close {
+        display: none;
+    }
+
+    &-footer {
+        #aui-dialog.aui-dialog-footer-base();
+        border-radius: 0 0 @dialog-container-border-radius @dialog-container-border-radius;
+        padding: @dialog-footer-padding-y @dialog-footer-padding-x;
+        width: 100%;
+
+        &:empty {
+            height: 5px;
+            padding: 0;
+        }
+    }
+
+    &-footer-hint {
+        color: @aui-dialog2-footer-hint-text-color;
+        line-height: (@footer-height - (2 * @dialog-footer-padding-y));
+    }
+
+    &-footer-hint,
+    &-header-main {
+        overflow: hidden;
+        padding-right: 10px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    &-header-main {
+        color: @aui-text-color;
+        max-width: 400px;
+    }
+
+    &-header-secondary,
+    &-header-close,
+    &-footer-actions {
+        text-align: right;
+    }
+
+    &-footer-actions {
+        float: right;
+    }
+
+    &-header-close {
+        cursor: pointer;
+        color: @aui-dialog-header-close-icon-color;
+        height: 20px;
+        line-height: 100%;
+        padding-left: 5px;
+        text-align: right;
+        width: 20px;
+
+        &:hover {
+            color: @aui-dialog-header-close-icon-color;
+        }
+    }
+
+    &-warning &-header {
+        background-color: @aui-dialog2-header-warning-bg-color;
+        border-bottom-color: @aui-dialog2-header-warning-bg-color;
+        color: @aui-dialog2-header-warning-text-color;
+
+        .aui-dialog2-header-main,
+        .aui-dialog2-header-actions a,
+        .aui-dialog2-header-secondary a,
+        .aui-dialog2-header-close {
+            color: inherit;
+        }
+    }
+
+    .aui-iconfont-close-dialog:before {
+        content: @aui-dialog-close-icon-glyph;
+    }
+}
+
+// Add responsive sizes
+.responsive-max-height((@dialog-height-large + 2*@layer-buffer-y), {
+    .aui-dialog2-large,
+    .aui-dialog2-xlarge {
+        min-height: @dialog-height-small;
+
+        &.aui-layer {
+            bottom: @layer-buffer-y;
+        }
+        .aui-dialog2-content {
+            height: calc(~"100vh" - @dialog-overflow-with-both-buffers);
+            max-height: none;
+            min-height: @dialog-content-height-small;
+        }
+    }
+});
+
+.responsive-max-height((@dialog-height-medium + 2*@layer-buffer-y), {
+    .aui-dialog2-medium {
+        min-height: @dialog-height-small;
+
+        &.aui-layer {
+            bottom: @layer-buffer-y;
+        }
+        .aui-dialog2-content {
+            height: calc(~"100vh" - @dialog-overflow-with-both-buffers);
+            max-height: none;
+            min-height: @dialog-content-height-small;
+        }
+    }
+});
+
+.responsive-max-height((@dialog-height-small + 2*@layer-buffer-y), {
+    .aui-dialog2 {
+        &.aui-layer {
+            bottom: auto; // this will let the min-height take effect.
+        }
+    }
+});
+
+.aui-dialog2-responsive-full-width(@dialogType; @maxWidth) {
+    .responsive-max-width(@maxWidth, {
+        .aui-dialog2-@{dialogType} {
+            &.aui-layer {
+                box-shadow: none; // because who would see it, anyway?
+                height: 100vh;
+                width: 100vw;
+                top: 0;
+            }
+
+            .aui-dialog2-content {
+                height: calc(~"100vh" - @header-footer-combined-height);
+                max-height: none; // otherwise, the footer "creeps up" the dialog and takes up the available space.
+            }
+        }
+    });
+}
+
+.aui-dialog2-responsive-full-width(xlarge, @aui-dialog2-xlarge-width);
+.aui-dialog2-responsive-full-width(large, @aui-dialog2-large-width);
+.aui-dialog2-responsive-full-width(medium, @aui-dialog2-medium-width);
+.aui-dialog2-responsive-full-width(small, @aui-dialog2-small-width);
+
+@supports (display: flex) {
+    .aui-dialog2 {
+        display: flex;
+        flex-direction: column;
+
+        &-content {
+            flex: 1;
+        }
+
+        &-header {
+            align-items: center;
+            display: flex;
+            justify-content: space-between;
+
+            > .aui-dialog2-header-secondary,
+            > .aui-dialog2-header-actions {
+                display: block;
+                flex: 1;
+            }
+        }
+        &-header-close {
+            align-items: center;
+            display: flex;
+            justify-content: center;
+        }
+    }
+}

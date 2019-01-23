@@ -1,0 +1,27 @@
+#if ($dataset.size() > 0)
+<ol id="user-stat-list">
+    #foreach ($result in $dataset)
+    <li>
+        #if ($display.contains("icon"))
+            #if ($result.user)
+                <span class="icon icon-user">User information icon</span>
+            #else
+                #icon("group_anyone_16.gif" 16 "")
+            #end
+        #end
+
+        #if ($result.user)
+            #usernameLink($result.user.name)
+        #else
+            $action.getText("usage.users.anonymous")
+        #end
+
+        #if ($display.contains("count"))
+        ($result.count)
+        #end
+    </li>
+    #end
+</ol>
+#else
+None
+#end

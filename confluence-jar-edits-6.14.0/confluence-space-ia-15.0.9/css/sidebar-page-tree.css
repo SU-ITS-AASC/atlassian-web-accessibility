@@ -1,0 +1,12 @@
+/* Page tree overrides */
+.ia-fixed-sidebar div.plugin_pagetree ul.plugin_pagetree_children_list .plugin_pagetree_children_span {
+    overflow: hidden;
+    width: 100%;
+    text-overflow: ellipsis;
+}
+
+.ia-fixed-sidebar div.plugin_pagetree ul.plugin_pagetree_children_list .plugin_pagetree_children_span a {
+    white-space: nowrap;
+    display:inline-block;
+}
+/** 64 lines*/

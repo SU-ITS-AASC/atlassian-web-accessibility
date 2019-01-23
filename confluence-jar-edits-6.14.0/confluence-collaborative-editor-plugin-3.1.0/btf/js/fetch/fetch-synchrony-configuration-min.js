@@ -1,0 +1,1 @@
+define("confluence-collaborative-editor-plugin/btf/fetch/fetch-synchrony-configuration",["ajs","confluence-collaborative-editor-plugin/btf/ajax/ajax"],function(a,b){var d=a.contextPath()+"/rest/synchrony-interop/configuration";var e;return function c(){if(e){return e}e=a.$.Deferred();b.get(d).done(function(f){e.resolve(f)});return e.promise()}});

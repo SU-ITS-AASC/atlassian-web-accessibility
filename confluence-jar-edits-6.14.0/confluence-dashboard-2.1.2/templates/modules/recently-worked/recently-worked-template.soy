@@ -1,0 +1,20 @@
+{namespace DashboardTemplates.RecentWorked}
+
+/**
+*
+* @param userCanCreateContent
+*/
+{template .blank}
+    {call DashboardTemplates.Default.blank}
+        {param cssClass: 'recently-worked' /}
+        {param title: getText('recently.worked.mainBanner') /}
+        {param content}
+            <p>{getText('recently.worked.subBanner')|noAutoescape}</p>
+            <p>{getText('recently.worked.subBanner2')|noAutoescape}</p>
+            {if $userCanCreateContent}
+                <a class="aui-style aui-button aui-button-primary create-page">{getText('heading.createpage')}</a>
+            {/if}
+        {/param}
+    {/call}
+{/template}
+

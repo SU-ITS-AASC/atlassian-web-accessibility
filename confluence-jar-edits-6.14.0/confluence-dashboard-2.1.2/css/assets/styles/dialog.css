@@ -1,0 +1,22 @@
+.aui-dialog2.confluence-dialog-no-chrome .aui-dialog2-header {
+  background: #fff;
+  border: 0;
+  height: 50px;
+  margin-bottom: -40px; }
+
+.aui-dialog2.confluence-dialog-no-chrome h2 {
+  margin: 20px; }
+
+.aui-dialog2.confluence-dialog-no-chrome .actions {
+  margin-top: 40px;
+  width: 100%;
+  text-align: center; }
+  .aui-dialog2.confluence-dialog-no-chrome .actions .aui-button {
+    margin: 0 20px; }
+
+.aui-dialog2.confluence-dialog-no-chrome .dialog-image-container {
+  margin-bottom: 20px; }
+
+.aui-dialog2.confluence-dialog-centered .aui-dialog2-content {
+  text-align: center;
+  padding: 30px 40px 40px; }

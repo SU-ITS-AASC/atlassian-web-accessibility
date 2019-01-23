@@ -1,0 +1,8 @@
+{
+"version":3,
+"file":"/dummy-file-path",
+"lineCount":2,
+"mappings":"AAOAA,MAAA,gHAKG,QAAA,CACCC,CADD,CAECC,CAFD,CAGCC,CAHD,CAICC,CAJD,cAUYC,QAAAA,CAASC,CAATD,EAEHC,CAAAC,OAAAC,IAAA,CAAc,QAAA,MACNN,CAAAO,KAAAC,IAAA,aADM,MAEFC,0BACwBT,CAAAO,KAAAC,IAAA,6BADxBC,CAGJV,EAAA,qCAAAW,OAAA,CAA8CR,CAAAS,OAAAC,QAAAC,MAAAC,OAAA,CAAsCL,CAAtC,CAA9C,CALM,EAAd,CAFGN,CAVZ,SAuBeY,QAAAA,sGAKQd,CAAAe,aALRD;AAKqCd,CAAAgB,aALrCF,EAvBf,EALH,CAuCAG,QAAA,8BAAAC,YAAA,8DACmF,QAAA,CAASC,CAAT,MACnEnB,EAAUiB,OAAA,WAEdjB,EAAAoB,OAAA,mCAAkDD,CAAlD,CAGAnB,EAAAqB,cAAAhB,IAAA,mBAA6CL,CAAAsB,QAAAC,gBAA7C,CANuE,CADnF;",
+"sources":["input.js"],
+"names":["define","$","AJS","tinymce","Templates","init","ed","onInit","add","Meta","get","params","append","Editor","SaveBar","Watch","render","getInfo","majorVersion","minorVersion","require","safeRequire","ConfluenceWatchPlugin","create","PluginManager","plugins","ConfluenceWatch"]
+}

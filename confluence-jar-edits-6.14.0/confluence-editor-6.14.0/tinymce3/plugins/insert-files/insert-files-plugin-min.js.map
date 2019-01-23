@@ -1,0 +1,8 @@
+{
+"version":3,
+"file":"/dummy-file-path",
+"lineCount":2,
+"mappings":"AAWAA,MAAA,8HAIG,QAAA,CACCC,CADD,CAECC,CAFD,CAGCC,CAHD,cAQYC,QAAAA,CAASC,CAATD,EAGHC,CAAAC,UAAA,kCAEWL,CAAAM,KAAAC,QAAA,4BAFX,SAGaP,CAAAM,KAAAC,QAAA,qCAHb,MAIIL,CAAAM,8BAAA,CAA0CR,CAAAM,KAAAC,QAAA,yCAA1C,CAJJ;kDAHGJ,CARZ,SAwBeM,QAAAA,6IAxBf,EAJH,CAwCAC,QAAA,8BAAAC,YAAA,uEAC4F,QAAA,CAASC,CAAT,MAC5EC,EAAUH,OAAA,WAEdG,EAAAC,OAAA,+BAA8CF,CAA9C,CAGAC,EAAAE,cAAAC,IAAA,eAAyCH,CAAAI,QAAAC,YAAzC,CANgF,CAD5F;",
+"sources":["input.js"],
+"names":["define","AJS","$","environment","init","ed","addButton","I18n","getText","transformCmdKeyTextBasingOnOS","getInfo","require","safeRequire","InsertFilesPlugin","tinymce","create","PluginManager","add","plugins","InsertFiles"]
+}

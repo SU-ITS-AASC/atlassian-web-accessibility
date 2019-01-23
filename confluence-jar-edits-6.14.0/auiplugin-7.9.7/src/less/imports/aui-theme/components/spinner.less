@@ -1,0 +1,11 @@
+@aui-spinner-size-small: 20px;
+@aui-spinner-size-medium: 30px;
+@aui-spinner-size-large: 50px;
+
+#aui {
+    .spinner-stroke(@size) {
+        stroke-dasharray: unit(@size * 2.8, px);
+        stroke-dashoffset: unit(@size * 2.25, px);
+        stroke-width: unit(@size / 10, px);
+    }
+}

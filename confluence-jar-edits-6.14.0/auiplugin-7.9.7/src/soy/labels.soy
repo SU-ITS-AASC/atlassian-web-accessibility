@@ -1,0 +1,71 @@
+{namespace aui.labels}
+
+/**
+ * Creates a single label unless given both a URL and set to isCloseable=true; in which case it creates a "split" label (main area is a clickable link; secondary area is a close icon). When a URL is supplied the clickable element is an A, otherwise it is a SPAN with tabindex 0.
+ * @param text Text of the button. Used in visible text area; and close icon alt and title.
+ * @param? url URL to place on label link. When set, makes the clickable area an A element.
+ * @param? id ID attribute of the button.
+ * @param? isCloseable Boolean. Default: false. When true, inserts small "close" icon (defaults to small X).
+ * @param? closeIconText Alternative text for "close" icon. Defaults to " (remove)" in English.
+ * @param? hasTitle Boolean. Default: true. When true, title added to close icons. Commonly used in tooltips.
+ * @param? extraClasses Standard option.
+ * @param? extraAttributes Standard option.
+ **/
+{template .label}
+{if $url and $isCloseable == true }
+    <span
+        {if $id}{sp}id="{$id}"{/if} 
+        {sp}class="aui-label aui-label-closeable aui-label-split
+        {call aui.renderExtraClasses data="all" /}
+        "
+        {call aui.renderExtraAttributes data="all" /}
+    >
+        <a class="aui-label-split-main" href="{$url}">{$text}</a>
+        <span class="aui-label-split-close" >{call .closeIcon data="all" /}</span>
+    </span>
+{else}
+    <{$url ? 'a' : 'span'} 
+        {if $id}{sp}id="{$id}"{/if} 
+        {sp}class="aui-label
+        {if $isCloseable}{sp}aui-label-closeable{/if}
+        {call aui.renderExtraClasses data="all" /}
+        " 
+        {call aui.renderExtraAttributes data="all" /}
+        {if $url}{sp}href="{$url}"{/if}
+    >
+        {$text}
+        {if $isCloseable }{call .closeIcon data="all" /}{/if}
+    </{$url ? 'a' : 'span'}>
+{/if}
+{/template}
+
+/**
+ * Private template for rendering the close icon. Title added for use with Tooltips.
+ * @param text Passed in.
+ * @param? closeIconText Passed in.
+ * @param? hasTitle Passed in.
+ **/
+{template .closeIcon private="true"}
+<span 
+    {sp}tabindex="0"
+    {sp}class="aui-icon aui-icon-close"
+    {if $hasTitle != false}
+        {sp}title="{call .closeIconText data="all" /}"
+    {/if}
+>
+    {call .closeIconText data="all" /}
+</span>
+{/template}
+
+/**
+ * Private template for rendering the text of the close icon
+ * @param text Passed in.
+ * @param? closeIconText Passed in.
+ **/
+{template .closeIconText private="true"}
+{if $closeIconText}
+    {$closeIconText}
+{else}
+    ({getText('aui.words.remove')} {$text})
+{/if}
+{/template}

@@ -1,0 +1,8 @@
+{
+"version":3,
+"file":"/dummy-file-path",
+"lineCount":2,
+"mappings":"AAKAA,MAAA,6LAIG,QAAA,CACCC,CADD,CAECC,CAFD,CAGCC,CAHD,cAQWC,QAAAA,CAAUC,CAAVD,EAEFC,CAAAC,WAAA,2BAAyC,QAAA,GACrCJ,CAAAK,OAAAC,cAAAC,QAAAC,cAAA,KADqC,CAAzC,CAIAL,EAAAM,YAAA,gBAA+BN,CAAAO,QAAA,gBAA/B,2BACAT,EAAA,EAPEC,CARX,SAkBcS,QAAAA;QAKQZ,CAAAa,aALRD,KAKqCZ,CAAAc,aALrCF,EAlBd,EAJH,CAiCAG,QAAA,8BAAAC,YAAA,0EAA4H,QAAA,CAASC,CAAT,MACpHjB,EAAUe,OAAA,WACdf,EAAAkB,OAAA,oCAAmDD,CAAnD,CACAjB,EAAAmB,cAAAC,IAAA,oBAA8CpB,CAAAqB,QAAAC,iBAA9C,CAHwH,CAA5H;",
+"sources":["input.js"],
+"names":["define","tinymce","Confluence","AutocompleteLink","init","ed","addCommand","Editor","Autocompleter","Manager","shortcutFired","addShortcut","getLang","getInfo","majorVersion","minorVersion","require","safeRequire","AutoCompleteLinkPlugin","create","PluginManager","add","plugins","AutoCompleteLink"]
+}

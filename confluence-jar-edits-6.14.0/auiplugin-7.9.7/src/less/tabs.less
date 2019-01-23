@@ -1,0 +1,182 @@
+@import './imports/global';
+
+// AUI Tabs
+aui-tabs {
+    display: block;
+}
+
+.aui-tabs {
+    display: flex;
+
+    > .tabs-pane {
+        display: none;
+
+        &.active-pane {
+            display: block;
+        }
+    }
+
+    // Common styles - Vertical and Horizontal
+    > .tabs-menu > .menu-item {
+        > a,
+        > a strong {
+            background: transparent;
+            cursor: pointer;
+            font-weight: @aui-font-weight-medium;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+    }
+
+    > .tabs-menu .menu-item {
+        a,
+        a:link,
+        a:visited {
+            color: @aui-tabs-tab-text-color;
+        }
+
+        a:focus,
+        a:hover {
+            color: @aui-tabs-tab-hover-text-color;
+        }
+
+        &.active-tab a {
+            &,
+            &:link,
+            &:visited,
+            &:focus,
+            &:hover,
+            &:active {
+                color: @aui-tabs-tab-active-text-color;
+            }
+        }
+    }
+
+    // Vertical Tabs
+    &.vertical-tabs {
+        flex-flow: row nowrap;
+
+        > .tabs-menu {
+            #aui.vertical-tab-indicator(@aui-tabs-tab-border-color, auto, @aui-tab-padding-y);
+
+            width: 11em;
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+
+            > .menu-item {
+                &.active-tab a {
+                    #aui.vertical-tab-indicator(@aui-tabs-tab-active-border-color, 1, @aui-tab-padding-y);
+                }
+
+                a {
+                    display: block;
+                    text-align: right;
+                    text-decoration: none;
+                    overflow: hidden;
+                    padding: @aui-tab-padding-y (@aui-tab-padding-x + @aui-tab-break-height) @aui-tab-padding-y @aui-tab-padding-x;
+                }
+
+                strong {
+                    padding-right: 0;
+                }
+            }
+        }
+
+        > .tabs-pane {
+            padding-left: (@aui-grid*2);
+            padding-right: (@aui-grid*2);
+        }
+    }
+
+    // Horizontal Tabs
+    &.horizontal-tabs {
+        @horizontal-gutter: @aui-tab-padding-x; // the tabs + tab line don't hug the left/right edges of their container.
+        flex-direction: column;
+
+        > .tabs-menu {
+            #aui.horizontal-tab-indicator(@aui-tabs-tab-border-color, auto, @horizontal-gutter);
+
+            display: flex;
+            flex-flow: row wrap;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+
+            > .menu-item {
+                &.active-tab a {
+                    #aui.horizontal-tab-indicator(@aui-tabs-tab-active-border-color, 1, @horizontal-gutter);
+                }
+            }
+        }
+
+        > .tabs-pane {
+            padding-left: @horizontal-gutter;
+            padding-right: @horizontal-gutter;
+            padding-top: @aui-grid;
+        }
+
+        &[data-aui-responsive]:not([data-aui-responsive="false"]) > .tabs-menu {
+            font-size: 0; // required to remove spacing between inline elements
+            flex-wrap: nowrap;
+            margin: 0 0 -1px 0;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        &[data-aui-responsive]:not([data-aui-responsive="false"]) > .tabs-menu > .menu-item {
+            display: inline-block;
+            float: none;
+            font-size: @aui-tabs-font-size; // reset the font-size
+        }
+
+        > .tabs-menu > .menu-item {
+            margin: 0;
+
+            a {
+                &,
+                &:focus,
+                &:hover,
+                &:active {
+                    display: block;
+                    padding: @aui-tab-padding-y @aui-tab-padding-x;
+                    text-decoration: none;
+                }
+            }
+
+            &.active-tab a {
+                &,
+                &:link,
+                &:visited,
+                &:focus,
+                &:hover,
+                &:active {
+                    color: @aui-tabs-tab-active-text-color;
+                }
+            }
+        }
+    }
+
+    // legacy tabs override - deprecated, to be remove in aui 5.0
+    &.vertical-tabs.aui-legacystyle2011 > .tabs-menu .menu-item strong {
+        text-overflow: clip;
+    }
+
+    &.vertical-tabs.aui-legacystyle2011 > .tabs-menu .menu-item.active-tab {
+        margin-right: 0;
+    }
+
+    &.vertical-tabs.aui-legacystyle2011 > .tabs-pane {
+        border-radius: 0;
+    }
+
+    &.horizontal-tabs > .tabs-menu > .menu-item.hidden {
+        display: none;
+    }
+
+    // reloadable tabs (active tab has different cursor affordance)
+    .active-tab.reloadable-tab a,
+    .active-tab.reloadable-tab a strong {
+        cursor: pointer !important;
+    }
+}

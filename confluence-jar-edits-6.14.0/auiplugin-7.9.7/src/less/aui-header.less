@@ -1,0 +1,117 @@
+@import './imports/global';
+
+aui-header {
+    display: block;
+}
+
+.aui-header {
+    background: @aui-header-bg-color;
+    border-bottom: @aui-header-border-width @aui-header-border-style @aui-header-border-color;
+    box-sizing: border-box;
+    color: @aui-header-text-color;
+    padding: 0 @aui-header-padding-x;
+}
+
+.aui-header:after,
+.aui-header .aui-header-logo a:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.aui-header .aui-header-logo,
+.aui-header .aui-nav {
+    margin: 0;
+    padding: 0;
+    float: left;
+}
+
+.aui-header .aui-header-secondary .aui-nav {
+    float: right;
+}
+
+.aui-header .aui-nav > li {
+    float: left;
+    padding: 0;
+}
+
+.aui-header a {
+    color: @aui-header-link-text-color;
+    display: block;
+    line-height: 1;
+    padding: @aui-header-link-padding-y @aui-header-link-padding-x;
+}
+
+.aui-header a:visited,
+.aui-header a:focus,
+.aui-header a:hover,
+.aui-header a:active {
+    text-decoration: none;
+}
+
+.aui-header .aui-header-logo a {
+    box-sizing: border-box;
+    float: left;
+    height: @aui-header-logo-height;
+    padding: @aui-header-logo-padding-y @aui-header-logo-padding-x;
+}
+
+.aui-header .aui-header-logo.aui-header-logo-textonly a {
+    font-size: 24px;
+    padding: (@aui-grid / 2) @aui-grid;
+}
+.aui-header .aui-header-logo-textonly .aui-header-logo-device {
+    float: left;
+    padding-top: @aui-header-logo-textonly-device-padding;
+    text-indent: 0;
+}
+.aui-header .aui-header-logo-textonly .aui-header-logo-device + .aui-header-logo-text {
+    padding: (@aui-grid / 2) 0 (@aui-grid / 2) @aui-grid;
+}
+
+/* for extra visible text, eg. instance names. */
+.aui-header .aui-header-logo .aui-header-logo-text {
+    display: block;
+    float: left;
+    font-size: @aui-header-logo-text-font-size;
+    line-height: @aui-header-logo-text-line-height;
+    margin: 0;
+    padding: @aui-grid 0 @aui-grid @aui-grid;
+}
+
+.aui-header .aui-header-logo-device {
+    background-repeat: no-repeat;
+    background-position: 0 50%;
+    background-size: 100%;
+    display: block;
+    float: left;
+    height: @aui-header-logo-device-height;
+    padding: @aui-header-logo-device-padding-y @aui-header-logo-device-padding-x;
+    text-indent: -9999px;
+    text-align: left;
+}
+
+/* Custom IMG elements can be set in most products */
+.aui-header .aui-header-logo img {
+    border: 0;
+    float: left;
+    max-height: @aui-header-img-height;
+    padding: @aui-header-img-padding-y @aui-header-img-padding-x;
+}
+
+/* Positioning icons in the header */
+.aui-header .aui-icon {
+    margin: -1px 0;
+    vertical-align: top;
+}
+
+.aui-header a > .aui-avatar {
+    vertical-align: top;
+}
+.aui-header a > .aui-avatar-tiny {
+    margin: -1px 0; /* (16px Tiny Avatar height - 14px font size (line-height 1 in the header)) / 2 */
+}
+.aui-header a > .aui-avatar-small {
+    margin: -5px 0; /* (24px Small Avatar height - 14px font size (line-height 1 in the header)) / 2 */
+}
+

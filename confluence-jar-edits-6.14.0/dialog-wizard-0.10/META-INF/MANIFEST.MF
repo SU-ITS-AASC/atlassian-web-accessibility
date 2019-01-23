@@ -1,0 +1,35 @@
+Manifest-Version: 1.0
+Archiver-Version: Plexus Archiver
+Created-By: Apache Maven Bundle Plugin
+Built-By: bamboo-agent
+Build-Jdk: 1.8.0_112
+Atlassian-Build-Date: 2017-02-08T06:21:00+0000
+Bnd-LastModified: 1486534861525
+Bundle-Description: Provides an easy way to create dialog wizards in C
+ onfluence.
+Bundle-DocURL: http://www.atlassian.com/
+Bundle-License: http://www.atlassian.com/end-user-agreement/
+Bundle-ManifestVersion: 2
+Bundle-Name: Dialog Wizard
+Bundle-SymbolicName: com.atlassian.confluence.plugins.dialog-wizard
+Bundle-Vendor: Atlassian
+Bundle-Version: 0.10.0
+Export-Package: com.atlassian.confluence.plugins.dialog.wizard.api;use
+ s:="com.atlassian.confluence.util.i18n,com.atlassian.plugin,com.atlas
+ sian.plugin.descriptors,com.atlassian.plugin.module,javax.annotation,
+ javax.xml.bind.annotation,org.dom4j";version="0.10.0"
+Import-Package: com.atlassian.confluence.languages;resolution:=optiona
+ l,com.atlassian.confluence.plugins.dialog.wizard.api;resolution:=opti
+ onal,com.atlassian.confluence.user;resolution:=optional,com.atlassian
+ .confluence.util.i18n;resolution:=optional,com.atlassian.plugin;resol
+ ution:=optional,com.atlassian.plugin.descriptors;resolution:=optional
+ ,com.atlassian.plugin.module;resolution:=optional,com.atlassian.plugi
+ ns.rest.common.security;resolution:=optional,com.atlassian.user;resol
+ ution:=optional,com.google.common.collect;resolution:=optional,javax.
+ annotation;resolution:=optional,javax.ws.rs;resolution:=optional,java
+ x.xml.bind.annotation;resolution:=optional,org.apache.commons.lang3;r
+ esolution:=optional,org.dom4j;resolution:=optional,org.slf4j;resoluti
+ on:=optional
+Require-Capability: osgi.ee;filter:="(&(osgi.ee=JavaSE)(version=1.8))"
+Tool: Bnd-2.4.1.201501161923
+

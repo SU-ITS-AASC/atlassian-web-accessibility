@@ -1,0 +1,16 @@
+com.atlassian.confluence.plugins.synchrony.analytics.PeriodicCollaborativeEditingModeEventSupplier
+com.atlassian.confluence.plugins.synchrony.analytics.PeriodicCollaborativeEditingSynchronyManagedModeEventSupplier
+com.atlassian.confluence.plugins.synchrony.config.DefaultSynchronyConfigurationManager#synchronyConfigurationManager
+com.atlassian.confluence.plugins.synchrony.config.SynchronyDarkFeatureHelper#synchrony-dark-feature-helper
+com.atlassian.confluence.plugins.synchrony.importexport.SynchronyCredentialsPostImportTaskImpl#synchrony-credentials-post-import-task
+com.atlassian.confluence.plugins.synchrony.service.AdditionalComponentImports#collab-plugin-additional-component-imports
+com.atlassian.confluence.plugins.synchrony.service.ConfluenceRecoveryManager#confluence-recovery-manager
+com.atlassian.confluence.plugins.synchrony.service.SynchronyContentService#synchrony-content-manager
+com.atlassian.confluence.plugins.synchrony.service.SynchronyExternalChangesManager#synchrony-external-changes-manager
+com.atlassian.confluence.plugins.synchrony.service.SynchronyInternalDraftManager#synchrony-internal-draft-manager
+com.atlassian.confluence.plugins.synchrony.service.SynchronyJsonWebTokenGenerator#synchrony-token-generator
+com.atlassian.confluence.plugins.synchrony.service.SynchronyRecoveryManager#synchrony-recovery-manager
+com.atlassian.confluence.plugins.synchrony.service.SynchronyUUIDManager#synchrony-uuid-manager
+com.atlassian.confluence.plugins.synchrony.service.http.SynchronyHttpClientFactory#synchrony-http-client-factory
+com.atlassian.confluence.plugins.synchrony.service.http.SynchronyRequestExecutor#synchrony-request-executor
+com.atlassian.confluence.plugins.synchrony.upgradetask.SynchronyAppIdUpgradeTask

@@ -1,0 +1,35 @@
+#requireResource("com.atlassian.confluence.plugins.confluence-create-content-plugin:list-templates-resources")
+
+##Global only
+#if (!$space)
+
+#macro (addSpaceBlueprintRow $blueprint)
+#set ($blueprintEnabled = $enabledBlueprints.contains($blueprint))
+<tr class="web-item-module#if(!$blueprintEnabled) disabled#end" data-blueprint-module-complete-key="$blueprint.moduleCompleteKey" data-space-blueprint-id="$blueprint.id">
+    <td>$i18nResolver.getText($blueprint.i18nNameKey)</td>
+    <td class="template-operations">
+        <a href="" class="module-state-toggle-trigger"
+           data-enabled="$blueprintEnabled">
+            #if ($blueprintEnabled)
+                $i18nResolver.getText("disable.name")
+            #else
+                $i18nResolver.getText("enable.name")
+            #end
+        </a>
+    </td>
+</tr>
+#end
+
+#if (!$spaceBlueprints.isEmpty())
+<div id="space-blueprints-admin" class="templates-section">
+    <h2>$i18nResolver.getText("create.content.plugin.space.blueprints")</h2>
+
+    <table id="space-blueprints-admin-table" class="aui">
+    #foreach ($blueprint in $spaceBlueprints)
+        #addSpaceBlueprintRow($blueprint)
+    #end
+    </table>
+</div>
+#end
+
+#end

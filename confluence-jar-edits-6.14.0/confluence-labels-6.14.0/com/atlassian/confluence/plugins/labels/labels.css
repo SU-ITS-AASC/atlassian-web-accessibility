@@ -1,0 +1,73 @@
+/* labels.css */
+
+.labels-content {
+    position: relative;
+    font-size: 12px;
+    font-weight: 300;
+    vertical-align: middle;
+}
+
+.label-list {
+    padding: 0;
+    margin: 0;
+    color: #5E6C84;
+}
+
+.label-list .no-labels-message {
+    display: inline-block;
+}
+
+.label-list.label-list-right {
+	text-align: right;
+}
+
+.label-list.label-list-right.has-pen {
+    padding-right: 20px;
+}
+
+.label-list .labels-edit-container {
+    display:inline-block;
+    max-width: 16px;
+    overflow: hidden;
+    vertical-align: middle;
+}
+
+.label-list .labels-edit-container .aui-iconfont-devtools-tag-small {
+    color: #505F79;
+}
+
+.label-list.label-list-right.has-pen .labels-edit-container {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.tag-cloud.label-list .aui-label {
+    border: none;
+    background: none;
+    margin: 0;
+}
+
+#dialog-label-list {
+    margin-top: 15px;
+}
+
+#label-operation-error-container .aui-message {
+    margin: 0 0 20px 0;
+}
+
+#add-labels-editor-button {
+    margin-left: 8px;
+}
+
+.plus-label:before {
+    content:"+ ";
+}
+
+.minus-label:before {
+    content:"- ";
+}
+
+.label-list .aui-label {
+    margin: 0 5px 5px 0;
+}

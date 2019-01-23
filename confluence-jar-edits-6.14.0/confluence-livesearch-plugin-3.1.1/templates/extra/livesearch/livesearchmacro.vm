@@ -1,0 +1,27 @@
+#requireResource("confluence.web.resources:jquery")
+#requireResource("confluence.extra.livesearch:livesearch-macro-web-resources")
+
+#set($isLarge = $size == "large")
+
+<div class="search-macro #if($isLarge)search-macro-large#{else}search-macro-medium#end">
+    <div class="aui-dd-parent"></div>
+    <form class="aui aui-dd-parent" name="livesearchForm" method="POST" action="$req.contextPath/dosearchsite.action">
+        <fieldset class="search-macro-fields">
+            <div class="search-macro-query">
+                <input class="text" type="text" name="queryString" autocomplete="off" placeholder="$!{placeholder}">
+                #if($isLarge)
+                <span class="aui-icon aui-icon-large aui-iconfont-search">$i18n.getText('confluence.extra.livesearch.label')</span>
+                #end
+            </div>
+            #if(!$isLarge)
+            <button type="submit" class="search-macro-button aui-button">
+                <span class="aui-icon aui-icon-small aui-iconfont-search">$i18n.getText('confluence.extra.livesearch.label')</span>
+            </button>
+            #end
+            <input type="hidden" name="where" value="$!{where}">
+            <input type="hidden" name="additional" value="$!{additional}">
+            <input type="hidden" name="labels" value="$!{labels}">
+            <input type="hidden" name="contentType" value="$!{contentType}">
+        </fieldset>
+    </form>
+</div>

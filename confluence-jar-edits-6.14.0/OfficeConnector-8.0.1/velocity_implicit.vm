@@ -1,0 +1,4 @@
+#* @implicitly included *#
+#* @vtlvariable name="generalUtil" type="com.atlassian.confluence.util.GeneralUtil" *#
+#* @vtlvariable name="helper" type="com.atlassian.confluence.themes.GlobalHelper" *#
+#* @vtlvariable name="req" type="javax.servlet.http.HttpServletRequest" *#

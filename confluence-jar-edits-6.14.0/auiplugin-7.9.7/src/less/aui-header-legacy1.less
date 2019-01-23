@@ -1,0 +1,97 @@
+@import './imports/global';
+
+.aui-layout #header ul {
+    list-style: none;
+    margin: 0;
+}
+
+.aui-layout #header .global,
+.aui-layout #header .global .primary,
+.aui-layout #header .global .primary > ul,
+.aui-layout #header .global .primary > ul > li,
+.aui-layout #header .local,
+.aui-layout #header .local .primary,
+.aui-layout #header .local .primary > ul,
+.aui-layout #header .local .primary > ul > li {
+    float: left;
+}
+
+.aui-layout #header .global .secondary,
+.aui-layout #header .global .secondary > ul,
+.aui-layout #header .global .secondary > ul > li,
+.aui-layout #header .local .secondary,
+.aui-layout #header .local .secondary > ul,
+.aui-layout #header .local .secondary > ul > li {
+    float: right;
+}
+
+.aui-layout #logo {
+    margin: 0;
+    padding: 0;
+}
+
+.aui-layout #header .local,
+.aui-layout #header .global {
+    width: 100%;
+}
+
+
+.aui-theme-default #header .global {
+    background: #036;
+    color: #fff;
+}
+
+.aui-theme-default #header a {
+    color: #fff;
+}
+
+.aui-theme-default #header .local .primary > ul,
+.aui-theme-default #header .global .primary > ul {
+    padding: 0 0 0 8px;
+}
+
+.aui-theme-default #header .local .primary > ul > li,
+.aui-theme-default #header .global .primary > ul > li {
+    margin: 0 8px 0 0;
+}
+
+.aui-theme-default #header .local .primary > ul > li > a,
+.aui-theme-default #header .global .primary > ul > li > a {
+    display: block;
+    padding: 4px;
+    white-space: nowrap;
+}
+
+.aui-theme-default #header .local .secondary > ul,
+.aui-theme-default #header .global .secondary > ul {
+    padding: 0 8px 0 0;
+}
+
+.aui-theme-default #header .local .secondary > ul > li,
+.aui-theme-default #header .global .secondary > ul > li {
+    margin: 0 0 0 8px;
+}
+
+.aui-theme-default #header .local .secondary > ul > li > a,
+.aui-theme-default #header .global .secondary > ul > li > a {
+    display: block;
+    padding: 4px;
+    white-space: nowrap;
+}
+
+.aui-theme-default #header .local {
+    background: #326ca6;
+    border-top: 1px solid #036;
+    color: #fff;
+}
+
+.aui-theme-default #header .local .primary > ul > li > a:hover {
+    background: #fff;
+    color: @aui-text-color;
+}
+
+.aui-theme-default #header .local .primary > ul > li.selected,
+.aui-theme-default #header .local .primary > ul > li.selected a {
+    background: #f0f0f0;
+    color: @aui-text-color;
+}

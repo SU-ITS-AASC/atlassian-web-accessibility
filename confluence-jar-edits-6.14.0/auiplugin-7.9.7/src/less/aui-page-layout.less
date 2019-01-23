@@ -1,0 +1,564 @@
+@import './imports/global';
+
+/**
+ * PAGE LAYOUT
+ */
+.aui-header,
+#footer {
+    clear: both;
+    float: left;
+    width: 100%;
+}
+
+#content {
+    box-sizing: border-box;
+    clear: both;
+    position: relative;
+}
+
+#content:before {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+#footer .footer-body a {
+    color: @aui-footer-body-link-text-color;
+}
+
+#footer .footer-body > ul,
+#footer .footer-body > p {
+    margin: @aui-grid 0 0 0;
+}
+
+#footer .footer-body > ul:first-child,
+#footer .footer-body > p:first-child {
+    margin: 0;
+}
+
+#footer .footer-body > ul {
+    display: block;
+    font-size: 0;
+    list-style: none;
+    padding: 0;
+}
+
+#footer .footer-body > ul > li {
+    display: inline-block;
+    font-size: @aui-font-size-small;
+    line-height: unit(20 / @aui-font-size-small);
+    padding: 0;
+    white-space: nowrap;
+}
+
+#footer .footer-body > ul > li + li {
+    margin-left: @aui-grid;
+}
+
+#footer .footer-body > ul > li:after {
+    content: "\b7"; /* mid dot */
+    margin-left: @aui-grid;
+    speak: none;
+}
+
+#footer .footer-body > ul > li:last-child:after {
+    display: none;
+}
+
+/**
+ * DEFAULT THEME SPACING
+ */
+
+#content {
+    margin: 0;
+    padding: 0;
+}
+
+/**
+ * PAGE DESIGN
+ */
+body {
+    background: @aui-background-color;
+    color: @aui-text-color;
+}
+
+#footer .footer-body {
+    color: @aui-footer-body-text-color;
+    font-size: @aui-font-size-small;
+    line-height: unit(20 / @aui-font-size-small);
+    margin: (@aui-grid * 2) 0;
+    padding: 0 @aui-grid (@aui-grid * 2 + 1) @aui-grid;
+    min-height: 44px; /* margin + height of image, means footer is just as high if no footer link present */
+    text-align: center;
+}
+
+/**
+ * CONTENT PANEL
+ */
+#content > .aui-panel {
+    background: @aui-panel-bg-color;
+    margin: (@aui-grid * 2) 0 0 0;
+    padding: (@aui-grid * 2);
+    border-color: @aui-border-color;
+    border-style: @aui-border-style;
+    border-width: @aui-border-width 0;
+}
+
+#content > .aui-page-header {
+    padding: (@aui-grid * 2);
+}
+
+#content > .aui-page-header + .aui-panel {
+    margin-top: 0;
+}
+
+#content > .aui-page-header:first-child {
+    margin-top: 0;
+}
+
+.aui-panel + .aui-panel {
+    margin-top: (@aui-grid * 2);
+}
+
+/*! AUI Page Panel */
+.aui-page-panel {
+    background: @aui-panel-bg-color;
+    border: @aui-border-width @aui-border-type @aui-border-color;
+    border-left-width: 0;
+    border-right-width: 0;
+    box-sizing: border-box;
+    clear: both;
+    display: block;
+    margin: (@aui-grid * 2) 0 0 0;
+    padding: 0;
+    position: relative;
+    width: 100%;
+}
+
+.aui-page-panel-inner {
+    border-spacing: 0;
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+}
+
+.aui-page-panel-nav,
+.aui-page-panel-content,
+.aui-page-panel-item,
+.aui-page-panel-sidebar {
+    box-sizing: border-box;
+    display: table-cell;
+    padding: (@aui-grid * 2);
+    vertical-align: top;
+}
+
+.aui-page-panel-nav {
+    border-right: @aui-border-width @aui-border-type @aui-border-color;
+    width: @aui-page-nav-width;
+
+    .aui-navgroup ~ .aui-page-panel &,
+    .aui-sidebar ~ .aui-page-panel &,
+    .aui-page-header ~ .aui-page-panel & {
+        background: @ak-color-N0;
+    }
+
+    // Standalone
+    .aui-page-panel & {
+        background: @aui-sidebar-background-color;
+    }
+}
+
+.aui-page-panel-sidebar {
+    width: @aui-page-sidebar-width;
+}
+
+.aui-page-panel-item {
+    padding: 0;
+}
+
+.aui-page-panel-nav ~ .aui-page-panel-sidebar {
+    width: (@aui-page-sidebar-width - 5);
+}
+
+/* Page Panel Interops */
+.aui-page-header + .aui-page-panel,
+.aui-navbar + .aui-page-panel {
+    margin-top: 0;
+}
+
+.aui-navbar + .aui-page-panel {
+    border-top: none;
+}
+
+.aui-page-panel-nav > .aui-nav-vertical,
+.aui-page-panel-nav > .aui-navgroup-vertical {
+    margin-left: -(@aui-grid);
+    margin-right: -(@aui-grid);
+
+    /* tree indication for nested aui-nav's.
+       it is expected that these are always expanded and no icons are added to the nav items. */
+    .aui-nav .aui-nav {
+        margin-top: 0;
+        padding: 0 0 0 (@aui-grid * 2);
+
+        > li {
+            position: relative;
+
+            &::before,
+            &::after {
+                background-color: @aui-border-color;
+                content: "";
+                left: -(@aui-grid / 2);
+                position: absolute;
+            }
+
+            &::before {
+                bottom: 0;
+                top: 0;
+                width: @aui-nav-subtree-indicator-width;
+            }
+
+            &::after {
+                height: @aui-nav-subtree-indicator-width;
+                top: @aui-font-size-medium;
+                width: (@aui-grid / 2);
+            }
+            &:last-child::before,
+            &.aui-nav-more::before {
+                bottom: 50%;
+            }
+        }
+    }
+}
+
+.aui-page-panel-content > .aui-navgroup-horizontal {
+    margin-left: -(@aui-grid * 2);
+    margin-right: -(@aui-grid * 2);
+}
+.aui-navgroup-horizontal + .aui-page-panel {
+    border-top: 0;
+    margin-top: 0;
+}
+.aui-page-panel-content > .aui-navgroup-horizontal:first-child {
+    margin-top: -(@aui-grid * 2);
+}
+
+/**
+ * Page variations
+ */
+.aui-page-focused .aui-page-header,
+.aui-page-focused .aui-page-panel,
+.aui-page-focused #footer .footer-body,
+.aui-page-notification .aui-page-header,
+.aui-page-notification .aui-page-panel,
+.aui-page-notification #footer .footer-body,
+.aui-page-fixed .aui-header-inner,
+.aui-page-fixed .aui-page-header-inner,
+.aui-page-fixed .aui-navgroup-horizontal .aui-navgroup-inner,
+.aui-page-fixed .aui-page-panel-inner,
+.aui-page-fixed #footer .footer-body,
+.aui-page-hybrid .aui-page-header,
+.aui-page-hybrid .aui-navgroup-horizontal .aui-navgroup-inner,
+.aui-page-hybrid .aui-page-panel-inner,
+.aui-page-hybrid #footer .footer-body {
+    margin-left: auto;
+    margin-right: auto;
+    width: @aui-page-width-xlarge;
+}
+
+/* extra width so left edge of hoverable content aligns with left edge of content while inactive. On hover, the hover affordance does extend outside the alignment but this looks better than the other way around. */
+.aui-page-fixed .aui-header-inner,
+.aui-page-fixed .aui-navgroup-horizontal .aui-navgroup-inner,
+.aui-page-hybrid .aui-navgroup-horizontal .aui-navgroup-inner {
+    width: (@aui-page-width-xlarge + (@aui-grid * 2));
+}
+
+.aui-page-focused,
+.aui-page-size {
+    &-small {
+        .aui-page-header,
+        .aui-page-panel,
+        #footer .footer-body {
+            width: @aui-page-width-small;
+        }
+    }
+    &-medium {
+        .aui-page-header,
+        .aui-page-panel,
+        #footer .footer-body {
+            width: @aui-page-width-medium;
+        }
+    }
+    &-large {
+        .aui-page-header,
+        .aui-page-panel,
+        #footer .footer-body {
+            width: @aui-page-width-large;
+        }
+    }
+    &-xlarge {
+        .aui-page-header,
+        .aui-page-panel,
+        #footer .footer-body {
+            width: @aui-page-width-xlarge;
+        }
+    }
+}
+
+.aui-page-focused,
+.aui-page-notification {
+    .aui-page-panel {
+        border-radius: @aui-border-radius-medium;
+        border-width: @aui-border-width;
+    }
+}
+
+.aui-page-fixed .aui-page-panel-inner,
+.aui-page-fixed #content > .aui-page-header {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.aui-page-fixed .aui-page-panel-nav:first-child,
+.aui-page-fixed .aui-page-panel-content:first-child,
+.aui-page-fixed .aui-page-panel-item:first-child,
+.aui-page-fixed .aui-page-panel-sidebar:first-child,
+.aui-page-hybrid .aui-page-panel-nav:first-child,
+.aui-page-hybrid .aui-page-panel-content:first-child,
+.aui-page-hybrid .aui-page-panel-item:first-child,
+.aui-page-hybrid .aui-page-panel-sidebar:first-child {
+    padding-left: 0;
+}
+
+.aui-page-fixed .aui-page-panel-nav:last-child,
+.aui-page-fixed .aui-page-panel-content:last-child,
+.aui-page-fixed .aui-page-panel-item:last-child,
+.aui-page-fixed .aui-page-panel-sidebar:last-child,
+.aui-page-hybrid .aui-page-panel-nav:last-child,
+.aui-page-hybrid .aui-page-panel-content:last-child,
+.aui-page-hybrid .aui-page-panel-item:last-child,
+.aui-page-hybrid .aui-page-panel-sidebar:last-child {
+    padding-right: 0;
+}
+
+/* reset to 100% inside page panel */
+.aui-page-panel .aui-page-header {
+    width: auto;
+}
+
+.aui-page-panel .aui-page-header-inner {
+    width: 100%;
+}
+
+/**
+ * TABS AS FIRST CHILD IN CONTENT
+ * Explicitly sets bg to white, changes horizontal hovers to work on grey.
+ * Remember these extend the standard component styles.
+ */
+
+#content > .aui-tabs {
+    margin: (@aui-grid * 2);
+
+    > .tabs-pane {
+        padding-top: (@aui-grid * 2);
+        padding-bottom: (@aui-grid * 2);
+    }
+}
+
+/**
+ * AUI Forms inside of a focused page
+ */
+
+.aui-page-focused .aui-page-panel-content > h2:first-child,
+.aui-page-notification .aui-page-panel-content > h1:first-child {
+    border-bottom: @aui-border-width @aui-border-type @aui-border-color;
+    margin-bottom: (@aui-grid * 2);
+    padding-bottom: (@aui-grid * 2);
+}
+
+.aui-page-notification {
+    .aui-page-panel {
+        margin-top: @aui-page-notification-panel-margin-top;
+    }
+
+    .aui-page-panel-content {
+        color: @aui-color-medium-gray;
+        padding: @aui-page-notification-content-padding;
+        text-align: center;
+
+        .aui-page-notification-description {
+            font-size: @aui-font-size-xlarge;
+        }
+
+        form.aui .text {
+            margin-right: @aui-page-notification-panel-content-form-text-margin-right;
+        }
+    }
+
+    &-details {
+        margin: 0 auto;
+        max-width: @aui-page-notification-details-min-width;
+        width: @aui-page-width-xlarge;
+
+        &-header {
+            color: @aui-color-medium-gray;
+            margin: @aui-page-notification-details-header-top-margin auto 0;
+            position: relative;
+            text-align: center;
+
+            &-expander {
+                display: flex;
+                align-items: center;
+                align-content: center;
+                justify-content: center;
+
+                &::before,
+                &::after {
+                    border-top: 1px solid @aui-border-color;
+                    content: '';
+                    display: block;
+                    flex: 1;
+                }
+
+                .aui-expander-trigger {
+                    background-color: @aui-button-default-bg-color;
+                    display: inline-block;
+                    padding: @aui-page-notification-details-header-expander-trigger-padding;
+                    position: relative;
+                }
+            }
+        }
+    }
+}
+
+.aui-page-focused .aui-page-panel-content > form.aui .buttons-container {
+    border-top: @aui-border-width @aui-border-type @aui-border-color;
+    margin-top: (@aui-grid * 2);
+    padding-top: (@aui-grid * 2);
+}
+
+// responsive layout mixins
+.aui-responsive-layout-full-width() {
+    .aui-page-header,
+    .aui-page-panel {
+        #aui.box-sizing(border-box);
+        width: 100%;
+    }
+
+    .aui-page-panel {
+        margin-top: 0;
+    }
+}
+
+.aui-responsive-layout-remove-borders() {
+    .aui-page-panel {
+        border-radius: 0;
+        border-left: 0;
+        border-right: 0;
+    }
+}
+
+#aui.responsive-small({
+    .aui-page-fixed,
+    .aui-page-hybrid {
+        #content > .aui-page-header,
+        .aui-page-panel-inner,
+        .aui-header-inner,
+        .aui-navgroup-horizontal .aui-navgroup-inner,
+        #footer .footer-body {
+            #aui.box-sizing(border-box);
+            width: 100%;
+        }
+    }
+
+    .aui-page-header-inner {
+      display: block;
+      width: 100%;
+    }
+
+    .aui-page-header-actions {
+        display: block;
+        width: auto;
+        text-align: left;
+        margin-top: (@aui-grid  * 2);
+        padding-left: 0;
+        padding-right: (@aui-grid * 2)
+    }
+});
+
+#aui.responsive-medium({
+    .aui-page-hybrid {
+        .aui-page-header,
+        .aui-page-panel-inner,
+        .aui-page-fixed .aui-header-inner,
+        .aui-navgroup-horizontal .aui-navgroup-inner {
+            #aui.box-sizing(border-box);
+            width: 100%;
+        }
+    }
+});
+
+#aui.responsive-large({
+    .aui-page-fixed,
+    .aui-page-hybrid {
+        #content > .aui-page-header,
+        .aui-page-panel-inner {
+            padding-left: (@aui-grid * 2);
+            padding-right: (@aui-grid * 2);
+        }
+    }
+
+    .aui-page-panel-content,
+    .aui-page-panel-sidebar {
+        display: block;
+        padding-left: 0;
+        padding-right: 0;
+        width: auto;
+    }
+
+    .aui-page-fixed .aui-header-inner,
+    .aui-page-fixed .aui-page-header-inner,
+    .aui-page-fixed .aui-page-panel-inner,
+    .aui-page-fixed #footer .footer-body {
+        box-sizing: border-box;
+        width: 100%;
+    }
+});
+
+// General responsive layout breakpoints
+html.aui-responsive {
+
+    // so that text in the footer wraps correctly
+    #footer .footer-body > ul > li {
+        white-space: normal;
+    }
+
+    // Focused page responsive layout breakpoints
+    @media screen and (max-width: 400px) {
+        .aui-page-focused-small {
+            .aui-responsive-layout-full-width();
+            .aui-responsive-layout-remove-borders();
+        }
+    }
+
+    @media screen and (max-width: 600px) {
+        .aui-page-focused-medium {
+            .aui-responsive-layout-full-width();
+            .aui-responsive-layout-remove-borders();
+        }
+    }
+
+    @media screen and (max-width: 800px) {
+        .aui-page-focused-large {
+            .aui-responsive-layout-full-width();
+            .aui-responsive-layout-remove-borders();
+        }
+    }
+
+    @media screen and (max-width: 980px) {
+        .aui-page-focused-xlarge {
+            .aui-responsive-layout-full-width();
+            .aui-responsive-layout-remove-borders();
+        }
+    }
+}

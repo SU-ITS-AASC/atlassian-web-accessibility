@@ -1,0 +1,29 @@
+{namespace DashboardTemplates.OptOut}
+
+/**
+*/
+{template .sidebarButtonContent}
+    <p>{getText('optout.dialog.text')}</p>
+    <div class="field-group">
+        <textarea class="textarea" rows="6" name="feedback" placeholder="{getText('optout.dialog.feedback.placeholder')}"></textarea>
+    </div>
+    <footer class="tip-footer">
+        <button class="aui-button btn-send-feedback">
+            {getText('optout.dialog.button.confirm')}
+        </button>
+    </footer>
+{/template}
+
+/**
+ */
+{template .sidebarButton}
+    <button class="aui-button aui-button-subtle" data-aui-trigger aria-controls="opt-out-dialog">
+        {getText('optout.button.trigger')}
+    </button>
+
+    <aui-inline-dialog id="opt-out-dialog" class="opt-out-dialog onboarding-inline-dialog"  alignment="top left" responds-to="toggle" aria-hidden="true">
+        <form class="aui">
+            {call .sidebarButtonContent /}
+        </form>
+    </aui-inline-dialog>
+{/template}

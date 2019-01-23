@@ -1,0 +1,20 @@
+{namespace Confluence.Templates.BrowseSpaces}
+
+/**
+ * Template to render drop down menu for Spaces in header panel
+ */
+{template .spacesLink}
+    {call aui.dropdown2.trigger}
+        {param menu: ['id': 'space-menu-link-content'] /}
+        {param id: 'space-menu-link' /}
+        {param tagName: 'a' /}
+        {param extraClasses: 'aui-nav-link' /}
+        {param title: getText('sidebar.header.spaces.tooltip') /}
+        {param showIcon: true /}
+        {param text: getText('sidebar.header.spaces.link') /}
+    {/call}
+    {call aui.dropdown2.contents}
+        {param id: 'space-menu-link-content' /}
+        {param extraClasses: 'aui-style-default aui-dropdown2-in-header' /}
+    {/call}
+{/template}

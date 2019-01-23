@@ -1,0 +1,297 @@
+/**
+ * RESET
+ */
+html, body, p, div, h1, h2, h3, h4, h5, h6, img, pre, form, fieldset {
+    margin: 0;
+    padding: 0;
+}
+ul, ol, dl {
+    margin: 0;
+}
+
+/**
+ * PAGE LAYOUT
+ */
+.aui-layout #header {
+    clear: both;
+    float: left;
+    width: 100%;
+}
+
+.aui-layout #header ul {
+    list-style: none;
+    margin: 0;
+}
+
+.aui-layout #header .global,
+.aui-layout #header .global .primary,
+.aui-layout #header .global .primary > ul,
+.aui-layout #header .global .primary > ul > li,
+.aui-layout #header .local,
+.aui-layout #header .local .primary,
+.aui-layout #header .local .primary > ul,
+.aui-layout #header .local .primary > ul > li {
+    float: left;
+}
+
+.aui-layout #header .global .secondary,
+.aui-layout #header .global .secondary > ul,
+.aui-layout #header .global .secondary > ul > li,
+.aui-layout #header .local .secondary,
+.aui-layout #header .local .secondary > ul,
+.aui-layout #header .local .secondary > ul > li {
+    float: right;
+}
+
+.aui-layout #logo {
+    margin: 0;
+    padding: 0;
+}
+
+.aui-layout #header .local,
+.aui-layout #header .global {
+    width: 100%;
+}
+
+.aui-layout #content {
+    box-sizing: border-box;
+    clear: both;
+    position: relative;
+}
+
+.aui-layout #footer {
+    clear: both;
+    float: left;
+    margin: 0;
+    padding: 0 0 16px 0;
+    width: 100%;
+}
+
+.aui-layout #footer .footer-body a {
+    color: #505050;
+}
+
+.aui-layout #footer .footer-body > ul,
+.aui-layout #footer .footer-body > p {
+    margin: 8px 0 0 0;
+}
+
+.aui-layout #footer .footer-body > ul:first-child,
+.aui-layout #footer .footer-body > p:first-child {
+    margin: 0;
+}
+
+.aui-layout #footer .footer-body > ul {
+    display: block;
+    list-style: none;
+    padding: 0;
+}
+
+.aui-layout #footer .footer-body > ul > li {
+    display: inline-block;
+    padding: 0;
+}
+
+.aui-layout #footer .footer-body > ul > li + li {
+    margin-left: 8px;
+}
+
+.aui-layout #footer .footer-body > ul > li + li:before {
+    content: "|";
+    display: inline-block;
+    margin-right: 8px;
+}
+
+
+/**
+ * GROUP/ITEM
+ */
+
+.aui-group {
+    display: table;
+    box-sizing: border-box;
+    border-spacing: 0;
+    table-layout: fixed;
+    width: 100%;
+}
+
+.aui-group > .aui-item {
+    box-sizing: border-box;
+    display: table-cell;
+    margin: 0;
+    vertical-align: top;
+}
+
+.aui-group > .aui-item + .aui-item {
+    padding-left: 16px;
+}
+
+/* defensive header allowance */
+.aui-layout .aui-group > header {
+    display: table-caption;
+}
+
+/* .aui-group-split: two items; alignment is left, then right (splits the layout). */
+.aui-group.aui-group-split > .aui-item {
+    text-align: right;
+}
+.aui-group.aui-group-split > .aui-item:first-child {
+    text-align: left;
+}
+
+/* .aui-group-trio: three items; alignment is left, center, right */
+.aui-group.aui-group-trio > .aui-item {
+    text-align: left;
+}
+.aui-group.aui-group-trio > .aui-item + .aui-item {
+    text-align: center;
+}
+.aui-group.aui-group-trio > .aui-item + .aui-item + .aui-item {
+    text-align: right;
+}
+
+/**
+ * DEFAULT THEME SPACING
+ */
+.aui-theme-default #content {
+    margin: 0;
+    padding: 16px;
+}
+
+/**
+ * PAGE DESIGN
+ */
+.aui-theme-default {
+    background: #F0F0F0;
+    color: #000;
+}
+
+.aui-theme-default a {
+    color: #326ca6;
+    text-decoration: none;
+}
+.aui-theme-default a:focus,
+.aui-theme-default a:hover,
+.aui-theme-default a:active {
+    text-decoration: underline;
+}
+
+.aui-theme-default h1,
+.aui-theme-default h2,
+.aui-theme-default h3,
+.aui-theme-default h4,
+.aui-theme-default h5,
+.aui-theme-default h6 {
+    color: #000;
+}
+
+.aui-theme-default #header .global {
+    background: #036;
+    color: #fff;
+}
+
+.aui-theme-default #header a {
+    color: #fff;
+}
+
+.aui-theme-default #header .local .primary > ul,
+.aui-theme-default #header .global .primary > ul {
+    padding: 0 0 0 8px;
+}
+
+.aui-theme-default #header .local .primary > ul > li,
+.aui-theme-default #header .global .primary > ul > li {
+    margin: 0 8px 0 0;
+}
+
+.aui-theme-default #header .local .primary > ul > li > a,
+.aui-theme-default #header .global .primary > ul > li > a {
+    display: block;
+    padding: 4px;
+    white-space: nowrap;
+}
+
+.aui-theme-default #header .local .secondary > ul,
+.aui-theme-default #header .global .secondary > ul {
+    padding: 0 8px 0 0;
+}
+
+.aui-theme-default #header .local .secondary > ul > li,
+.aui-theme-default #header .global .secondary > ul > li {
+    margin: 0 0 0 8px;
+}
+
+.aui-theme-default #header .local .secondary > ul > li > a,
+.aui-theme-default #header .global .secondary > ul > li > a {
+    display: block;
+    padding: 4px;
+    white-space: nowrap;
+}
+
+.aui-theme-default #header .local {
+    background: #326ca6;
+    border-top: 1px solid #036;
+    color: #fff;
+}
+
+.aui-theme-default #header .local .primary > ul > li > a:hover {
+    background: #fff;
+    color: #333;
+}
+
+.aui-theme-default #header .local .primary > ul > li.selected,
+.aui-theme-default #header .local .primary > ul > li.selected a {
+    background: #f0f0f0;
+    color: #333;
+}
+
+.aui-theme-default #footer .footer-body {
+    background: transparent;
+    color: #505050;
+    font-size: 11px;
+    line-height: 1.364;
+    margin: 0;
+    padding: 0 16px;
+}
+
+.aui-theme-default #footer .footer-body {
+    text-align: center;
+}
+
+/**
+ * CONTENT PANEL
+ */
+.aui-theme-default .aui-panel {
+    background: #fff;
+    border: 1px solid #bbb;
+    border-radius: 5px;
+    padding: 16px;
+}
+
+/**
+ * TABS AS FIRST CHILD IN CONTENT
+ * Explicitly sets bg to white, changes horizontal hovers to work on grey.
+ * Remember these extend the standard component styles.
+ */
+.aui-theme-default #content > .aui-tabs > .tabs-pane {
+    background: #fff;
+    border-radius: 5px;
+}
+
+.aui-theme-default #content > .aui-tabs.horizontal-tabs > .tabs-menu > li.menu-item a {
+    background: #f0f0f0;
+    border-color: #f0f0f0;
+}
+
+.aui-theme-default #content > .aui-tabs.horizontal-tabs > .tabs-menu > li.menu-item a:focus,
+.aui-theme-default #content > .aui-tabs.horizontal-tabs > .tabs-menu > li.menu-item a:hover {
+    background: #fff;
+    border-color: #bbb;
+    border-bottom-color: #fff;
+}
+
+.aui-theme-default #content > .aui-tabs.horizontal-tabs > .tabs-pane {
+    border: 1px solid #bbb;
+    margin: 0;
+    padding: 16px;
+}

@@ -1,0 +1,23 @@
+<tr bgcolor=ffffff>
+    <td>
+        <a name="atlassian-macro-section">
+{popular:spaces=@all}<br/><br/>
+{popular:spaces=dog,cat|types=page,blogpost}<br/><br/>
+{popular:timespan=1m|events=create,view,update|max=20}<br/>
+    </td>
+    <td>
+        <p>
+        $action.getText('usage.popular.macro.desc')
+        <ul>
+        <li><b>spaces:</b> - $action.getText("usage.macro.param.spaces")</li>
+        <li><b>types:</b> - $action.getText("usage.macro.param.types")</li>
+        <li><b>labels:</b> - $action.getText("usage.macro.param.labels")</li>
+        <li><b>display:</b> - $action.getText("usage.macro.param.display")</li>
+        <li><b>timespan:</b> - $action.getText("usage.macro.param.timespan")</li>
+        <li><b>events:</b> - $action.getText("usage.popular.macro.param.events")</li>
+        <li><b>max:</b> - $action.getText("usage.popular.macro.param.max")</li>
+        <li><b>style:</b> - $action.getText("usage.popular.macro.param.style")</li>
+        </ul>
+        </p>
+    </td>
+</tr>

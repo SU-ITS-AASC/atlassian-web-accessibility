@@ -1,0 +1,49 @@
+{namespace aui.toolbar2}
+
+/**
+ * @param content Must have Toolbar2 items, items can (optionally) be enclosed in groups.
+ * @param? id
+ * @param? extraClasses
+ * @param? extraAttributes
+ **/
+{template .toolbar2}
+    <div
+        {if $id} id="{$id}"{/if} 
+        {sp}class="aui-toolbar2{call aui.renderExtraClasses data="all" /}"{call aui.renderExtraAttributes data="all" /}
+        {sp}role="toolbar">
+        <div class="aui-toolbar2-inner">
+            {$content|noAutoescape}
+        </div>
+    </div>
+{/template}
+
+/**
+ * @param item Sets up toolbar structure. Options are "primary" (defaults to left) or "secondary" (defaults to right). Should contain AUI Buttons.
+ * @param content
+ * @param? id
+ * @param? extraClasses
+ * @param? extraAttributes
+ **/
+{template .item}
+    <div 
+        {if $id} id="{$id}"{/if} 
+        {sp}class="aui-toolbar2-{$item}{call aui.renderExtraClasses data="all" /}"{call aui.renderExtraAttributes data="all" /}>
+        {$content|noAutoescape}
+    </div>
+{/template}
+
+/**
+ * Toolbar2 groups are optional and effectively just used for multi-row toolbars
+ * @param content Should only contain toolbar items. Add one per group/row then append items.
+ * @param? id
+ * @param? extraClasses
+ * @param? extraAttributes
+ **/
+{template .group}
+    <div
+        {if $id} id="{$id}"{/if} 
+        {sp}class="aui-toolbar2-group{call aui.renderExtraClasses data="all" /}"
+        {call aui.renderExtraAttributes data="all" /}>
+        {$content|noAutoescape}
+    </div>
+{/template}

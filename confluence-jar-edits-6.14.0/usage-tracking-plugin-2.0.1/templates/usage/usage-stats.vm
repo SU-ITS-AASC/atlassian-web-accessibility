@@ -1,0 +1,48 @@
+#if ($debug.equals("true"))
+    Period: $period<br />
+    Event Types: #if ($eventTypes.isEmpty())all#else$eventTypes#end<br />
+    Spaces: #foreach ($space in $spaces) $space.key #end<br />
+    Content Types: $contentTypes<br />
+    Columns: $usageQuery.columns<br />
+    #if ($afterTime)
+        Between: $afterTime and $beforeTime<br />
+    #end
+#end
+#if ($dataset.seriesCount > 0)
+<table id="usage-stats" class="grid">
+    <tr>
+        <th>Date</th>
+        #set ($maxSeries = $dataset.seriesCount - 1)
+        #foreach ($i in [0 .. $maxSeries])
+            #if ($usageQuery.columns == "space")
+                <th>$generalUtil.htmlEncode($macro.getSpace($dataset.getSeriesKey($i)).getName())</th>
+            #else
+                #set ($title = $dataset.getSeriesKey($i))
+                #if ($title == "blogpost")
+                    #set ($title = "blog posts")
+                #end
+                <th>$generalUtil.htmlEncode($macro.makeTitleCase($title))</th>
+            #end
+        #end
+    </tr>
+
+    #foreach ($row in $dataset.getSeries(0).timePeriods)
+    <tr>
+        <td>$row</td>
+        #foreach ($j in [0 .. $maxSeries])
+            <td>$!dataset.getSeries($j).getValue($row)</td>
+        #end
+    </tr>
+    #end
+</table>
+#else
+    There are no matching usage events.
+#end
+
+#macro (displaySeriesKey $key)
+    #if ($key == "blogpost")
+        blog posts
+    #else
+        $key
+    #end
+#end

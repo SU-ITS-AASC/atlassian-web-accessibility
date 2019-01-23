@@ -1,0 +1,26 @@
+@import (reference) 'imports/mixins';
+/*! Atlassian UI and the Atlassian Design Guidelines are created by Atlassian. See https://developer.atlassian.com/display/AUI/ and https://developer.atlassian.com/design/ for license details. */
+
+.clear {
+    clear: both;
+}
+.hidden,
+form.aui .hidden,
+form.aui .field-group.hidden,
+form.aui fieldset.hidden {
+    display: none;
+}
+
+.assistive,
+form.aui legend.assistive {
+    #aui.visually-hidden();
+}
+
+/* Deprecated since AUI 7.3. */
+.aui-box-shadow {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.13);
+
+    .aui-dialog& {
+        box-shadow: none; // dialog implements its own shadow.
+    }
+}

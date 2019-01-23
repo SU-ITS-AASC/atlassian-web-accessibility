@@ -1,0 +1,484 @@
+{namespace Confluence.Templates.Sidebar}
+
+/**
+ * We need to set the sidebar to the right width and then hide it, because we may need to add the
+ * 'collapsed' class to it after the element has loaded. If we don't hide the sidebar for now, we
+ * may see a flash of the icons at the wrong size before they are changed to their collapsed state.
+ * @param? sidebarWidth
+ */
+{template .headerStyles}
+    {if $sidebarWidth}
+        <style>
+            .ia-fixed-sidebar, .ia-splitter-left {lb}
+                width: {$sidebarWidth}px;
+            {rb}
+            .theme-default .ia-splitter #main {lb}
+                margin-left: {$sidebarWidth}px;
+            {rb}
+            .ia-fixed-sidebar {lb}
+                visibility: hidden;
+            {rb}
+        </style>
+    {/if}
+{/template}
+
+/**
+* @param space
+* @param mainLinks
+* @param quickLinks
+* @param advancedLinks
+* @param? contextualNav
+* @param forBlogs
+* @param navType
+* @param pageTreeEmpty
+* @param? collectorToHighlight
+* @param? hasCreatePermission
+* @param? hasConfigurePermission
+* @param quickLinksState
+* @param pageTreeState
+* @param hasSidebarCustomisation
+* @param sidebarCustomisation
+* @param hasFavouriteSpacePermission
+* @param isFavouriteSpace
+* @param accessMode
+*/
+{template .sidebar}
+<div class="acs-side-bar ia-scrollable-section">
+    <div class="acs-side-bar-space-info tipsy-enabled" data-configure-tooltip="{getText('sidebar.main.configure.flyout.help')}">
+        <div class="avatar">
+            <div class="space-logo" data-key="{$space.key}" data-name="{$space.name}" data-entity-type="confluence.space">
+                <div class="avatar-img-container">
+                    <div class="avatar-img-wrapper">
+                        <a href="{$space.homeUrl}" title="{$space.name}">
+                            <img class="avatar-img" src="{$space.logoUrl}" alt="{$space.name}">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="space-information-container">
+            <div class="name"><a href="{$space.homeUrl}" title="{$space.name}">{$space.name}</a></div>
+            <div class="flyout-handle icon aui-icon aui-icon-small aui-iconfont-edit"></div>
+            {if $hasFavouriteSpacePermission or $accessMode == 'READ_ONLY'}
+                <div class="favourite-space-icon {if $accessMode == 'READ_ONLY'}disabled{/if}">
+                        {call .renderFavouriteSpace}
+                            {param isFavouriteSpace: $isFavouriteSpace /}
+                        {/call}
+                </div>
+            {/if}
+        </div>
+    </div>
+    <div class="acs-side-bar-content">
+        <div class="acs-nav-wrapper">
+            <div class="acs-nav" data-has-create-permission="{$hasCreatePermission}" data-quick-links-state="{$quickLinksState}" data-page-tree-state="{$pageTreeState}" data-nav-type="{$navType}">
+                {call .renderLinks}
+                    {param mainLinks: $mainLinks /}
+                    {param quickLinks: $quickLinks /}
+                    {param hasConfigurePermission: $hasConfigurePermission /}
+                    {param collectorToHighlight: $collectorToHighlight /}
+                    {param quickLinksState: $quickLinksState /}
+                    {param hasSidebarCustomisation: $hasSidebarCustomisation /}
+                    {param sidebarCustomisation: $sidebarCustomisation /}
+                {/call}
+            </div>
+        </div>
+
+        {if $contextualNav}
+            {call .contextualNav data="all" /}
+        {/if}
+    </div>
+    <div class="hidden">
+        <a href="{$space.browseSpaceUrl}" id="space-pages-link"></a> /* used by keyboard-shortcut plugin for Browse Space ("g, s") */
+        <script type="text/x-template" title="logo-config-content">
+            <h2>{getText('sidebar.main.configure.flyout.heading')}</h2>
+            <div class="personal-space-logo-hint">{getText('sidebar.main.configure.flyout.personalspace.tip', contextPath() + '/users/profile/editmyprofilepicture.action')|noAutoescape}</div>
+        </script>
+    </div>
+</div>
+{call .renderSpaceToolsSection}
+    {param advancedLinks: $advancedLinks /}
+    {param hasConfigurePermission: $hasConfigurePermission /}
+    {param currentlyViewed: $collectorToHighlight == 'spacebar-advanced' /}
+    {param pageTreeState: $pageTreeState /}
+{/call}
+{/template}
+
+/**
+ * @param isFavouriteSpace
+ */
+{template .renderFavouriteSpace}
+    <button title="{getText('sidebar.favourite.space.add.dashboard')}" id="space-favourite-add" class="space-favourite aui-icon aui-icon-small aui-iconfont-unstar"></button>
+    <button class="{if not $isFavouriteSpace} space-favourite-hidden {/if} space-favourite aui-icon aui-icon-small aui-iconfont-star"
+            id="space-favourite-remove"
+            title="{getText('sidebar.favourite.space.remove.dashboard')}"></button>
+{/template}
+
+/**
+ * @param? mainLinks
+ * @param? quickLinks
+ * @param? hasConfigurePermission
+ * @param collectorToHighlight
+ * @param quickLinksState
+ * @param hasSidebarCustomisation
+ * @param sidebarCustomisation
+ */
+{template .renderLinks}
+    <div class="acs-nav-sections">
+    {if length($mainLinks)}
+        {call .renderLinksSection}
+            {param links: $mainLinks /}
+            {param sectionClass: 'main-links-section' /}
+            {param collectorToHighlight: $collectorToHighlight /}
+        {/call}
+    {/if}
+    {if $quickLinksState != 'hide'}
+        <div class="quick-links-wrapper">
+            {if length($quickLinks)}
+                <h5 class="ia-quick-links-header-title">{getText('sidebar.main.quick.links')}</h5>
+                {call .renderLinksSection}
+                    {param links: $quickLinks /}
+                    {param sectionClass: 'quick-links-section tipsy-enabled' /}
+                    {param collectorToHighlight: null /}
+                {/call}
+            {elseif $hasConfigurePermission}
+                <h5 class="ia-quick-links-header-title">{getText('sidebar.main.quick.links')}</h5>
+                <p class="tip">{getText('sidebar.main.configure.tip', '', 'configure-sidebar')|noAutoescape}</p>
+            {/if}
+        </div>
+    {/if}
+    {if $hasSidebarCustomisation}
+        {call .renderCustomContent}
+            {param sidebarCustomisation: $sidebarCustomisation /}
+        {/call}
+    {/if}
+    </div>
+{/template}
+
+/**
+ * @param sidebarCustomisation
+ */
+{template .renderCustomContent}
+    <div class="custom-sidebar">
+        <div class="custom-sidebar-content">
+            <div class="content">
+                {$sidebarCustomisation|noAutoescape}
+            </div>
+        </div>
+    </div>
+{/template}
+
+/**
+ * @param? links
+ * @param sectionClass
+ * @param? collectorToHighlight
+ * @param? highlightSection
+ */
+{template .renderLinksSection}
+    {if length($links)}
+        <div class="{$sectionClass} {if $highlightSection} current-section{/if}">
+            <ul class="acs-nav-list">
+                {foreach $link in $links}
+                    <li class="acs-nav-item {$link.styleClass}
+                               {if $collectorToHighlight and $link.collectorKey == $collectorToHighlight} current-item{/if}"
+                               {if $link.collectorKey}{sp}data-collector-key="{$link.collectorKey}"{/if}>
+                        <a class="acs-nav-item-link tipsy-enabled" href="{$link.url}" data-collapsed-tooltip="{$link.tooltip}">
+                            {if $link.styleClass == 'pinned_attachment'}
+                                <span class="aui-icon aui-icon-small aui-iconfont-attachment"></span>
+                            {else}
+                                <span class="icon"></span>
+                            {/if}
+                            <span class="acs-nav-item-label">{$link.title}</span>
+                        </a>
+                    </li>
+                {/foreach}
+            </ul>
+        </div>
+    {/if}
+{/template}
+
+/**
+* @param contextualNav data for the contextual navigation
+* @param? forBlogs
+* @param? forSettings
+* @param navType
+* @param? pageTreeEmpty
+* @param space
+* @param? hasCreatePermission
+* @param? pageTreeState
+*/
+{template .contextualNav}
+<div class="ia-secondary-container tipsy-enabled" data-tree-type="{if $forBlogs}blogs{elseif $forSettings}settings{else}{$navType}{/if}">
+    {if $pageTreeState != 'hide'}
+        {if $forBlogs}
+            <div class="ia-secondary-header">
+                <h5 class="ia-secondary-header-title blog">
+                    <span class="icon"></span>
+                    <span class="label">
+                        {getText('sidebar.title.blog')}
+                    </span>
+                </h5>
+            </div>
+            <div class="ia-secondary-content">
+                {call .pagetreeList}
+                    {param pagetree: $contextualNav /}
+                {/call}
+            </div>
+        {elseif $forSettings}
+            <div class="ia-secondary-header">
+                <h5 class="ia-secondary-header-title settings">
+                    <span class="label">
+                        {getText('sidebar.title.settings')}
+                    </span>
+                </h5>
+            </div>
+            <div class="ia-secondary-content">
+                {call .pagetreeList}
+                    {param pagetree: $contextualNav /}
+                {/call}
+            </div>
+        {elseif $navType == 'page-tree'}
+                <div class="ia-secondary-header">
+                    <h5 class="ia-secondary-header-title page-tree">
+                        <span class="icon"></span>
+                        <span class="label">
+                            {getText('sidebar.title.tree')}
+                        </span>
+                    </h5>
+                </div>
+                {if $pageTreeEmpty}
+                        <p class="tip">
+                            {getText('sidebar.pages.tree.create.tip', contextPath() + '/pages/createpage.action?spaceKey=' + $space.key, 'page-tree-create-child-page-link')|noAutoescape}
+                        </p>
+                {else}
+                    <div class="ia-secondary-content">
+                        {$contextualNav|noAutoescape}
+                    </div>
+                {/if}
+        {else}
+            {call Confluence.Templates.Sidebar.Pages.renderPageContextualNav}
+                {param pageContextualNav: $contextualNav/}
+                {param hasCreatePermission: $hasCreatePermission/}
+            {/call}
+        {/if}
+    {/if}
+</div>
+{/template}
+
+/**
+* @param $pageTreeState
+* @param $contextualNav
+*/
+
+/**
+* @param? isSubtree
+* @param pagetree
+*/
+{template .pagetreeList}
+    <ul class="{if $isSubtree}ia-subpagetree{else}ia-pagetree{/if}">
+    {foreach $item in $pagetree}
+        {call .pagetreeItem data="$item" /}
+    {/foreach}
+    </ul>
+{/template}
+
+/**
+ * This should be used via Confluence.Sidebar.throbberDiv() so that the spinner appears.
+ *
+ * The sliding transition for page navigation in the sidebar depends on the top level
+ * element of this template being div.content-container.
+ */
+{template .throbber}
+    <div class="content-container">
+        <div class="throbber-container">
+            <div class="throbber">
+                <div class="spinner"></div>
+                <span>{getText('sidebar.loading')}</span>
+            </div>
+        </div>
+    </div>
+{/template}
+
+/**
+*/
+{template .treeThrobber}
+	<ul class="ia-subpagetree">
+    <li class="acs-tree-item leaf">
+	<span class="node-title">{getText('sidebar.loading')}</span>
+	</li>
+    </ul>
+{/template}
+
+/**
+* @param title
+* @param? children
+* @param? hasChildren
+* @param? pageId
+* @param? groupType
+* @param? groupValue
+* @param? url
+* @param? active
+*/
+{template .pagetreeItem}
+<li class="acs-tree-item
+    {if $hasChildren}
+        {if length($children)} opened{else} closed{/if}
+    {else} leaf
+    {/if}
+    {if $groupType} grouping{/if}
+    {if $active} current-item{/if}"
+    {if $pageId} data-page-id="{$pageId}"{/if}
+    {if $groupType} data-group-type="{$groupType}" data-group-value="{$groupValue}"{/if}
+    >
+
+    {if not $groupType}<a href="{$url}">{/if}
+	<span class="icon aui-icon aui-icon-small {if $hasChildren}{if length($children)}aui-iconfont-expanded{else}aui-iconfont-collapsed{/if}{/if}"></span>
+	<span class="node-title navigation-pseudo-link">{$title}</span>
+	{if not $groupType}</a>{/if}
+
+	{if $children and length($children) > 0}
+    {call .pagetreeList}
+        {param pagetree: $children /}
+        {param isSubtree: true /}
+    {/call}
+	{/if}
+</li>
+{/template}
+
+/**
+ * Renders section containing Space Tools menu and button to expand or collapse the sidebar
+ * @param advancedLinks any additional links (pluggable) that should be displayed in the Space Tools menu
+ * @param? hasConfigurePermission whether or not to display the Configure Sidebar link in the Space Tools menu
+ * @param? currentlyViewed whether or not Space Tools are currently being viewed in the space
+ * @param pageTreeState
+ */
+{template .renderSpaceToolsSection}
+    <div class="space-tools-section">
+        <div id="space-tools-menu-additional-items" class="hidden">
+            {foreach $link in $advancedLinks}
+                <div data-label="{$link.title}" data-class="{$link.styleClass}" data-href="{$link.url}">{$link.title}</div>
+            {/foreach}
+            {if $hasConfigurePermission}
+                <div data-label="{getText('sidebar.main.configure.edit')}" data-class="configure-sidebar" data-href="">{getText('sidebar.main.configure.edit')}</div>
+            {/if}
+        </div>
+        {call aui.dropdown2.trigger}
+            {param menu: ['id': 'space-tools-menu'] /}
+            {param id: 'space-tools-menu-trigger' /}
+            {param tagName: 'button' /}
+            {param extraClasses}
+                aui-button{sp}aui-button-subtle{sp}tipsy-enabled{sp}aui-dropdown2-trigger-arrowless{sp}{if $currentlyViewed}{sp}current-item{/if}
+            {/param}
+            {param content}
+                {call aui.icons.icon}
+                    {param useIconFont: true /}
+                    {param icon: 'configure' /}
+                    {param accessibilityText: getText('sidebar.main.configure') /}
+                {/call}
+                <span class="aui-button-label">{getText('sidebar.main.settings')}</span>
+            {/param}
+        {/call}
+        {call aui.dropdown2.contents}
+            {param id: 'space-tools-menu' /}
+            {param extraClasses: 'aui-style-default space-tools-dropdown' /}
+            {param extraAttributes: ['data-aui-alignment': 'top left'] /}
+        {/call}
+        <a class="expand-collapse-trigger aui-icon aui-icon-small {if $pageTreeState == 'hide'}aui-iconfont-chevron-double-right{else}aui-iconfont-chevron-double-left{/if}"></a>
+    </div>
+{/template}
+
+/**
+ * @param spaceToolLinks Array containing objects with 'label' and 'href' properties, representing top-level Space Tools navigation options
+ * @param? spaceLinks Array containing objects with 'label', 'href' and 'class' (optional) properties, representing other types of space operations
+ * @param isAuiFiveSeven Boolean to indicate if the current AUI version is 5.7.x.
+ */
+{template .spaceToolsMenu}
+    {if $isAuiFiveSeven}
+        <div class="space-tools-menu">
+            <div class="aui-dropdown2-section">
+                <ul class="space-tools-navigation">
+                    {foreach $link in $spaceToolLinks}
+                        <li>
+                            <a href="{$link.href}" title="{$link.label}">{$link.label}</a>
+                        </li>
+                    {/foreach}
+                </ul>
+            </div>
+        {if length($spaceLinks) > 0}
+            <div class="aui-dropdown2-section">
+                <ul class="space-operations">
+                    {foreach $link in $spaceLinks}
+                        <li>
+                            <a class="{$link.className}" href="{$link.href}" title="{$link.label}">{$link.label}</a>
+                        </li>
+                    {/foreach}
+                </ul>
+            </div>
+        {/if}
+        </div>
+    {else}
+        {call aui.dropdown2.itemGroup}
+            {param isTruncated: true /}
+            {param items: $spaceToolLinks /}
+            {param extraClasses: 'space-tools-navigation' /}
+        {/call}
+        {if length($spaceLinks) > 0}
+            {call aui.dropdown2.itemGroup}
+                {param isTruncated: true /}
+                {param items: $spaceLinks /}
+                {param extraClasses: 'space-operations' /}
+            {/call}
+        {/if}
+    {/if}
+{/template}
+
+/**
+ * @param? pageTree
+ * @param quickLinksState
+ * @param pageTreeState
+ * @param hasSidebarCustomisation
+ * @param customContentAdminLink
+ * @param sidebarCustomisation
+ */
+{template .configure}
+    <div class="acs-nav-sections">
+        <table id="acs-nav-list-main" class="acs-nav-list"></table>
+        <div class="acs-nav-list-quick-section{if $quickLinksState == 'hide'} hidden-section{/if}">
+            <div class="quick-links-header">
+                <h5>{getText('sidebar.main.quick.links')}</h5>
+                <a href="#" class="aui-icon aui-icon-small toggle-link {if $quickLinksState == 'hide'}aui-iconfont-add-circle{else}aui-iconfont-plan-disabled{/if}" data-tooltip="{getText('sidebar.main.configure.hide.quick.links')}"/>
+            </div>
+            <table id="acs-nav-list-quick" class="acs-nav-list"></table>
+            <p class="tip">{getText('sidebar.main.configure.edit.tip')}</p>
+            <a class="acs-add-link" href="#">
+                <span class="aui-icon aui-icon-small aui-iconfont-add-small"></span>
+                <span class="label">{getText('sidebar.main.configure.addlink')}</span>
+            </a>
+        </div>
+
+        {if $hasSidebarCustomisation}
+            <p class="tip">{getText('sidebar.custom.content.configure.text', $customContentAdminLink, 'custom-sidebar-tip')|noAutoescape}</p>
+            {call .renderCustomContent}
+                {param sidebarCustomisation: $sidebarCustomisation /}
+            {/call}
+        {/if}
+
+        <div class="acs-nav-list-page-tree-section{if $pageTreeState == 'hide'} hidden-section{/if}">
+            <div class="page-tree-header">
+                <h5>{getText('sidebar.main.configure.nav')}</h5>
+                <a href="#" class="aui-icon aui-icon-small {if $pageTreeState == 'hide'}aui-iconfont-add-circle{else}aui-iconfont-plan-disabled{/if}" data-tooltip="{getText('sidebar.main.configure.hide.page.tree')}"/>
+            </div>
+            <form class="aui page-tree-options">
+                <div class="radio">
+                    <input {if $pageTreeState == 'hide'}disabled {/if} class="radio acs-nav-type" type="radio" name="nav-type" value="pages" id="nav-type-pages" {if not $pageTree}checked{/if}>
+                    <label for="nav-type-pages">{getText('sidebar.pages.children')}</label>
+                </div>
+                <div class="radio">
+                    <input {if $pageTreeState == 'hide'}disabled {/if} class="radio acs-nav-type" type="radio" name="nav-type" value="page-tree" id="nav-type-tree" {if $pageTree}checked{/if}>
+                    <label for="nav-type-tree">{getText('sidebar.title.tree')}</label>
+                </div>
+            </form>
+        </div>
+
+        <button class="aui-style aui-button acs-done-link">{getText('sidebar.main.configure.save')}</button>
+    </div>
+{/template}

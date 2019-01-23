@@ -1,0 +1,73 @@
+#macro (contentNoLink $content)
+    #contentIcon($content)
+    $!webwork.htmlEncode($content.displayTitle)
+#end
+#macro (simplenode $p $idsToExpandAsList $startDepth $disableLinks)
+    #set ($treeId = $generalUtil.htmlEncode($action.getTreeId()))
+    #set ($hasVisibleChildren = $action.hasPermittedChildren($p))
+    #set ($isAncestorPage = $action.isAncestorPage($p))
+
+    <div class="plugin_pagetree_childtoggle_container">
+        #if ($hasVisibleChildren)
+            #if ($startDepth > 1 || $idsToExpandAsList.contains($p.id) || $isAncestorPage)
+                #set ($iconClass = "aui-iconfont-chevron-down")
+            #else
+                #set ($iconClass = "aui-iconfont-chevron-right")
+            #end
+            <a id="plusminus${p.id}-${treeId}" class="plugin_pagetree_childtoggle aui-icon aui-icon-small $iconClass">
+            </a>
+        #else
+            <span class="no-children icon"></span>
+        #end
+    </div>
+    <div class="plugin_pagetree_children_content">
+        #set ($pageExcerptHtml = "")  ##clear previous excerpt value
+
+        #if ($action.getExcerpt())
+            #set ($pageExcerptHtml = $action.getPageExcerptHtml($p))
+            #if( "$!pageExcerptHtml" != "" )
+                #set ($pageExcerptHtml = "&nbsp;&mdash; <span class='smalltext'> " + $pageExcerptHtml + "</span>")
+            #end
+        #end
+
+        #if ($disableLinks)
+            <span class="plugin_pagetree_children_span" id="childrenspan${p.id}-${treeId}">#contentNoLink ($p)</span>$pageExcerptHtml
+        #else
+            <span class="plugin_pagetree_children_span" id="childrenspan${p.id}-${treeId}">#contentLink2 ($p false false)</span>$pageExcerptHtml
+        #end
+    </div>
+
+    #set ($tmp = $startDepth - 1)
+    <div id="children${p.id}-${treeId}" class="plugin_pagetree_children_container">
+        #if ($hasVisibleChildren)
+            #if ($tmp <= 0)
+                #if ($isAncestorPage || $idsToExpandAsList.contains($p.id))
+                    <ul class="plugin_pagetree_children_list" id="child_ul${p.id}-$treeId">
+                    #foreach ($child in $action.getPermittedChildren($p))
+                        <li>#simplenode($child $idsToExpandAsList $tmp $disableLinks)</li>
+                    #end
+                    </ul>
+                #end
+            #else
+                <ul class="plugin_pagetree_children_list" id="child_ul${p.id}-$treeId">
+                #foreach ($child in $action.getPermittedChildren($p))
+                    <li>#simplenode($child $idsToExpandAsList $tmp $disableLinks)</li>
+                #end
+                </ul>
+            #end
+        #end
+    </div>
+    #set ($tmp = $tmp + 1)
+#end
+
+<ul class="plugin_pagetree_children_list" id="child_ul${page.id}-$generalUtil.htmlEncode($action.getTreeId())">
+#if ($action.hasRoot())
+    #foreach ($child in $action.getPermittedChildren($page))
+        <li>#simplenode($child $action.idsToExpand $action.getStartDepth() $disableLinks)</li>
+    #end
+#else
+    #foreach ($child in $action.getAllPermittedStartPages($action.getSpaceKey()))
+        <li>#simplenode($child $action.idsToExpand $action.getStartDepth() $disableLinks)</li>
+    #end
+#end
+</ul>

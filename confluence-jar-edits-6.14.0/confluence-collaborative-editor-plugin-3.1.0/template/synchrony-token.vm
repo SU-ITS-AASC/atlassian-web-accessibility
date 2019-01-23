@@ -1,0 +1,14 @@
+##see Confluence project editor-settings.vm
+#if ($dynamicLoading == "true")
+    #renderMetadatum("synchrony-token", $synchronyJWT)
+    #renderMetadatum("synchrony-base-url", $synchronyBaseUrl)
+    #renderMetadatum("synchrony-app-id", $synchronyAppId)
+    #renderMetadatum("synchrony-expiry", $synchronyExpiry)
+    #renderMetadatum("use-xhr-fallback", $useXhrFallback)
+#else
+    #putMetadata("synchrony-token", $synchronyJWT)
+    #putMetadata("synchrony-base-url", $synchronyBaseUrl)
+    #putMetadata("synchrony-app-id", $synchronyAppId)
+    #putMetadata("synchrony-expiry", $synchronyExpiry)
+    #putMetadata("use-xhr-fallback", $useXhrFallback)
+#end

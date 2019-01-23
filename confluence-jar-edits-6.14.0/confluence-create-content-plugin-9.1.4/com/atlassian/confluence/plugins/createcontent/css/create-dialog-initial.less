@@ -1,0 +1,44 @@
+// This file contains only what is necessary for the create dialog in its loading phase
+#create-dialog {
+    .wait-container {
+        display: none;
+    }
+
+    .loading .wait-container {
+        text-align: center;
+        left: 50%;
+        position: absolute;
+        top: 50%;
+        display: block;
+    }
+
+    .loadable {
+        display: block;
+    }
+
+    .loading > .loadable {
+        display: none;
+    }
+
+    h2.dialog-title {
+        .dialog-help-link {
+            margin-top: 2px;
+        }
+
+        line-height: 25px;
+    }
+
+    .dom-filter-field-form {
+        margin-right: 10px;
+    }
+
+    //CONF-33298: each aui-button should have a margin-right, so if one of them is hide, the layout is still ok
+    .aui-button {
+        margin-right: 10px;
+
+        //so we do not need margin-left of .aui-button-primary
+        &.aui-button-primary {
+            margin-left: 0;
+        }
+    }
+}

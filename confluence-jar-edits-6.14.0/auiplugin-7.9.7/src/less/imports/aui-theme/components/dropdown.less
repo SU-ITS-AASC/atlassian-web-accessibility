@@ -1,0 +1,79 @@
+@import '../theme';
+@import '../../mixins/shadows';
+
+@aui-dropdown-bg-color: @ak-color-N0;
+@aui-dropdown-border-color: @ak-color-N40; // to match the lightness of the faux border in the "z200" shadow
+@aui-dropdown-border-radius: @aui-border-radius-small;
+
+// space between a dropdown trigger and the dropdown itself
+@aui-dropdown-trigger-offset: 3px;
+
+// amount of space between a dropdown item and an item group border
+@aui-dropdown-group-spacing: 3px;
+
+// dropdown item attributes
+@aui-dropdown-option-font-size: @aui-font-size-medium; // It is assumed that the font-size is inherited from body.
+
+@aui-dropdown-option-effective-height: 30px;
+@aui-dropdown-option-spacing-horizontal: 10px;
+@aui-dropdown-option-spacing-vertical: 7px;
+
+@aui-dropdown-option-text-color: @aui-button-default-text-color;
+@aui-dropdown-option-bg-color: transparent;
+
+@aui-dropdown-option-hover-text-color: @aui-button-default-text-color;
+@aui-dropdown-option-hover-bg-color: @ak-color-N30;
+
+@aui-dropdown-option-active-text-color: @aui-button-default-active-text-color;
+@aui-dropdown-option-active-bg-color: @aui-button-default-active-bg-color;
+
+@aui-dropdown-option-disabled-text-color: @ak-color-N100;
+
+#aui-dropdowns {
+    .aui-dropdown-style() {
+        #aui.shadow.z200();
+        background: @aui-dropdown-bg-color;
+        border: 0 solid @aui-dropdown-border-color;
+        border-radius: @aui-dropdown-border-radius;
+        color: @aui-dropdown-option-text-color;
+    }
+
+    // See also: #aui-nav.item-base();
+    .aui-dropdown-item-base(@height: @aui-dropdown-option-effective-height) {
+        box-sizing: content-box;
+        // This *cannot* be changed to flexbox until a major version.
+        // Plain-text often ends up in these items alongside elements that are currently floated;
+        // it wouldn't be possible to re-arrange them correctly using flexbox.
+        display: block;
+        // the line-height + padding adds up to an effective 30px height for the element,
+        // but the inner content box is only 16px tall. This enables things like
+        // lozenges and small icons to line up correctly with the text, without explicit treatment.
+        // this is assumed and exploited in most dropdowns for either avatars or radio/checkbox glyphs.
+        line-height: unit((@height - (2 * @aui-dropdown-option-spacing-vertical)) / @aui-dropdown-option-font-size);
+        padding: @aui-dropdown-option-spacing-vertical @aui-dropdown-option-spacing-horizontal;
+    }
+
+    .aui-dropdown-item-style(normal) {
+        background-color: @aui-dropdown-option-bg-color;
+        color: @aui-dropdown-option-text-color;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .aui-dropdown-item-style(hover) {
+        background-color: @aui-dropdown-option-hover-bg-color;
+        color: @aui-dropdown-option-hover-text-color;
+    }
+
+    .aui-dropdown-item-style(active) {
+        background-color: @aui-dropdown-option-active-bg-color;
+        color: @aui-dropdown-option-active-text-color;
+    }
+
+    .aui-dropdown-item-style(disabled) {
+        background-color: transparent;
+        color: @aui-dropdown-option-disabled-text-color;
+        cursor: not-allowed;
+        text-decoration: none;
+    }
+}

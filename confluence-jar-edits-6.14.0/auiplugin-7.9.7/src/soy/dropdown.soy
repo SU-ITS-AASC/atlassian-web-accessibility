@@ -1,0 +1,64 @@
+{namespace aui.dropdown}
+
+/**
+ * @param? id
+ * @param? extraClasses
+ * @param? extraAttributes
+ * @param? showIcon default is true
+ * @param? accessibilityText
+ **/
+{template .trigger}
+<a{if $id} id="{$id}"{/if} class="aui-dd-trigger{call aui.renderExtraClasses data="all" /}"
+    {call aui.renderExtraAttributes data="all" /}>
+    <span class="dropdown-text">
+        {if $accessibilityText}{$accessibilityText}{/if}
+    </span>
+    {if not ($showIcon == false)}
+        <span class="icon icon-dropdown"></span>
+    {/if}
+</a>
+{/template}
+
+
+/**
+ * @param? id
+ * @param? tagName
+ * @param? extraClasses
+ * @param? extraAttributes
+ * @param content
+ **/
+{template .menu}
+    <{$tagName ? $tagName : 'ul'}{if $id} id="{$id}"{/if} class="aui-dropdown hidden{call aui.renderExtraClasses data="all" /}"
+        {call aui.renderExtraAttributes data="all" /}>
+        {$content|noAutoescape}
+    </{$tagName ? $tagName : 'ul'}>
+{/template}
+
+/**
+ * @param? id
+ * @param? tagName
+ * @param? extraClasses
+ * @param? extraAttributes
+ * @param content
+ **/
+{template .parent}
+    <{$tagName ? $tagName : 'div'}{if $id} id="{$id}"{/if} class="aui-dd-parent{call aui.renderExtraClasses data="all" /}"
+        {call aui.renderExtraAttributes data="all" /}>
+        {$content|noAutoescape}
+    </{$tagName ? $tagName : 'div'}>
+{/template}
+
+/**
+ * @param text
+ * @param? url
+ * @param? id
+ * @param? tagName
+ * @param? extraClasses
+ * @param? extraAttributes
+ **/
+{template .item}
+    <{$tagName ? $tagName : 'li'}{if $id} id="{$id}"{/if} class="dropdown-item{call aui.renderExtraClasses data="all" /}"
+        {call aui.renderExtraAttributes data="all" /}>
+        <a href="{$url ? $url : '#'}">{$text}</a>
+    </{$tagName ? $tagName : 'li'}>
+{/template}

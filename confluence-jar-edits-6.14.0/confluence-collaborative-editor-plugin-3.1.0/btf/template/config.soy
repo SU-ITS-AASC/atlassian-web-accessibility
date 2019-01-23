@@ -1,0 +1,402 @@
+{namespace Confluence.Templates.CollaborativeEditor.Admin.BTF.Config}
+
+/**
+ * It's like The Real World meets Boys Meets World meets Days of Our Lives
+ */
+{template .config}
+{webResourceManager_requireResourcesForContext('collab.btf.config')}
+<html>
+    <head>
+        <title>
+            {getText('collab.admin.btf.configure.word')}
+        </title>
+    </head>
+    <body>
+        <div id="collab-editing-config">
+            <p>
+                {getText('collab.admin.btf.configure.intro')}
+                {call .learnMore}
+                    {param link: docLink('help.collaborative.editing') /}
+                {/call}
+            </p>
+            <p id="collab-editing-message" style="display:none;margin-bottom:20px;"></p>
+            {call .collaborativeEditingStatusMain /}
+            <div style="border-top:1px solid #e4e4e4;margin-top:30px"></div>
+            {call .synchronyStatusMain /}
+        </div>
+    </body>
+</html>
+{/template}
+
+/**
+ * @param action
+ */
+{template .actionLink}
+    <p>
+        <a href="{$action == 'troubleshoot' ? docLink('help.collaborative.editing.troubleshoot') : '#' }" class="action-link"
+            target="{$action == 'troubleshoot' ? '_blank' : '_self' }">
+            {switch $action}
+                {case 'change'}
+                    {getText('collab.admin.btf.configure.action.change.mode')}
+                {case 'troubleshoot'}
+                    {getText('collab.admin.btf.troubleshoot.word')}
+            {/switch}
+        </a>
+    </p>
+{/template}
+
+/**
+ * @param link
+ * @param? standalone
+ */
+{template .learnMore}
+    <a href="{$link}" class="{$standalone ? '' : 'pad-text-left'}" target="_blank">{getText('collab.admin.btf.learn.more')}</a>
+{/template}
+
+/**
+ *
+ */
+{template .collaborativeEditingStatusMain}
+
+    <h3>{getText('collab.admin.btf.configure.editing.mode.title')}</h3>
+    <div class="aui-group">
+        <div class="aui-item">
+            <div id="collab-spinner"></div>
+            <div id="collab-status">
+
+            </div>
+        </div>
+        <div class="aui-item">
+        </div>
+    </div>
+{/template}
+
+/**
+ * @param mode
+ */
+{template .collabStatus}
+    {switch $mode}
+        {case 'enabled'}
+            {call .collabEnabledStatus /}
+        {case 'disabled'}
+            {call .collabDisabledStatus /}
+        {case 'limited'}
+            {call .collabLimitedStatus /}
+    {/switch}
+{/template}
+
+/**
+ * @param mode
+ */
+{template .collabDescription}
+    <p class="description">
+        {switch $mode}
+            {case 'enabled'}
+                {getText('collab.admin.btf.configure.editing.mode.description.enabled')}
+            {case 'disabled'}
+                {getText('collab.admin.btf.configure.editing.mode.description.disabled')}
+            {case 'limited'}
+                {getText('collab.admin.btf.configure.editing.mode.description.limited')}
+        {/switch}
+        {call .learnMore}
+            {param link: docLink('help.collaborative.editing.admin') /}
+        {/call}
+    </p>
+{/template}
+
+/**
+ */
+{template .collabAction}
+<p>
+    {call aui.buttons.button}
+        {param text: ' ' + getText('collab.admin.btf.configure.action.change.mode')/}
+        {param extraClasses: 'action-button'/}
+    {/call}
+</p>
+{/template}
+
+/**
+ *
+ */
+{template .collabEnabledStatus}
+<div id="collab-status-enabled" class="collab-status">
+    <strong>{getText('collab.admin.btf.configure.word')}</strong> {call aui.lozenges.lozenge}
+        {param text: getText('collab.admin.btf.configure.on')/}
+        {param type: 'success'/}
+        {param extraClasses: 'status-lozenge'/}
+    {/call}
+    {call .collabDescription }
+        {param mode: 'enabled'/}
+    {/call}
+    {call .collabAction /}
+</div>
+{/template}
+
+/**
+ *
+ */
+{template .collabLimitedStatus}
+<div id="collab-status-limited" class="collab-status">
+    <strong>{getText('collab.admin.btf.configure.word')}</strong> {call aui.lozenges.lozenge}
+        {param text: getText('collab.admin.btf.configure.limited')/}
+        {param type: 'current'/}
+        {param extraClasses: 'status-lozenge'/}
+    {/call}
+    {call .collabDescription }
+        {param mode: 'limited'/}
+    {/call}
+    {call .collabAction /}
+</div>
+{/template}
+
+/**
+ *
+ */
+{template .collabDisabledStatus}
+<div id="collab-status-disabled" class="collab-status">
+    <strong>{getText('collab.admin.btf.configure.word')}</strong> {call aui.lozenges.lozenge}
+        {param text: getText('collab.admin.btf.configure.off')/}
+        {param type: 'error'/}
+        {param extraClasses: 'status-lozenge'/}
+    {/call}
+    {call .collabDescription }
+        {param mode: 'disabled'/}
+    {/call}
+    {call .collabAction /}
+</div>
+{/template}
+
+/**
+ *
+ */
+{template .synchronyStatusMain}
+<h3>{getText('collab.admin.btf.configure.synchrony.title')}</h3>
+<div class="aui-group">
+    <div class="aui-item">
+        <h4>{getText('collab.admin.btf.configure.synchrony.status.title')}</h4>
+        <div id="collab-spinner"></div>
+        <p id="synchrony-status">
+
+        </p>
+    </div>
+    <div class="aui-item">
+        <h4>{getText('collab.admin.btf.configure.synchrony.configuration.title')}</h4>
+        <p id="synchrony-config">
+
+        </p>
+    </div>
+</div>
+{/template}
+
+/**
+ * @param properties
+ */
+{template .synchronyConfig}
+<table style="margin:20px 0px;">
+    <tbody>
+        {foreach $property in $properties}
+            <tr>
+                <td style="text-align:right;padding-right:20px;"><strong>{$property.name}</strong></td>
+                <td style="width:165px">{$property.value}</td>
+            </tr>
+        {/foreach}
+    </tbody>
+</table>
+<p>
+    {call .learnMore}
+        {param link: docLink('help.collaborative.editing.admin') /}
+        {param standalone: true /}
+    {/call}
+</p>
+{/template}
+
+/**
+ * @param status
+ * @param collabMode
+ */
+{template .synchronyStatus}
+    {if $collabMode == 'disabled'}
+        {call .synchronyOffStatus /}
+    {else}
+        {switch $status}
+            {case 'running'}
+                {call .synchronyRunningStatus /}
+            {case 'stopped'}
+                    {call .synchronyStoppedStatus /}
+            {case 'error'}
+                {call .synchronyStoppedStatus /}
+        {/switch}
+    {/if}
+{/template}
+
+/**
+ * @param status
+ */
+{template .synchronyDescription}
+    <p class="description">
+        <span id="synchrony-description-managed" style="display:none;">
+            {if $status == 'running'}
+                {getText('collab.admin.btf.configure.synchrony.status.running.description')}
+            {elseif $status == 'stopped' or $status == 'error'}
+                {getText('collab.admin.btf.configure.synchrony.status.stopped.description')}
+            {else}
+                {getText('collab.admin.btf.configure.synchrony.status.off.description')}
+            {/if}
+        </span>
+        <span id="synchrony-description-external" style="display:none;">
+            {if $status == 'running'}
+                {getText('collab.admin.btf.configure.synchrony.status.running.description.external')}
+            {elseif $status == 'stopped' or $status == 'error'}
+                {getText('collab.admin.btf.configure.synchrony.status.stopped.description.external')}
+            {else}
+                {getText('collab.admin.btf.configure.synchrony.status.off.description')}
+            {/if}
+        </span>
+    </p>
+{/template}
+
+/**
+ *
+ */
+{template .synchronyButtons}
+<p>
+    {call aui.buttons.button}
+        {param text: getText('collab.admin.btf.configure.synchrony.action.restart')/}
+        {param extraClasses: 'action-button'/}
+    {/call}
+    <a href="{docLink('help.collaborative.editing.troubleshoot')}" target="_blank"
+        class="aui-button aui-button-link">
+        {getText('collab.admin.btf.troubleshoot.word')}
+    </a>
+</p>
+{/template}
+
+/**
+ *
+ */
+{template .synchronyRunningStatus}
+    <strong>{getText('collab.admin.btf.configure.synchrony.word')}</strong> {call aui.lozenges.lozenge}
+        {param text: getText('collab.admin.btf.configure.synchrony.running')/}
+        {param type: 'success'/}
+        {param extraClasses: 'status-lozenge'/}
+    {/call}
+    {call .synchronyDescription}
+        {param status: 'running'/}
+    {/call}
+    {call .synchronyButtons /}
+{/template}
+
+/**
+ *
+ */
+{template .synchronyStoppedStatus}
+    <strong>{getText('collab.admin.btf.configure.synchrony.word')}</strong> {call aui.lozenges.lozenge}
+        {param text: getText('collab.admin.btf.configure.synchrony.errors')/}
+        {param type: 'error'/}
+        {param extraClasses: 'status-lozenge'/}
+    {/call}
+    {call .synchronyDescription}
+        {param status: 'stopped'/}
+    {/call}
+    {call .synchronyButtons /}
+{/template}
+
+/**
+ *
+ */
+{template .synchronyOffStatus}
+    <strong>{getText('collab.admin.btf.configure.synchrony.word')}</strong> {call aui.lozenges.lozenge}
+        {param text: getText('collab.admin.btf.configure.synchrony.off')/}
+        {param type: 'default'/}
+        {param extraClasses: 'status-lozenge'/}
+    {/call}
+    {call .synchronyDescription}
+        {param status: 'off'/}
+    {/call}
+    {call .synchronyButtons /}
+{/template}
+
+/**
+ * Dialog that allows the user to choose what mode to set collab editing to
+ * @param options
+ */
+{template .actionDialog}
+    <section role="dialog" id="change-collab-mode-dialog" class="aui-layer aui-dialog2 aui-dialog2-medium" aria-hidden="true" persistent>
+        <!-- Dialog header -->
+        <header class="aui-dialog2-header">
+            <h2 class="aui-dialog2-header-main">{getText('collab.admin.btf.configure.editing.mode.change.title')}</h2>
+            <div class="aui-dialog2-header-secondary">
+                {call .learnMore}
+                    {param link: docLink('help.collaborative.editing.admin') /}
+                {/call}
+            </div>
+        </header>
+        <!-- Main dialog content -->
+        <div class="aui-dialog2-content">
+            <p>{getText('collab.admin.btf.configure.editing.mode.change.intro')}</p>
+            <form>
+                <table class="aui mode-options">
+                    <tbody>
+                        {foreach $option in $options}
+                            <tr class="radio {$option.name}">
+                                <td class="mode-option">
+                                    <input class="radio" type="radio" name="mode" id="{$option.id}">
+                                </td>
+                                <td>
+                                    {switch $option.icon}
+                                        {case 'success'}
+                                            <span class="custom-icon icon-success"></span>
+                                        {case 'warning'}
+                                            <span class="custom-icon icon-warning"></span>
+                                        {case 'error'}
+                                            <span class="custom-icon icon-error"></span>
+                                    {/switch}
+                                    <label for="{$option.id}"><strong>{$option.label}</strong></label>
+                                    <div class="mode-description">
+                                        {$option.descriptionHtml|noAutoescape}
+                                    </div>
+                                </td>
+                            </tr>
+                        {/foreach}
+                    </tbody>
+                </table>
+            </form>
+        </div>
+        <!-- Dialog footer -->
+        <footer class="aui-dialog2-footer">
+            <div class="aui-dialog2-footer-actions">
+                <div class="button-spinner" style="display: inline-block;margin-right: 20px;margin-bottom:5px;"></div>
+                <button id="dialog-submit-button" class="aui-button aui-button-primary">{getText('collab.admin.btf.configure.editing.mode.change.button')}</button>
+                <button id="dialog-close-button" class="aui-button aui-button-link">{getText('collab.admin.btf.cancel.word')}</button>
+            </div>
+            <!-- Hint text is rendered on the left of the footer -->
+            <div class="aui-dialog2-footer-hint"></div>
+        </footer>
+    </section>
+{/template}
+
+/**
+ *  Dialog that allows the user to restart Synchrony
+ */
+{template .restartSynchronyDialog}
+    <section role="dialog" id="restart-synchrony-dialog" class="aui-layer aui-dialog2 aui-dialog2-small" aria-hidden="true" persistent>
+        <!-- Dialog header -->
+        <header class="aui-dialog2-header">
+            <h2 class="aui-dialog2-header-main">{getText('collab.admin.btf.configure.synchrony.action.restart')}</h2>
+        </header>
+        <!-- Main dialog content -->
+        <div class="aui-dialog2-content">
+            <p>{getText('collab.admin.btf.configure.synchrony.action.restart.description')}</p>
+        </div>
+        <!-- Dialog footer -->
+        <footer class="aui-dialog2-footer">
+            <div class="aui-dialog2-footer-actions">
+                <div class="button-spinner" style="display: inline-block;margin-right: 20px;margin-bottom:5px;"></div>
+                <button id="dialog-submit-button" class="aui-button aui-button-primary">{getText('collab.admin.btf.configure.synchrony.action.restart.button')}</button>
+                <button id="dialog-close-button" class="aui-button aui-button-link">{getText('collab.admin.btf.cancel.word')}</button>
+            </div>
+            <!-- Hint text is rendered on the left of the footer -->
+            <div class="aui-dialog2-footer-hint"></div>
+        </footer>
+    </section>
+{/template}

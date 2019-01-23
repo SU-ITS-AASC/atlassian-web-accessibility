@@ -1,0 +1,78 @@
+/* CONFDEV-38819 - Instead of using a class we use a data-attribute to avoid it being synchronized */
+body[data-table-resizing=true] {
+  cursor: col-resize;
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer */
+  -khtml-user-select: none; /* KHTML browsers (e.g. Konqueror) */
+  -webkit-user-select: none; /* Chrome, Safari, and Opera */
+  -webkit-touch-callout: none; /* Disable Android and iOS callouts */
+  > * {
+    pointer-events: none;
+  }
+}
+
+.confluenceTable {
+  &.active-resizable {
+    cursor: col-resize;
+  }
+  &:not(.fixed-table) {
+    .confluenceTh, .confluenceTd {
+      min-width: 8px;
+    }
+  }
+  &.fixed-table {
+    .confluenceTh, .confluenceTd {
+      img.confluence-embedded-image:not([width]):not([height]) {
+        max-width: ~'calc(100% - 4px)';
+      }
+    }
+  }
+  .confluenceTh, .confluenceTd {
+    p + .content-wrapper {
+      margin-top: 10px;
+    }
+  }
+}
+
+#resize-indicator, .resize-alignment-bar {
+  position: absolute;
+  background: #22b5fe;
+  width: 2px;
+  pointer-events: none;
+}
+
+#resize-indicator {
+  display: block;
+  width: 2px;
+}
+
+.confluenceTable-resize-indicator-fixed {
+  background: mediumpurple !important;
+}
+
+#page-width-expander {
+  height: 1px;
+}
+
+.content-wrapper + .content-wrapper,
+table.wysiwyg-macro + table.wysiwyg-macro {
+  margin-top: 10px;
+}
+
+#percentage-indicator {
+  position: absolute;
+  width: 30px;
+  height: 15px;
+  pointer-events: none;
+  text-align: center;
+  display: none;
+  color: #146c98;
+  font-weight: 600;
+  background: none !important;
+}
+
+.resize-width-holder {
+  display: block;
+  height: 1px;
+  visibility: hidden;
+}

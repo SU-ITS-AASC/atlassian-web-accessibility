@@ -1,0 +1,177 @@
+@import '../theme';
+@import '../../mixins';
+
+@aui-button-border-color: transparent;
+
+@aui-button-effective-height: 30px;
+
+@aui-button-border-radius: @aui-border-radius-smallish;
+@aui-button-border-style: solid;
+@aui-button-border-width: 1px;
+@aui-button-font-size: @aui-font-size-medium;
+@aui-button-height: unit(@aui-button-effective-height / @aui-button-font-size, em);
+@aui-button-padding-x: 10px;
+@aui-button-padding-y: 4px;
+@aui-button-line-height: unit((@aui-button-effective-height - (@aui-button-border-width + @aui-button-padding-y) *2) / @aui-button-font-size, em);
+
+// Default button
+@aui-button-default-bg-color: @ak-color-N30A;
+@aui-button-default-hover-bg-color: @ak-color-N40A;
+@aui-button-default-border-color: @aui-button-border-color;
+@aui-button-default-text-color: @ak-color-N600;
+@aui-button-default-icon-color: @aui-button-default-text-color;
+
+@aui-button-default-active-bg-color: @ak-color-B50;
+@aui-button-default-active-border-color: @aui-button-default-border-color;
+@aui-button-default-active-text-color: @ak-color-B400;
+@aui-button-default-active-icon-color: @aui-button-default-active-text-color;
+
+@aui-button-default-selected-bg-color: @ak-color-N600;
+@aui-button-default-selected-border-color: @aui-button-default-border-color;
+@aui-button-default-selected-text-color: @ak-color-N0;
+@aui-button-default-selected-icon-color: @aui-button-default-selected-text-color;
+
+@aui-button-default-disabled-bg-color: @ak-color-N20;
+@aui-button-default-disabled-border-color: @aui-button-border-color;
+@aui-button-default-disabled-text-color: @ak-color-N70;
+@aui-button-default-disabled-icon-color: @aui-button-default-disabled-text-color;
+
+@aui-button-light-bg-color: @ak-color-N0;
+
+// Primary button
+@aui-button-primary-bg-color: @ak-color-B400;
+@aui-button-primary-border-color: @aui-button-border-color;
+@aui-button-primary-text-color: @ak-color-N0;
+@aui-button-primary-icon-color: @ak-color-N0;
+
+@aui-button-primary-hover-bg-color: @ak-color-B300;
+@aui-button-primary-active-bg-color: @aui-button-primary-bg-color;
+@aui-button-primary-active-border-color: @aui-button-border-color;
+@aui-button-primary-active-text-color: @aui-button-primary-text-color;
+@aui-button-primary-active-icon-color: @aui-button-primary-active-text-color;
+
+@aui-button-primary-disabled-bg-color: @aui-button-default-disabled-bg-color;
+@aui-button-primary-disabled-border-color: @aui-button-border-color;
+@aui-button-primary-disabled-text-color: @aui-button-default-disabled-text-color;
+@aui-button-primary-disabled-icon-color: @aui-button-default-disabled-icon-color;
+
+@aui-button-subtle-text-color: @aui-button-default-text-color;
+@aui-button-subtle-dropdown2-trigger-arrow-color: @aui-button-border-color;
+
+@aui-button-subtle-border-color: @aui-button-border-color;
+
+@aui-button-transition: background-color 0.1s ease-out;
+
+@aui-grouped-button-spacing: 2px;
+
+#aui-buttons {
+    .aui-button-base() {
+        #aui.transition(@aui-button-transition);
+        border-radius: @aui-button-border-radius;
+        border-style: @aui-button-border-style;
+        border-width: @aui-button-border-width;
+        cursor: pointer;
+        font-family: inherit;
+        font-size: @aui-button-font-size;
+        font-variant: normal;
+        font-weight: @aui-font-weight-normal;
+    }
+
+    .aui-button-style(normal) {
+        background-image: none;
+        background-color: @aui-button-default-bg-color;
+        border-color: @aui-button-default-border-color;
+        color: @aui-button-default-text-color;
+        text-decoration: none;
+    }
+
+    .aui-button-style(hover) {
+        background-color: @aui-button-default-hover-bg-color;
+        border-color: @aui-button-default-border-color;
+        color: @aui-button-default-text-color;
+        text-decoration: none;
+    }
+
+    .aui-button-style(active) {
+        background-image: none;
+        background-color: @aui-button-default-active-bg-color;
+        border-color: @aui-button-default-active-border-color;
+        color: @aui-button-default-active-text-color;
+        text-decoration: none;
+    }
+
+    .aui-button-style(selected) {
+        background-image: none;
+        background-color: @aui-button-default-selected-bg-color;
+        border-color: @aui-button-default-selected-border-color;
+        color: @aui-button-default-selected-text-color;
+        text-decoration: none;
+    }
+
+    .aui-button-style(disabled) {
+        background-color: @aui-button-default-disabled-bg-color;
+        border-color: @aui-button-default-disabled-border-color;
+        color: @aui-button-default-disabled-text-color;
+        cursor: default;
+    }
+
+    .aui-primary-button-style(normal) {
+        background-image: none;
+        background-color: @aui-button-primary-bg-color;
+        border-color: @aui-button-primary-border-color;
+        color: @aui-button-primary-text-color;
+        text-decoration: none;
+        font-weight: @aui-font-weight-semibold;
+    }
+
+    .aui-primary-button-style(hover) {
+        background-color: @aui-button-primary-hover-bg-color;
+        border-color: @aui-button-primary-active-border-color;
+        color: @aui-button-primary-active-text-color;
+        text-decoration: none;
+    }
+
+    .aui-primary-button-style(active) {
+        background-image: none;
+        background-color: @aui-button-primary-active-bg-color;
+        border-color: @aui-button-primary-active-border-color;
+        color: @aui-button-primary-active-text-color;
+        text-decoration: none;
+    }
+
+    .aui-primary-button-style(disabled) {
+        #aui-buttons.aui-button-style(disabled);
+    }
+
+    .aui-subtle-button-style(normal) {
+        background: transparent none;
+        border-color: transparent;
+        color: @aui-button-default-text-color;
+        text-decoration: none;
+    }
+
+    .aui-link-button-style(normal) {
+        background-color: transparent;
+        border-color: transparent;
+        color: @aui-link-color;
+        cursor: pointer;
+        text-decoration: none;
+    }
+
+    .aui-link-button-style(hover) {
+        color: @aui-link-color-hover;
+        text-decoration: underline;
+    }
+
+    .aui-link-button-style(active) {
+        color: @aui-link-color-active;
+        text-decoration: none;
+    }
+
+    .aui-link-button-style(disabled) {
+        background-color: transparent;
+        border-color: transparent;
+        color: @aui-button-default-disabled-text-color;
+        text-decoration: none;
+    }
+}

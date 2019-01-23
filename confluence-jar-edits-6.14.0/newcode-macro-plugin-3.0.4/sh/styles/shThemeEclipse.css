@@ -1,0 +1,113 @@
+/**
+ * SyntaxHighlighter
+ * http://alexgorbatchev.com/SyntaxHighlighter
+ *
+ * SyntaxHighlighter is donationware. If you are using it, please donate.
+ * http://alexgorbatchev.com/SyntaxHighlighter/donate.html
+ *
+ * @version
+ * 3.0.83 (July 02 2010)
+ * 
+ * @copyright
+ * Copyright (C) 2004-2010 Alex Gorbatchev.
+ *
+ * @license
+ * Dual licensed under the MIT and GPL licenses.
+ */
+.syntaxhighlighter.sh-eclipse {
+  background-color: white !important;
+}
+.syntaxhighlighter.sh-eclipse .line.highlighted.number {
+  color: white !important;
+}
+.syntaxhighlighter.sh-eclipse table caption {
+  color: black !important;
+}
+.syntaxhighlighter.sh-eclipse .gutter .line.highlighted {
+  background-color: #d4d0c8 !important;
+  color: white !important;
+}
+.syntaxhighlighter.sh-eclipse.printing .line .content {
+  border: none !important;
+}
+.syntaxhighlighter.sh-eclipse.collapsed {
+  overflow: visible !important;
+}
+.syntaxhighlighter.sh-eclipse.collapsed .toolbar {
+  color: #3f5fbf !important;
+  background: white !important;
+  border: 1px solid #d4d0c8 !important;
+}
+.syntaxhighlighter.sh-eclipse.collapsed .toolbar a {
+  color: #3f5fbf !important;
+}
+.syntaxhighlighter.sh-eclipse.collapsed .toolbar a:hover {
+  color: #aa7700 !important;
+}
+.syntaxhighlighter.sh-eclipse .toolbar {
+  color: #a0a0a0 !important;
+  background: #d4d0c8 !important;
+  border: none !important;
+}
+.syntaxhighlighter.sh-eclipse .toolbar a {
+  color: #a0a0a0 !important;
+}
+.syntaxhighlighter.sh-eclipse .toolbar a:hover {
+  color: red !important;
+}
+.syntaxhighlighter.sh-eclipse .plain, .syntaxhighlighter.sh-eclipse .plain a {
+  color: black !important;
+}
+.syntaxhighlighter.sh-eclipse .comments, .syntaxhighlighter.sh-eclipse .comments a {
+  color: #3f5fbf !important;
+}
+.syntaxhighlighter.sh-eclipse .string, .syntaxhighlighter.sh-eclipse .string a {
+  color: #2a00ff !important;
+}
+.syntaxhighlighter.sh-eclipse .keyword {
+  color: #7f0055 !important;
+}
+.syntaxhighlighter.sh-eclipse .preprocessor {
+  color: #646464 !important;
+}
+.syntaxhighlighter.sh-eclipse .variable {
+  color: #aa7700 !important;
+}
+.syntaxhighlighter.sh-eclipse .value {
+  color: #009900 !important;
+}
+.syntaxhighlighter.sh-eclipse .functions {
+  color: #ff1493 !important;
+}
+.syntaxhighlighter.sh-eclipse .constants {
+  color: #0066cc !important;
+}
+.syntaxhighlighter.sh-eclipse .script {
+  font-weight: bold !important;
+  color: #7f0055 !important;
+  background-color: none !important;
+}
+.syntaxhighlighter.sh-eclipse .color1, .syntaxhighlighter.sh-eclipse .color1 a {
+  color: gray !important;
+}
+.syntaxhighlighter.sh-eclipse .color2, .syntaxhighlighter.sh-eclipse .color2 a {
+  color: #ff1493 !important;
+}
+.syntaxhighlighter.sh-eclipse .color3, .syntaxhighlighter.sh-eclipse .color3 a {
+  color: red !important;
+}
+
+.syntaxhighlighter.sh-eclipse .keyword {
+  font-weight: bold !important;
+}
+.syntaxhighlighter.sh-eclipse .xml .keyword {
+  color: #3f7f7f !important;
+  font-weight: normal !important;
+}
+.syntaxhighlighter.sh-eclipse .xml .color1, .syntaxhighlighter.sh-eclipse .xml .color1 a {
+  color: #7f007f !important;
+}
+.syntaxhighlighter.sh-eclipse .xml .string {
+  font-style: italic !important;
+  color: #2a00ff !important;
+}

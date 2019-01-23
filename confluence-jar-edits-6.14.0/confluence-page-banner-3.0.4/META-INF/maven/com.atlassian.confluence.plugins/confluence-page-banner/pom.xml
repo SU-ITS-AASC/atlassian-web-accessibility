@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.atlassian.confluence.plugins</groupId>
+        <artifactId>confluence-page-banner-project</artifactId>
+        <version>3.0.4</version>
+    </parent>
+
+    <artifactId>confluence-page-banner</artifactId>
+    <packaging>atlassian-plugin</packaging>
+
+    <name>Confluence Page Banner</name>
+    <description>Displays a pluggable banner at the top of Confluence pages.</description>
+
+    <dependencies>
+        <dependency>
+             <groupId>com.atlassian.plugin</groupId>
+             <artifactId>atlassian-spring-scanner-annotation</artifactId>
+             <version>${spring-scanner.version}</version>
+             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.atlassian.confluence</groupId>
+            <artifactId>confluence</artifactId>
+            <version>${confluence.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.11</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-library</artifactId>
+            <version>1.3</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- WIRED TEST RUNNER DEPENDENCIES -->
+        <dependency>
+            <groupId>com.atlassian.plugins</groupId>
+            <artifactId>atlassian-plugins-osgi-testrunner</artifactId>
+            <version>${plugin.testrunner.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.ws.rs</groupId>
+            <artifactId>jsr311-api</artifactId>
+            <version>1.1.1</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.2.2-atlassian-1</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>${javax.servlet.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Dependencies for testing -->
+        <dependency>
+            <groupId>com.atlassian.confluence</groupId>
+            <artifactId>confluence-test-support</artifactId>
+            <version>${confluence.version}</version>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion><!-- At the time of exclusion, this brings in 4.2.x of httpcomponents which is
+                    incompatible with the version of htmlunit used in Confluence (see CONFDEV-27213) -->
+                    <groupId>com.atlassian.confluence.plugins</groupId>
+                    <artifactId>confluence-ondemand-crowd-proxy-plugin</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>com.atlassian.confluence</groupId>
+            <artifactId>confluence-webdriver-support</artifactId>
+            <version>${confluence.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.atlassian.confluence</groupId>
+            <artifactId>confluence-testutils</artifactId>
+            <version>${confluence.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.atlassian.confluence.plugins</groupId>
+            <artifactId>confluence-page-banner-test-support</artifactId>
+            <version>${project.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>${mockito.core.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.atlassian.confluence</groupId>
+            <artifactId>confluence-stateless-test-runner</artifactId>
+            <version>1.0.23</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.atlassian.maven.plugins</groupId>
+                <artifactId>maven-confluence-plugin</artifactId>
+                <extensions>true</extensions>
+                <configuration>
+                    <productVersion>${confluence.version}</productVersion>
+                    <productDataVersion>${confluence.data.version}</productDataVersion>
+                    <systemPropertyVariables>
+                        <confluence.version>${confluence.version}</confluence.version> <!-- system property required by Functest RPC plugin -->
+                        <xvfb.enable>${xvfb.enable}</xvfb.enable>
+                        <xvfb.display>${xvfb.display}</xvfb.display>
+                        <http.port>${http.confluence.port}</http.port>
+                        <baseurl.confluence>${baseurl.confluence}</baseurl.confluence>
+                        <context.path>${context.confluence.path}</context.path>
+                    </systemPropertyVariables>
+                    <instructions>
+                        <Atlassian-Plugin-Key>${project.groupId}.${project.artifactId}</Atlassian-Plugin-Key>
+                        <Spring-Context>*</Spring-Context>
+                        <Export-Package />
+                        <Import-Package>
+                            <!-- Runtime-only dependencies (such as conditions) need an explicit import -->
+                            com.atlassian.confluence.plugin.descriptor.web.conditions,
+                            com.atlassian.confluence.plugin.descriptor.web.conditions.user,
+                            <!-- Optional resolution is required because of the Atlassian spring scanner,
+                                 which uses either Spring DM or Gemini Blueprint depending on the version
+                                 of the plugins framework -->
+                            *;resolution:=optional
+                        </Import-Package>
+                    </instructions>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.4</version>
+                <executions>
+                    <execution>
+                        <id>test-jar</id>
+                        <goals>
+                            <goal>test-jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>com.atlassian.plugin</groupId>
+                <artifactId>atlassian-spring-scanner-maven-plugin</artifactId>
+                <version>${spring-scanner.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>atlassian-spring-scanner</goal>
+                        </goals>
+                        <phase>process-classes</phase>
+                    </execution>
+                </executions>
+                <configuration>
+                    <verbose>false</verbose>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

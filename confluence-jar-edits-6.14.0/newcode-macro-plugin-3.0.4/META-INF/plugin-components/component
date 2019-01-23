@@ -1,0 +1,13 @@
+com.atlassian.confluence.ext.code.config.NewcodeSettingsManager
+com.atlassian.confluence.ext.code.descriptor.ConfluenceStrategyImpl
+com.atlassian.confluence.ext.code.descriptor.DescriptorFacadeImpl
+com.atlassian.confluence.ext.code.descriptor.custom.CustomCodeSyntaxModuleDescriptorFactory
+com.atlassian.confluence.ext.code.languages.impl.LanguageRegistryImpl
+com.atlassian.confluence.ext.code.languages.impl.PluginGeneratorImpl
+com.atlassian.confluence.ext.code.languages.impl.RegisteredLanguageInstallerImpl
+com.atlassian.confluence.ext.code.languages.impl.RegisteredLanguageListener
+com.atlassian.confluence.ext.code.languages.impl.RhinoLanguageParser
+com.atlassian.confluence.ext.code.languages.installers.BuiltInLanguageInstaller
+com.atlassian.confluence.ext.code.render.ContentFormatter
+com.atlassian.confluence.ext.code.themes.impl.ThemeRegistryImpl
+com.atlassian.plugin.osgi.bridge.external.SpringHostContainer

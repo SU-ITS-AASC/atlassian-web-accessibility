@@ -1,0 +1,18 @@
+.acs-side-bar-space-info .avatar-img-wrapper {
+    display: block;
+}
+
+/*
+    See code comment in sidebar-space-tools.js (above the function declaration for
+    'forceSpaceToolsTriggerPseudoElementRedraw') for an explanation of why this is needed.
+
+    The extra spaces in the properties defined below trigger the required redraw in IE8.
+
+    If that JavaScript function is removed, this can probably be deleted too.
+ */
+#space-tools-menu-trigger.force-redraw:after {
+    content: "     ";
+}
+#space-tools-menu-trigger.force-redraw .aui-iconfont-configure:before {
+    content: "\e001 ";
+}

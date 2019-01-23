@@ -1,0 +1,30 @@
+#* @vtlvariable name="action" type="com.benryan.webwork.ManageQueueAction" *#
+<html>
+    <head>
+        <title>$action.getActionName($action.getClass().getName())</title>
+        <content tag="selectedWebItem">worddavadmin</content>
+    </head>
+    <body>  
+        #parse ( "/template/includes/actionerrors.vm" )
+        #if (!$action.queueEmpty)
+        <table class="tableview attachments">
+            <tr>
+                <th>$action.getText("office.connector.queue.info")</th>
+                <th>$action.getText("office.connector.queue.time.queued")</th>
+                <th>&nbsp;</th>
+            </tr>
+            #foreach($data in $action.beingConverted)
+            <tr>
+                #set ($bookmark = "$data.ceoTitle-attachment-$data.fileName") 
+                <td><a href='$req.contextPath/pages/viewpageattachments.action?pageId=$data.ceoId&highlight=$generalUtil.urlEncode($data.fileName)#$generalUtil.urlEncode($bookmark)'>$generalUtil.htmlEncode($data.fileName)</a></td>
+                <td>$!action.getTimeDiff($data.queueDate)</td>
+                <td><a href='$req.contextPath/admin/worddav/removefromqueue.action?attachmentId=$data.attachmentId'>Remove</a></td>
+            </tr>
+            #end
+        </table>
+        #else
+        No attachments waiting to be converted
+        #end
+    </body>
+	#parse ( "/admin/admin-breadcrumbs.vm" )
+</html>

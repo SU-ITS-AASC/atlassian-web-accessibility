@@ -1,0 +1,15 @@
+{namespace DashboardTemplates.AllUpdates}
+
+/**
+*
+*/
+{template .blank}
+    {call DashboardTemplates.Default.blank}
+        {param cssClass: 'all-updates' /}
+        {param title: getText('all.updates.mainBanner') /}
+        {param content}
+            <p>{getText('all.updates.subBanner')|noAutoescape}</p>
+            <p>{getText('all.updates.subBanner2')|noAutoescape}</p>
+        {/param}
+    {/call}
+{/template}

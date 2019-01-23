@@ -1,0 +1,8 @@
+{
+"version":3,
+"file":"/dummy-file-path",
+"lineCount":3,
+"mappings":"AAWAA,MAAA,+FAGG,QAAA,CACCC,CADD,CAECC,CAFD,cAOYC,QAAAA,CAASC,CAATD,CAAaE,CAAbF,EAEHC,CAAAE,WAAA,cAA4B,QAAA,GACxBF,CAAAG,cAAAC,KAAA,OACWP,CAAAQ,SAAAC,+BADX,8BAEkBC,QAAA,CAASP,CAAAQ,QAAA,0BAAT,CAFlB,YAGmBD,QAAA,CAASP,CAAAQ,QAAA,2BAAT,CAHnB,6EAQiBP,CARjB,EADwB,CAA5B,CAcAD,EAAAS,UAAA;kBAIAT,EAAAU,QAAAC,IAAA,CAAe,QAAA,CAASX,CAAT,CAAaY,CAAb,MACPC,EAAID,CAAAE,OADG,CAEPC,CAFO,YAIRF,CAAAG,SAJQ,GAKPD,CALO,CAKFjB,CAAA,CAAEe,CAAF,CALE,CAMJE,CAAAE,SAAA,YANI,QAOHC,EAPG,CAOGlB,CAAAmB,UAAAC,OAAA,IAPH,EAQgBR,CAAAS,QARhB,EAQ8BT,CAAAU,OAR9B,CAQyCT,CAAAU,EARzC,EASSV,CAAAW,MATT,IAYCN,CAAAO,eAAA,CAAmBZ,CAAnB,CAZD,CAaCK,CAAAQ,aAAA,CAAiBb,CAAjB,CAbD,GAgBCK,CAAAS,cAAA,CAAkBd,CAAlB,CAhBD,CAiBCK,CAAAU,YAAA,CAAgBf,CAAhB,CAjBD,EAoBHb,CAAAmB,UAAAU,OAAA,CAAoBX,CAApB,CApBG,CAqBHlB,CAAAmB,UAAAW,SAAA,EArBG,CAuBIjC,CAAAkC,IAAAC,MAAAC,QAAA,CAA0BrB,CAA1B,CAvBJ,CAAf,CApBGb,CAPZ,SAwDemC,QAAAA;QAMQrC,CAAAsC,aANRD,KAMqCrC,CAAAuC,aANrCF,EAxDf,EAHH,CAuEAG,QAAA,8BAAAC,YAAA,0EAA4H,QAAA,CAASC,CAAT,MACpH1C,EAAUwC,OAAA,WACdxC,EAAA2C,OAAA,kCAAiDD,CAAjD,CAEA1C,EAAA4C,cAAA9B,IAAA,YAAsCd,CAAA6C,QAAAH,eAAtC,CAJwH,CAA5H;",
+"sources":["input.js"],
+"names":["define","tinymce","$","init","ed","url","addCommand","windowManager","open","settings","editor_plugin_action_base_path","parseInt","getLang","addButton","onClick","add","e","n","target","$n","nodeName","hasClass","rng","selection","getRng","offsetX","layerX","x","width","setStartBefore","setEndBefore","setStartAfter","setEndAfter","setRng","collapse","dom","Event","prevent","getInfo","majorVersion","minorVersion","require","safeRequire","EmotionsPlugin","create","PluginManager","plugins"]
+}

@@ -1,0 +1,76 @@
+{namespace DashboardTemplates.Default}
+
+/**
+* @param url
+* @param title
+* @param? date
+* @param icon
+*/
+{template .listItem}
+    <a class="item-title" href="{ $url }">
+        <div class="item-icon">
+            <span class="aui-icon aui-icon-large aui-iconfont-{$icon}">
+                {if $icon == 'page'}
+                    {getText('page.word')}
+                {else}
+                    {getText('news.word')}
+                {/if}
+            </span>
+        </div>
+    </a>
+    <div class="item-content">
+        <p class="title-wrapper">
+            <a class="item-title" href="{ $url }">{ $title }</a>
+        </p>
+        {if $date}
+            <span class="last-modified">{ $date }</span>
+        {/if}
+    </div>
+{/template}
+
+/**
+ *
+ */
+{template .loading}
+	<div class="spinner-container empty-state-loading"></div>
+{/template}
+
+/**
+ * @param filter
+ */
+{template .noMatches}
+    {call DashboardTemplates.Default.blank}
+        {param cssClass: 'no-matches' /}
+        {param content}
+            <h6 class="blank-slate-title-text">{ getText('no.matches.mainBanner') }</h6>
+            <h6 class="blank-slate-filter-text"> '{ $filter }'</h6>
+            <p>{getText('no.matches.subBanner')|noAutoescape}</p>
+        {/param}
+    {/call}
+{/template}
+
+/**
+* @param? cssClass
+* @param? title
+* @param? content
+*/
+{template .blank}
+    <div class="{if $cssClass} { $cssClass } {/if} blank-slate">
+        <div class="blank-slate-content">
+            <div class="blank-slate-image-container">
+                <div class="blank-slate-image" id="blank-slate-image"></div>
+            </div>
+            <div class="blank-slate-text">
+                {if $title}
+                    <h6 class="blank-slate-title-text">{ $title }</h6>
+                {/if}
+                { $content|noAutoescape }
+            </div>
+        </div>
+    </div>
+{/template}
+
+/**
+*/
+{template .empty}
+{/template}

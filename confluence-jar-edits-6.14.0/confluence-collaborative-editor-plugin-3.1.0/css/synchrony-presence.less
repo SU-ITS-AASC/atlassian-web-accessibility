@@ -1,0 +1,285 @@
+@max-avatars: 5;
+@max-avatars-after: @max-avatars + 1;
+@bottom-offset: -43px;
+@right-offset: 20px;
+@invite-button-margin: 50px;
+
+/* Invite to Edit button is handled by the confluence-share-page-plugin
+ * We style it here to avoid inconsistencies in case the style of the avatar
+ * buttons changes.
+ */
+.invite-to-edit-button {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    width: 32px;
+    height: 32px;
+    right: @right-offset;
+    bottom: @bottom-offset;
+    z-index: 10;
+    color: #707070;
+    border-radius: 50%;
+    &.aui-button.active {
+        & >.invite-plus-icon {
+            background-color: #fff;
+        }
+        & >.invite-plus-icon::before {
+            background-color: #fff;
+        }
+    }
+}
+/* End Invite to Edit */
+
+#avatar-list {
+    list-style: none;
+    margin: 0;
+    position: absolute;
+    right: @right-offset;
+    bottom: @bottom-offset;
+    font-size: 0;
+    z-index: 1;
+
+    .invite-to-edit-button ~ & {
+        right: @right-offset + @invite-button-margin;
+    }
+
+    .avatar-item {
+        display: inline-block;
+        font-size: 14px;
+        margin-left: 5px;
+        width: 0;
+        position: relative;
+
+        /* Corrects animation when there are more than 6 elements, and the 5th element is removed */
+        &.animate:nth-child(@{max-avatars}) {
+            width: 0;
+            margin-left: 5px;
+
+            & + .avatar-item {
+                margin-left: 0;
+                position: relative;
+                right: auto;
+                top: auto;
+                visibility: hidden;
+                width: 32px;
+                z-index: 10;
+            }
+        }
+
+        &.removing {
+            width: 0;
+            transform: translate(0, 16px) scale(.5);
+            -webkit-transform: translate(0, 16px) scale(.5);
+            opacity: 0;
+
+            /* Only applies when avatar 1-4 are removed and there are more than 6 -> keeps other avatars in position */
+            & ~ .avatar-item:nth-child(@{max-avatars-after}) {
+                width: 32px;
+                overflow: visible;
+                position: relative;
+                right: auto;
+                top: auto;
+                left: -32px;
+                margin-left: 0;
+            }
+        }
+
+        /* Hides all avatars that are after #5, sets the width to 0 to animate/push list */
+        &:nth-child(n + @{max-avatars-after}),
+        &.show:nth-child(n + @{max-avatars-after}) {
+            overflow: hidden;
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 0;
+            z-index: -1;
+        }
+    }
+    /* Hides name badge for avatars underneath the overlay */
+    &.has-overlay .avatar-item:nth-child(n + @{max-avatars}) .avatar:before {
+        opacity: 0;
+        transform: translate(-2px, -3px);
+        -webkit-transform: translate(-2px, -3px);
+    }
+}
+
+/* Initial size for transition into view for avatars and overlay */
+#avatar-list .avatar-item, #synchrony-presence-overlay {
+    -webkit-transition: -webkit-transform .35s ease-in-out,
+    width .35s ease-in-out,
+    opacity .35s ease-in-out;
+    -moz-transition: transform .35s ease-in-out,
+    width .35s ease-in-out,
+    opacity .35s ease-in-out;
+    -o-transition: transform .35s ease-in-out,
+    width .35s ease-in-out,
+    opacity .35s ease-in-out;
+    transition: transform .35s ease-in-out,
+    width .35s ease-in-out,
+    opacity .35s ease-in-out;
+    width: 32px;
+
+    &:not(.no-animate-entry) {
+        width: 0;
+        opacity: 0;
+        transform: scale(.8);
+        -webkit-transform: scale(.8);
+    }
+
+    /* Final size after the transition */
+    &.show {
+        opacity: 1;
+        transform: scale(1);
+        -webkit-transform: scale(1);
+        width: 32px;
+    }
+}
+
+.collaborative-avatars-list {
+    .avatar-item {
+        &.p0 .avatar:before {
+            background-color: #3572B0;
+        }
+        &.p1 .avatar:before {
+            background-color: #78A100;
+        }
+        &.p2 .avatar:before {
+            background-color: #D37295;
+        }
+        &.p3 .avatar:before {
+            background-color: #205081;
+        }
+        &.p4 .avatar:before {
+            background-color: #ED7118;
+        }
+        &.p5 .avatar:before {
+            background-color: #00A6A6;
+        }
+        &.p6 .avatar:before {
+            background-color: #6E4EA8;
+        }
+        &.p7 .avatar:before {
+            background-color: #CE453C;
+        }
+        &.p8 .avatar:before {
+            background-color: #BD8E00;
+        }
+        &.p9 .avatar:before {
+            background-color: #1D8831;
+        }
+    }
+
+    .avatar {
+        width: 32px;
+        height: 32px;
+        border-radius: 3px;
+        cursor: default;
+        display: block;
+        position: relative;
+        z-index: 1;
+
+        & > img {
+            display: inline-block;
+            height: 100%;
+            border-radius: 50%;
+        }
+
+        &:not(.active) {
+            -webkit-filter: grayscale(100%);
+            filter: grayscale(100%);
+            opacity: 0.7;
+        }
+
+        &.active:before {
+
+            content: attr(avatar);
+            height: 6px;
+            width: 13px;
+            font-size: 9px;
+            color: #fff;
+            position: absolute;
+            bottom: -3px;
+            right: -2px;
+            border-radius: 50%;
+            text-align: center;
+            /* Hack to partially make the text position uniform cross browser */
+            line-height: 0;
+            padding-top: 7px;
+            box-shadow: 0 0 1px rgba(255, 255, 255, 1);
+            -webkit-transition: -webkit-transform .2s ease-in-out, opacity .4s ease-in-out;
+            -moz-transition: transform .2s ease-in-out, opacity .4s ease-in-out;
+            -o-transition: transform .2s ease-in-out, opacity .4s ease-in-out;
+            transition: transform .2s ease-in-out, opacity .4s ease-in-out;
+        }
+    }
+}
+
+#synchrony-presence-overlay {
+    position: absolute;
+    right: @right-offset;
+    bottom: @bottom-offset;
+    z-index: 1;
+    transform: translateX(110px);
+
+    .invite-to-edit-button ~ & {
+      right: @right-offset + @invite-button-margin;
+    }
+
+    &.show {
+        transform: translateX(0);
+    }
+
+    .aui-button {
+        height: 32px;
+        width: 32px;
+        line-height: 32px;
+        padding: 0;
+        text-align: center;
+        color: #707070;
+        background: #f5f5f5;
+        border-radius: 50%;
+    }
+}
+
+#more-avatars-list {
+    list-style: none;
+    max-height: 350px;
+    padding: 0;
+    overflow-y: auto;
+
+    .avatar-item {
+        margin-top: 5px;
+
+        &:first-child {
+            margin-top: 0;
+        }
+    }
+
+    .avatar {
+        height: 24px;
+        width: auto;
+        padding: 0 5px 0 30px;
+
+        & > img {
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        &:after {
+            content: attr(title);
+            display: inline-block;
+            vertical-align: middle;
+            max-width: 235px;
+            padding-right: 15px;
+            text-overflow: ellipsis;
+            overflow-x: hidden;
+            white-space: nowrap;
+        }
+
+        &:before {
+            right: 0;
+            bottom: 6px;
+        }
+    }
+}

@@ -1,0 +1,88 @@
+{namespace Confluence.Templates.InsertWiki}
+
+
+/**
+ * This is the default layout while the preview is still as dark feature
+ */
+{template .originalDefaultTempWikiMarkupDialog}
+<form action='#' method='post' id="insert-wiki-markup-form" class="aui">
+    <textarea class='monospaceInput textarea originalDefault' id='insert-wiki-textarea' name='wikitext'/>
+</form>
+{/template}
+
+
+/**
+ * This markup will be used to generate the preview iframe in order to allow
+ * editor resources to be injected here.
+ *
+ */
+{template .previewWikiIframeContent}
+<!DOCTYPE html>
+<html class="insert-wiki-markup-dialog">
+    <head>
+    </head>
+    <body class="wiki-content previewWiki">
+    </body>
+</html>
+{/template}
+
+
+/**
+ * Dialog for the insert-wiki-markup
+ *
+ * NOTE the '<!-- -->', by default inline-blocks have a 4px space between each other
+ * this will remove default inline-blocks spaces.
+ * refer to http://css-tricks.com/fighting-the-space-between-inline-block-elements
+ *
+ */
+{template .wikiMarkupDialog}
+<p id="insert-wiki-info-title">{getText('tinymce.confluence.conf_wikimarkup_info_title')}</p>
+<form action='#' method='post' id="insert-wiki-markup-form" class="aui">
+    <h3 class="wiki-title">
+        <span id="insert-wiki-insert-title">{getText('tinymce.confluence.conf_wikimarkup.insert.label')}</span>
+        <span id="insert-wiki-preview-title">{getText('tinymce.confluence.conf_wikimarkup_preview_label')}</span>
+    </h3>
+    <textarea class='monospaceInput textarea' id='insert-wiki-textarea' name='wikitext'/><!--
+    --><div class='example-container' id='insert-wiki-textarea-preview'></div>
+</form>
+{/template}
+
+
+/**
+ * Sub Dialog for displaying errors within the insert-wiki-markup dialog
+ *
+ * @param warningMessage   - warning message to be displayed as the header
+ * @param exceptionMessage - exception message returned from the server
+ */
+{template .wikiErrorSubDialog}
+<p class='warning'>
+    {$warningMessage}
+</p>
+<p class='exception-report'>
+    <span class='exceptionMessage'>
+        {$exceptionMessage}
+    </span>
+</p>
+{/template}
+
+
+/**
+ * Will create the menu selector for wiki parser selection, will add the default selection as the first option.
+ *
+ * @param DEFAULT - options to be added to the selector
+ * @param WIKI - all other wiki languages
+ */
+{template .wikiParserSelector}
+<span class="wiki-parser-selector">
+	<form action="#" method="post" id="d" class="aui">
+		<select class="select medium-field" id="wiki-parser-selection-tool" name="wiki-parser-selection-tool" title="wiki parser selector">
+              <option value="{$DEFAULT.val}">{$DEFAULT.label}</option>
+              {foreach $wikiLang in keys($WIKI)}
+                {if $WIKI[$wikiLang].val != $DEFAULT.val}
+                    <option value="{$WIKI[$wikiLang].val}">{$WIKI[$wikiLang].label}</option>
+                {/if}
+              {/foreach}
+		</select>
+	</form>
+</span>
+{/template}

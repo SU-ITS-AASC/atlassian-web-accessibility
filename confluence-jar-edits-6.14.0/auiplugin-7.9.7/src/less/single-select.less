@@ -1,0 +1,159 @@
+@import 'imports/global';
+@import 'imports/aui-theme/components/dropdown';
+
+@aui-select-image-size: 16px;
+@aui-select-image-in-input-top: 6px;
+@aui-select-image-in-input-left: 10px;
+@aui-select-image-in-input-right: 5px;
+@aui-select-image-vertical-padding: 2px;
+@aui-select-image-horizontal-padding: 6px;
+
+.aui-popover {
+    #aui-dropdowns.aui-dropdown-style();
+    box-sizing: border-box;
+    max-width: 300px;
+    min-width: 160px;
+    padding: @aui-dropdown-group-spacing 0;
+    position: absolute;
+
+    [role="option"] {
+        color: inherit;
+        display: block;
+        padding: 3px 10px;
+        text-decoration: none;
+
+        &.aui-select-suggestion {
+            cursor: pointer;
+        }
+    }
+
+    img {
+        display: inline-block;
+        height: @aui-select-image-size;
+        position: relative;
+        padding-right: @aui-select-image-horizontal-padding;
+        top: @aui-select-image-vertical-padding;
+        vertical-align: baseline;
+        width: @aui-select-image-size;
+    }
+
+    ul {
+        list-style: none;
+        margin: 0;
+        padding-left: 0;
+
+        [role="option"] {
+            #aui-dropdowns.aui-dropdown-item-base();
+            #aui-dropdowns.aui-dropdown-item-style(normal);
+
+            &:not(.aui-select-no-suggestions):hover {
+                #aui-dropdowns.aui-dropdown-item-style(hover);
+            }
+
+            &:not(.aui-select-no-suggestions):active {
+                #aui-dropdowns.aui-dropdown-item-style(active);
+            }
+        }
+
+        &:not(:hover) [role="option"].aui-select-active {
+            #aui-dropdowns.aui-dropdown-item-style(hover);
+        }
+    }
+
+    &.aui-layer {
+        height: auto;
+
+        &.aui-alignment-element-attached-top {
+            margin-top: @aui-dropdown-trigger-offset;
+        }
+
+        &.aui-alignment-element-attached-bottom {
+            margin-bottom: @aui-dropdown-trigger-offset;
+        }
+    }
+}
+
+form.aui aui-select,
+aui-select {
+    @select-trigger-padding-left: 6px;
+    @select-trigger-padding-right: 6px;
+    @select-trigger-arrow-width: 8px;
+    @select-trigger-width: @aui-button-border-width * 2 + @select-trigger-padding-left + @select-trigger-arrow-width + @select-trigger-padding-right;
+    @select-trigger-arrow-height: @select-trigger-arrow-width / 2;
+
+    display: inline-block;
+    position: relative;
+    max-width: @aui-form-field-width-default;
+    width: 100%;
+
+    &:not([resolved]) {
+        display: inline-block;
+        height: @aui-form-field-height;
+        width: 100%;
+        max-width: 250px;
+        vertical-align: bottom;
+    }
+
+    aui-option:not([resolved]) {
+        display: none;
+    }
+
+    input.aui-select-has-inline-image {
+        background-position: @aui-select-image-in-input-left @aui-select-image-in-input-top;
+        background-repeat: no-repeat;
+        background-size: @aui-select-image-size;
+        padding-left: @aui-select-image-size + @aui-select-image-in-input-left + @aui-select-image-in-input-right;
+    }
+
+    select,
+    datalist {
+        display: none;
+    }
+
+    input.text {
+        padding-right: @select-trigger-width;
+        max-width: 100%;
+    }
+
+    button.aui-button {
+        background-clip: padding-box;
+        border-color: @aui-form-field-border-color;
+        border-bottom-left-radius: 0;
+        border-top-left-radius: 0;
+        bottom: 0;
+        box-sizing: border-box;
+        display: inline-block;
+        height: @aui-form-field-height;
+        right: 0;
+        margin: 0;
+        position: absolute;
+        top: 0;
+        vertical-align: top;
+        width: @select-trigger-width;
+
+        &:not(:hover) {
+            border-top-color: transparent;
+            border-right-color: transparent;
+            border-bottom-color: transparent;
+        }
+
+        &:not([aria-busy])::before {
+            #aui.aui-dropdown2-trigger-chevron-icon();
+
+            right: ((@select-trigger-width - @aui-icon-size-small - (@aui-button-border-width *2)) / 2);
+        }
+    }
+}
+
+//Form notification + single select
+form.aui {
+    aui-select {
+        &[data-aui-notification-error] .text {
+            border-color: @aui-notification-error-color;
+        }
+
+        &[data-aui-notification-success] .text {
+            border-color: @aui-notification-success-color;
+        }
+    }
+}

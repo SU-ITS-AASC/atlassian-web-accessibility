@@ -1,0 +1,1 @@
+define("confluence-ui-components/js/page-picker",["ajs","confluence-ui-components/js/space-page-picker"],function(a,b){return{build:function(c){c.placeholder=a.I18n.getText("confluence-ui-components.page-picker.placeholder");c.contentType=["page"];c.showRecentlyViewedSpaces=false;c.spaceCatKeys=[];c.spaceKeys=[];return b.build(c)}}});

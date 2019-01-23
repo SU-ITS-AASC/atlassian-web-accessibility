@@ -1,0 +1,15 @@
+{namespace DashboardTemplates.Starred}
+
+/**
+*
+*/
+{template .blank}
+    {call DashboardTemplates.Default.blank}
+        {param cssClass: 'starred' /}
+        {param title: getText('starred.mainBanner') /}
+        {param content}
+            <p>{getText('starred.subBanner')|noAutoescape}</p>
+            <p>{getText('starred.subBanner2')|noAutoescape}</p>
+        {/param}
+    {/call}
+{/template}

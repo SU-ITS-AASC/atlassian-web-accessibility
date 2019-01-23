@@ -1,0 +1,113 @@
+div.editable-title {
+    height: 1%;
+    margin: 0;
+    *padding-right: 10px; /* IE7 */
+    _padding-right: 0; /* IE6 */
+}
+
+h1 #content-title {
+    margin: 0;
+    display: block;
+    width: 93%;     /* IE8 (note that 95% wraps/breaks) */
+    *width: 100%;   /* IE7 */
+    _width: 90%;    /* IE6 */
+}
+
+
+/* Render shadows on the top and bottom toolbars of the full-screen editor in IE. */
+#rte-toolbar {
+    -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=5, Direction=180, Color='#404040')";
+}
+
+#rte-savebar {
+    -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=2, Direction=0, Color='#404040')";
+}
+
+#rte-button-edit,
+#rte-button-preview,
+#rte-button-publish {
+    *width: 65px; /* IE7 */
+}
+
+/* CONFDEV-1155 - Fixes aui message bug in IE7 */
+#content.edit {
+    height: 100%;
+    display: table-cell !important;
+    *position: relative; /* IE7 */
+}
+
+.grouped-dropdown-item,
+.dropdown-item, 
+.item-link {
+    *display: inline-block; /* IE7 */
+}
+
+/* AJS-641 - Remove some button-specific code */
+.aui-toolbar .toolbar-split-captcha .toolbar-group .first {
+    border-left: none;
+}
+
+/* CONFDEV-8575 */
+#table-highlight-colour .icon-dropdown {
+    margin-left: -3px;
+}
+
+/* CONFDEV-12573 */
+#rte-toolbar .aui-toolbar2-secondary > .aui-buttons {
+    margin: 0 10px 0 0;
+}
+
+#rte-toolbar .aui-toolbar2-secondary > .aui-buttons ~ .aui-buttons {
+	margin: 0;
+}
+
+/* CONFDEV-13887 */
+
+#editor-precursor #content-title {
+    line-height: 50px;
+}
+
+/* CONFDEV-13914 */
+
+#insert-menu .dropdown-shim {
+    left: -5px !important; /* Override style attribute on iframe */
+}
+
+/* CONFDEV-13971 */
+
+#table-highlight-colour a.aui-dd-trigger:after {
+    display: none;
+}
+
+#table-highlight-colour a.aui-dd-trigger .icon-dropdown {
+    width: 0;
+    padding: 0;
+    min-width: 0;
+    margin: 10px 0 0 1px;
+    border-style: solid;
+    border-width: 4px 4px 0 4px;
+    border-color: #5A5A5A transparent transparent transparent;
+}
+
+/* End CONFDEV-13971 */
+
+
+/* CONFDEV-14133 */
+#insert-menu .aui-dropdown li {
+    overflow-x: hidden;
+}
+
+#insert-menu-options ul li.dropdown-item a {
+    width: 100%;
+}
+/* End CONFDEV-14133 */
+
+/* Set a specific width for this element to make sure label and input end up on the same line. See CONFDEV-14763. */
+#toolbar-group-blog-date > span {
+    width: 400px;
+}
+
+div.editor-fullheight {
+    height: auto; /* CONF-28415 - reset to auto for IE8 */
+}
+

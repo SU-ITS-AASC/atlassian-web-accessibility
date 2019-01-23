@@ -1,0 +1,82 @@
+{namespace DashboardTemplates.RecommendedStream}
+
+/**
+  * @param author
+  * @param url
+  * @param title
+  * @param friendlyDate
+  * @param counts
+  * @param viewers
+  */
+{template .compactStreamItem}
+     <div class="avatar-container">
+        {if not $author.anonymous}<a class="confluence-userlink" data-username="{$author.userName}" href="{$author.url}">{/if}
+        <img class="avatar userLogo logo" src="{$author.avatarUrl}">
+        <div class="stream-icon-container">
+            <span class="aui-icon aui-icon-small content-type-page"></span>
+        </div>
+        {if not $author.anonymous}</a>{/if}
+    </div>
+    <div class="stream-item-body-container">
+        <div class="compact-stream-item-layout">
+            <div class="stream-heading-container">
+                <span class="stream-item-heading">
+                    <a class="stream-item-heading-link visitable" href="{$url}">{$title}</a>
+                </span>
+            </div>
+
+            <div class="count-container valign-middle-container">
+                <a href="" class="delete-button">
+                    <span class="aui-icon aui-icon-small aui-iconfont-delete">ignore</span>
+                </a>
+            </div>
+
+            {foreach $countItem in $counts}
+                <div class="count-container valign-middle-container">
+                    <span class="{$countItem.cssClass}"></span>
+                    <span class="count">{$countItem.count}</span>
+                </div>
+            {/foreach}
+        </div>
+        <div class="flush-with-heading-container">
+            <div class="stream-item-meta">
+                {foreach $viewer in $viewers}
+                    <span class="viewer-image">
+                        <a class="confluence-userlink" data-username="{$viewer.userName}" href="{$viewer.url}">
+                            <img class="avatar userLogo logo smaller" src="{$viewer.avatarUrl}" alt="{$viewer.fullName}"/>
+                        </a>
+                    </span>
+                {/foreach}
+               <ol class="middot-list">
+                   <li>{if $author.anonymous}
+                    <span class="anonymous-user">{$author.fullName}</span>
+                    {elseif $author.unknownUser}
+                    <span class="unknown-user">{$author.fullName}</span>
+                    {else}
+                    <a class="confluence-userlink" data-username="{$author.userName}" href="{$author.url}">{$author.fullName}</a>
+                    {/if}</li>
+               </ol>
+               <time datetime="" class="stream-item-date">{$friendlyDate}</time>
+            </div>
+        </div>
+    </div>
+{/template}
+
+/**
+* @param image
+* @param userCanCreateContent
+*/
+{template .blank}
+    {call DashboardTemplates.Default.blank}
+        {param cssClass: 'popular-stream' /}
+        {param image: $image /}
+        {param title: getText('popular.stream.mainBanner') /}
+        {param content}
+            <p>{getText('popular.stream.subBanner')|noAutoescape}</p>
+            <p>{getText('popular.stream.subBanner2')|noAutoescape}</p>
+            {if $userCanCreateContent}
+                <a class="aui-style aui-button aui-button-primary create-page">{getText('heading.createpage')}</a>
+            {/if}
+        {/param}
+    {/call}
+{/template}

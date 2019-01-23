@@ -1,0 +1,44 @@
+<tr bgcolor=ffffff>
+  <td>
+    {viewfile:presentation.ppt}<br/><br/>
+    {viewfile:space=dog|page=testpage|name=worddocument.doc}<br/><br/>
+    {viewfile:spreadsheet.xls|grid=false|sheet=Sheet 1|row=4|col=5}<br/><br/>
+    {viewfile:slideshow.pdf|width=200|height=150}
+  </td>
+  <td>
+    <p>
+      Embeds the content of a file attachment into a Confluence page.
+      
+      Supported formats:
+      <ul>
+      <li><b>Microsoft Word Documents</b></li> - Embedded as html
+      <li><b>Microsoft Excel Spreadsheets</b></li> - Embedded as html
+      <li><b>Microsoft Powerpoint Presentations</b></li> - Embedded in a flash slideshow control or as a single image for individual pages
+      <li><b>Adobe PDF files</b></li> - Embedded in a flash slideshow control or as a single image for individual pages
+    </ul>
+
+    <!-- Provide a list of all possible macro arguments -->
+    <ul>
+      <li><b>space:</b> - (optional)the space key for the attachment. The default is the space of the page calling the macro. </li>
+      <li><b>page:</b> - (optional)the page or blog post that contains the attachment. The default is the page calling the macro. </li>
+      <li><b>date:</b> - (optional)the date of the blog post that contains the attachment in the form mm/dd/yyyy. Only applicable if the file is attached to a blog post</li>
+      <li><b>name:</b> - (required)the filename of the attachment. Can also be specified as the first argument using macro shorthand. {viewfile:filename.ext}  
+    </ul>
+    
+    <b>Macro arguments specific to Excel spreadsheets</b>
+    <ul>
+    	<li><b>grid</b> -  (optional)If true, the worksheet gridlines will be rendered. The default is true. </li>
+		<li><b>sheet</b> - (optional)The name of the worksheet to render. The default is the first sheet in the workbook </li>
+		<li><b>row</b> - (optional)the last row in the worksheet to render. The default is the last row with content. </li>
+		<li><b>col</b> - (optional)the last column in the worksheet to render. The default the last column with content. </li>
+    </ul>
+    
+    <b>Macro arguments specific to Powerpoint and PDF presentations</b>
+    <ul>
+    	<li><b>slide</b> - (optional)instead of an entire slideshow, you can specify a slide index (0-based). the slide at the specified index will be rendered as a jpg image in the page. </li>
+		<li><b>height</b> - (optional)overrides the default height of the flash control or image. </li>
+		<li><b>width</b> - (optional)overrides the default width of the flash control or image. </li>   
+    </ul>
+    </p>    
+    </td>
+</tr>

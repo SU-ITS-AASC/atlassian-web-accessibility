@@ -1,0 +1,17 @@
+@media all {
+    .expand-content { margin: 0 0 10px 20px; }
+    .expand-icon { vertical-align: text-bottom; }
+    .expand-control-text { vertical-align: top; color: #0052CC; }
+    .expand-control-text:hover { text-decoration: underline; }
+}
+
+@media screen {
+    /* This container preloads the opened expand icon, but we don't want it displayed to the user. */
+    .expand-hidden { display: none; opacity: 0; }
+    .expand-control { cursor: pointer; text-decoration: none; margin-bottom: 10px; }
+}
+
+@media print {
+    /* show expander text in print */
+    .expand-content { display: block !important; }
+}

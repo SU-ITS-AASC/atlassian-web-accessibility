@@ -1,0 +1,10 @@
+{
+  "confluence.macro.metrics.attachments": [
+    "searchAttachmentsMillis",
+    "unfilteredAttachmentsCount",
+    "filterAndSortAttachmentsMillis",
+    "filteredAttachmentsCount",
+    "templateModelBuildMillis",
+    "templateRenderMillis"
+  ]
+}

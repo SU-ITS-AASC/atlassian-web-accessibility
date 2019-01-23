@@ -1,0 +1,58 @@
+@import 'aui-sidebar-config.less';
+
+//
+// Imported by aui-sidebar.
+//
+// Provides interop styles for badges inside the sidebar and its various patterns.
+// Fundamentally, badges appear inside nav items, but their display differs depending
+// on whether they are nested within a simple navigation, or a collapsed sidebar's grouping.
+//
+
+.aui-sidebar,
+.aui-sidebar-submenu {
+
+    .aui-nav > li > .aui-nav-item {
+        > .aui-badge,
+        > aui-badge {
+            background-color: @aui-sidebar-badge-background-color;
+            border-color: @aui-sidebar-badge-border-color;
+            color: @aui-badge-text-color; // just the normal #333 not the one with alpha transparency
+
+            float: right;
+            // aui-nav sets the line height to 16px, and the aui-badge is supposed to sit on the baseline and have an overall
+            // height of 16px. Sidebar nav items have their line-heights changed to 20px to match the icon sizes,
+            // so we nudge the aui-badge down by 2px so that it is vertically centered with the nav item label
+            margin-top: 2px;
+        }
+    }
+}
+
+//-----------------------
+// Sidebar narrow state - add collapsed styles.
+//-----------------------
+.aui-sidebar {
+    &[aria-expanded="false"] {
+        .aui-nav > li > a:hover > .aui-nav-item > .aui-badge {
+            visibility: visible;
+        }
+
+        // used when the nav items have icons - shows the icon in the collapsed state
+        .aui-sidebar-group-tier-one {
+            .aui-nav > li > .aui-nav-item {
+                // If an aui-badge is present, position it over the icon
+                > .aui-badge,
+                > aui-badge {
+                    border-width: @aui-sidebar-collapsed-badge-border-width;
+                    border-style: solid;
+                    font-size: 9px;
+                    margin-top: 0;
+                    padding: 0.2em 0.4em;
+                    position: absolute;
+                    right: -0.5em;
+                    top: -0.5em;
+                    z-index: 1;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,75 @@
+<atlassian-plugin name='Confluence Space Directory' key="com.atlassian.confluence.plugins.confluence-space-directory" plugins-version="2">
+    <plugin-info>
+        <param name="atlassian-data-center-compatible">true</param>
+        <description>This provides a single view for all the spaces in the instance.</description>
+        <version>6.14.0</version>
+        <vendor name="Atlassian" url="https://www.atlassian.com/"/>
+    </plugin-info>
+
+    <resource type="i18n" name="i18n" location="i18n/space-directory"/>
+
+    <xwork name="Space Directory XWork Actions" key="spaceDirectoryActions">
+        <package name="spaceDirectory" extends="default" namespace="/spacedirectory">
+            <default-interceptor-ref name="defaultStack"/>
+            <action name="view" class="com.atlassian.confluence.plugins.spacedirectory.ViewSpaceDirectoryAction">
+                <result name="success" type="velocity">/templates/spacedirectory.vm</result>
+            </action>
+        </package>
+    </xwork>
+
+    <web-item key="add-space" name="Add Space Button" section="system.spacedir.button" weight="10">
+        <label key="action.space.add"/>
+        <link linkId="addSpaceLink">/spaces/createspace-start.action</link>
+        <condition class="com.atlassian.confluence.plugin.descriptor.web.conditions.CreateContentCondition">
+            <param name="content">space</param>
+        </condition>
+        <param name="iconClass">space-default</param>
+    </web-item>
+
+    <web-resource key="pagination-resources" name="Pagination Resources">
+        <transformation extension="js">
+            <transformer key="jsI18n"/>
+        </transformation>
+        <transformation extension="soy">
+            <transformer key="soyTransformer" />
+        </transformation>
+        <dependency>confluence.web.resources:ajs</dependency>
+        <resource type="download" name="pagination-templates.js" location="templates/pagination.soy"/>
+        <resource type="download" name="pagination.js" location="js/pagination.js"/>
+    </web-resource>
+
+    <web-resource key="space-directory-templates" name="Space Directory Templates">
+        <transformation extension="soy">
+            <transformer key="soyTransformer" />
+        </transformation>
+        <resource type="download" name="spacedirectory-templates.js" location="templates/spacedirectory.soy" />
+    </web-resource>
+
+    <web-resource key="space-directory" name="Space Directory Resources">
+        <transformation extension="js">
+            <transformer key="jsI18n"/>
+        </transformation>
+        <dependency>confluence.web.resources:ajs</dependency>
+        <dependency>confluence.web.resources:aui-forms</dependency>
+        <dependency>com.atlassian.confluence.plugins.confluence-space-directory:pagination-resources</dependency>
+        <dependency>com.atlassian.confluence.plugins.confluence-space-directory:space-directory-templates</dependency>
+        <resource type="download" name="space-directory.css" location="css/space-directory.css"/>
+        <resource type="download" name="space-directory.js" location="js/space-directory.js"/>
+        <resource type="download" name="img/" location="img/"/>
+        <dependency>com.atlassian.auiplugin:aui-experimental-iconfont</dependency>
+        <dependency>com.atlassian.confluence.plugins.confluence-icons:confluence-icon-resources</dependency>
+    </web-resource>
+
+    <rest key="space-directory-rest" name="Space Directory Rest API" path="spacedirectory" version="1">
+        <description>Provides a REST Interface for Space Directory</description>
+    </rest>
+
+    <component name="Space Directory Entity Builder"
+               key="spaceDirectoryEntityBuilder"
+               class="com.atlassian.confluence.plugins.spacedirectory.rest.DefaultSpaceDirectoryEntityBuilder">
+        <interface>com.atlassian.confluence.plugins.spacedirectory.rest.SpaceDirectoryEntityBuilder</interface>
+    </component>
+
+    <component-import interface="com.atlassian.confluence.core.datetime.DateFormatterFactory" key="dateFormatterFactory" />
+    <component-import interface="com.atlassian.sal.api.timezone.TimeZoneManager" key="timeZoneManager" />
+</atlassian-plugin>

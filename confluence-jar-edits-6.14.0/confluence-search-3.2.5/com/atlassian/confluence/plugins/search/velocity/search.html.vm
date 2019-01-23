@@ -1,0 +1,110 @@
+#* @vtlvariable name="soyTemplateRendererHelper" type="com.atlassian.confluence.plugins.soy.VelocityFriendlySoyTemplateRenderer" *#
+#* @vtlvariable name="paginationSupport" type="bucket.core.actions.PaginationSupport" *#
+#* @vtlvariable name="action" type="com.atlassian.confluence.plugins.search.actions.SearchAction" *#
+<html>
+    <head>
+        <title>$action.getText('confluence-search.title')</title>
+    </head>
+    <body>
+        <content tag="show-main-header">false</content>
+        #requireResourcesForContext("confluence-search")
+
+        #putMetadata("search-start-index", "$startIndex")
+        #putMetadata("search-page-size", "$pageSize")
+        #putMetadata("search-total-size", "$paginationSupport.total")
+        #putMetadata("search-query-session-uuid", "$action.sessionUuid")
+        #putMetadata("search-cql", "$cql")
+
+        #set ($sidebarPanels = $webInterfaceManager.getDisplayableWebPanels("search-results-sidebar", $action.context))
+        #set ($displaySidebar = $sidebarPanels.size() > 0)
+
+        <header id="search-results-header" class="aui-page-header">
+            #set ($formAction = "dosearchsite.action?")
+            <form class="aui" id="search-form">
+                <h1>$action.getText('confluence-search.title')</h1>
+                <span class="search-input-wrapper">
+                    <input type="text" class="text long-field search-input" name="queryString" id="query-string" value="$!action.queryString" incremental="true" maxlength="255">
+                    <span class="aui-icon aui-icon-small aui-iconfont-help help-button">Help</span>
+                </span>
+                <button type="submit" class="aui-button" id="search-query-submit-button"><span class="aui-icon aui-icon-small aui-iconfont-search">Search</span></button>
+                <div class="loading-spinner button-spinner"></div>
+                #fielderrorAUI("queryString")
+            </form>
+        </header>
+
+        <div class="aui-page-panel-inner">
+            <div class="search-results-page-panel-nav">
+                <form id="filter-form" class="aui">
+                    <nav class="aui-navgroup aui-navgroup-vertical">
+                        <div class="aui-navgroup-inner">
+                        </div>
+                    </nav>
+                </form>
+            </div>
+
+            <section class="aui-page-panel-content #if($displaySidebar) two-panels #else one-panel #end">
+                <div class="search-results-wrapper">
+                    <div class="search-blanket" style="display: none"></div>
+                    <div class="search-results-container">
+                        #if ($action.actionErrors.isEmpty() && $action.fieldErrors.isEmpty())
+                            #if($cql == "")
+                                #set ($templateParameters = {})
+                                $soyTemplateRendererHelper.getRenderedTemplateHtml("com.atlassian.confluence.plugins.search.confluence-search:confluence-search-resources",
+                                "Confluence.Templates.CQLSearch.searchMissingQuery.soy", $templateParameters)
+                            #elseif($paginationSupport.total == 0)
+                                #set ($templateParameters = {
+                                "queryString": $queryString
+                                })
+                                $soyTemplateRendererHelper.getRenderedTemplateHtml("com.atlassian.confluence.plugins.search.confluence-search:confluence-search-resources",
+                                "Confluence.Templates.CQLSearch.noSearchResults.soy", $templateParameters)
+                            #else
+                                #set ($templateParameters = {
+                                "searchResults": $action.cqlSearchResults.results,
+                                "startIndex": $paginationSupport.startIndex,
+                                "pageSize": $paginationSupport.pageSize,
+                                "totalSize": $paginationSupport.total,
+                                "timeSpent": $!action.cqlSearchResults.searchDuration,
+                                "queryString": $queryString
+                                })
+                                $soyTemplateRendererHelper.getRenderedTemplateHtml("com.atlassian.confluence.plugins.search.confluence-search:confluence-search-resources",
+                                "Confluence.Templates.CQLSearch.searchResults.soy", $templateParameters)
+                            #end
+                        #else
+                            #set ($templateParameters = {
+                                "errorMessage": $action.actionErrors.get(0)
+                            })
+                            $soyTemplateRendererHelper.getRenderedTemplateHtml("com.atlassian.confluence.plugins.search.confluence-search:confluence-search-resources",
+                                "Confluence.Templates.CQLSearch.searchError.soy", $templateParameters)
+                        #end
+                    </div>
+
+                    <div class="pagination-container">
+                        #if($paginationSupport.total > $paginationSupport.pageSize)
+                            #set ($templateParameters = {
+                            "startIndex": $paginationSupport.startIndex,
+                            "pageSize": $paginationSupport.pageSize,
+                            "totalSize": $paginationSupport.total,
+                            "url": "${formAction}${queryParameters}"
+                            })
+                            $soyTemplateRendererHelper.getRenderedTemplateHtml("com.atlassian.confluence.plugins.search.confluence-search:confluence-search-resources",
+                            "Confluence.Templates.Pagination.pagination.soy", $templateParameters)
+                        #end
+                    </div>
+                </div>
+            </section>
+
+            #if($displaySidebar)
+                <aside class="aui-page-panel-sidebar">
+                    <div class="search-pluggable-results-wrapper">
+                        #foreach ($webPanel in $sidebarPanels)
+                            $!webPanel.getHtml($context)
+                        #end
+                    </div>
+                </aside>
+            #end
+
+        </div>
+    </body>
+</html>
+
+

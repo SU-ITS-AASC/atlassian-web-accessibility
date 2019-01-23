@@ -1,0 +1,82 @@
+{namespace aui.expander}
+
+/**
+ * Creates an AUI Expander Content area
+ * @param id the id of the content element to be generated
+ * @param? extraClasses extra classes that go on the content.
+ * @param? extraAttributes extra attributes that go on the content.
+ * @param? initiallyExpanded boolean, whether or not the expander is expanded by default
+ * @param? content
+ **/
+{template .content}
+        <div id="{$id}" class="aui-expander-content
+            {call aui.renderExtraClasses data="all" /}"
+            {call aui.renderExtraAttributes data="all" /}
+            {if $initiallyExpanded} aria-expanded="{$initiallyExpanded}"{/if}
+        >
+            {if $content}{$content|noAutoescape}{/if}
+        </div>   
+{/template}
+
+/**
+ * template for creating an expander trigger
+ * @param? id the id to put on the trigger
+ * @param? tag the html tag of the trigger
+ * @param contentId the content that this trigger controls
+ * @param? replaceText Text that will be replace the initial trigger text when it is invoked.
+ * @param? replaceSelector Text that will be replace the initial trigger text when it is invoked.
+ * @param? extraClasses Standard option.
+ * @param? extraAttributes Standard option.
+ * @param? content the contents of the trigger
+ * @param? collapsible whether or not the trigger will collapse the expander after it is expanded.
+ **/
+{template .trigger}
+    <{$tag ? $tag : 'div'}
+        {if $id}{sp}id="{$id}"{/if}
+        {if $replaceText}{sp}data-replace-text="{$replaceText}"{/if}
+        {if $replaceSelector}{sp}data-replace-selector="{$replaceSelector}"{/if}
+        {sp}class="aui-expander-trigger
+        {call aui.renderExtraClasses data="all" /}
+        "
+        {call aui.renderExtraAttributes data="all" /}
+        {sp}aria-controls="{$contentId}"
+        {if $collapsible} data-collapsible="{$collapsible}"{/if}
+    >   
+        {if $content}{$content|noAutoescape}{/if}   
+    </{$tag ? $tag : 'div'}>
+{/template}
+
+/**
+ * template for creating teh reveal text pattern
+ * @param triggerId the id to put on the trigger
+ * @param contentId the content that this trigger controls
+ * @param contentContent the content of the contents, can be html
+ * @param? contentExtraClasses Standard option.
+ * @param? contentExtraAttributes Standard option.
+ * @param? triggerExtraClasses Standard option.
+ * @param? triggerExtraAttributes Standard option.
+ **/
+{template .revealText}
+     {call .content}
+        {param id: $contentId/}
+        {param content} 
+            {$contentContent}
+            {call .trigger}
+                    {param id: $triggerId/}
+                    {param contentId: $contentId/}
+                    {param tag: 'a'/}
+                    {param content}
+                        <span class='reveal-text-trigger-text'>Show more</span>
+                    {/param}
+                    {param replaceSelector: '.reveal-text-trigger-text' /}
+                    {param replaceText: 'Show less'/}
+                    {param extraAttributes: $triggerExtraAttributes/}
+                    {param extraClasses}
+                        {if $triggerExtraClasses}{$triggerExtraClasses} {sp}{/if} aui-expander-reveal-text
+                    {/param}          
+            {/call}
+        {/param}
+        {param extraAttributes: $contentExtraAttributes/}
+        {param extraClasses: $contentExtraClasses/}
+    {/call}
+{/template}

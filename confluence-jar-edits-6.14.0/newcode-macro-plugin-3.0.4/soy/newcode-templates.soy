@@ -1,0 +1,37 @@
+{namespace Confluence.Templates.NewCode}
+
+/**
+ * @param token XSRF Security Token
+ */
+{template .addLanguageDialog}
+    <div class="header">
+        <div class="aui-message warning shadowed">
+            <p class="title">
+                <span class="aui-icon icon-warning"></span>
+                <strong>{getText('newcode.config.language.add.warning.header')}</strong>
+            </p>
+            <p>{getText('newcode.config.language.add.warning.body')}</p>
+        </div>
+        <p>{getText('newcode.config.language.add.instructions')} <a href="http://alexgorbatchev.com/SyntaxHighlighter/manual/brushes/custom.html">{getText('newcode.config.language.add.syntax')}</a>.</p>
+    </div>
+    <form action="addlanguage.action" enctype="multipart/form-data" name="addLanguageForm" method="POST" class="aui" id="addLanguageForm">
+        <input type="hidden" name="atl_token" value="{$token}"/>
+        <div class="field-group">
+            <label for="languageFile">{getText('newcode.config.language.add.filename')}<span class="aui-icon icon-required"></span></label>
+            <input class="file" type="file" name="languageFile" id="languageFile" title="{getText('newcode.config.language.add.filename')}"/>
+            <div class="error hidden" id="languageFile-error">
+
+            </div>
+        </div>
+        <div class="field-group">
+            <label for="newLanguageName">{getText('newcode.config.language.add.friendlyname')}<span class="aui-icon icon-required"></span></label>
+            <input type="text" class="text" name="newLanguageName" id="newLanguageName" title="{getText('newcode.config.language.add.friendlyname')}"/>
+            <div class="error hidden" id="newLanguageName-error">
+
+            </div>
+            <div class="description">
+                {getText('newcode.config.language.add.friendlyname.description')}
+            </div>
+        </div>
+    </form>
+{/template}

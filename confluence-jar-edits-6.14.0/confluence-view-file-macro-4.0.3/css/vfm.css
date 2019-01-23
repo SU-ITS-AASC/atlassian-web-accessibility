@@ -1,0 +1,50 @@
+/**
+ *
+ * We must use .css because it is used in email also.
+ * We may change the file to .less when this issue is resolved: https://jira.atlassian.com/browse/CONFDEV-29395.
+ *
+ * Some attributes need to be duplicated so they can be embedded to email's inline style.
+ *
+ */
+.confluence-embedded-file-wrapper {
+    position: relative; /* so overlay can use position: absolute; and top: xxx;. */
+    display: inline-block; /* help confluence-embedded-file has correct size; to embed in email. */
+    max-width: 100%; /* to embed in email. */
+}
+
+.confluence-embedded-file-wrapper .confluence-embedded-file {
+    display: block; /* to contain a block element; if it is inline-block, there is a redundant bottom space. */
+    margin-left: 2px;
+    margin-right: 2px;
+    max-width: 100%;
+}
+
+.confluence-embedded-file-wrapper .confluence-embedded-file img {
+    display: block; /* for no bottom space. */
+    border: 1px solid #ddd;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.confluence-embedded-file-wrapper .confluence-embedded-file .title {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+
+    width: 100%;
+    color: #333;
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    font-family: Arial, sans-serif;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    text-align: center;
+    padding: 30px 10px 0px 10px;
+}

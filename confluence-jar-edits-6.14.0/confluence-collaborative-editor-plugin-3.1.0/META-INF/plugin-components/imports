@@ -1,0 +1,16 @@
+com.atlassian.bandana.BandanaManager
+com.atlassian.beehive.ClusterLockService
+com.atlassian.confluence.api.service.relations.RelationService
+com.atlassian.confluence.cluster.ClusterManager
+com.atlassian.confluence.content.render.xhtml.FormatConverter
+com.atlassian.confluence.core.persistence.ContentEntityObjectDao
+com.atlassian.confluence.pages.DraftsTransitionHelper
+com.atlassian.confluence.pages.PageManager
+com.atlassian.confluence.security.PermissionManager
+com.atlassian.confluence.setup.BootstrapManager
+com.atlassian.confluence.setup.settings.DarkFeaturesManager
+com.atlassian.confluence.user.UserAccessor
+com.atlassian.event.api.EventPublisher
+com.atlassian.sal.api.transaction.TransactionTemplate
+com.atlassian.sal.api.user.UserManager
+org.springframework.transaction.PlatformTransactionManager

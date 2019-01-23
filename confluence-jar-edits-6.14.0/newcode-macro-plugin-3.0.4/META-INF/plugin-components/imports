@@ -1,0 +1,7 @@
+com.atlassian.confluence.setup.settings.SettingsManager
+com.atlassian.plugin.PluginAccessor
+com.atlassian.plugin.PluginController
+com.atlassian.plugin.event.PluginEventManager
+com.atlassian.plugin.module.ModuleFactory
+com.atlassian.renderer.v2.SubRenderer
+com.atlassian.webresource.api.assembler.PageBuilderService

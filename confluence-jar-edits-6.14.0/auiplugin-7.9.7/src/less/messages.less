@@ -1,0 +1,145 @@
+@import './imports/global';
+
+aui-message {
+    display: block;
+    margin: @aui-message-stacked-spacing 0 0 0;
+}
+
+.aui-message {
+    #aui.icon-bar();
+
+    background: @aui-color-white;
+    border: 1px solid @aui-message-default-border-color;
+    border-radius: @aui-message-border-radius;
+    color: @aui-message-text-color;
+    line-height: @aui-message-line-height;
+    margin: @aui-message-stacked-spacing 0 0 0;
+    overflow-wrap: break-word;
+    padding-bottom: @aui-message-vertical-padding;
+    padding-left: (@aui-message-side-width + ( @aui-message-padding-left / 2));
+    padding-right: @aui-message-padding-right;
+    padding-top: @aui-message-vertical-padding;
+    position: relative;
+    word-wrap: break-word;
+    word-break: normal;
+
+    #aui.icon-glyph(@aui-message-info-icon-glyph, @aui-message-info-icon-color);
+
+    & .aui-icon.icon-close {
+        background-image: none;
+        color: @aui-message-close-icon-color;
+        text-indent: inherit;
+
+        //The close cross
+        &::before {
+            #aui.icon-pseudoelement(@aui-icon-font-family);
+            content: @aui-message-close-icon-glyph;
+            font-size: @aui-message-icon-size;
+        }
+        &:hover {
+            color: @aui-color-charcoal;
+        }
+    }
+
+    /** deprecated; replaced with icon font */
+    .aui-icon-success,
+    .aui-icon-warning,
+    .aui-icon-info,
+    .aui-icon-error,
+    .aui-icon-hint,
+    .aui-icon-generic,
+    .icon-generic,
+    .icon-error,
+    .icon-hint,
+    .icon-info,
+    .icon-success,
+    .icon-warning {
+        display: none;
+    }
+}
+
+aui-message:first-child,
+.aui-message:first-child {
+    margin-top: 0;
+}
+
+.aui-popup .aui-message.closeable,
+.aui-dialog .aui-message.closeable {
+    z-index: 4000;
+}
+
+/* DEPRECATED .error, .warning, .hint, .info, .success */
+.aui-message.error,
+.aui-message-error {
+    background: @aui-message-error-bg-color;
+    border-color: @aui-message-error-border-color;
+    color: @aui-message-error-text-color;
+    #aui.icon-glyph(@aui-message-error-icon-glyph, @aui-message-error-icon-color);
+}
+
+.aui-message.warning,
+.aui-message-warning {
+    background: @aui-message-warning-bg-color;
+    border-color: @aui-message-warning-border-color;
+    color: @aui-message-warning-text-color;
+    #aui.icon-glyph(@aui-message-warning-icon-glyph, @aui-message-warning-icon-color);
+}
+
+.aui-message.hint,
+.aui-message-hint,
+.aui-message.info,
+.aui-message-info {
+    background: @aui-message-info-bg-color;
+    border-color: @aui-message-info-border-color;
+    color: @aui-message-info-text-color;
+    #aui.icon-glyph(@aui-message-info-icon-glyph, @aui-message-info-icon-color);
+}
+
+.aui-message.success,
+.aui-message-success {
+    background: @aui-message-success-bg-color;
+    border-color: @aui-message-success-border-color;
+    color: @aui-message-success-text-color;
+    #aui.icon-glyph(@aui-message-success-icon-glyph, @aui-message-success-icon-color);
+}
+
+/* Message titles */
+
+.aui-message p.title {
+    font-weight: bold;
+}
+
+/* IE double bolds otherwise... */
+.aui-message p.title strong {
+    font-weight: inherit;
+}
+
+.aui-message.closeable {
+    & {
+        padding-right: (@aui-message-side-width + ( @aui-message-close-icon-padding / 2));;
+    }
+
+    .icon-close {
+        cursor: pointer;
+        left: auto;
+        opacity: 0;
+        position: absolute;
+        right: @aui-message-close-icon-padding;
+        top: @aui-message-close-icon-padding;
+    }
+
+    &:hover .icon-close,
+    .icon-close:focus,
+    &:not(.fadeout):not(.aui-will-close) .icon-close {
+        opacity: 1;
+    }
+}
+
+/* End aui-icon position */
+
+/* Footer interop (provisional, just enough to stop them looking broken) */
+#footer .aui-message {
+    margin-left: 20px;
+    margin-right: 20px;
+    text-align: left;
+}

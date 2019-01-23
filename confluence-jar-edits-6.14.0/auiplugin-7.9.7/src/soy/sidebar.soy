@@ -1,0 +1,54 @@
+{namespace aui.sidebar}
+
+/**
+ * @param content Main sidebar HTML content. Typically in the form of an AUI Vertical navigation
+ * @param headerContent Sidebar header HTML content. Typically in the form of an AUI Page Header
+ * @param? footerContent Sidebar footer HTML content. Typically an AUI Button or Dropdown2, replaces the $settings* options.
+ * @param? settingsButtonUrl Link to direct the standard sidebar settings button.
+ * @param? settingsText Text to use for the standard sidebar settings buttton.
+ * @param? settingsTooltip Tooltip to display with the sidebar settings button, defaults to $settingsText.
+ * @param? id ID for the sidebar container
+ * @param? tagName HTML element for the sidebar container. Default is 'div'
+ * @param? state String. 'collapsed', 'expanded' or left undefined. Used by AUI Sidebar to render the sidebar's initial state
+ * @param? isAnimated Boolean. Enables animated transitions for Sidebar expanding and collapsing. Default is false
+ * @param? isResizable Boolean. Enables a draggable handle to allow the user to resize the sidebar. Default is false
+ * @param? isResponsive Boolean. Whether the sidebar should automatically collapse/expand based on browser width. Default is true
+ * @param? isSettingsButtonSelected Boolean. Highlights the Settings button as the currently selected item, if user is on a Settings page. Default is false
+ * @param? extraClasses String or Object. CSS classes to add to the outermost element
+ * @param? extraAttributes String or Object. Additional attributes to add to the outermost element
+ */
+{template .sidebar}
+    <{$tagName ? $tagName : 'div'}{if $id} id="{$id}"{/if}
+        {if $state}{sp}aria-expanded="{if $state == 'collapsed'}false{else}true{/if}"{/if}
+        {sp}class="aui-sidebar
+        {sp}{if $isAnimated}aui-is-animated{/if}
+        {call aui.renderExtraClasses data="all" /}"
+        {sp}{if $isResponsive == false}data-aui-responsive="false"{/if}
+        {call aui.renderExtraAttributes data="all" /}>
+        <div class="aui-sidebar-wrapper">
+            <div class="aui-sidebar-body">
+                {$headerContent |noAutoescape}
+                {$content |noAutoescape}
+            </div>
+            <div class="aui-sidebar-footer">
+                {if $footerContent}
+                    {$footerContent |noAutoescape}
+                {elseif $settingsButtonUrl and $settingsText}
+                    <a href="{$settingsButtonUrl}"
+                        class="aui-button aui-button-subtle aui-sidebar-settings-button
+                        {if $isSettingsButtonSelected}{sp}aui-sidebar-settings-selected{/if}"
+                        {sp}data-tooltip="{$settingsTooltip ? $settingsTooltip : $settingsText}">
+                        <span class="aui-icon aui-icon-small aui-iconfont-configure"></span>
+                        <span class="aui-button-label">{$settingsText}</span>
+                    </a>
+                {/if}
+                <a class="aui-button aui-button-subtle aui-sidebar-toggle aui-sidebar-footer-tipsy" data-tooltip="{getText('aui.sidebar.expand.tooltip')}" href="#">
+                    <span class="aui-icon aui-icon-small"></span>
+                </a>
+            </div>
+            {if $isResizable}
+                <div class="aui-sidebar-handle"></div>
+            {/if}
+        </div>
+    </{$tagName ? $tagName : 'div'}>
+{/template}

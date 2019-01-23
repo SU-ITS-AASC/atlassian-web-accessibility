@@ -1,0 +1,86 @@
+@distance-to-edge: 5px;
+
+.vfm-ellipsis() {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.vfm-box-sizing() {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.wiki-content .confluence-embedded-file-wrapper {
+
+    .confluence-embedded-file {
+        cursor: pointer;
+    }
+
+    .overlay {
+        position: absolute;
+        bottom: @distance-to-edge;
+        // need to plus 2px because the inner element .confluence-embedded-[image|file] has margin-left:2px
+        left: @distance-to-edge + 2;
+        right: @distance-to-edge;
+        color: #fff;
+        line-height: 16px; //equal height of icon
+        font-size: 12px;
+        font-weight: normal;
+        font-style: normal;
+        font-family: Arial, sans-serif;
+        cursor: pointer;
+
+        .general-overlay() {
+            .vfm-ellipsis();
+            .vfm-box-sizing();
+            background-color: rgba(0, 0, 0, .8);
+            border-radius: 3px;
+            padding: 5px;
+            display: block;
+            float: left;
+        }
+
+        .comment-count-overlay {
+            .general-overlay();
+            margin-right: 2px;
+            background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTciIGhlaWdodD0iMjAiIHZpZXdCb3g9IjAgMCAxNyAyMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczpza2V0Y2g9Imh0dHA6Ly93d3cuYm9oZW1pYW5jb2RpbmcuY29tL3NrZXRjaC9ucyI+PHBhdGggZD0iTTE2IDEuOTkzdjExLjAyNWMtLjAxNC40ODItLjU1MS45OTItMSAuOTkyaC0zLjVsLTIuOTg3IDQuMjktMy4wMTMtNC4yOWgtMy40OTVjLS41NTQgMC0xLjAwNS0uNDQ1LTEuMDA1LS45OTJ2LTExLjAyNWMwLS41NDguNDUxLS45OTMgMS4wMDUtLjk5M2gxMi45OTVjLjU2IDAgLjk5NS40NCAxIC45OTN6bS0xMy45OTUtMS45OTNjLTEuMTA3IDAtMi4wMDUuODk1LTIuMDA1IDEuOTkzdjExLjAyNWMwIDEuMS44OTQgMS45OTIgMi4wMDUgMS45OTJoMi45OTVsMy41IDQuOTkzIDMuNS00Ljk5M2gzYzEuMTAxIDAgMi4wMTEtLjg5MiAyLTEuOTkydi0xMS4wMjVjLS4wMTEtMS4xLS44OTEtMS45OTMtMi0xLjk5M2gtMTIuOTk1eiIgc2tldGNoOnR5cGU9Ik1TU2hhcGVHcm91cCIgZmlsbD0iI2ZmZiIvPjwvc3ZnPg==);
+            background-position: center 6px;
+            background-repeat: no-repeat;
+            width: 26px;
+            height: 26px;
+            text-align: center;
+
+            .content {
+                font-size: 10px;
+                text-align: center;
+                vertical-align: text-top;
+            }
+        }
+
+        .file-type-desc-overlay {
+            .general-overlay();
+
+            // override aui style in case a file is embedded to another macro (e.g. info/warning)
+            .aui-icon {
+              display: inline-block;
+              left: 0px;
+              line-height: 0px;
+              position: relative;
+              vertical-align: text-top;
+              top: auto;
+            }
+
+            .content {
+                vertical-align: middle;
+            }
+            max-width: 100%;
+        }
+    }
+
+    &.has-comment-overlay .file-type-desc-overlay {
+        max-width: 84%;
+    }
+
+}

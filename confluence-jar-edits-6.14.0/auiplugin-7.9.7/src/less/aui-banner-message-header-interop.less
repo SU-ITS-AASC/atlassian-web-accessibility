@@ -1,0 +1,23 @@
+@import './imports/global';
+
+@aui-banner-message-padding-vertical: 10px;
+
+// Legacy styles.
+// Deprecated; to be removed in AUI 6.
+#header .aui-message {
+    border-radius: 0;
+    color: @aui-message-text-color;
+    margin: 0;
+    padding-top: @aui-banner-message-padding-vertical;
+    padding-bottom: @aui-banner-message-padding-vertical;
+    position: relative;
+
+    // Icon
+    &::after {
+        top: @aui-banner-message-padding-vertical;
+    }
+
+    &.closeable .icon-close {
+        top: @aui-banner-message-padding-vertical;
+    }
+}

@@ -1,0 +1,38 @@
+<table class="aui">
+    <thead>
+    <th colspan="4">$i18n.getText('attachment.version.history')</th>
+    </thead>
+    <tbody>
+        #foreach( $attachmentVersion in $allVersions)
+        <tr class="history-$attachmentId" data-attachment-version="$attachmentVersion.version">
+            <td class="attachment-version">
+                <a class="filename"
+                   href="$generalUtil.htmlEncode("$req.contextPath$attachmentVersion.downloadPath")"
+                   data-type="$generalUtil.htmlEncode($attachmentVersion.contentType)" >$i18n.getText('attachment.version') $attachmentVersion.getVersion()</a>
+                #if ($attachmentVersion.isLatestVersion())
+                    ($i18n.getText('attachment.current.version'))
+                #end
+            </td>
+            <td class="version-modified-by">
+                #if (!$attachmentHelper.attachmentsInWebDavFolder)
+                    #if ($attachmentVersion.isNew())
+                        $i18n.getText('attachment.created.by') #usernameLink($attachmentVersion.creatorName)
+                    #else
+                        $i18n.getText('attachment.modified.by') #usernameLink($attachmentVersion.lastModifierName)
+                    #end
+                #else
+                    &nbsp;
+                #end
+            </td>
+            <td class="version-comment">
+                #if (!$attachmentHelper.attachmentsInWebDavFolder && $attachmentVersion.comment && $attachmentVersion.comment.trim().length() > 0)
+                    $generalUtil.htmlEncode($attachmentVersion.comment)
+                #else
+                    &nbsp;
+                #end
+            </td>
+            <td class="version-modified-time">#if(!$attachmentHelper.attachmentsInWebDavFolder)$i18n.getText($friendlyDateFormatter.getFormatMessage($attachmentVersion.creationDate)) #else &nbsp; #end</td>
+        </tr>
+        #end
+    </tbody>
+</table>

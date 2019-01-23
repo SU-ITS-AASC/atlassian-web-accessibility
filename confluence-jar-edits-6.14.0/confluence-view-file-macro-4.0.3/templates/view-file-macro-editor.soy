@@ -1,0 +1,14 @@
+{namespace Confluence.ViewFileMacro.Templates.Editor}
+
+/**
+ * @param fileName file name.
+ * @param fileIcon file type.
+ */
+{template .viewFilePropertyPanelHeader}
+    <div class="view-file-property-panel-header">
+        <span class="file-name">
+            <span class="aui-icon aui-icon-small {$fileIcon}"></span>
+            {$fileName}
+        </span>
+    </div>
+{/template}

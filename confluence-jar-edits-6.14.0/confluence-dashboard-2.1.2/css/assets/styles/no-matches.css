@@ -1,0 +1,13 @@
+.no-matches .blank-slate-text {
+  margin-top: 190px; }
+
+.no-matches .blank-slate-title-text {
+  display: inline; }
+
+.no-matches .blank-slate-filter-text {
+  display: inline;
+  text-transform: uppercase; }
+
+.no-matches .blank-slate-image-container {
+  min-height: 0;
+  margin: 0; }

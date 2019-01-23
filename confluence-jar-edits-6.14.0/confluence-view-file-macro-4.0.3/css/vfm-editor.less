@@ -1,0 +1,26 @@
+@color-grey-ash: #ccc;
+
+.vfm-ellipsis() {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#property-panel {
+
+    .view-file-property-panel-header {
+        padding-bottom: 1px;
+        margin-bottom: 6px;
+    }
+
+    .file-name {
+        .vfm-ellipsis();
+
+        display: inline-block;
+        max-width: 230px; // acceptable max-width for the panel.
+
+        .aui-icon {
+            margin-right: 5px;
+        }
+    }
+}

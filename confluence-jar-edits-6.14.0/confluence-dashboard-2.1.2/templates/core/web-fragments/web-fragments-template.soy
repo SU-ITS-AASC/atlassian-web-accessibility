@@ -1,0 +1,27 @@
+{namespace DashboardTemplates.WebFragments}
+
+/**
+ * Render a web item for the sidebar. Used to generate the dashboard sidebar links.
+ * @param key A string identifying the navigation item - used to generate a css class nav-item-{$key}
+ * @param url The URL of the endpoint
+ * @param label The label to display
+ * @param icon The icon CSS class for the item
+ */
+{template .webItem}
+    <a href="/{$url}" class="aui-nav-item nav-item-{$key}" title="{$label}">
+        <span class="aui-icon aui-icon-small {$icon}"></span>
+        <span class="aui-nav-item-label">{$label}</span>
+    </a>
+{/template}
+
+/**
+
+ */
+{template .webPanel}
+{/template}
+
+/**
+
+ */
+{template .section}
+{/template}

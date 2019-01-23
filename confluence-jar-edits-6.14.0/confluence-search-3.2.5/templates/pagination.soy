@@ -1,0 +1,43 @@
+{namespace Confluence.Templates.Pagination}
+
+/**
+ * @param startIndex start index for the current page. (index starts at 0)
+ * @param pageSize number of elements per page
+ * @param totalSize total number of elements
+ * @param url link to other pages, must end with ? or &
+ */
+{template .pagination}
+    <ul class="pagination">
+
+        {let $currentPage: floor($startIndex / $pageSize) + 1 /}
+        {let $maxPageIndex: ceiling($totalSize / $pageSize) /}
+        {let $minRangePageIndex: max($currentPage - 4, 1)/}
+        {let $maxRangePageIndex: min($currentPage + 4, $maxPageIndex) /}
+
+        {if $currentPage != 1}
+            <li>
+                <a class="pagination-prev" href="{$url|noAutoescape}startIndex={$startIndex - $pageSize}">
+                    {getText('confluence-search.page.previous')}
+                </a>
+            </li>
+        {/if}
+
+        {for $page in range($minRangePageIndex, $currentPage)}
+            <li><a href="{$url|noAutoescape}startIndex={($page - 1) * $pageSize}">{$page}</a></li>
+        {/for}
+
+        <li data-index="{$currentPage}"><strong class="pagination-curr">{$currentPage}</strong></li>
+
+        {for $page in range($currentPage + 1, $maxRangePageIndex + 1)}
+            <li><a href="{$url|noAutoescape}startIndex={($page - 1) * $pageSize}">{$page}</a></li>
+        {/for}
+
+        {if $currentPage != $maxRangePageIndex}
+            <li>
+                <a class="pagination-next" href="{$url|noAutoescape}startIndex={$startIndex + $pageSize}">
+                    {getText('confluence-search.page.next')}
+                </a>
+            </li>
+        {/if}
+    </ul>
+{/template}

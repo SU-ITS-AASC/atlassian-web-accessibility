@@ -1,0 +1,19 @@
+{namespace Confluence.UI.Components.BlankPlaceholderBox.Templates}
+
+/**
+ * Render a large rounded box commonly used for blank placeholder,
+ * such as Task Report Macro, Page Properties Macro
+ * @param blankTitle
+ * @param blankDescription
+ * @param? customClass
+ * @param? customHtml
+ */
+{template .blankBox}
+    <div class="blank-placeholder-box {if $customClass}{$customClass}{/if}">
+        <div class="content">
+            <h2>{$blankTitle}</h2>
+            <p>{$blankDescription}</p>
+        </div>
+        {if $customHtml}{$customHtml|noAutoescape}{/if}
+    </div>
+{/template}

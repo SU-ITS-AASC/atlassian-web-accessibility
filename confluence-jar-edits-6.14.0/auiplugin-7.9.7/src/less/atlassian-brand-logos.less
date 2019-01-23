@@ -1,0 +1,76 @@
+.logo-in-header(@img, @width) {
+    & .aui-header-logo-device {
+        background-image: url(@img);
+        width: @width;
+    }
+}
+
+.aui-header {
+    // atlassian itself
+    .aui-header-logo-atlassian {
+        .logo-in-header("images/logos/aui-header-logo-atlassian.png", 87px);
+    }
+
+    // this library
+    .aui-header-logo-aui {
+        .logo-in-header("images/logos/aui-header-logo-aui.png", 36px);
+    }
+
+    // products
+    .aui-header-logo-bamboo {
+        .logo-in-header("images/logos/aui-header-logo-bamboo.png", 95px);
+    }
+    .aui-header-logo-bitbucket,
+    .aui-header-logo-stash {
+        .logo-in-header("images/logos/aui-header-logo-bitbucket.png", 100px);
+    }
+    .aui-header-logo-clover {
+        .logo-in-header("images/logos/aui-header-logo-clover.png", 72px);
+    }
+    .aui-header-logo-confluence {
+        .logo-in-header("images/logos/aui-header-logo-confluence.png", 118px);
+    }
+    .aui-header-logo-crowd {
+        .logo-in-header("images/logos/aui-header-logo-crowd.png", 71px);
+    }
+    .aui-header-logo-crucible {
+        .logo-in-header("images/logos/aui-header-logo-crucible.png", 89px);
+    }
+    .aui-header-logo-fecru {
+        .logo-in-header("images/logos/aui-header-logo-fecru.png", 51px);
+    }
+    .aui-header-logo-fisheye {
+        .logo-in-header("images/logos/aui-header-logo-fisheye.png", 87px);
+    }
+    .aui-header-logo-hipchat {
+        .logo-in-header("images/logos/aui-header-logo-hipchat.png", 97px);
+    }
+    .aui-header-logo-jira {
+        .logo-in-header("images/logos/aui-header-logo-jira.png", 57px);
+    }
+
+    // sites, programs, and other intellectual properties
+    .aui-header-logo-answers {
+        .logo-in-header("images/logos/aui-header-logo-answers.png", 103px);
+    }
+    .aui-header-logo-developers {
+        .logo-in-header("images/logos/aui-header-logo-developers.png", 111px);
+    }
+    .aui-header-logo-experts {
+        .logo-in-header("images/logos/aui-header-logo-experts.png", 64px);
+    }
+    .aui-header-logo-marketplace {
+        .logo-in-header("images/logos/aui-header-logo-marketplace.png", 116px);
+    }
+    .aui-header-logo-support {
+        .logo-in-header("images/logos/aui-header-logo-support.png", 90px);
+    }
+    .aui-header-logo-university {
+        .logo-in-header("images/logos/aui-header-logo-university.png", 113px);
+    }
+
+    // defunct
+    .aui-header-logo-cloud {
+        .logo-in-header("images/logos/aui-header-logo-cloud.png", 126px);
+    }
+}

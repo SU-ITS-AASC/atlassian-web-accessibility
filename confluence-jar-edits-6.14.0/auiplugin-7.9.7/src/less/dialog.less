@@ -1,0 +1,151 @@
+@import './imports/global';
+
+.aui-dialog-shadow-parent {
+    position: fixed;
+    overflow: hidden;
+    left:50%;
+    top:50%;
+}
+.aui-popup {
+    background-color: @aui-dialog-bg-color;
+    left: 50%;
+    position: fixed;
+    top: 50%;
+    z-index: 3000;
+}
+.aui-dialog {
+    #aui.shadow.z300();
+    background: @aui-dialog-bg-color;
+    border: 1px solid @aui-dialog-border-color;
+    border-radius: @aui-border-radius-medium;
+    overflow: hidden;
+}
+.aui-dialog .dialog-blanket {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0.2;
+    background: @aui-blanket-bg-color;
+}
+
+/* dialog header styles */
+.aui-dialog .dialog-title {
+    #aui-dialog.aui-dialog-header-base();
+    margin: 0;
+    overflow: hidden;
+    position: relative;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.aui-dialog h2.dialog-title {
+    #aui.typography.h600();
+    color: @aui-text-color;
+}
+
+/* dialog navigation styles */
+.aui-dialog .dialog-page-menu {
+    background: @aui-dialog-bg-color;
+    border-right: 1px solid @aui-dialog-border-color;
+    box-sizing: border-box;
+    float: left;
+    height: 100%;
+    list-style: none;
+    margin: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding: 10px 10px 20px 10px;
+    width: 25%;
+}
+.aui-dialog .dialog-page-menu li.page-menu-item {
+    display: flex; // so that width: 100% will be constrained by this element.
+    margin: 0;
+    padding: 0;
+}
+.aui-dialog .dialog-page-menu li.page-menu-item button.item-button {
+    #aui-nav.item-base();
+    #aui-nav.item-style(normal);
+    background: none;
+    border: 0;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: inherit;
+    text-align: left;
+    text-decoration: none;
+    width: 100%;
+}
+.aui-dialog .dialog-page-menu li.page-menu-item button.item-button:hover,
+.aui-dialog .dialog-page-menu li.page-menu-item button.item-button:focus {
+    #aui-nav.item-style(hover)
+}
+.aui-dialog .dialog-page-menu li.page-menu-item.selected button.item-button {
+    #aui-nav.item-style(selected);
+}
+.aui-dialog .dialog-page-menu li.page-menu-item button.item-button:active,
+.aui-dialog .dialog-page-menu li.page-menu-item.selected button.item-button:active {
+    #aui-nav.item-style(active);
+}
+
+/* dialog body content styles */
+.aui-dialog .dialog-page-body {
+    background: @aui-dialog-bg-color;
+}
+
+.aui-dialog .dialog-panel-body {
+    box-sizing: border-box;
+    overflow: auto;
+    padding: 20px;
+}
+.aui-dialog .dialog-panel-body > *:first-child {
+    margin-top: 0;
+}
+
+/* dialog button panel styles */
+.aui-dialog .dialog-button-panel {
+    #aui-dialog.aui-dialog-footer-base();
+    clear: both;
+    overflow: hidden;
+    text-align: right;
+    width: 100%;
+}
+.aui-dialog .dialog-button-panel button.button-panel-button {
+    #aui.box-sizing();
+    #aui-buttons.aui-button-base();
+    #aui-buttons.aui-button-style(normal);
+    line-height: 20px;
+    padding: 4px 10px;
+    vertical-align: baseline;
+
+    &:hover,
+    &:focus {
+        #aui-buttons.aui-button-style(hover);
+    }
+
+    &:active {
+        #aui-buttons.aui-button-style(active);
+    }
+}
+
+.aui-dialog .dialog-button-panel a.button-panel-link {
+    #aui-buttons.aui-link-button-style(normal);
+    display: inline-block;
+    padding: 5px 0;
+
+    &:focus,
+    &:hover {
+        #aui-buttons.aui-link-button-style(hover);
+    }
+
+    &:active {
+        #aui-buttons.aui-link-button-style(active);
+    }
+}
+
+.aui-dialog .dialog-button-panel button.button-panel-button,
+.aui-dialog .dialog-button-panel a.button-panel-link {
+    margin: 0 10px 0 0;
+}
+.aui-dialog .dialog-button-panel button.button-panel-button.left,
+.aui-dialog .dialog-button-panel a.button-panel-link.left {
+    float: left;
+    margin: 0 0 0 10px;
+}

@@ -1,0 +1,1 @@
+("undefined"===typeof window?global:window).__6c4fb3940d6fd500a61aec90cc3f93dc=function(){var a={};"use strict";Object.defineProperty(a,"__esModule",{value:!0});var b=window.DocumentTouch;a.default="ontouchstart"in window||b&&document instanceof b;return a=a["default"]}.call(this);
