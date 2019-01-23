@@ -15,7 +15,7 @@
         #putMetadata('page-size', $action.pageSize)
 
         <div id="space-directory-wrapper">
-            <nav class="aui-navgroup aui-navgroup-vertical" id="space-directory"  #if($selectedSpaceCategory)data-selected-tab="$htmlUtil.htmlEncode($selectedSpaceCategory)"#end>
+            <nav class="aui-navgroup aui-navgroup-vertical" id="space-directory" aria-label="Space Filters" #if($selectedSpaceCategory)data-selected-tab="$htmlUtil.htmlEncode($selectedSpaceCategory)"#end>
                 <div class="aui-navgroup-inner">
                     <ul id="space-system-list" class="aui-nav">
                         <li>
@@ -49,15 +49,16 @@
                 </div>
             </nav>
 
-            <div id="space-search-result" class="tabs-pane active-pane">
+            <div id="space-search-result" class="tabs-pane active-pane" tabindex="-1">
                 <div id="space-search-title-bar">
                     <h2 class="space-search-title"></h2>
                     <div id="space-search">
                         <div class="loading-throbber"></div>
                         <form id="space-search-form" action="$req.contextPath/dosearchsite.action" class="aui">
-                            #assistiveLabel("queryString" "$i18n.getText('search.filter.label')")
+                            #assistiveLabel("$i18n.getText('search.filter.label')" "space-search-query")
                             <input id="space-search-query" name="queryString" type="text" placeholder="$i18n.getText("filter.name")" autocomplete="off" class="text">
                             <input name="type" type="hidden" value="spacedesc">
+                            <button type="submit" class="assistive" aria-label="$i18n.getText("filter.name")"></button>
                         </form>
                     </div>
                 </div>
@@ -66,10 +67,12 @@
                     <table id="space-list" class="aui list-container hidden">
                         <thead class="list-header">
                         <tr>
-                            <td class="column-heading name-heading" colspan="2">$i18n.getText("space.name")</td>
-                            <td class="column-heading desc-heading">$i18n.getText("description.name")</td>
-                            <td class="column-heading labels-heading">$i18n.getText("categories.name")</td>
-                            <td class="column-heading icon-column-heading"></td>
+                            <th scope="col" class="column-heading name-heading" colspan="2">$i18n.getText("space.name")</th>
+                            <th scope="col" class="column-heading desc-heading">$i18n.getText("description.name")</th>
+                            <th scope="col" class="column-heading labels-heading">$i18n.getText("categories.name")</th>
+                            #if ($remoteUser)
+                                <th scope="col" class="column-heading icon-column-heading"><span class="assistive">Actions</span></th>
+                            #end
                         </tr>
                         </thead>
                     </table>

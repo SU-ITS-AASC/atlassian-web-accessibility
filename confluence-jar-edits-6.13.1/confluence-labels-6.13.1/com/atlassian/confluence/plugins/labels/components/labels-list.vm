@@ -23,7 +23,7 @@
     #end
     #if($accessMode == "READ_WRITE" && $labelable && ($remoteUser || $permissionHelper.canEdit($remoteUser, $labelable)))
         <li class="labels-edit-container">
-            <a href="#" class="show-labels-editor" title="$action.getText('edit.labels.tooltip')">
+            <a href="#" class="show-labels-editor" title="$action.getText('edit.labels.tooltip')" tabindex="0">
                 <span class="aui-icon aui-icon-small aui-iconfont-devtools-tag-small">$action.getText('edit.labels')</span>
             </a>
         </li>

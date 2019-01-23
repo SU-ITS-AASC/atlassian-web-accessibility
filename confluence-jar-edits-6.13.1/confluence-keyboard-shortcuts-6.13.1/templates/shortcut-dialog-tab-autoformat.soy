@@ -89,11 +89,12 @@
  * A template to render the markup help for an emoticon
  * @param src the url of the emoticon
  * @param type what you type into the editor
+ * @param alt alternative text for image
  */
 {template .emoticonHelpItem}
     {call Confluence.Templates.KeyboardShortcutsDialog.Autoformat.simpleHelpItem}
         {param output}
-            <img src={$src}></img>
+            <img src={$src} alt="{$alt}"></img>
         {/param}
         {param type: $type /}
     {/call}

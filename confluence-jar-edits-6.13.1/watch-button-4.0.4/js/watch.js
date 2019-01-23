@@ -24,6 +24,12 @@ require([
         // disable clicks on the watch button before we have a chance to handle it properly
         $trigger.click(function(e) {
             e.preventDefault();
+            $('#watch-title').focus();
+        });
+        $trigger.keyup(function(e) {
+            if (event.keyCode === 13) {
+                $(this).click();
+            }
         });
 
         var pageId = AJS.Meta.get("page-id");

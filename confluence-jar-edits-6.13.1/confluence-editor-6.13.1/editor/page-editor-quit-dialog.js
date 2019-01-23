@@ -49,7 +49,7 @@ define("confluence-editor/editor/page-editor-quit-dialog", [
             if (!isInitialized) {
                 isPagePublished = !Meta.get("new-page");
 
-                UI.discardButton = $("#qed-discard-button").tooltip({gravity: 's', className: 'quit-editor-dialog'});
+                UI.discardButton = $("#qed-discard-button").prop('role', 'dialog').removeAttr('title').attr('aria-label', 'Quit Notice').tooltip({gravity: 's', className: 'quit-editor-dialog'});
                 // We only disable the Discard button for published pages if the editor is in limited mode.
                 if (Confluence.Editor.isLimitedModeEnabled() && isPagePublished) {
                     Confluence.Editor.UI.setButtonState(false, UI.discardButton);
@@ -62,7 +62,7 @@ define("confluence-editor/editor/page-editor-quit-dialog", [
                 UI.saveExitButton = $("#qed-save-exit-button").click(clickSaveExit);
                 UI.hideDiffButton = $("#qed-hide-diff-button").click(clickHideDiff);
                 //publish button in the dialog
-                UI.publishButton = $("#qed-publish-button");
+                UI.publishButton = $("#qed-publish-button").removeAttr('title');
                 //close button in the dialog
                 UI.closeButton = $("#qed-close-button").click(closeDialog);
                 UI.buttonsAll = [UI.discardButton, UI.saveExitButton, UI.showDiffButton, UI.hideDiffButton, UI.publishButton];

@@ -78,7 +78,7 @@
     {param userInfo: $commenter /}
 {/call}
     // used to stop the scroll bar and viewport jumping about as we remove the loading container and replace with the dynamically loaded editor
-    <div class="quick-comment-body">
+    <div class="quick-comment-body" tabindex="0">
         <div class="quick-comment-loading-container" style="display:{if $state == 'loading'}block{else}none{/if};">
         </div>
 
@@ -98,7 +98,7 @@
               {/switch}
          {sp}>
          {if $mode == 'add'}
-            <div title="{getText('comment.name.tooltip')}" class="quick-comment-prompt"><span>{getText('quick.comment.placeholder.message')}</span></div>
+            <div title="{getText('comment.name.tooltip')}" class="quick-comment-prompt"  tabindex="0"><span>{getText('quick.comment.placeholder.message')}</span></div>
          {/if}
         </form>
     </div>
@@ -118,17 +118,9 @@
     <img class="userLogo logo anonymous" src="{staticResourceUrlPrefix()}/images/icons/profilepics/anonymous.svg"
     alt="{getText('accessibility.user.icon')}: {getText('user.icon.anonymous.title')}" title="{getText('user.icon.anonymous.title')}">
 {elseif $userInfo.profilePicture.isDefault}
-    <a class="userLogoLink" data-username="{$userInfo.userName}" href="{contextPath()}/users/profile/editmyprofilepicture.action" title="{getText('add.a.profile.picture')}">
-        <img class="userLogo logo defaultLogo" src="{staticResourceUrlPrefix()}/images/icons/profilepics/add_profile_pic.svg" alt="{getText('accessibility.user.icon')}: {getText('add.a.profile.picture')}">
-    </a>
+    <img class="userLogo logo defaultLogo" src="{staticResourceUrlPrefix()}/images/icons/profilepics/add_profile_pic.svg" alt="">
 {else}
-    <a class="userLogoLink" data-username="{$userInfo.userName}" href="
-        {call Confluence.Templates.User.userLinkUrl}
-            {param username: $userInfo.userName /}
-        {/call}
-    ">
-        <img class="userLogo logo" src="{$userInfo.profilePicture.path}" alt="{getText('accessibility.user.icon')}: {$userInfo.userName}" title="{$userInfo.userName}">
-    </a>
+    <img class="userLogo logo" src="{$userInfo.profilePicture.path}" alt="" title="{$userInfo.userName}">
 {/if}
 </p>
 {/template}

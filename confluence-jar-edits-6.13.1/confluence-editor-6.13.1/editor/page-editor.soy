@@ -16,7 +16,7 @@
                    {param sharedDraftsEnabled: $sharedDraftsEnabled /}
                    {param isNewPage: $isNewPage /}
                {/call}"
-        tabindex="101">
+        tabindex="0">
         {call .saveButtonText}
            {param contentType: $contentType /}
            {param sharedDraftsEnabled: $sharedDraftsEnabled /}
@@ -220,7 +220,7 @@
                 <div class="contributor-avatar">
                     <span class="aui-avatar aui-avatar-large">
                         <span class="aui-avatar-inner">
-                                <img src="{$contributor.avatarURL}"/>
+                                <img src="{$contributor.avatarURL}" alt=""/>
                         </span>
                     </span>
                 </div>

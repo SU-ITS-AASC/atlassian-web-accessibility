@@ -337,7 +337,7 @@ define('confluence-editor/editor/page-editor-ui', [
                     labelName = AJS.I18n.getText("editor.labels.plural", numLabels);
                 }
 
-                $("#rte-button-labels").attr('data-tooltip', labelName);
+                $("#rte-button-labels").attr('data-tooltip', labelName).attr('aria-label', labelName);
             });
 
             // Add tooltip for draft/unpublished edits status lozenge

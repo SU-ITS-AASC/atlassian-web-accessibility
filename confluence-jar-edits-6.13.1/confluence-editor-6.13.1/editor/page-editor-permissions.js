@@ -34,6 +34,7 @@ define('confluence-editor/editor/page-editor-permissions', [
         }
 
         restrictionButton.attr('data-tooltip', labelName);
+        restrictionButton.attr('aria-label', labelName);
         restrictionButton.data('explicit-restrictions', hasExplicitRestrictions);
         restrictionButton.data('inherited-restrictions', hasInheritedRestrictions);
         restrictionButton.data('restrictionsHash', restrictionsHash);

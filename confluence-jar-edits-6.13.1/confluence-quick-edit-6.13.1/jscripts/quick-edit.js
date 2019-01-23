@@ -367,6 +367,7 @@ define('confluence-quick-edit/quick-edit', [
                         isQuickEdit: true,
                         onInitialise: options.onInitialise
                     });
+                    $('#rte-toolbar, #comments-section .aui-button').attr('tabindex','0');
                 }
 
                 function handleErrorActivatingEditor(e, xhr) {

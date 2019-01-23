@@ -14,22 +14,20 @@
     {let $isLoggedIn: $remoteUser != ''/}
     <tr class="space-list-item" data-spacekey="{$spaceKey}">
         <td class="entity-attribute space-logo entity-logo entity-icon">
-            <a href="{$spaceUrl}">
-                <img class="space logo" src="{$logoUrl}" alt="{getText('space.logo')}"/>
-            </a>
+            <img class="space logo" src="{$logoUrl}" alt=""/>
         </td>
         <td class="entity-attribute space-name">
-            <a title="{$spaceName}" href="{$spaceUrl}">{$truncatedSpaceName}</a>
+            <a href="{$spaceUrl}">{$truncatedSpaceName}</a>
         </td>
         <td class="entity-attribute space-desc">
             <span>{$spaceDescHtml|noAutoescape}</span>
         </td>
         <td class="entity-attribute space-labels">
         </td>
-        <td class="entity-attribute entity-icon entity-info-icon right" data-entity-id="{$spaceKey}" data-entity-type="space">
-            <a class="aui-icon aui-icon-small aui-iconfont-info" title="{getText('space.details')}" href="{contextPath()}/spaces/viewspacesummary.action?key={$spaceKey}">{getText('space.details')}</a>
-        </td>
         {if $isLoggedIn}
+        <td class="entity-attribute entity-icon entity-info-icon right" data-entity-id="{$spaceKey}" data-entity-type="space">
+            <a class="aui-icon aui-icon-small aui-iconfont-info" href="{contextPath()}/spaces/viewspacesummary.action?key={$spaceKey}">{getText('space.details')}</a>
+        </td>
             <td class="entity-attribute entity-icon entity-favourites space-favourites {if $accessMode == 'READ_ONLY'}disabled{/if}" data-entity-id="{$spaceKey}" data-entity-type="space" data-entity-scope="space-directory">
                 <a class="aui-icon aui-icon-small aui-iconfont-star-filled hidden" title="{getText('space.stop.favourite')}" href="#">{getText('favourite.remove.space.short', $spaceName)}</a>
                 <a class="aui-icon aui-icon-small aui-iconfont-new-star hidden" title="{getText('space.start.favourite')}" href="#">{getText('favourite.add.space.short', $spaceName)}</a>

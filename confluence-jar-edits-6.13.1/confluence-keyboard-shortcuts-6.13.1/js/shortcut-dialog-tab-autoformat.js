@@ -75,12 +75,14 @@ define('confluence-keyboard-shortcuts/shortcut-dialog-tab-autoformat', [
             {
                 context: "autoformat.emoticons",
                 img: AJS.I18n.getText("keyboard.shortcuts.autoformat.check.img"),
-                action: AJS.I18n.getText("keyboard.shortcuts.autoformat.tick.example")
+                action: AJS.I18n.getText("keyboard.shortcuts.autoformat.tick.example"),
+                title: AJS.I18n.getText("keyboard.shortcuts.autoformat.check.title")
             },
             {
                 context: "autoformat.emoticons",
                 img: AJS.I18n.getText("keyboard.shortcuts.autoformat.smile.img"),
-                action: AJS.I18n.getText("keyboard.shortcuts.autoformat.smile.example")
+                action: AJS.I18n.getText("keyboard.shortcuts.autoformat.smile.example"),
+                title: AJS.I18n.getText("keyboard.shortcuts.autoformat.smile.title")
             },
             {
                 context: "autoformat.lists",
@@ -145,7 +147,7 @@ define('confluence-keyboard-shortcuts/shortcut-dialog-tab-autoformat', [
                     context,
                     function (item) {
                         return templates.emoticonHelpItem(
-                                {src: emoticonResourceUrl + item.img, type: item.action}
+                                {src: emoticonResourceUrl + item.img, type: item.action, alt: item.title}
                         );
                     }
             );
